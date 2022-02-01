@@ -20,21 +20,40 @@ We provide a catalog that can be filtered through different categories, allowing
 
 ## Screens
 
-- Home
+- Home: landing page with products ordered by relevance. This filter can be changed to categories. A user can sign in or sign up from this screen. Clothes can be sent to the cart and wishing list from here.
 
-- Login / register
+- Login / register: where a user can create an account or log into it with a mail adress, a nickname and a password.
 
-- Cart
+- Cart: list with products the user wants to buy. To end the transaction the user must be logged in.
 
-- Wish list
+- Wish list: list with products the user likes and can add to cart. They can be added from this list.
 
-- Product view
+- Product view: where a single product is displayed and specific details are shown.
 
+- Admin home: where admins can chose what to do (manage categories, manage users, manage products) and a sales graph is displayed.
+
+- Manage categories: where and admin can create and delete categories.
+
+- Manage users: where and admin can ban a user, make a user admin or revoke admin privilege from a user.
+
+- Manage products: where and admin can create and delete products.
 
 ## Entities
 
+- User: admin and non admin.
+- Product
+- Category
+- Transaction
+- Wish list
+
 ## Algorithms
+
+Our app tracks the least favorite products and calculates a discount for them based on their popularity ranking and a minimum price every product has.
 
 ## Graphs
 
+Our graph is a bar plot located at the admin panel and allows admins to track the volume of sales and their respective earnings.
+
 ## Extra technologies
+
+We've implemented a mail function that sends the user a mail when they make a purchase with the product summary, price and transaction number for posible incidence.
