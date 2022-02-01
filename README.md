@@ -20,6 +20,15 @@ We provide a catalog that can be filtered through different categories, allowing
 
 ## Screens
 
+- Home
+
+- Login / register
+
+- Cart
+
+- Wish list
+
+- Product view
 
 
 ## Entities
