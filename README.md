@@ -32,11 +32,11 @@ We provide a catalog that can be filtered through different categories, allowing
 
 - Admin home: where admins can chose what to do (manage categories, manage users, manage products) and a sales graph is displayed.
 
-- Manage categories: where and admin can create and delete categories.
+- Manage categories: where an admin can create and delete categories.
 
-- Manage users: where and admin can ban a user, make a user admin or revoke admin privilege from a user.
+- Manage users: where an admin can ban a user, make a user admin or revoke admin privilege from a user.
 
-- Manage products: where and admin can create and delete products.
+- Manage products: where an admin can create and delete products.
 
 ## Entities
 
