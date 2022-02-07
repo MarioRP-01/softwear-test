@@ -40,7 +40,7 @@ We provide a catalog that can be filtered through different categories, allowing
 
 ## Entities
 
-- User: admin and non admin.
+- User: admin, registered and non registered.
 - Product
 - Category
 - Transaction
