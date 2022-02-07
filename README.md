@@ -49,15 +49,15 @@ We provide a catalog that can be filtered through different categories, allowing
 
 ## Belongings
 
-- Product:
+* Product:
 	* Use: all
 	* Owner: admin
 
-- Coupon
+* Coupon
 	* Use: registered
 	* Owner: admin
 
-- Transaction
+* Transaction
 	* Use: registered
 	* Owner: registered
 
