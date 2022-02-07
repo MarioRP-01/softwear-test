@@ -54,16 +54,12 @@ We provide a catalog that can be filtered through different categories, allowing
 	* Owner: admin
 
 - Coupon
-	* Use: all
+	* Use: registered
 	* Owner: admin
 
 - Transaction
 	* Use: registered
 	* Owner: registered
-
-- Wish list
-	* Use: registered and non registered
-	* Owner: registered and non registered
 
 ## Algorithms
 
