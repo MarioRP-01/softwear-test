@@ -46,6 +46,24 @@ We provide a catalog that can be filtered through different categories, allowing
 - Transaction
 - Wish list
 
+## Belongings
+
+- Product:
+	· Use: all
+	· Owner: admin
+
+- Category
+	· Use: all
+	· Owner: admin
+
+- Transaction
+	· Use: registered
+	· Owner: registered
+
+- Wish list
+	· Use: registered and non registered
+	· Owner: registered and non registered
+
 ## Algorithms
 
 Our app tracks the least favorite products and calculates a discount for them based on their popularity ranking and a minimum price every product has.
