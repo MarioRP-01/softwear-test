@@ -1,3 +1,5 @@
+![Logo SoftWear](startbootstrap-shop-homepage-gh-pages/assets/Logo.jpg)
+
 # Softwear
 
 Online clothing store web app. We sell our own products, made with the highest quality fabrics and cloths, as well as the best brands on the market. We promote reducing clothing waste, so everything on sale is guaranteed to last more than two years, thus fighting climate change.
