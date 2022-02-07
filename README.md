@@ -1,4 +1,4 @@
-![Logo SoftWear](startbootstrap-shop-homepage-gh-pages/assets/Logo.jpg)
+![Logo SoftWear](startbootstrap-shop-homepage-gh-pages/assets/full-logo.jpg)
 
 # Softwear
 
