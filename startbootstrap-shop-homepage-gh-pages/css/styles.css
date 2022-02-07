@@ -70,6 +70,16 @@
   box-sizing: border-box;
 }
 
+
+@font-face {
+  font-family: softFont;
+  src: url(../assets/Granjon\ LT\ Roman.ttf);
+}
+
+.softFont{
+  font-family: softFont;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   :root {
     scroll-behavior: smooth;
@@ -4517,6 +4527,11 @@ textarea.form-control-lg {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+}
+.card:hover{
+  transform: scale(1.05);
+  transition: transform 330ms ease;
+  border:2px solid rgba(0, 0, 0, 0.175);
 }
 .card > hr {
   margin-right: 0;
