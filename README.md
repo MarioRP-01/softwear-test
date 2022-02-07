@@ -44,27 +44,26 @@ We provide a catalog that can be filtered through different categories, allowing
 
 - User: admin, registered and non registered.
 - Product
-- Category
+- Coupon
 - Transaction
-- Wish list
 
 ## Belongings
 
 - Product:
-	· Use: all
-	· Owner: admin
+	* Use: all
+	* Owner: admin
 
-- Category
-	· Use: all
-	· Owner: admin
+- Coupon
+	* Use: all
+	* Owner: admin
 
 - Transaction
-	· Use: registered
-	· Owner: registered
+	* Use: registered
+	* Owner: registered
 
 - Wish list
-	· Use: registered and non registered
-	· Owner: registered and non registered
+	* Use: registered and non registered
+	* Owner: registered and non registered
 
 ## Algorithms
 
