@@ -80,6 +80,16 @@
   font-family: softFont;
 }
 
+.user-icon{
+    max-width: 40px;
+    width: auto;
+    height: auto;
+}
+
+.cart-icon{
+  margin-right: 3vw;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   :root {
     scroll-behavior: smooth;
@@ -4066,6 +4076,7 @@ textarea.form-control-lg {
   text-decoration: none;
   white-space: nowrap;
 }
+
 .navbar-nav {
   display: flex;
   flex-direction: column;
