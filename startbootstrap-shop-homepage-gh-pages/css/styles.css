@@ -11349,7 +11349,6 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
-<<<<<<< HEAD
   
 }
 
@@ -11443,8 +11442,6 @@ textarea.form-control-lg {
 	width: 35px;
 	height: 35px;
 }
-=======
-}
 
 /* Login styles*/
 
@@ -11472,4 +11469,3 @@ section.section-login {
 /* .footer-login {
   max-height: 10vh;
 } */
->>>>>>> login
