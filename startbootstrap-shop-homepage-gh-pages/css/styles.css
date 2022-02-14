@@ -62,6 +62,7 @@
   --bs-body-line-height: 1.5;
   --bs-body-color: #212529;
   --bs-body-bg: #fff;
+  --bs-softwear-yellow: #feb000;
 }
 
 *,
@@ -11348,6 +11349,7 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+<<<<<<< HEAD
   
 }
 
@@ -11441,3 +11443,33 @@ textarea.form-control-lg {
 	width: 35px;
 	height: 35px;
 }
+=======
+}
+
+/* Login styles*/
+
+.body-login {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 8.5vh auto auto;
+}
+
+section.section-login {
+  background: var(--bs-body-bg);
+  background: linear-gradient(180deg, var(--bs-light), var(--bs-dark));
+}
+
+.card-login, .card-register {
+  background: var(--bs-light);
+}
+
+.btn-login {
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+}
+
+/* .footer-login {
+  max-height: 10vh;
+} */
+>>>>>>> login
