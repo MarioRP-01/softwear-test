@@ -62,6 +62,7 @@
   --bs-body-line-height: 1.5;
   --bs-body-color: #212529;
   --bs-body-bg: #fff;
+  --bs-softwear-yellow: #feb000;
 }
 
 *,
@@ -81,13 +82,27 @@
 }
 
 .user-icon{
-    max-width: 40px;
-    width: auto;
-    height: auto;
+    min-width: 3vh;
+}
+
+.user-icon-big-screen{
+  display: none;
+}
+
+.banner-big-screen{
+  display: none;
 }
 
 .cart-icon{
   margin-right: 3vw;
+}
+
+#header .item img{
+  display: block;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -4075,6 +4090,17 @@ textarea.form-control-lg {
   font-size: 1.25rem;
   text-decoration: none;
   white-space: nowrap;
+  min-width: 2vh;
+}
+
+.navbar-brand-2 {
+  padding-top: 0.3125rem;
+  padding-bottom: 0.3125rem;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  text-decoration: none;
+  white-space: nowrap;
+  min-width: 2vh;
 }
 
 .navbar-nav {
@@ -4248,6 +4274,18 @@ textarea.form-control-lg {
   }
 }
 @media (min-width: 992px) {
+  .user-icon-small-screen{
+    display: none !important;
+  }
+  .user-icon-big-screen{
+    display: block !important;
+  }
+  .banner-small-screen{
+    display: none !important;
+  }
+  .banner-big-screen{
+    display: block !important;
+  }
   .navbar-expand-lg {
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -11311,4 +11349,127 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+<<<<<<< HEAD
+  
 }
+
+
+#product-content-wrapper{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.product-column{
+	width: 600px;
+	padding: 10px;
+
+}
+
+#product-featured{
+	max-width: 500px;
+	max-height: 600px;
+	object-fit: cover;
+	cursor: pointer;
+	border: 2px solid black;
+
+}
+
+.product-thumbnail{
+	object-fit: cover;
+	max-width: 180px;
+	max-height: 100px;
+	cursor: pointer;
+	opacity: 0.5;
+	margin: 5px;
+	border: 2px solid black;
+
+}
+
+.product-thumbnail:hover{
+	opacity:1;
+}
+
+.product-active{
+	opacity: 1;
+}
+
+#product-slide-wrapper{
+	max-width: 500px;
+	display: flex;
+	min-height: 100px;
+	align-items: center;
+}
+
+#product-slider{
+	width: 440px;
+	display: flex;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+
+}
+
+#product-slider::-webkit-scrollbar {
+		width: 8px;
+
+}
+
+#product-slider::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+
+}
+ 
+#product-slider::-webkit-scrollbar-thumb {
+  background-color: #dede2e;
+  outline: 1px solid slategrey;
+   border-radius: 100px;
+
+}
+
+#product-slider::-webkit-scrollbar-thumb:hover{
+    background-color: #18b5ce;
+}
+
+.product-arrow{
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	transition: .3s;
+}
+
+.product-arrow:hover{
+	opacity: .5;
+	width: 35px;
+	height: 35px;
+}
+=======
+}
+
+/* Login styles*/
+
+.body-login {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 8.5vh auto auto;
+}
+
+section.section-login {
+  background: var(--bs-body-bg);
+  background: linear-gradient(180deg, var(--bs-light), var(--bs-dark));
+}
+
+.card-login, .card-register {
+  background: var(--bs-light);
+}
+
+.btn-login {
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+}
+
+/* .footer-login {
+  max-height: 10vh;
+} */
+>>>>>>> login
