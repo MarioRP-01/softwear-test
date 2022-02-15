@@ -111,7 +111,13 @@
   }
 }
 
+footer{
+  margin-top:auto; 
+}
+
 body {
+  display: grid;
+  min-height: 100vh;
   margin: 0;
   font-family: var(--bs-body-font-family);
   font-size: var(--bs-body-font-size);
@@ -4063,6 +4069,7 @@ textarea.form-control-lg {
 }
 
 .navbar {
+  max-height: 10vh;
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -11460,12 +11467,6 @@ textarea.form-control-lg {
 }
 
 /* Login styles*/
-
-.body-login {
-  height: 100vh;
-  display: grid;
-  grid-template-rows: 8.5vh auto auto;
-}
 
 section.section-login {
   background: var(--bs-body-bg);
