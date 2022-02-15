@@ -11468,11 +11468,6 @@ textarea.form-control-lg {
 
 /* Login styles*/
 
-section.section-login {
-  background: var(--bs-body-bg);
-  background: linear-gradient(180deg, var(--bs-light), var(--bs-dark));
-}
-
 .card-login, .card-register {
   height: 90%;
   background: var(--bs-light);
