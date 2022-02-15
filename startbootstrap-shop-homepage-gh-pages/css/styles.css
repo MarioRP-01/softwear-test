@@ -111,7 +111,13 @@
   }
 }
 
+footer{
+  margin-top:auto; 
+}
+
 body {
+  display: grid;
+  min-height: 100vh;
   margin: 0;
   font-family: var(--bs-body-font-family);
   font-size: var(--bs-body-font-size);
@@ -4063,6 +4069,7 @@ textarea.form-control-lg {
 }
 
 .navbar {
+  max-height: 10vh;
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -4577,10 +4584,19 @@ textarea.form-control-lg {
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
 }
-.card:hover{
+.product:hover{
   transform: scale(1.05);
   transition: transform 330ms ease;
   border:2px solid rgba(0, 0, 0, 0.175);
+}
+.product-actions{
+  display: flex; 
+  align-items: center; 
+  justify-content: space-around;
+}
+.navbar-brand-2:hover{
+  transform: scale(1.05);
+  transition: transform 330ms ease;
 }
 .card > hr {
   margin-right: 0;
@@ -4946,7 +4962,14 @@ textarea.form-control-lg {
   border-top-right-radius: 0.2rem;
   border-bottom-right-radius: 0.2rem;
 }
-
+.favIcon{
+  top: 0.5rem; 
+  right: 0.5rem;
+}
+.favIcon:hover{
+  border: #084298 1px solid;
+  cursor: pointer;
+}
 .badge {
   display: inline-block;
   padding: 0.35em 0.65em;
@@ -11445,12 +11468,6 @@ textarea.form-control-lg {
 
 /* Login styles*/
 
-.body-login {
-  height: 100vh;
-  display: grid;
-  grid-template-rows: auto auto auto;
-}
-
 section.section-login {
   background: var(--bs-body-bg);
   background: linear-gradient(180deg, var(--bs-light), var(--bs-dark));
@@ -11477,3 +11494,138 @@ section.section-login {
 /* .footer-login {
   max-height: 10vh;
 } */
+
+.cart-body{
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom right, #E3F0FF, #FAFCFF);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-container{
+  width: 70%;
+  height: 85%;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0px 25px 40px #1687d933;
+}
+
+.cart-header{
+  margin: auto;
+  width: 90%;
+  height: 15%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ }
+ .cart-heading{
+  font-size: 20px;
+  font-family: ‘Open Sans’;
+  font-weight: 700;
+  color: #2F3841;
+ }
+ .cart-action{
+  font-size: 14px;
+  font-family: ‘Open Sans’;
+  font-weight: 600;
+  color: #E44C4C;
+  cursor: pointer;
+  border-bottom: 1px solid #E44C4C;
+ }
+
+ .cart-items{
+  margin: auto;
+  width: 90%;
+  height: 30%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+ }
+ .cart-image-box{
+  width: 15%;
+  min-width: 150px;
+  text-align: center;
+ }
+ .cart-image-box img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+ }
+ .cart-item-about{
+  height: 100%;
+  align-items: center;
+ }
+ .cart-item-title{
+  padding-top: 5px;
+  line-height: 10px;
+  font-size: 28px;
+  font-family: ‘Open Sans’;
+  font-weight: 800;
+  color: #202020;
+ }
+ .cart-item-subtitle{
+  line-height: 10px;
+  font-size: 12px;
+  font-family: ‘Open Sans’;
+  font-weight: 600;
+  color: #909090;
+ }
+ .cart-item-counter{
+  width: 15%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ }
+ .cart-counter-btn{
+  width: 4vh;
+  height: 4vh;
+  border-radius: 50%;
+  background-color: #d9d9d9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-family: ‘Open Sans’;
+  font-weight: 900;
+  color: #202020;
+  cursor: pointer;
+ }
+ .cart-item-count{
+  font-size: 20px;
+  font-family: ‘Open Sans’;
+  font-weight: 900;
+  color: #202020;
+ }
+ .cart-item-prices{
+  height: 100%;
+  text-align: right;
+ }
+ .cart-item-amount{
+  padding-top: 20px;
+  font-size: 26px;
+  font-family: ‘Open Sans’;
+  font-weight: 800;
+  color: #202020;
+ }
+ .cart-item-toWishList{
+  padding-top: 5px;
+  font-size: 14px;
+  font-family: ‘Open Sans’;
+  font-weight: 600;
+  color: #1687d9;
+  cursor: pointer;
+ }
+ .cart-item-remove{
+  padding-top: 5px;
+  font-size: 14px;
+  font-family: ‘Open Sans’;
+  font-weight: 600;
+  color: #E44C4C;
+  cursor: pointer;
+ }
