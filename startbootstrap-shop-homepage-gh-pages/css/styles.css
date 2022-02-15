@@ -4582,6 +4582,15 @@ textarea.form-control-lg {
   transition: transform 330ms ease;
   border:2px solid rgba(0, 0, 0, 0.175);
 }
+.product-actions{
+  display: flex; 
+  align-items: center; 
+  justify-content: space-around;
+}
+.navbar-brand-2:hover{
+  transform: scale(1.05);
+  transition: transform 330ms ease;
+}
 .card > hr {
   margin-right: 0;
   margin-left: 0;
@@ -4946,7 +4955,14 @@ textarea.form-control-lg {
   border-top-right-radius: 0.2rem;
   border-bottom-right-radius: 0.2rem;
 }
-
+.favIcon{
+  top: 0.5rem; 
+  right: 0.5rem;
+}
+.favIcon:hover{
+  border: #084298 1px solid;
+  cursor: pointer;
+}
 .badge {
   display: inline-block;
   padding: 0.35em 0.65em;

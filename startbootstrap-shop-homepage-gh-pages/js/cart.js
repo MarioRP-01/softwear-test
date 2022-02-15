@@ -1,4 +1,4 @@
-function renderCart(items) {
+/* function renderCart(items) {
     
     console.log(items)
     console.log(cartLS.list())
@@ -39,4 +39,4 @@ cartLS.onChange(renderCart)
 
 $( document ).ready(function() {
     renderCart(cartLS.list())
-});
+}); */

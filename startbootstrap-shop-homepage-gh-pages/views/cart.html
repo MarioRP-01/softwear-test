@@ -12,6 +12,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="../css/styles.css" rel="stylesheet" />
+        <!-- FontAwesome CDN -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"></link>
     </head>
     <body>
         <!-- Navigation-->
@@ -90,22 +92,51 @@
 
 
         <div class="card mb-4 shadow-sm" style="border: 1px solid rgba(114, 114, 114, 0.26); margin: 30px; border-radius: 5px;">
-			<div class="card-header">
-				<h2>Cart</h2>
-			</div>
-			<div class="card-body">
-				<table class="table">
-					<tbody class="cart">
-					</tbody>
-					<tfoot>
-						<tr><td></td>
-						<td></td>
-						<td class="text-right">Total: <strong class="total"></strong></td>
-						<td></td>
-					</tr></tfoot>
-				</table>
-			</div>
-		</div>
+            <div class="card-header">
+                <h2>Cart</h2>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <tbody class="cart">
+                    <tr>
+                        <td>#1</td>
+                        <td>Leather Jacket</td>
+                        <td>3</td>
+                        <td style="width: 60px;">
+                            <button type="button" class="btn btn-block btn-sm btn-outline-primary" onclick="">+</button>
+                        </td>
+                        <td style="width: 60px;">
+                            <button type="button" class="btn btn-block btn-sm btn-outline-primary" onclick="">-</button>
+                        </td>
+                        <td class="text-right">$18</td>
+                        <td class="text-right"><button class="btn btn-primary" onclick="">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>#2</td>
+                        <td>Softcoat</td>
+                        <td>3</td>
+                        <td style="width: 60px;">
+                            <button type="button" class="btn btn-block btn-sm btn-outline-primary" onclick="">+</button>
+                        </td>
+                        <td style="width: 60px;">
+                            <button type="button" class="btn btn-block btn-sm btn-outline-primary" onclick="">-</button>
+                        </td>
+                        <td class="text-right">$49.99</td>
+                        <td class="text-right"><button class="btn btn-primary" onclick="">Delete</button></td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr><td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right">Total: <strong class="total">$67.99</strong></td>
+                        <td>Checkout: <i class="fa-brands fa-paypal"></i> <i class="fa-brands fa-cc-amazon-pay"></i> <i class="fa-solid fa-credit-card"></i></td>
+                    </tr></tfoot>
+                </table>
+            </div>
+        </div>
 
 
         <!-- Footer-->
@@ -124,7 +155,7 @@
         <!-- Core theme JS-->
         <script src="../js/scripts.js"></script>
         <!-- Cart Jquery Plugin -->
-        <script src="https://unpkg.com/cart-localstorage@latest/dist/cart-localstorage.min.js"></script>
+        <!-- <script src="https://unpkg.com/cart-localstorage@latest/dist/cart-localstorage.min.js"></script> -->
         <!-- Cart Custom JS-->
         <script src="../js/cart.js"></script>
     </body>
