@@ -10032,6 +10032,9 @@ textarea.form-control-lg {
   }
 }
 @media (min-width: 1200px) {
+  .purchase-box{
+    margin: 0.5rem 5rem !important; 
+  }
   .float-xl-start {
     float: left !important;
   }
@@ -11642,3 +11645,11 @@ textarea.form-control-lg {
   color: #E44C4C;
   cursor: pointer;
  }
+.purchase-box{
+  border: 1px solid rgba(114, 114, 114, 0.26); 
+  margin: 0.5rem 20px; 
+  border-radius: 5px;
+}
+.purchase-box td{
+  font-size: smaller;
+}
