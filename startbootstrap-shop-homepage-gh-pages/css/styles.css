@@ -11448,7 +11448,7 @@ textarea.form-control-lg {
 .body-login {
   height: 100vh;
   display: grid;
-  grid-template-rows: 8.5vh auto auto;
+  grid-template-rows: auto auto auto;
 }
 
 section.section-login {
@@ -11457,7 +11457,15 @@ section.section-login {
 }
 
 .card-login, .card-register {
+  height: 90%;
   background: var(--bs-light);
+}
+
+.card-login > .card-body, .card-register > .card-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .btn-login {
