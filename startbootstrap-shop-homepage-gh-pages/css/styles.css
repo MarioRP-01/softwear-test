@@ -77,6 +77,24 @@
   src: url(../assets/Granjon\ LT\ Roman.ttf);
 }
 
+details{
+  border: 1px solid rgba(73, 73, 73, 0.205);
+  padding: 1rem;
+  margin-bottom:5px;
+  width:500px;
+  background-color: rgba(236, 236, 236, 0.425);
+  border-radius: 5px;
+}
+summary{
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  font-size: 22px;
+  cursor: pointer;
+}
+details summary::-webkit-details-marker {
+  color: rgba(73, 73, 73, 0.205);
+}
+
 .softFont{
   font-family: softFont;
 }
@@ -11467,11 +11485,6 @@ textarea.form-control-lg {
 }
 
 /* Login styles*/
-
-section.section-login {
-  background: var(--bs-body-bg);
-  background: linear-gradient(180deg, var(--bs-light), var(--bs-dark));
-}
 
 .card-login, .card-register {
   height: 90%;
