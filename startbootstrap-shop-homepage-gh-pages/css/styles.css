@@ -11518,8 +11518,7 @@ color:#69707a;
 }
 
 #change-password-form .form-container {
-  width: 50vw;
-  height: 60vh;
+  
   padding: 10px;
   background: white;
 }
@@ -11540,4 +11539,10 @@ color:#69707a;
   #change-password-form .form-container {
     width: 25vw !important;
   }
+}
+
+.body-profile {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto auto auto;
 }
