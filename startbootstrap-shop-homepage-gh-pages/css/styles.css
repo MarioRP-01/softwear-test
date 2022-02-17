@@ -11461,7 +11461,7 @@ textarea.form-control-lg {
 
 #product-slider::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.03);
 }
  
 #product-slider::-webkit-scrollbar-thumb {
@@ -11734,16 +11734,14 @@ color:#69707a;
   }
 }
 
-.body-profile {
-  height: 100vh;
-  display: grid;
-  grid-template-rows: auto auto auto;
-}
-
 /* Nav Dropdown Small Screen Fix */
 
 @media (max-width: 960px) {
   .navbar {
     max-height: none;
   }
+}
+
+.softwear-admin-banner {
+  max-height: 3rem;
 }
