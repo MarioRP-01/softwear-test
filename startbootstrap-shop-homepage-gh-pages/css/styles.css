@@ -4096,6 +4096,7 @@ textarea.form-control-lg {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
+
 .navbar > .container,
 .navbar > .container-fluid,
 .navbar > .container-sm,
@@ -11737,4 +11738,12 @@ color:#69707a;
   height: 100vh;
   display: grid;
   grid-template-rows: auto auto auto;
+}
+
+/* Nav Dropdown Small Screen Fix */
+
+@media (max-width: 960px) {
+  .navbar {
+    max-height: none;
+  }
 }
