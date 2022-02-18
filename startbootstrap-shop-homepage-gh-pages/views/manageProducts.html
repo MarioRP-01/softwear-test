@@ -22,7 +22,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li class="nav-item"><a class="nav-link" href="../views/adminHome.html">Admin Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="../views/manageProducts.html">Manage Products</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="../views/manageProducts.html">Manage Products</a></li>
                         <li class="nav-item"><a class="nav-link" href="../views/manageUsers.html">Manage Users</a></li>
                     </ul>
                 </div>
@@ -30,7 +30,7 @@
         </nav>
 
         <!-- Header-->
-        <header class="bg-dark">
+        <header class="softwear-admin-banner bg-dark">
             <div class="container px-4 px-lg-5">
                 <div class="text-center text-white">
                     <h1 class="softFont">Softwear</h1>
@@ -57,7 +57,7 @@
                                 <td>0001</td>
                                 <td>Mom jeans Billie</td>
                                 <td>$ 89</td>
-                                <td><button class="btn btn-primary" type="submit">Edit</button></td>
+                                <td><button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#editUserData">Edit</button></td>
                                 <td><button class="btn btn-primary" type="submit">Delete</button></td>
                             </tr>
                             <tr>
@@ -65,7 +65,7 @@
                                 <td>002</td>
                                 <td>Mini tote handbag</td>
                                 <td>$ 120</td>
-                                <td><button class="btn btn-primary" type="submit">Edit</button></td>
+                                <td><button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#editUserData">Edit</button></td>
                                 <td><button class="btn btn-primary" type="submit">Delete</button></td>
                             </tr>
                             <tr>
@@ -73,7 +73,7 @@
                                 <td>0003</td>
                                 <td>Vanilla blazer</td>
                                 <td>$ 350</td>
-                                <td><button class="btn btn-primary" type="submit">Edit</button></td>
+                                <td><button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#editUserData">Edit</button></td>
                                 <td><button class="btn btn-primary" type="submit">Delete</button></td>
                             </tr>
                             <tr>
@@ -81,7 +81,7 @@
                                 <td>0004</td>
                                 <td>Horsebit heel</td>
                                 <td>$ 987 </td>
-                                <td><button class="btn btn-primary" type="submit">Edit</button></td>
+                                <td><button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#editUserData">Edit</button></td>
                                 <td><button class="btn btn-primary" type="submit">Delete</button></td>
                             </tr>
                             <tr>
@@ -89,7 +89,7 @@
                                 <td>0005</td>
                                 <td>Angora fleece jacket </td>
                                 <td>$ 859 </td>
-                                <td><button class="btn btn-primary" type="submit">Edit</button></td>
+                                <td><button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#editUserData">Edit</button></td>
                                 <td><button class="btn btn-primary" type="submit">Delete</button></td>
                             </tr>
                             <tr>
@@ -97,7 +97,7 @@
                                 <td>0006</td>
                                 <td>Feathers vest</td>
                                 <td>$ 500 </td>
-                                <td><button class="btn btn-primary" type="submit">Edit</button></td>
+                                <td><button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#editUserData">Edit</button></td>
                                 <td><button class="btn btn-primary" type="submit">Delete</button></td>
                             </tr>
                             <tr>
@@ -105,7 +105,7 @@
                                 <td>0007</td>
                                 <td>Cotton Oxford shirt</td>
                                 <td>$ 4999 </td>
-                                <td><button class="btn btn-primary" type="submit">Edit</button></td>
+                                <td><button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#editUserData">Edit</button></td>
                                 <td><button class="btn btn-primary" type="submit">Delete</button></td>
                             </tr>
                             <tr>
@@ -113,17 +113,93 @@
                                 <td>0008</td>
                                 <td>Horsebit moccasin</td>
                                 <td>$ 842 </td>
-                                <td><button class="btn btn-primary" type="submit">Edit</button></td>
+                                <td><button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#editUserData">Edit</button></td>
                                 <td><button class="btn btn-primary" type="submit">Delete</button></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="row justify-content-start">
-                    <button class="btn btn-primary" type="submit">Add Product</button>
+                    <button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#addProduct">Add Product</button>
                 </div>
             </div>
         </section>
+
+        <!--  Modal Edit Product Data -->
+        <div class="modal fade" id="editUserData" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+        <!-- Modal Header-->
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalLabel">Edit product data</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+        <!-- Modal Body-->
+                    <div class="modal-body">
+
+                        <form action="" method="POST" enctype="multipart/form-data"  method="POST" id="ModalForm">
+                            <input type="hidden" id="editId" value="">
+                            <div class="form-group">
+                                <label for="editName">ID</label>
+                                <input type="text" name="name" class="form-control" id="editName" placeholder="Identification" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editSurname">Name</label>
+                                <input type="text" name="surname" class="form-control" id="editSurname" placeholder="Product name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editEmail">Price</label>
+                                <input type="email"  name="email" class="form-control" id="editEmail" placeholder="Product price" required>
+                            </div>
+                        
+        <!-- Modal footer-->
+                            <div class="modal-footer">
+                                <a  class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+                                <button type="button"  id="saveModalButton" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Add Product Data -->
+        <div class="modal fade" id="addProduct" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+        <!-- Modal Header-->
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalLabel">Add product</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+        <!-- Modal Body-->
+                    <div class="modal-body">
+
+                        <form action="" method="POST" enctype="multipart/form-data"  method="POST" id="ModalForm">
+                            <input type="hidden" id="editId" value="">
+                            <div class="form-group">
+                                <label for="editName">ID</label>
+                                <input type="text" name="name" class="form-control" id="editName" placeholder="Identification" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editSurname">Name</label>
+                                <input type="text" name="surname" class="form-control" id="editSurname" placeholder="Product name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editEmail">Price</label>
+                                <input type="email"  name="email" class="form-control" id="editEmail" placeholder="Product price" required>
+                            </div>
+                        
+        <!-- Modal footer-->
+                            <div class="modal-footer">
+                                <a  class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+                                <button type="button"  id="saveModalButton" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Footer-->
         <footer class="py-5 bg-dark">
