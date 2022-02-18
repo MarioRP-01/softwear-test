@@ -11744,4 +11744,23 @@ color:#69707a;
 
 .softwear-admin-banner {
   max-height: 3rem;
+  position: relative;
+  top: 0;
+}
+
+.pick-size{
+  display: flex; 
+  flex-direction: row; 
+  gap: 0.3rem;
+  margin: 0.5rem 0;
+}
+
+.product-description{
+  text-align: justify;
+}
+
+.checkout-btn{
+  font-size: min(8vw, 10vh);
+  border: 3px solid;
+  border-radius: 1rem;
 }
