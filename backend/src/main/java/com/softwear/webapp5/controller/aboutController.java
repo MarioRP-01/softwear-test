@@ -1,4 +1,4 @@
-package com.softwear.webapp5;
+package com.softwear.webapp5.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
