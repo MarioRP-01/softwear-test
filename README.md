@@ -45,6 +45,45 @@ We provide a catalog that can be filtered through different categories, allowing
 - Coupon
 - Transaction
 
+Property list of each entity:
+
+### User
+- rol: USER, ADMIN
+- name
+- lastName
+- eMail
+- password
+- address
+- phoneNumber
+- birthDay
+- transactionHistory
+- userid
+### Product
+- price
+- name
+- description
+- stock
+- brand
+- supplier
+- madeIn
+- manufacturingDate
+- productId
+### Coupon
+- code
+- type
+- startDate
+- dateOfExpiry
+- minimumForAplication
+- discount
+- affectedProducts
+- couponId
+### Transaction
+- type: WISHLIST, TRANSACTION, CART
+- userID
+- usedCoupons
+- Date
+- ProductList
+- transactionId
 ## Belongings
 
 * Product:
