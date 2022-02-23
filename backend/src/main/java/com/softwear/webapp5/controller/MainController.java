@@ -5,28 +5,28 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class Controladores {
-	@GetMapping("/productView") //Falta id
+public class MainController {
+	@GetMapping("/productView") //Missing id
 	public String product(Model model) {
 	    return "productView";
 	}
 	
-	@GetMapping("/") //Falta id
+	@GetMapping("/") //Missing id
 	public String index(Model model) {
 	    return "index";
 	}
 	
-	@GetMapping("/about") //Falta id
+	@GetMapping("/about") //Missing id
 	public String about(Model model) {
 	    return "about";
 	}
 	
-	@GetMapping("/userProfile") //Falta id
+	@GetMapping("/userProfile") //Missing id
 	public String user(Model model) {
 	    return "userProfile";
 	}
 	
-	@GetMapping("/login") //Falta id
+	@GetMapping("/login") //Missing id
 	public String login(Model model) {
 	    return "login";
 	}
