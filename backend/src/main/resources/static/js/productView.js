@@ -1,5 +1,7 @@
 
 
+
+
 let thumbnails = document.getElementsByClassName('product-thumbnail')
 
 let activeImages = document.getElementsByClassName('product-active')
@@ -29,4 +31,35 @@ buttonLeft.addEventListener('click', function(){
 
 buttonRight.addEventListener('click', function(){
 	document.getElementById('product-slider').scrollLeft += 180
+})
+
+
+//Load items from server
+function loadProduct(callback) {
+  $.ajax({
+      url: 'http://localhost:8080/products/'
+  }).done(function (products) {
+      console.log('products loaded: ' + JSON.stringify(products));
+      callback(products);
+  })
+}
+
+function showProduct(product) {
+
+	$("#product-featured")[0].src= product.img_routes[0];
+	$("img.product-thumbnail")[0].src= product.img_routes[0]; //FOR RECORRER LAS RUTAS
+	$("h1.softFont")[0].innerHTML = product.name;
+	$("h3")[0].innerHTML = "$"+ product.price;
+	$("p.product-description")[0].innerHTML = product.description;
+	
+}
+
+$(document).ready(function () {
+
+  loadProduct(function (products) {
+      //When items are loaded from server
+      for (var i = 0; i < products.length; i++) {
+          showProduct(products[i]);
+      }
+  });
 })
