@@ -53,12 +53,12 @@ public class CouponService {
 
 	//TODO Determine parameters
 	/* public boolean checkCoupon(...) {}*/
-	public boolean addCoupon(String code, String type, String startDate, String dateOfExpiry, @Nullable Float minimum, @Nullable Float discount, @Nullable List<Product> affectedProducts) {
+	public boolean addCoupon(Coupon coupon) {
 		
-		int[] stDate = transformStringDateToIntArray(startDate);
-		int[] endDate = transformStringDateToIntArray(dateOfExpiry);
+		int[] stDate = transformStringDateToIntArray(coupon.getStartDate());
+		int[] endDate = transformStringDateToIntArray(coupon.getDateOfExpiry());
 		if(parseDates(stDate, endDate)) {
-			couponRepository.save(new Coupon(code, type, startDate, dateOfExpiry, minimum, discount, affectedProducts));
+			couponRepository.save(coupon);
 			return true;
 		}
 		return false;
