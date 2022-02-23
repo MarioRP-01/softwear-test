@@ -32,7 +32,7 @@ public class ProductController {
 	
 	@PostConstruct
 	public void init() {
-		ArrayList<String> routes= new ArrayList();
+		ArrayList<String> routes= new ArrayList<>();
 		routes.add("../assets/productos/item1.webp");
 		products.save(new Product("Softcoat", "Coat made in ESPAÑA",routes,49.99));
 		//users.save(new User());

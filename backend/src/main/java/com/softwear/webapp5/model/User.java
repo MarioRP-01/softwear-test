@@ -19,9 +19,9 @@ public class User {
 	private String address;
 	private int mobileNumber;
 	private Date birthday;
-	private ArrayList<Product> cart = new ArrayList();
+	private ArrayList<Product> cart = new ArrayList<>();
 	//private ArrayList<Transaction> purchaseHistory = new ArrayList();
-	private ArrayList<Product> wishlist= new ArrayList();
+	private ArrayList<Product> wishlist= new ArrayList<>();
 	
 	
 	public User() {

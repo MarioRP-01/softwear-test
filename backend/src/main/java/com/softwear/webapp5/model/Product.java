@@ -14,7 +14,7 @@ public class Product{
     private Long id;
     private String name;
     private String description;
-    private ArrayList <String> img_routes = new ArrayList();
+    private ArrayList <String> img_routes = new ArrayList<>();
     private double price;
     
     
