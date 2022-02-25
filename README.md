@@ -22,28 +22,49 @@ We provide a catalog that can be filtered through different categories, allowing
 
 ## Screens
 
-! [about] (readmeAssets/about.jpg)
-- Index: landing page with products ordered by relevance. This filter can be changed to categories. A user can sign in or sign up from this screen. Clothes can be sent to the cart and wishing list from here.
+![index](readmeAssets/index1.jpg)
+![index](readmeAssets/index2.jpg)
+- Index: landing page with products ordered by relevance. This filter can be changed to categories. A user can sign in or sign up from this screen. Clothes can be sent to the cart and wishing list from here. Allows to navigate to About, Cart and Login.  
 
-- Login / register: where a user can create an account or log into it with a mail adress, a nickname and a password.
+\
+![login](readmeAssets/login.jpg)
+- Login / register: where a user can create an account or log into it with a mail adress, a nickname and a password. Allows to navigate to Home, About and Cart.
 
-- Cart: list with products the user wants to buy. To end the transaction the user must be logged in.
+\
+![login](readmeAssets/cart.jpg)
+- Cart: list with products the user wants to buy. To end the transaction the user must be logged in. Allows to navigate to Home, About and Login.
 
-- Wish list: list with products the user likes and can add to cart. They can be added from this list.
+\
+![login](readmeAssets/wishlist.jpg)
+- Wish list: list with products the user likes and can add to cart. They can be added from this list. Allows to navigate to Home, About, Cart and Login.
 
-- Product view: where a single product is displayed and specific details are shown.
+\
+![login](readmeAssets/productView.jpg)
+- Product view: where a single product is displayed and specific details are shown. Allows to navigate to Home, About, Shop and Login.
 
-- Admin home: where admins can choose what to do (manage categories, manage users, manage products) and a sales graph is displayed.
+\
+![login](readmeAssets/adminHome.jpg)
+- Admin home: where admins can choose what to do (manage categories, manage users, manage products) and a sales graph is displayed. Allows to navigate to Home, Manage Products and Manage Users.
 
-- Manage users: where an admin can ban a user, make a user admin or revoke admin privilege from a user.
+\
+![login](readmeAssets/manageUsers.jpg)
+- Manage users: where an admin can ban a user, make a user admin or revoke admin privilege from a user. Allows to navigate to  Home, Admin Home and Manage Products.
 
-- Manage products: where an admin can create and delete products.
+\
+![login](readmeAssets/manageProducts.jpg)
+- Manage products: where an admin can create and delete products. Allows to navigate to Home, Admin Home and Manage Users.
 
-- About: some information about us: the brand, our values and the webpage.
+\
+![login](readmeAssets/about.jpg)
+- About: some information about us: the brand, our values and the webpage. Allows to navigate to Home, Cart and Login.
 
-- Purchase history: different purchases with the products information.
+\
+![login](readmeAssets/purchaseHistory.jpg)
+- Purchase history: different purchases with the products information. Allows to navigate to Home, About, Cart and Login.
 
-- User profile: account details of each user.
+\
+![login](readmeAssets/userProfile.jpg)
+- User profile: account details of each user. Allows to navigate to Home, About and Cart.
 
 ## Entities
 
