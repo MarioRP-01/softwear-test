@@ -137,3 +137,7 @@ Our graph is a bar plot located at the admin panel and allows admins to track th
 ## Extra technologies
 
 We've implemented a mail function that sends the user a mail when they make a purchase with the product summary, price and transaction number for posible incidence.
+
+## Tools
+
+Link to our Trello: https://trello.com/b/7PcNfIHM/daw
