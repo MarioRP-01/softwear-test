@@ -22,7 +22,8 @@ We provide a catalog that can be filtered through different categories, allowing
 
 ## Screens
 
-- Home: landing page with products ordered by relevance. This filter can be changed to categories. A user can sign in or sign up from this screen. Clothes can be sent to the cart and wishing list from here.
+! [about] (readmeAssets/about.jpg)
+- Index: landing page with products ordered by relevance. This filter can be changed to categories. A user can sign in or sign up from this screen. Clothes can be sent to the cart and wishing list from here.
 
 - Login / register: where a user can create an account or log into it with a mail adress, a nickname and a password.
 
@@ -37,6 +38,12 @@ We provide a catalog that can be filtered through different categories, allowing
 - Manage users: where an admin can ban a user, make a user admin or revoke admin privilege from a user.
 
 - Manage products: where an admin can create and delete products.
+
+- About: some information about us: the brand, our values and the webpage.
+
+- Purchase history: different purchases with the products information.
+
+- User profile: account details of each user.
 
 ## Entities
 
