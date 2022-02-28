@@ -1,14 +1,14 @@
 package com.softwear.webapp5.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
 import com.softwear.webapp5.model.Coupon;
-import com.softwear.webapp5.model.Product;
+import com.softwear.webapp5.model.User;
 import com.softwear.webapp5.repository.CouponRepository;
 
 @Service
@@ -45,14 +45,22 @@ public class CouponService {
 				(
 					startDate[1] == endDate[1] 
 					&&
-					startDate[0] >= endDate[0]
+					startDate[0] > endDate[0]
 				)
 			)
 		));
 	}
 
-	//TODO Determine parameters
-	/* public boolean checkCoupon(...) {}*/
+	public boolean checkCoupon(User user, Coupon coupon) {
+		// TODO Uncomment block bellow when User is finished
+		/*if(user.getUsedCoupons().contains(coupon)) {
+			return false;
+		}*/
+		Calendar currentDate = Calendar.getInstance();
+		int[] intCurrentDate = {currentDate.get(Calendar.DAY_OF_MONTH), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.YEAR)};
+		return parseDates(transformStringDateToIntArray(coupon.getStartDate()), intCurrentDate) && parseDates(intCurrentDate, transformStringDateToIntArray(coupon.getDateOfExpiry()));
+	}
+
 	public boolean addCoupon(Coupon coupon) {
 		
 		int[] stDate = transformStringDateToIntArray(coupon.getStartDate());
