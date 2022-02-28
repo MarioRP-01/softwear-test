@@ -2,7 +2,6 @@ package com.softwear.webapp5.model;
 
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.persistence.*;
 
@@ -18,7 +17,7 @@ public class User {
 	private String password;
 	private String address;
 	private int mobileNumber;
-	private Date birthday;
+	private String birthdate;
 	private ArrayList<Product> cart = new ArrayList<>();
 	//private ArrayList<Transaction> purchaseHistory = new ArrayList();
 	private ArrayList<Product> wishlist= new ArrayList<>();
@@ -28,7 +27,7 @@ public class User {
 	
 	}
 
-	public User(String email, String name, String lastName, String password, String address, int mobileNumber, Date birthday,
+	public User(String email, String name, String lastName, String password, String address, int mobileNumber, String birthdate,
 			ArrayList<Product> cart, ArrayList<Product> wishlist) {
 		this.email = email;
 		this.name = name;
@@ -36,7 +35,7 @@ public class User {
 		this.password = password;
 		this.address = address;
 		this.mobileNumber = mobileNumber;
-		this.birthday = birthday;
+		this.birthdate = birthdate;
 		this.cart = cart;
 		this.wishlist = wishlist;
 	}
@@ -89,12 +88,12 @@ public class User {
 		this.mobileNumber = mobileNumber;
 	}
 
-	public Date getBirthday() {
-		return birthday;
+	public String getBirthdate() {
+		return birthdate;
 	}
 
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
+	public void setBirthdate(String birthdate) {
+		this.birthdate = birthdate;
 	}
 
 	public ArrayList<Product> getCart() {
