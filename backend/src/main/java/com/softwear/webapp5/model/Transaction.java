@@ -2,10 +2,13 @@ package com.softwear.webapp5.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Transaction {
@@ -14,11 +17,26 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+	@Column(nullable = false)
     private String type;
+
+	@ManyToOne(/*Uncomment when User is finished*//*optional = false*/)
     private User user;
+
+	@ManyToOne
     private Coupon usedCoupon;
+
+	@Column(nullable = false)
     private String date;
+
+	@ManyToMany
+	@Column(/*Uncomment when Product is finished*//*nullable = false*/)
     private List<Product> products;
+
+	public Transaction(String type, String date) {
+		this.type = type;
+		this.date = date;
+	}
 
     public Transaction(String type, User user, Coupon usedCoupon, String date, List<Product> products) {
         this.type = type;
