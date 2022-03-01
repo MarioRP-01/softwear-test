@@ -1,9 +1,6 @@
 package com.softwear.webapp5.service;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.Properties;
-
 import javax.mail.Message;
 import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
@@ -16,25 +13,28 @@ import javax.mail.internet.MimeMultipart;
 
 public class MailService {
 
-    public MailService(){
+    Properties prop;
+    Session session;
 
+    public MailService(String mailUsername, String mailPassword){
+        this.prop = new Properties();
+        this.prop.put("mail.smtp.auth", true);
+        this.prop.put("mail.smtp.starttls.enable", "true");
+        this.prop.put("mail.smtp.host", "smtp.mailtrap.io");
+        this.prop.put("mail.smtp.port", "25");
+        this.prop.put("mail.smtp.ssl.trust", "smtp.mailtrap.io");
+        this.session = Session.getInstance(this.prop, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                //softwearDAW@gmail.com 9SEc6FMyIvPB
+                return new PasswordAuthentication(mailUsername, mailPassword);
+            }
+        });
     }
 
     public void send(String receiverMail, String subject, String msg) throws Exception{
-        Properties prop = new Properties();
-        prop.put("mail.smtp.auth", false);
-        prop.put("mail.smtp.starttls.enable", "true");
-        prop.put("mail.smtp.host", "smtp.mailtrap.io");
-        prop.put("mail.smtp.port", "25");
-        prop.put("mail.smtp.ssl.trust", "smtp.mailtrap.io");
-        Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
-            }
-        }); 
-
-        Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress("from@gmail.com"));
+   
+        Message message = new MimeMessage(this.session);
+        message.setFrom(new InternetAddress("softwearDAW@gmail.com"));
         message.setRecipients(
         Message.RecipientType.TO, InternetAddress.parse(receiverMail));
         message.setSubject(subject);
@@ -48,7 +48,6 @@ public class MailService {
         message.setContent(multipart);
 
         Transport.send(message);
-
     }
 
 
