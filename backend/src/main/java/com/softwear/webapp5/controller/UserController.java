@@ -11,20 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.User;
-import com.softwear.webapp5.repository.ProductRepository;
-import com.softwear.webapp5.repository.UserRepository;
+import com.softwear.webapp5.service.UserService;
 
 @Controller
 public class UserController {
 	
 	@Autowired
-	private UserRepository users;
-
-	@PostConstruct
-	public void init() {
-		users.save(new User("ale.2019@alumnos.urjc.es", "Ale","Morueco", "1234", "Arroyo", 671642, "12/02/2000", null ,null));
-		//users.save(new User());
-	}
+	private UserService users;
 
 	@GetMapping("/userProfile")
 	public String user(Model model) {
@@ -38,5 +31,10 @@ public class UserController {
 		return "userProfile";
 	}
 	
+	
+    @GetMapping("/userProfile/purchaseHistory")
+    public String purchaseHistory(Model model) {
+        return "purchaseHistory";
+    }
 	
 }
