@@ -96,8 +96,8 @@ public class Transaction {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(Double price) {
-		totalPrice = price;
+	public void setTotalPrice(Double totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 	// Returns sum of product prices, without discount
