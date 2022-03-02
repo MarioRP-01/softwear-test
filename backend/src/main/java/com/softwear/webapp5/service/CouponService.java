@@ -1,11 +1,11 @@
 package com.softwear.webapp5.service;
 
+import com.softwear.webapp5.model.Product;
+import com.softwear.webapp5.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.User;
@@ -15,9 +15,12 @@ import com.softwear.webapp5.repository.UserRepository;
 
 @Service
 public class CouponService {
-	
+
 	@Autowired
 	private CouponRepository couponRepository;
+
+	@Autowired
+	private TransactionRepository transactionRepository;
 	
 	//Uncomment when Product is finished
 	/*@Autowired
@@ -106,6 +109,124 @@ public class CouponService {
 
 	public List<Coupon> findByDiscount(Float discount) {
 		return couponRepository.findByDiscount(discount);
+	}
+
+	private boolean applyTotalPercentCoupon(Transaction transaction) {
+		Coupon coupon = transaction.getUsedCoupon();
+		if(coupon.getDiscount() == null) {
+			return false;
+		}
+		transaction.setTotalPrice(transaction.getTotalPrice() * (1 - coupon.getDiscount()));
+		return true;
+	}
+
+	private boolean applyTotalAmountCoupon(Transaction transaction) {
+		Coupon coupon = transaction.getUsedCoupon();
+		if(coupon.getDiscount() == null) {
+			return false;
+		}
+		transaction.setTotalPrice(transaction.getTotalPrice() - coupon.getDiscount());
+		return true;
+	}
+
+	private boolean applyMxNCoupon(Transaction transaction, int M, int N) {
+		List<Product> products = transaction.getUsedCoupon().getAffectedProducts();
+		if(products == null || products.isEmpty()) {
+			return false;
+		}
+		boolean changed = false;
+		for(Product product: products) {
+			int numberOfDiscounts = Collections.frequency(transaction.getProducts(), product) / M;
+			if(numberOfDiscounts > 0) {
+				transaction.setTotalPrice(transaction.getTotalPrice() - (M - N) * numberOfDiscounts * product.getPrice());
+				changed = true;
+			}
+		}
+		return changed;
+	}
+
+	private boolean applyProductPercentCoupon(Transaction transaction) {
+		Coupon coupon = transaction.getUsedCoupon();
+		if(coupon.getDiscount() == null) {
+			return false;
+		}
+		List<Product> products = coupon.getAffectedProducts();
+		if(products == null || products.isEmpty()) {
+			return false;
+		}
+		boolean changed = false;
+		for(Product product: products) {
+			int numberOfProducts = Collections.frequency(transaction.getProducts(), product);
+			if(numberOfProducts > 0) {
+				transaction.setTotalPrice(transaction.getTotalPrice() - numberOfProducts * coupon.getDiscount() * product.getPrice());
+				changed = true;
+			}
+		}
+		return changed;
+	}
+
+	private boolean applyProductAmountCoupon(Transaction transaction) {
+		Coupon coupon = transaction.getUsedCoupon();
+		if(coupon.getDiscount() == null) {
+			return false;
+		}
+		List<Product> products = coupon.getAffectedProducts();
+		if(products == null || products.isEmpty()) {
+			return false;
+		}
+		boolean changed = false;
+		for(Product product: products) {
+			int numberOfProducts = Collections.frequency(transaction.getProducts(), product);
+			if(numberOfProducts > 0) {
+				transaction.setTotalPrice(transaction.getTotalPrice() - numberOfProducts * coupon.getDiscount());
+				changed = true;
+			}
+		}
+		return changed;
+	}
+
+	private boolean applyCouponByType(Transaction transaction) {
+		Coupon coupon = transaction.getUsedCoupon();
+		if(coupon.getType().equals("total_percent")) {
+			return applyTotalPercentCoupon(transaction);
+		}
+		if(coupon.getType().equals("total_fix_amount")) {
+			return applyTotalAmountCoupon(transaction);
+		}
+		if(coupon.getType().equals("2x1")) {
+			return applyMxNCoupon(transaction, 2, 1);
+		}
+		if(coupon.getType().equals("3x2")) {
+			return applyMxNCoupon(transaction, 3, 2);
+		}
+		if(coupon.getType().equals("product_percent")) {
+			return applyProductPercentCoupon(transaction);
+		}
+		if(coupon.getType().equals("product_amount")) {
+			return applyProductAmountCoupon(transaction);
+		}
+		return false;
+	}
+
+	public boolean applyCoupon(Long transactionId) {
+		Optional<Transaction> transactionOptional= transactionRepository.findById(transactionId);
+		if(transactionOptional.isPresent()) {
+			Transaction transaction = transactionOptional.get();
+			Coupon coupon = transaction.getUsedCoupon();
+			if(coupon != null) {
+				if(transaction.getTotalPrice() != transaction.calculateTotalProductPrice()) {
+					transaction.setTotalPrice(transaction.calculateTotalProductPrice());
+				}
+				if(coupon.getMinimum() != null && transaction.getTotalPrice() < coupon.getMinimum()) {
+					return false;
+				}
+				if(applyCouponByType(transaction)) {
+					transactionRepository.save(transaction);
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 }
