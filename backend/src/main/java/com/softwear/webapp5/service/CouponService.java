@@ -53,9 +53,10 @@ public class CouponService {
 	}
 
 	public boolean checkCoupon(User user, Coupon coupon) {
-		if(couponRepository.findCouponsByUser(user).contains(coupon)) {
+		// Uncomment block bellow when User is done
+		/*if(couponRepository.findCouponsByUser(user).contains(coupon)) {
 			return false;
-		}
+		}*/
 		Calendar currentDate = Calendar.getInstance();
 		int[] intCurrentDate = {currentDate.get(Calendar.DAY_OF_MONTH), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.YEAR)};
 		return checkDates(transformStringDateToIntArray(coupon.getStartDate()), intCurrentDate) && checkDates(intCurrentDate, transformStringDateToIntArray(coupon.getDateOfExpiry()));
@@ -109,6 +110,10 @@ public class CouponService {
 
 	public List<Coupon> findByDiscount(Float discount) {
 		return couponRepository.findByDiscount(discount);
+	}
+
+	public List<Coupon> findCouponsByUser(User user) {
+		return couponRepository.findCouponsByUser(user);
 	}
 
 	private boolean applyTotalPercentCoupon(Transaction transaction) {
@@ -187,10 +192,10 @@ public class CouponService {
 
 	private boolean applyCouponByType(Transaction transaction) {
 		Coupon coupon = transaction.getUsedCoupon();
-		if(coupon.getType().equals("total_percent")) {
+		if(coupon.getType().equals("total_percentage")) {
 			return applyTotalPercentCoupon(transaction);
 		}
-		if(coupon.getType().equals("total_fix_amount")) {
+		if(coupon.getType().equals("total_amount")) {
 			return applyTotalAmountCoupon(transaction);
 		}
 		if(coupon.getType().equals("2x1")) {
@@ -199,7 +204,7 @@ public class CouponService {
 		if(coupon.getType().equals("3x2")) {
 			return applyMxNCoupon(transaction, 3, 2);
 		}
-		if(coupon.getType().equals("product_percent")) {
+		if(coupon.getType().equals("product_percentage")) {
 			return applyProductPercentCoupon(transaction);
 		}
 		if(coupon.getType().equals("product_amount")) {
@@ -208,25 +213,30 @@ public class CouponService {
 		return false;
 	}
 
+	public boolean applyCoupon(Transaction transaction) {
+		Coupon coupon = transaction.getUsedCoupon();
+		if(coupon == null || checkCoupon(/*Change when User is done*//*transaction.getUser()*/null, coupon)) {
+			return false;
+		}
+		if(transaction.getTotalPrice() != transaction.calculateTotalProductPrice()) {
+			transaction.setTotalPrice(transaction.calculateTotalProductPrice());
+		}
+		if(coupon.getMinimum() != null && transaction.getTotalPrice() < coupon.getMinimum()) {
+			return false;
+		}
+		if(!applyCouponByType(transaction)) {
+			return false;
+		}
+		transactionRepository.save(transaction);
+		return true;
+	}
+
 	public boolean applyCoupon(Long transactionId) {
 		Optional<Transaction> transactionOptional= transactionRepository.findById(transactionId);
-		if(transactionOptional.isPresent()) {
-			Transaction transaction = transactionOptional.get();
-			Coupon coupon = transaction.getUsedCoupon();
-			if(coupon != null) {
-				if(transaction.getTotalPrice() != transaction.calculateTotalProductPrice()) {
-					transaction.setTotalPrice(transaction.calculateTotalProductPrice());
-				}
-				if(coupon.getMinimum() != null && transaction.getTotalPrice() < coupon.getMinimum()) {
-					return false;
-				}
-				if(applyCouponByType(transaction)) {
-					transactionRepository.save(transaction);
-					return true;
-				}
-			}
+		if (transactionOptional.isEmpty()) {
+			return false;
 		}
-		return false;
+		return applyCoupon(transactionOptional.get());
 	}
 
 }
