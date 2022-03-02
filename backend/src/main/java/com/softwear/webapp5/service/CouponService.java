@@ -53,9 +53,10 @@ public class CouponService {
 	}
 
 	public boolean checkCoupon(User user, Coupon coupon) {
-		if(transactionRepository.getCouponsByUser(user).contains(coupon)) {
+		// Uncomment block bellow when TransactionRepository.getCouponByUser is done
+		/*if(transactionRepository.getCouponsByUser(user).contains(coupon)) {
 			return false;
-		}
+		}*/
 		Calendar currentDate = Calendar.getInstance();
 		int[] intCurrentDate = {currentDate.get(Calendar.DAY_OF_MONTH), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.YEAR)};
 		return checkDates(transformStringDateToIntArray(coupon.getStartDate()), intCurrentDate) && checkDates(intCurrentDate, transformStringDateToIntArray(coupon.getDateOfExpiry()));

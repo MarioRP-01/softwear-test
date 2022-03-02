@@ -32,7 +32,7 @@ public class Coupon {
     
     private Float discount;
 
-	@ManyToMany(mappedBy = "id")
+	@ManyToMany
     private List<Product> affectedProducts;
     
     
