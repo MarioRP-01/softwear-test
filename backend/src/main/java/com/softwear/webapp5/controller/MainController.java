@@ -21,10 +21,10 @@ public class MainController {
 	    return "about";
 	}
 	
-	@GetMapping("/userProfile") //Missing id
+	/*@GetMapping("/userProfile") //Missing id
 	public String user(Model model) {
 	    return "userProfile";
-	}
+	}*/
 	
 	@GetMapping("/login") //Missing id
 	public String login(Model model) {
