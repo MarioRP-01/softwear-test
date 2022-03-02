@@ -10,16 +10,17 @@ import java.util.Optional;
 import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.User;
 import com.softwear.webapp5.repository.CouponRepository;
+import com.softwear.webapp5.repository.TransactionRepository;
+import com.softwear.webapp5.repository.UserRepository;
 
 @Service
 public class CouponService {
 	
 	@Autowired
 	private CouponRepository couponRepository;
-	
-	//Uncomment when User is finished
-	/*@Autowired
-	private UserRepository userRepository;*/
+
+	@Autowired
+	private TransactionRepository transactionRepository;
 	
 	//Uncomment when Product is finished
 	/*@Autowired
@@ -34,7 +35,7 @@ public class CouponService {
 		return dateArray;
 	}
 
-	private boolean parseDates(int[] startDate, int[] endDate) {
+	private boolean checkDates(int[] startDate, int[] endDate) {
 		return !(startDate[2] > endDate[2] ||
 		(
 			startDate[2] == endDate[2] 
@@ -52,20 +53,20 @@ public class CouponService {
 	}
 
 	public boolean checkCoupon(User user, Coupon coupon) {
-		// TODO Uncomment block bellow when User is finished
-		/*if(user.getUsedCoupons().contains(coupon)) {
+		// Uncomment block bellow when TransactionRepository.getCouponByUser is done
+		/*if(transactionRepository.getCouponsByUser(user).contains(coupon)) {
 			return false;
 		}*/
 		Calendar currentDate = Calendar.getInstance();
 		int[] intCurrentDate = {currentDate.get(Calendar.DAY_OF_MONTH), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.YEAR)};
-		return parseDates(transformStringDateToIntArray(coupon.getStartDate()), intCurrentDate) && parseDates(intCurrentDate, transformStringDateToIntArray(coupon.getDateOfExpiry()));
+		return checkDates(transformStringDateToIntArray(coupon.getStartDate()), intCurrentDate) && checkDates(intCurrentDate, transformStringDateToIntArray(coupon.getDateOfExpiry()));
 	}
 
 	public boolean addCoupon(Coupon coupon) {
 		
 		int[] stDate = transformStringDateToIntArray(coupon.getStartDate());
 		int[] endDate = transformStringDateToIntArray(coupon.getDateOfExpiry());
-		if(parseDates(stDate, endDate)) {
+		if(checkDates(stDate, endDate)) {
 			couponRepository.save(coupon);
 			return true;
 		}
