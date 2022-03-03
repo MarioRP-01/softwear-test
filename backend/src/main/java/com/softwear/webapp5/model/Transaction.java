@@ -52,6 +52,14 @@ public class Transaction {
 
     public Transaction() {}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getType() {
 		return type;
 	}
@@ -90,14 +98,15 @@ public class Transaction {
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
+		totalPrice = calculateTotalProductPrice();
 	}
 
 	public Double getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(Double price) {
-		totalPrice = price;
+	public void setTotalPrice(Double totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 	// Returns sum of product prices, without discount
