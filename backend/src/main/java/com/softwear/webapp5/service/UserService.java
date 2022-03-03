@@ -5,13 +5,18 @@ import com.softwear.webapp5.repository.UserRepository;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.softwear.webapp5.model.User;
 
+@Service
 public class UserService {
 	
+	@Autowired
 	private UserRepository users;
 	
-	public Optional<User> findById(long id){
+	public Optional<User> findById(Long id){
 		return users.findById(id);
 	}
 	
@@ -31,8 +36,8 @@ public class UserService {
 		return users.findByName(name);
 	}
 	
-	public List<User> findByLastname (String lastname){
-		return users.findByLastname(lastname);
+	public List<User> findByLastName (String lastName){
+		return users.findByLastName(lastName);
 	}
 	
 	public List<User> findByAddress (String address){
@@ -41,6 +46,29 @@ public class UserService {
 	
 	public List<User> findByBirthdate (String birthdate){
 		return users.findByBirthdate(birthdate);
+	}
+	
+	///////////////////////////////////////////
+	
+	public void updateInfo(Optional<User> oldUser, User u) {
+
+		oldUser.get().setUsername(u.getUsername());
+		oldUser.get().setAddress(u.getAddress());
+		oldUser.get().setBirthdate(u.getBirthdate());
+		oldUser.get().setEmail(u.getEmail());
+		oldUser.get().setLastName(u.getLastName());
+		oldUser.get().setMobileNumber(u.getMobileNumber());
+		oldUser.get().setName(u.getName());
+		
+		users.save(oldUser.get());
+		
+	}
+	
+	public void updatePass(Optional<User> oldUser, String newPass) {
+
+		oldUser.get().setPassword(newPass);
+		users.save(oldUser.get());
+		
 	}
 
 }
