@@ -29,6 +29,9 @@ public class Transaction {
 	@Column(nullable = false)
     private String date;
 
+	@Column(nullable = false)
+	private Double totalPrice;
+
 	@ManyToMany
 	@Column(/*Uncomment when Product is finished*//*nullable = false*/)
     private List<Product> products;
@@ -44,6 +47,7 @@ public class Transaction {
         this.usedCoupon = usedCoupon;
         this.date = date;
         this.products = products;
+		totalPrice = calculateTotalProductPrice();
     }
 
     public Transaction() {}
@@ -88,6 +92,21 @@ public class Transaction {
 		this.products = products;
 	}
 
-    
+	public Double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Double price) {
+		totalPrice = price;
+	}
+
+	// Returns sum of product prices, without discount
+    public double calculateTotalProductPrice() {
+		double sum = 0.0f;
+		for(Product product: products) {
+			sum += product.getPrice();
+		}
+		return sum;
+	}
 
 }
