@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Transaction;
+import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.repository.CouponRepository;
 import com.softwear.webapp5.repository.TransactionRepository;
+import com.softwear.webapp5.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,9 @@ public class DatabaseInitializer {
 
 	@Autowired
 	private CouponService couponService;
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	@PostConstruct
 	public void init() {
@@ -93,6 +98,13 @@ public class DatabaseInitializer {
 		couponService.applyCoupon(transaction);
 		transactionRepository.save(transaction);
 
+		
+		
+		// Users
+		
+		userRepository.save(new ShopUser("JOLU","joseluis@gmail.com","Jose Luis","Ekisde","1234","Calle falsa 123", 678934837,"31/01/1990","Admin"));
+		userRepository.save(new ShopUser("PEPELU","pepeluis@gmail.com","Pepe Luis","Ekisde","5678","Calle falsa 123", 671234129,"30/03/1993","User"));
+		
 	}
 	
 }

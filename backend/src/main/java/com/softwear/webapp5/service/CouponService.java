@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 import com.softwear.webapp5.model.Coupon;
-import com.softwear.webapp5.model.User;
+import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.repository.CouponRepository;
 import com.softwear.webapp5.repository.TransactionRepository;
 import com.softwear.webapp5.repository.UserRepository;
@@ -52,7 +52,7 @@ public class CouponService {
 		));
 	}
 
-	public boolean checkCoupon(User user, Coupon coupon) {
+	public boolean checkCoupon(ShopUser user, Coupon coupon) {
 		// Uncomment block bellow when User is done
 		/*if(couponRepository.findCouponsByUser(user).contains(coupon)) {
 			return false;
