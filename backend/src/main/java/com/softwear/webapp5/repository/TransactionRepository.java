@@ -12,7 +12,7 @@ import com.softwear.webapp5.model.ShopUser;
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
     List<Transaction> findByType(String type);
-    List<Transaction> findByUser(User user);
+    List<Transaction> findByUser(ShopUser user);
     List<Transaction> findByUsedCoupon(Coupon coupon);
     List<Transaction> findByDate(String date);
     List<Transaction> findByTotalPrice(Double totalPrice);

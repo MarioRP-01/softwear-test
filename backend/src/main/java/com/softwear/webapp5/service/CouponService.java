@@ -112,7 +112,7 @@ public class CouponService {
 		return couponRepository.findByDiscount(discount);
 	}
 
-	public List<Coupon> findCouponsByUser(User user) {
+	public List<Coupon> findCouponsByUser(ShopUser user) {
 		return couponRepository.findCouponsByUser(user);
 	}
 

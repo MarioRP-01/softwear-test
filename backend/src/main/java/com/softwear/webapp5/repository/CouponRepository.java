@@ -2,7 +2,7 @@ package com.softwear.webapp5.repository;
 
 import java.util.List;
 
-import com.softwear.webapp5.model.User;
+import com.softwear.webapp5.model.ShopUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.softwear.webapp5.model.Coupon;
@@ -19,6 +19,6 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 
 	@Query("SELECT coupon FROM Coupon coupon, Transaction trans " +
 			"WHERE coupon=trans.usedCoupon and trans.user=:user")
-	List<Coupon> findCouponsByUser(User user);
+	List<Coupon> findCouponsByUser(ShopUser user);
 	
 }
