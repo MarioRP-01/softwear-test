@@ -45,9 +45,9 @@ public class DatabaseInitializer {
 		lista3.add("item7.webp");
 		lista3.add("item8.webp");
 
-		productRepository.save(new Product("camisa", "es cómoda", lista1, 10));
-		productRepository.save(new Product("chaqueta", "está cómoda", lista2, 20));
-		productRepository.save(new Product("pantalón", "ufff", lista3, 15));
+		productRepository.save(new Product("camisa", "es cómoda", lista1, 10, 156, "Correos", "China", "Softwear", "15 de marzo de 2022"));
+		productRepository.save(new Product("chaqueta", "está cómoda", lista2, 20, 156, "DMW", "Albacete", "Softwear", "26 de abril de 2022"));
+		productRepository.save(new Product("pantalón", "ufff", lista3, 15, 156, "Amazon", "Murcia", "Softwear", "12 de enero de 2022"));
 	}
 	
 }
