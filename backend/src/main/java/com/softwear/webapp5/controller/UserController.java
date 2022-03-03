@@ -21,17 +21,11 @@ public class UserController {
 	private UserService users;
 	
 	private Long id;
-
-	@GetMapping("/userProfile")
-	public String ShopUser(Model model) {
-		
-		
-		return "userProfile";
-	}
 	
-	@GetMapping("/userProfile/{id}")
+	@GetMapping("/userProfile")
 	public String getUser(Model model, @PathVariable Long id) {
-
+		
+		
 		this.id=id;
 		model.addAttribute("id",id);
 		model.addAttribute("username", users.findById(id).get().getUsername());
@@ -69,11 +63,22 @@ public class UserController {
 		return "BadPass";
 	}
 	
-	
-	
     @GetMapping("/userProfile/purchaseHistory")
     public String purchaseHistory(Model model) {
         return "purchaseHistory";
     }
+    
+    
+	@GetMapping("/login") //Missing id
+	public String loginPage(Model model) {
+	    return "login";
+	}
+	
+	@PostMapping("/login")
+	public String login (Model model) {
+		
+		
+		return "index";
+	}
 	
 }

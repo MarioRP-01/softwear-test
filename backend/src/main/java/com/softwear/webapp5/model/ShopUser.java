@@ -8,15 +8,20 @@ import javax.persistence.*;
 @Entity
 public class ShopUser {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(unique=true)
 	private String username;
+	
+	@Column(unique=true)
 	private String email;
 	private String name;
 	private String lastName;
 	private String password;
 	private String address;
+	
+	@Column(unique=true)
 	private int mobileNumber;
 	private String birthdate;
 	private String role;

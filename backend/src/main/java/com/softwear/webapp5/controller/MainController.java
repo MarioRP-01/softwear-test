@@ -29,10 +29,7 @@ public class MainController {
 	    return "userProfile";
 	}*/
 	
-	@GetMapping("/login") //Missing id
-	public String login(Model model) {
-	    return "login";
-	}
+
 	
 	@GetMapping("/mailTry")
 	public String mailTest(Model model) {

@@ -12,13 +12,13 @@
                             <h5 class="card-title text-center mb-5 fw-light fs-5">Sign In</h5>
                           </div>
                           <div class="row">
-                            <form id="form-login">
+                            <form id="form-login" action="/login" method="post">
                               <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com" required>
-                                <label for="floatingEmail">Email address</label>
+                                <input type="text" class="form-control" id="floatingUsername" placeholder="Username" name="usernameLogin" required>
+                                <label for="floatingUsername">Username</label>
                               </div>
                               <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="passwordLogin" required>
                                 <label for="floatingPassword">Password</label>
                               </div>
                               <div class="d-grid">
@@ -39,21 +39,21 @@
                             <h5 class="card-title text-center mb-5 fw-light fs-5">Sign Up</h5>
                           </div>
                           <div class="row">
-                            <form id="form-register">
+                            <form id="form-register" action="/login/register" method="post">
                               <div class="form-floating mb-3">
-                                  <input type="text" class="form-control" id="floatingName" placeholder="Name" required>
+                                  <input type="text" class="form-control" id="floatingName" placeholder="Name" name="name" required>
                                   <label for="floatingPassword">Name</label>
                               </div>
                               <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="floatingEmailReg" placeholder="name@example.com" required>
+                                <input type="email" class="form-control" id="floatingEmailReg" placeholder="name@example.com" name="email" required>
                                 <label for="floatingEmail">Email address</label>
                               </div>
                               <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingPasswordReg" placeholder="Password" required>
+                                <input type="password" class="form-control" id="floatingPasswordReg" placeholder="Password" name="password" required>
                                 <label for="floatingPassword">Password</label>
                               </div>
                               <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingPasswordRepeatReg" placeholder="Password" required>
+                                <input type="password" class="form-control" id="floatingPasswordRepeatReg" placeholder="Password" name="confPassword" required>
                                 <label for="floatingPasswordRepeat">Repeat Password</label>
                               </div>
                 
