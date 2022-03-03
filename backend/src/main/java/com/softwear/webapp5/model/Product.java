@@ -1,7 +1,6 @@
 package com.softwear.webapp5.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,10 +18,10 @@ public class Product{
     private String name;
 
 	@Column(nullable = false)
-	private double price;
+    private String description;
 
 	@Column(nullable = false)
-    private String description;
+	private double price;
 
 	@Column(nullable = false)
 	private int stock;
@@ -32,24 +31,22 @@ public class Product{
 	private String brand;
 	private String manufactDate;
 
-    private List <String> img_routes = new ArrayList<>();
+    private ArrayList<String> img_routes = new ArrayList<>();
     
-    
-    
-    public Product() {}
-    
-	public Product(String name, String description, List<String> img_routes, double price, int stock, String supplier, 
-	String madeIn, String brand, String manufactDate) {
+	public Product(String name, String description, double price, int stock, String supplier, 
+	String madeIn, String brand, String manufactDate, ArrayList<String> img_routes) {
 		this.name = name;
 		this.description = description;
-		this.img_routes = img_routes;
 		this.price = price;
 		this.stock = stock;
 		this.supplier = supplier;
 		this.madeIn = madeIn;
 		this.brand = brand;
 		this.manufactDate = manufactDate;
+		this.img_routes = img_routes;
 	}
+
+	public Product() {}
 
 	public String getBrand() {
 		return brand;
@@ -123,11 +120,11 @@ public class Product{
 		this.madeIn = madeIn;
 	}
 
-	public List<String> getImg_routes() {
+	public ArrayList<String> getImg_routes() {
 		return img_routes;
 	}
 
-	public void setImg_routes(List<String> img_routes) {
+	public void setImg_routes(ArrayList<String> img_routes) {
 		this.img_routes = img_routes;
 	}
 }

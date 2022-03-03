@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Service
 public class ProductService {
+    
     @Autowired
     private ProductRepository repository;
 
@@ -29,7 +30,7 @@ public class ProductService {
     //  findbyprice, findbybrand
 
     public List<Product> findByName(String name){
-        return repository.findByName(name).notFound().build();
+        return repository.findByName(name);
     }
 
 
