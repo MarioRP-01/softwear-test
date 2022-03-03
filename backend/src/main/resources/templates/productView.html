@@ -19,14 +19,14 @@
 	
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">  <!-- bg-light -->
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="/"><img src="../assets/full-logo-new.svg" style = "width: 5vw"></a>
-                <a class="navbar-brand-2 user-icon-small-screen" href="/login"><img src="../assets/user-icon.png" class="user-icon" style = "width: 3vw"></a>
+                <a class="navbar-brand" href="../views/index.html"><img src="../assets/full-logo-new.svg" style = "width: 5vw"></a>
+                <a class="navbar-brand-2 user-icon-small-screen" href="login.html"><img src="../assets/user-icon.png" class="user-icon" style = "width: 3vw"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about">About</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -38,7 +38,7 @@
                         </li>
                     </ul>
                     <form class="d-flex cart-icon">
-                        <a class="btn btn-outline-dark" href="cart">
+                        <a class="btn btn-outline-dark" href="cart.html">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
                             <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
@@ -46,7 +46,7 @@
                     </form>
                     
                 </div>
-                <a class="navbar-brand-2 user-icon-big-screen" href="/login"><img src="../assets/user-icon.png" class="user-icon" style = "width: 3vw"></a>
+                <a class="navbar-brand-2 user-icon-big-screen" href="login.html"><img src="../assets/user-icon.png" class="user-icon" style = "width: 3vw"></a>
             </div>
         </nav>
 	
@@ -61,20 +61,19 @@
 				<img id="product-slideLeft" class="product-arrow" src="../assets/arrow-left.png">
 
 				<div id="product-slider">
-					<img class="product-thumbnail product-active" src="../assets/productos/{{product.img_routes.0}}">
-                    {{#products.img_routes}}
-					    <img class="product-thumbnail" src="../assets/productos/{{this}}">
-                    {{/product.img_routes}}
-                </div>				
+					<img class="product-thumbnail product-active" src="../assets/productos/item1.webp">
+					<img class="product-thumbnail" src="../assets/productos/item2.webp">
+					<img class="product-thumbnail" src="../assets/productos/item3.webp">
+				</div>
 
 				<img id="product-slideRight" class="product-arrow" src="../assets/arrow-right.png">
 			</div>
 		</div>
 
 		<div class="product-column">
-			<h1 class="softFont">${{product.name}}</h1>
+			<h1 class="softFont">Softcoat</h1>
 			<hr>
-			<h3>${{product.price}}</h3>
+			<h3>$49.99</h3>
             <div class="pick-size">
                 <a class="btn btn-outline-dark">XS</a>
                 <a class="btn btn-outline-dark">S</a>
@@ -82,7 +81,7 @@
                 <a class="btn btn-outline-dark">L</a>
                 <a class="btn btn-outline-dark">XL</a>
             </div>
-			<p class="product-description">{{product.description}}</p>
+			<p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
 			<input value=1 type="number">
 			<a class="btn btn-dark" href="#">Add to Cart</a>
