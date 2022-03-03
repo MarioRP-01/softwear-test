@@ -1,14 +1,17 @@
 package com.softwear.webapp5.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.softwear.webapp5.model.Coupon;
-import com.softwear.webapp5.model.Transaction;
+import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.repository.CouponRepository;
-import com.softwear.webapp5.repository.TransactionRepository;
+import com.softwear.webapp5.repository.ProductRepository;
 
 @Service
 public class DatabaseInitializer {
@@ -17,27 +20,34 @@ public class DatabaseInitializer {
 	private CouponRepository couponRepository;
 
 	@Autowired
-	private TransactionRepository transactionRepository;
+	private ProductRepository productRepository;
 	
 	@PostConstruct
 	public void init() {
+		couponRepository.save(new Coupon("ESE10", "total_percentage", "15/02/22", "26/06/22", 10.00f, 0.1f, null));
+		couponRepository.save(new Coupon("DAME10", "total_fix_amount", "15/02/22", "26/02/22", 10.00f, 2.5f, null));
+		couponRepository.save(new Coupon("2x1SIEMPREENTRA", "2x1", "13/03/22", "26/06/22", null, null, null));
+		couponRepository.save(new Coupon("PRUEBAEL3X2", "3x2", "12/02/22", "22/02/22", null, null, null));
+		couponRepository.save(new Coupon("PORTODOLOALTO", "total_percentage", "15/02/22", "26/06/22", 0f, 0.5f, null));
 
-		// Coupons
+		ArrayList<String> lista1 = new ArrayList<>();
+		ArrayList<String> lista2 = new ArrayList<>();
+		ArrayList<String> lista3 = new ArrayList<>();
 
-		Coupon coupon = new Coupon("ASTONISHOFFER", "total_percentage", "15/02/22", "26/06/22", 0f, 0.5f, null);
+		lista1.add("item1.webp");
+		lista1.add("item2.webp");
+		lista1.add("item3.webp");
 
-		couponRepository.save(new Coupon("10PER", "total_percentage", "15/02/22", "26/06/22", 10.00f, 0.1f, null));
-		couponRepository.save(new Coupon("GIVEME10", "total_fix_amount", "15/02/22", "26/02/22", 10.00f, 2.5f, null));
-		couponRepository.save(new Coupon("2X1", "2x1", "13/03/22", "26/06/22", null, null, null));
-		couponRepository.save(new Coupon("TAKEALOOK3X2", "3x2", "12/02/22", "22/02/22", null, null, null));
-		couponRepository.save(coupon);
+		lista2.add("item4.webp");
+		lista2.add("item5.webp");
+		lista2.add("item6.webp");
 
-		// Transactions
+		lista3.add("item7.webp");
+		lista3.add("item8.webp");
 
-		Transaction transaction = new Transaction("CART", "24/02/22");
-		transaction.setUsedCoupon(coupon);
-		transactionRepository.save(transaction);
-		
+		productRepository.save(new Product("camisa", "es cómoda", lista1, 10));
+		productRepository.save(new Product("chaqueta", "está cómoda", lista2, 20));
+		productRepository.save(new Product("pantalón", "ufff", lista3, 15));
 	}
 	
 }

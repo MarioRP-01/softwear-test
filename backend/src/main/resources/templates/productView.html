@@ -61,19 +61,20 @@
 				<img id="product-slideLeft" class="product-arrow" src="../assets/arrow-left.png">
 
 				<div id="product-slider">
-					<img class="product-thumbnail product-active" src="../assets/productos/item1.webp">
-					<img class="product-thumbnail" src="../assets/productos/item2.webp">
-					<img class="product-thumbnail" src="../assets/productos/item3.webp">
-				</div>
+					<img class="product-thumbnail product-active" src="../assets/productos/{{product.img_routes.0}}">
+                    {{#products.img_routes}}
+					    <img class="product-thumbnail" src="../assets/productos/{{this}}">
+                    {{/product.img_routes}}
+                </div>				
 
 				<img id="product-slideRight" class="product-arrow" src="../assets/arrow-right.png">
 			</div>
 		</div>
 
 		<div class="product-column">
-			<h1 class="softFont">Softcoat</h1>
+			<h1 class="softFont">${{product.name}}</h1>
 			<hr>
-			<h3>$49.99</h3>
+			<h3>${{product.price}}</h3>
             <div class="pick-size">
                 <a class="btn btn-outline-dark">XS</a>
                 <a class="btn btn-outline-dark">S</a>
@@ -81,7 +82,7 @@
                 <a class="btn btn-outline-dark">L</a>
                 <a class="btn btn-outline-dark">XL</a>
             </div>
-			<p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			<p class="product-description">{{product.description}}</p>
 
 			<input value=1 type="number">
 			<a class="btn btn-dark" href="#">Add to Cart</a>
