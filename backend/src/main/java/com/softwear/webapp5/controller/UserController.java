@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.softwear.webapp5.model.User;
+import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.service.UserService;
 
 @Controller
@@ -23,7 +23,7 @@ public class UserController {
 	private Long id;
 
 	@GetMapping("/userProfile")
-	public String user(Model model) {
+	public String ShopUser(Model model) {
 		
 		
 		return "userProfile";
@@ -33,6 +33,7 @@ public class UserController {
 	public String getUser(Model model, @PathVariable Long id) {
 
 		this.id=id;
+		model.addAttribute("id",id);
 		model.addAttribute("username", users.findById(id).get().getUsername());
 		model.addAttribute("name", users.findById(id).get().getName());
 		model.addAttribute("lastName", users.findById(id).get().getLastName());
@@ -44,25 +45,26 @@ public class UserController {
 		return "userProfile";
 	}
 	
-	@PostMapping("/")
-	public String updateUser(Model model, User u) throws IOException{
+	@PostMapping("/userProfile/{id}")
+	public String updateUser(Model model, ShopUser u) throws IOException{
 		
-		Optional<User> oldUser= users.findById(id);
+		Optional<ShopUser> oldUser= users.findById(id);
 		
 		users.updateInfo(oldUser,u);
 		
-		return "index";
+		return getUser(model,id);
 	}
 	
-	@PostMapping("/userProfile/{id}")
+	@PostMapping("/userProfile/changePassword/{id}")
 	public String updatePass(Model model, @RequestParam(name = "oldPass") String oldPass,  @RequestParam(name = "newPass") String newPass,  @RequestParam(name = "newConfPass") String newConfPass) {
 		
-		Optional<User> oldUser= users.findById(id);
+		Optional<ShopUser> oldUser= users.findById(id);
 		
 		if(oldUser.get().getPassword().equals(oldPass) && newPass.equals(newConfPass)) {
 			users.updatePass(oldUser, newPass);
-			return "index";
+			return getUser(model,id);
 		}
+		
 		
 		return "BadPass";
 	}

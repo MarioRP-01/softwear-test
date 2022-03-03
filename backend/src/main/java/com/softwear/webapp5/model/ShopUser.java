@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import javax.persistence.*;
 
 @Entity
-public class User {
+public class ShopUser {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	private String username;
@@ -19,16 +19,17 @@ public class User {
 	private String address;
 	private int mobileNumber;
 	private String birthdate;
+	private String role;
 	
 	
-	public User() {
+	public ShopUser() {
 	
 	}
 
 		
 
-	public User(String username, String email, String name, String lastName, String password, String address,
-			int mobileNumber, String birthdate) {
+	public ShopUser(String username, String email, String name, String lastName, String password, String address,
+			int mobileNumber, String birthdate, String role) {
 		this.username = username;
 		this.email = email;
 		this.name = name;
@@ -37,6 +38,7 @@ public class User {
 		this.address = address;
 		this.mobileNumber = mobileNumber;
 		this.birthdate = birthdate;
+		this.setRole(role);
 	}
 
 
@@ -128,6 +130,18 @@ public class User {
 
 	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
+	}
+
+
+
+	public String getRole() {
+		return role;
+	}
+
+
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	

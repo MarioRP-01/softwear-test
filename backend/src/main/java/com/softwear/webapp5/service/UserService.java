@@ -8,66 +8,66 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.softwear.webapp5.model.User;
+import com.softwear.webapp5.model.ShopUser;
 
 @Service
 public class UserService {
 	
 	@Autowired
-	private UserRepository users;
+	private UserRepository shopUsers;
 	
-	public Optional<User> findById(Long id){
-		return users.findById(id);
+	public Optional<ShopUser> findById(Long id){
+		return shopUsers.findById(id);
 	}
 	
-	public List<User> findAll(){
-		return users.findAll();
+	public List<ShopUser> findAll(){
+		return shopUsers.findAll();
 	}
 	
-	public List<User> findByUsername(String username){
-		return users.findByUsername(username);
+	public List<ShopUser> findByShopUsername(String username){
+		return shopUsers.findByUsername(username);
 	}
 	
-	public List<User> findByEmail (String email){
-		return users.findByEmail(email);
+	public List<ShopUser> findByEmail (String email){
+		return shopUsers.findByEmail(email);
 	}
 	
-	public List<User> findByName (String name){
-		return users.findByName(name);
+	public List<ShopUser> findByName (String name){
+		return shopUsers.findByName(name);
 	}
 	
-	public List<User> findByLastName (String lastName){
-		return users.findByLastName(lastName);
+	public List<ShopUser> findByLastName (String lastName){
+		return shopUsers.findByLastName(lastName);
 	}
 	
-	public List<User> findByAddress (String address){
-		return users.findByAddress(address);
+	public List<ShopUser> findByAddress (String address){
+		return shopUsers.findByAddress(address);
 	}
 	
-	public List<User> findByBirthdate (String birthdate){
-		return users.findByBirthdate(birthdate);
+	public List<ShopUser> findByBirthdate (String birthdate){
+		return shopUsers.findByBirthdate(birthdate);
 	}
 	
 	///////////////////////////////////////////
 	
-	public void updateInfo(Optional<User> oldUser, User u) {
+	public void updateInfo(Optional<ShopUser> oldShopUser, ShopUser u) {
 
-		oldUser.get().setUsername(u.getUsername());
-		oldUser.get().setAddress(u.getAddress());
-		oldUser.get().setBirthdate(u.getBirthdate());
-		oldUser.get().setEmail(u.getEmail());
-		oldUser.get().setLastName(u.getLastName());
-		oldUser.get().setMobileNumber(u.getMobileNumber());
-		oldUser.get().setName(u.getName());
+		oldShopUser.get().setUsername(u.getUsername());
+		oldShopUser.get().setAddress(u.getAddress());
+		oldShopUser.get().setBirthdate(u.getBirthdate());
+		oldShopUser.get().setEmail(u.getEmail());
+		oldShopUser.get().setLastName(u.getLastName());
+		oldShopUser.get().setMobileNumber(u.getMobileNumber());
+		oldShopUser.get().setName(u.getName());
 		
-		users.save(oldUser.get());
+		shopUsers.save(oldShopUser.get());
 		
 	}
 	
-	public void updatePass(Optional<User> oldUser, String newPass) {
+	public void updatePass(Optional<ShopUser> oldShopUser, String newPass) {
 
-		oldUser.get().setPassword(newPass);
-		users.save(oldUser.get());
+		oldShopUser.get().setPassword(newPass);
+		shopUsers.save(oldShopUser.get());
 		
 	}
 

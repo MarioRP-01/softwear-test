@@ -1,6 +1,6 @@
 package com.softwear.webapp5.controller;
 
-import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
+/*import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -87,3 +87,4 @@ public class ProductController {
 
 
 }
+*/

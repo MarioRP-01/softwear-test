@@ -76,7 +76,7 @@
 		            <div class="card mb-4">
 		                <div class="card-header">Account Details</div>
 		                <div class="card-body">
-		                    <form action="/" method="post">
+		                    <form action="/userProfile/{{id}}" method="post">
 		                        <!-- Form Group (username)-->
 		                        <div class="mb-3">
 		                            <label class="small mb-1" for="inputUsername">Username</label>
@@ -135,7 +135,7 @@
 		</div>
         
         <div class="form-popup" id="change-password-form" >
-             <form  class="form-container" action="/userProfile/{id}" method="post">
+             <form  class="form-container" action="/userProfile/changePassword/{{id}}" method="post">
                  <h2 style="margin-bottom: 8vh; margin-top: 2vh;">Change Password</h2>
 
                  <div class="form-floating mb-3">

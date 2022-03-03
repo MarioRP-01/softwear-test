@@ -21,7 +21,7 @@ public class Transaction {
     private String type;
 
 	@ManyToOne(/*Uncomment when User is finished*//*optional = false*/)
-    private User user;
+    private ShopUser user;
 
 	@ManyToOne
     private Coupon usedCoupon;
@@ -38,7 +38,7 @@ public class Transaction {
 		this.date = date;
 	}
 
-    public Transaction(String type, User user, Coupon usedCoupon, String date, List<Product> products) {
+    public Transaction(String type, ShopUser user, Coupon usedCoupon, String date, List<Product> products) {
         this.type = type;
         this.user = user;
         this.usedCoupon = usedCoupon;
@@ -56,11 +56,11 @@ public class Transaction {
 		this.type = type;
 	}
 
-	public User getUser() {
+	public ShopUser getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(ShopUser user) {
 		this.user = user;
 	}
 

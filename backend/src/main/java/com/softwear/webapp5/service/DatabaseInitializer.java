@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Transaction;
-import com.softwear.webapp5.model.User;
+import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.repository.CouponRepository;
 import com.softwear.webapp5.repository.TransactionRepository;
 import com.softwear.webapp5.repository.UserRepository;
@@ -46,8 +46,8 @@ public class DatabaseInitializer {
 		
 		// Users
 		
-		userRepository.save(new User("JOLU","joseluis@gmail.com","Jose Luis","Ekisde","1234","Calle falsa 123", 678934837,"31/01/1990"));
-		userRepository.save(new User("PEPELU","pepeluis@gmail.com","Pepe Luis","Ekisde","5678","Calle falsa 123", 671234129,"30/03/1993"));
+		userRepository.save(new ShopUser("JOLU","joseluis@gmail.com","Jose Luis","Ekisde","1234","Calle falsa 123", 678934837,"31/01/1990","Admin"));
+		userRepository.save(new ShopUser("PEPELU","pepeluis@gmail.com","Pepe Luis","Ekisde","5678","Calle falsa 123", 671234129,"30/03/1993","User"));
 		
 	}
 	
