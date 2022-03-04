@@ -5,8 +5,9 @@ import java.util.Optional;
 
 import com.softwear.webapp5.repository.TransactionRepository;
 import com.softwear.webapp5.model.Coupon;
+import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.model.Transaction;
-import com.softwear.webapp5.model.User;
+import com.softwear.webapp5.model.ShopUser;
 
 public class TransactionService {
     
@@ -24,7 +25,7 @@ public class TransactionService {
         return transactionRepository.findByType(type);
     }
 
-    public List<Transaction> findByUser(User user) {
+    public List<Transaction> findByUser(ShopUser user) {
         return transactionRepository.findByUser(user);
     }
 

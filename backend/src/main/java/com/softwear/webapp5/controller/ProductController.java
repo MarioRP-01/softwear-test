@@ -23,4 +23,37 @@ public class ProductController {
         return "productView";
     }
 
+/*
+	@PostMapping("/userProfile")
+	public ResponseEntity<Product> createItem(@RequestBody Product product) {
+
+		products.save(product);
+
+		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(product.getId()).toUri();
+
+		return ResponseEntity.created(location).body(product);
+	}
+	
+	@PutMapping("/{id}")
+	public Product replaceItem(@PathVariable long id, @RequestBody Product newItem) {
+
+		products.findById(id).orElseThrow();
+
+		newItem.setId(id);
+		products.save(newItem);
+			
+		return newItem;
+	}
+
+	@DeleteMapping("/{id}")
+	public Product deleteItem(@PathVariable long id) {
+
+		Product product = products.findById(id).orElseThrow();
+
+		products.deleteById(id);
+		
+		return product;
+	}
+*/	
 }
+

@@ -21,13 +21,16 @@ public class Transaction {
     private String type;
 
 	@ManyToOne(/*Uncomment when User is finished*//*optional = false*/)
-    private User user;
+    private ShopUser user;
 
 	@ManyToOne
     private Coupon usedCoupon;
 
 	@Column(nullable = false)
     private String date;
+
+	@Column(nullable = false)
+	private Double totalPrice;
 
 	@ManyToMany
 	@Column(/*Uncomment when Product is finished*//*nullable = false*/)
@@ -38,15 +41,24 @@ public class Transaction {
 		this.date = date;
 	}
 
-    public Transaction(String type, User user, Coupon usedCoupon, String date, List<Product> products) {
+    public Transaction(String type, ShopUser user, Coupon usedCoupon, String date, List<Product> products) {
         this.type = type;
         this.user = user;
         this.usedCoupon = usedCoupon;
         this.date = date;
         this.products = products;
+		totalPrice = calculateTotalProductPrice();
     }
 
     public Transaction() {}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getType() {
 		return type;
@@ -56,11 +68,11 @@ public class Transaction {
 		this.type = type;
 	}
 
-	public User getUser() {
+	public ShopUser getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(ShopUser user) {
 		this.user = user;
 	}
 
@@ -86,8 +98,24 @@ public class Transaction {
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
+		totalPrice = calculateTotalProductPrice();
 	}
 
-    
+	public Double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	// Returns sum of product prices, without discount
+    public double calculateTotalProductPrice() {
+		double sum = 0.0f;
+		for(Product product: products) {
+			sum += product.getPrice();
+		}
+		return sum;
+	}
 
 }
