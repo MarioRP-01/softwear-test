@@ -38,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/logout").permitAll();
 
         // Private pages
+        http.authorizeRequests().antMatchers("/loginSuccess").hasAnyRole("USER", "ADMIN");
         http.authorizeRequests().antMatchers("/userProfile").hasAnyRole("USER", "ADMIN");
         http.authorizeRequests().antMatchers("/userProfile/*").hasAnyRole("USER", "ADMIN");
         http.authorizeRequests().antMatchers("/admin*").hasAnyRole("ADMIN");
@@ -46,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin().loginPage("/login");
         http.formLogin().usernameParameter("usernameLogin");
         http.formLogin().passwordParameter("passwordLogin");
-        http.formLogin().defaultSuccessUrl("/");
+        http.formLogin().defaultSuccessUrl("/loginSuccess");
         http.formLogin().failureUrl("/loginerror");
 
         // Logout

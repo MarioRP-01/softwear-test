@@ -82,5 +82,17 @@ public class UserController {
 		
 		return "index";
 	}
+
+	@GetMapping("/loginSuccess")
+	public String loginSuccess(Model model) {
+		String role = users.findByUsername((String) model.getAttribute("username")).get().getRole();
+		if(role.equals("ADMIN")) {
+			return "redirect:/admin/home";
+		}
+		if(role.equals("USER")) {
+			return "redirect:/";
+		}
+		return "error";
+	}
 	
 }
