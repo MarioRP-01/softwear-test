@@ -37,4 +37,16 @@ public class TransactionService {
         return transactionRepository.findByDate(date);
     }
 
+    public Optional<Transaction> findCart(ShopUser user) {
+        return transactionRepository.findCart(user);
+    }
+
+    public Optional<Transaction> findWishlist(ShopUser user) {
+        return transactionRepository.findWishlist(user);
+    }
+
+    public List<Transaction> findPurchaseHistory(ShopUser user) {
+        return transactionRepository.findPurchaseHistory(user);
+    }
+
 }
