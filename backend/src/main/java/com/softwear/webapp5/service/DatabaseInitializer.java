@@ -105,9 +105,9 @@ public class DatabaseInitializer {
 		
 		
 		// Users
-		
-		userRepository.save(new ShopUser("JOLU","joseluis@gmail.com","Jose Luis","Ekisde",passwordEncoder.encode("1234"),"Calle falsa 123", 678934837,"31/01/1990","Admin"));
-		userRepository.save(new ShopUser("PEPELU","pepeluis@gmail.com","Pepe Luis","Ekisde",passwordEncoder.encode("5678"),"Calle falsa 123", 671234129,"30/03/1993","User"));
+
+		userRepository.save(new ShopUser("admin", "admin@admin.com", "Administrator", "Softwear", passwordEncoder.encode("pass"), "Admin Street 1", 654321987, "01/01/2000", "ADMIN"));
+		userRepository.save(new ShopUser("user", "user@user.com", "User", "Softwear", passwordEncoder.encode("pass"), "User Street 1", 654987321, "01/01/2000", "USER"));
 		
 	}
 	

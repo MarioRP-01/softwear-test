@@ -24,7 +24,7 @@ public class UserService {
 		return shopUsers.findAll();
 	}
 	
-	public Optional<ShopUser> findByShopUsername(String username){
+	public Optional<ShopUser> findByUsername(String username){
 		return shopUsers.findByUsername(username);
 	}
 	

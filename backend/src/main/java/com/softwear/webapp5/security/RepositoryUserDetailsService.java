@@ -31,7 +31,7 @@ public class RepositoryUserDetailsService implements UserDetailsService {
 
 		roles.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
 
-		return new org.springframework.security.core.userdetails.User(user.getName(), 
+		return new org.springframework.security.core.userdetails.User(user.getUsername(),
 				user.getPassword(), roles);
 
 	}
