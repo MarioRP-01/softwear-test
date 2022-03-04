@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.softwear.webapp5.model.Coupon;
@@ -39,8 +40,10 @@ public class DatabaseInitializer {
 
 	@Autowired
 	private CouponService couponService;
-
-
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@PostConstruct
 	public void init() {
 
@@ -125,9 +128,9 @@ public class DatabaseInitializer {
 		
 		
 		// Users
-		
-		userRepository.save(new ShopUser("JOLU","joseluis@gmail.com","Jose Luis","Ekisde","1234","Calle falsa 123", 678934837,"31/01/1990","Admin"));
-		userRepository.save(new ShopUser("PEPELU","pepeluis@gmail.com","Pepe Luis","Ekisde","5678","Calle falsa 123", 671234129,"30/03/1993","User"));
+
+		userRepository.save(new ShopUser("admin", "admin@admin.com", "Administrator", "Softwear", passwordEncoder.encode("pass"), "Admin Street 1", 654321987, "01/01/2000", "ADMIN"));
+		userRepository.save(new ShopUser("user", "user@user.com", "User", "Softwear", passwordEncoder.encode("pass"), "User Street 1", 654987321, "01/01/2000", "USER"));
 		
 	}
 	
