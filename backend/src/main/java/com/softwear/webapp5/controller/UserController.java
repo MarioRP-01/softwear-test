@@ -24,9 +24,9 @@ public class UserController {
 	private Long id;
 	
 	@GetMapping("/userProfile")
-	public String getUser(Model model, HttpServletRequest request) {
+	public String getUser(Model model) {
 
-		ShopUser user = users.findByUsername(request.getUserPrincipal().getName()).get();
+		ShopUser user = users.findByUsername((String) model.getAttribute("username")).get();
 		this.id = user.getId();
 
 		model.addAttribute("id", this.id);
@@ -48,7 +48,7 @@ public class UserController {
 		
 		users.updateInfo(oldUser,u);
 		
-		return getUser(model, request);
+		return getUser(model);
 	}
 	
 	@PostMapping("/userProfile/changePassword/{id}")
@@ -58,7 +58,7 @@ public class UserController {
 		
 		if(oldUser.get().getPassword().equals(oldPass) && newPass.equals(newConfPass)) {
 			users.updatePass(oldUser, newPass);
-			return getUser(model, request);
+			return getUser(model);
 		}
 		
 		
