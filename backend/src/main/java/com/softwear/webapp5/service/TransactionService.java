@@ -8,9 +8,13 @@ import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.model.Transaction;
 import com.softwear.webapp5.model.ShopUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TransactionService {
-    
+
+    @Autowired
     private TransactionRepository transactionRepository;
 
     public Optional<Transaction> findById(Long id) {
