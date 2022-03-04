@@ -1,7 +1,5 @@
 package com.softwear.webapp5.controller;
 
-import java.util.ArrayList;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.User;
-import com.softwear.webapp5.repository.ProductRepository;
 import com.softwear.webapp5.repository.UserRepository;
 
 @Controller

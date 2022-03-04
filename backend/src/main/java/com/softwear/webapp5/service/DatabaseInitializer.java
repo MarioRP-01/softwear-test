@@ -1,7 +1,6 @@
 package com.softwear.webapp5.service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -45,9 +44,9 @@ public class DatabaseInitializer {
 		lista3.add("item7.webp");
 		lista3.add("item8.webp");
 
-		productRepository.save(new Product("camisa", "es cómoda", lista1, 10, 156, "Correos", "China", "Softwear", "15/3/21"));
-		productRepository.save(new Product("chaqueta", "está cómoda", lista2, 20, 156, "DMW", "Albacete", "Softwear", "26/4/21"));
-		productRepository.save(new Product("pantalón", "ufff", lista3, 15, 156, "Amazon", "Murcia", "Softwear", "12/2/22"));
+		productRepository.save(new Product("camisa", "es cómoda", 10, (long) 156, "Correos", "China", "Softwear", "15/3/21", lista1));
+		productRepository.save(new Product("chaqueta", "está cómoda", 20, (long) 156, "DMW", "Albacete", "Softwear", "26/4/21", lista2));
+		productRepository.save(new Product("pantalón", "ufff", 15, (long) 156, "Amazon", "Murcia", "Softwear", "12/2/22", lista3));
 	}
 	
 }

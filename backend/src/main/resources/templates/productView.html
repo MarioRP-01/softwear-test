@@ -49,22 +49,21 @@
             <a class="navbar-brand-2 user-icon-big-screen" href="login.html"><img src="../assets/user-icon.png" class="user-icon" style = "width: 3vw"></a>
         </div>
     </nav>
-	
-	
+		
     <div id="product-content-wrapper">		
         <div class="product-column">
             <img id=product-featured src="../assets/productos/item1.webp">
 
             <div id="product-slide-wrapper" >
                 <img id="product-slideLeft" class="product-arrow" src="../assets/arrow-left.png">
-
                 <div id="product-slider">
+                    
                     <img class="product-thumbnail product-active" src="../assets/productos/{{product.img_routes.0}}">
-                    {{#products.img_routes}}
+                     
+                    {{#product.img_routes}}
                         <img class="product-thumbnail" src="../assets/productos/{{this}}">
                     {{/product.img_routes}}
-                </div>				
-
+                </div>			
                 <img id="product-slideRight" class="product-arrow" src="../assets/arrow-right.png">
             </div>
         </div>

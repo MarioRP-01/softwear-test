@@ -24,23 +24,23 @@ public class Product{
 	private double price;
 
 	@Column(nullable = false)
-	private int stock;
+	private Long stock;
 	
 	private String supplier;
-	private String madeIn;
+	private String placeMade;
 	private String brand;
 	private String manufactDate;
 
     private ArrayList<String> img_routes = new ArrayList<>();
     
-	public Product(String name, String description, double price, int stock, String supplier, 
-	String madeIn, String brand, String manufactDate, ArrayList<String> img_routes) {
+	public Product(String name, String description, double price, Long stock, String supplier, 
+	String placeMade, String brand, String manufactDate, ArrayList<String> img_routes) {
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.stock = stock;
 		this.supplier = supplier;
-		this.madeIn = madeIn;
+		this.placeMade = placeMade;
 		this.brand = brand;
 		this.manufactDate = manufactDate;
 		this.img_routes = img_routes;
@@ -96,11 +96,11 @@ public class Product{
 		this.description = description;
 	}
 
-	public int getStock() {
+	public Long getStock() {
 		return stock;
 	}
 
-	public void setStock(int stock) {
+	public void setStock(Long stock) {
 		this.stock = stock;
 	}
 
@@ -112,12 +112,12 @@ public class Product{
 		this.supplier = supplier;
 	}
 
-	public String getMadeIn() {
-		return madeIn;
+	public String getPlaceMade() {
+		return placeMade;
 	}
 
-	public void setMadeIn(String madeIn) {
-		this.madeIn = madeIn;
+	public void setPlaceMade(String place)  {
+		this.placeMade = place;
 	}
 
 	public ArrayList<String> getImg_routes() {
