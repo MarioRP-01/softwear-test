@@ -81,6 +81,7 @@ public class TransactionController {
                 cart = new Transaction("CART", user, null, getCurrentDate(), new ArrayList<>());
             }
             cart.getProducts().add(product);
+            cart.setTotalPrice(cart.calculateTotalProductPrice());
             productService.save(product);
             return "redirect:/cart";
         }
@@ -98,6 +99,7 @@ public class TransactionController {
                 Transaction cart = optCart.get();
                 if (cart.getProducts().contains(product)) {
                     cart.getProducts().remove(product);
+                    cart.setTotalPrice(cart.calculateTotalProductPrice());
                     transactionService.save(cart);
                     return "redirect:/cart";
                 }
