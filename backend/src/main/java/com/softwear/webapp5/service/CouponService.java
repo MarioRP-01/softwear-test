@@ -88,7 +88,7 @@ public class CouponService {
 		return couponRepository.findById(id);
 	}
 
-	public List<Coupon> findByCode(String code) {
+	public Optional<Coupon> findByCode(String code) {
 		return couponRepository.findByCode(code);
 	}
 
