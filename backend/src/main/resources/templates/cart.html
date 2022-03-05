@@ -17,24 +17,29 @@
                     {{#cart}}
                     {{#transactionEntries}}
                     <tr>
-                        <td>#{{-index}}</td>
+                        <td class="cart-text">#{{-index}}</td>
                         {{#product}}
-                        <td>{{name}}</td>
-                        <td>${{price}}</td>
+                        <td>
+                            <form action="/productView" method="post">
+                                <input type="hidden" name="id" value="{{id}}"/>
+                                <button class="btn btn-outline-dark border-0" type="submit">{{name}}</button>
+                            </form>
+                        </td>
+                        <td class="cart-text">${{price}}</td>
                         <td style="width: 60px;">
                             <form action="/cart/add" method="post">
                                 <input type="hidden" name="id" value="{{id}}"/>
                                 <button class="btn btn-block btn-sm btn-outline-dark fw-bold" type="submit">+</button>
                             </form>
                         </td>
-                        <td class="text-right">{{quantity}}</td>
+                        <td class="cart-text text-right">{{quantity}}</td>
                         <td style="width: 60px;">
                             <form action="/cart/delete" method="post">
                                 <input type="hidden" name="id" value="{{id}}"/>
                                 <button class="btn btn-block btn-sm btn-outline-dark fw-bold" type="submit">-</button>
                             </form>
                         </td>
-                        <td class="text-right">${{totalPrice}}</td>
+                        <td class="cart-text text-right">${{totalPrice}}</td>
                         <td class="text-right">
                             <form action="/cart/deleteAll" method="post">
                                 <input type="hidden" name="id" value="{{id}}"/>

@@ -11646,6 +11646,15 @@ textarea.form-control-lg {
   color: #E44C4C;
   cursor: pointer;
  }
+
+ .cart-text {
+   padding-top: 0.9rem !important;
+ }
+
+ .advise-title {
+   margin: 2.5vh auto;
+ }
+
 .purchase-box{
   border: 1px solid rgba(114, 114, 114, 0.26); 
   margin: 0.5rem 20px; 
