@@ -10,7 +10,8 @@ import java.util.Objects;
 
 public class TransactionView {
 
-    List<TransactionViewEntry> transactionEntries= new ArrayList<>();
+    private List<TransactionViewEntry> transactionEntries= new ArrayList<>();
+    private String date;
 
     public static class TransactionViewEntry {
 
@@ -73,6 +74,15 @@ public class TransactionView {
                 transactionEntries.add(new TransactionViewEntry(product, Collections.frequency(transaction.getProducts(), product)));
             }
         }
+        date = transaction.getDate();
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public List<TransactionViewEntry> getTransactionEntries() {
