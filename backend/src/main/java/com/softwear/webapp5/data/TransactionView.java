@@ -1,5 +1,6 @@
 package com.softwear.webapp5.data;
 
+import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.Transaction;
 
@@ -10,10 +11,13 @@ import java.util.Objects;
 
 public class TransactionView {
 
+    private long id;
     private List<TransactionViewEntry> transactionEntries= new ArrayList<>();
     private String type;
     private String date;
+    private CouponView coupon;
     private double totalPrice;
+    private double discount;
 
     public static class TransactionViewEntry {
 
@@ -76,8 +80,24 @@ public class TransactionView {
                 transactionEntries.add(new TransactionViewEntry(product, Collections.frequency(transaction.getProducts(), product)));
             }
         }
+        id = transaction.getId();
         date = transaction.getDate();
         totalPrice = transaction.getTotalPrice();
+        discount = calculateDiscount();
+        Coupon usedCoupon = transaction.getUsedCoupon();
+        if(usedCoupon == null) {
+            coupon = null;
+        } else {
+            coupon = new CouponView(usedCoupon, discount);
+        }
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getDate() {
@@ -104,6 +124,14 @@ public class TransactionView {
         this.transactionEntries = transactionEntries;
     }
 
+    public CouponView getCoupon() {
+        return coupon;
+    }
+
+    public void setCoupon(CouponView coupon) {
+        this.coupon = coupon;
+    }
+
     public double getTotalPrice() {
         return totalPrice;
     }
@@ -112,4 +140,23 @@ public class TransactionView {
         this.totalPrice = totalPrice;
     }
 
+    public double calculateTotalPrice() {
+        double sum = 0.0;
+        for(TransactionViewEntry entry: transactionEntries) {
+            sum += entry.getTotalPrice();
+        }
+        return sum;
+    }
+
+    public double calculateDiscount() {
+        return calculateTotalPrice() - totalPrice;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
 }
