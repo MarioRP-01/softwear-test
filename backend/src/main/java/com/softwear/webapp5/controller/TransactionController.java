@@ -1,9 +1,11 @@
 package com.softwear.webapp5.controller;
 
 import com.softwear.webapp5.data.TransactionView;
+import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.model.Transaction;
+import com.softwear.webapp5.service.CouponService;
 import com.softwear.webapp5.service.ProductService;
 import com.softwear.webapp5.service.TransactionService;
 import com.softwear.webapp5.service.UserService;
@@ -23,6 +25,9 @@ import java.util.Optional;
 public class TransactionController {
 
     @Autowired
+    private CouponService couponService;
+
+    @Autowired
     private TransactionService transactionService;
 
     @Autowired
@@ -40,14 +45,25 @@ public class TransactionController {
     public String cart(Model model) {
         ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
         Optional<Transaction> optCart = transactionService.findCart(user);
-        TransactionView cart;
+        TransactionView cartView;
         if(optCart.isPresent()) {
-            cart = new TransactionView(optCart.get());
+            Transaction cart = optCart.get();
+            boolean check = true;
+            if(cart.getUsedCoupon() != null) {
+                check = couponService.applyCoupon(cart);
+            }
+            if(!model.containsAttribute("wrongCoupon")){
+                model.addAttribute("wrongCoupon", false);
+            }
+            if(!check) {
+                model.addAttribute("wrongCoupon", true);
+            }
+            cartView = new TransactionView(cart);
         } else {
-            cart = new TransactionView();
+            cartView = new TransactionView();
         }
-        model.addAttribute("cart", cart);
-        model.addAttribute("totalPrice", cart.getTotalPrize());
+        model.addAttribute("cart", cartView);
+        model.addAttribute("totalPrice", cartView.getTotalPrice());
         return "cart";
     }
 
@@ -117,6 +133,23 @@ public class TransactionController {
             transactionService.delete(optCart.get());
         }
         return "redirect:/cart";
+    }
+
+    @PostMapping("/cart/applyCoupon")
+    public String cartApplyCoupon(@RequestParam String code, Model model) {
+        ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
+        Optional<Transaction> optCart = transactionService.findCart(user);
+        if (optCart.isPresent()) {
+            Transaction cart = optCart.get();
+            Optional<Coupon> optionalCoupon = couponService.findByCode(code);
+            if(optionalCoupon.isPresent()) {
+                cart.setUsedCoupon(optionalCoupon.get());
+                couponService.applyCoupon(cart);
+            } else {
+                model.addAttribute("wrongCoupon", true);
+            }
+        }
+        return cart(model);
     }
 
     @GetMapping("/wishlist")

@@ -13,20 +13,21 @@
                         <td>#{{-index}}</td>
                         {{#product}}
                         <td>{{name}}</td>
-                        <td>{{quantity}}</td>
+                        <td>${{price}}</td>
                         <td style="width: 60px;">
                             <form action="/cart/add" method="post">
                                 <input type="hidden" name="id" value="{{id}}"/>
                                 <button class="btn btn-block btn-sm btn-outline-dark fw-bold" type="submit">+</button>
                             </form>
                         </td>
+                        <td class="text-right">{{quantity}}</td>
                         <td style="width: 60px;">
                             <form action="/cart/delete" method="post">
                                 <input type="hidden" name="id" value="{{id}}"/>
                                 <button class="btn btn-block btn-sm btn-outline-dark fw-bold" type="submit">-</button>
                             </form>
                         </td>
-                        <td class="text-right">${{price}}</td>
+                        <td class="text-right">${{totalPrice}}</td>
                         <td class="text-right">
                             <form action="/cart/deleteAll" method="post">
                                 <input type="hidden" name="id" value="{{id}}"/>
@@ -36,19 +37,46 @@
                         {{/product}}
                     </tr>
                     {{/transactionEntries}}
+                    {{#coupon}}
+                    <tr>
+                        <td></td>
+                        <td class="text-right">Discount coupon "{{code}}":</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right">-${{discount}}</td>
+                    </tr>
+                    {{/coupon}}
                     {{/cart}}
                     </tbody>
                     <tfoot>
-                        <tr><td></td>
+                    <tr><td></td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td class="text-right">Total: <strong class="total">${{totalPrice}}</strong></td>
-                        <td>Discount code:</td>
-                        <td><input type="text" class="form-control form-control-sm" placeholder="Enter your discount code..."/></td>
-                        <td><button type="submit" class="btn btn-outline-dark">Apply</button></td>
-                    </tr></tfoot>
+                        <form action="/cart/applyCoupon" method="post">
+                            <td>Discount code:</td>
+                            <td><input type="text" class="form-control form-control-sm" placeholder="Enter your discount code..." name="code" value="{{#coupon}}{{code}}{{/coupon}}"/></td>
+                            <td><button type="submit" class="btn btn-outline-dark">Apply</button></td>
+                        </form>
+                    </tr>
+                    {{#wrongCoupon}}
+                    <tr><td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="col-form-label">Wrong Coupon Code</td>
+                    </tr>
+                    {{/wrongCoupon}}
+                    </tfoot>
                 </table>
                 <div style="display: flex; justify-content: center; align-items: center; gap: 2rem;">
                 <i class="btn btn-outline-dark checkout-btn fa-brands fa-paypal"></i>
