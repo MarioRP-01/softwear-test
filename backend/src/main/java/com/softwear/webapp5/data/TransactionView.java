@@ -13,8 +13,8 @@ public class TransactionView {
 
     private long id;
     private List<TransactionViewEntry> transactionEntries= new ArrayList<>();
-    private String type;
     private String date;
+    private String type;
     private CouponView coupon;
     private double totalPrice;
     private double discount;
@@ -82,6 +82,7 @@ public class TransactionView {
         }
         id = transaction.getId();
         date = transaction.getDate();
+        type = transaction.getType();
         totalPrice = transaction.getTotalPrice();
         discount = calculateDiscount();
         Coupon usedCoupon = transaction.getUsedCoupon();
