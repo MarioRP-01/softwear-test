@@ -78,13 +78,13 @@ public class DatabaseInitializer {
 
 		// Coupons
 
-		Product leather_coat = new Product("leather coat", "Test Product", 10, 150L, "DMW", "Spain", "Softwear", "20/11/21", new ArrayList<>());
+		Product leather_coat = new Product("Leather Coat (Softwear)", "Test Product", 10.00, 150L, "DMW", "Spain", "Softwear", "20/11/21", lista1);
 		List<Product> affectedProducts = new ArrayList<>();
 		affectedProducts.add(leather_coat);
 		productRepository.save(leather_coat);
 
 		Coupon coupon = new Coupon("ASTONISHOFFER", "total_percentage", "15/02/22", "26/06/22", 0f, 0.5f, null);
-		Coupon coupon2x1 = new Coupon("2X1", "2x1", "13/03/22", "26/06/22", null, null, affectedProducts);
+		Coupon coupon2x1 = new Coupon("2X1", "2x1", "13/02/22", "26/06/22", null, null, affectedProducts);
 		Coupon coupon3x2 = new Coupon("TAKEALOOK3X2", "3x2", "12/02/22", "22/02/22", null, null, affectedProducts);
 		Coupon couponLeatherPer = new Coupon("I<3LEATHER", "product_percentage", "15/02/22", "15/06/22", null, 0.4f, affectedProducts);
 		Coupon couponLeatherTot = new Coupon("10LEATHER", "product_amount", "15/02/22", "15/06/22", null, 4.5f, affectedProducts);
