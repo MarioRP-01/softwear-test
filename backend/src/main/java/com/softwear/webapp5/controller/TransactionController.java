@@ -128,7 +128,7 @@ public class TransactionController {
     }
 
     @PostMapping("/cart/empty")
-    public String cartEmpty(@RequestParam Long id, Model model) {
+    public String cartEmpty(Model model) {
         ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
         Optional<Transaction> optCart = transactionService.findCart(user);
         if (optCart.isPresent()) {
