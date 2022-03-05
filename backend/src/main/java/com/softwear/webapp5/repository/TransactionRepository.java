@@ -27,7 +27,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     Optional<Transaction> findWishlist(ShopUser user);
 
     @Query("SELECT t FROM Transaction t " +
-            "WHERE t.user = :user and not (t.type = 'CART' or t.type = 'WISHLIST')")
+            "WHERE t.user = :user and not (t.type = 'CART' or t.type = 'WISHLIST') " +
+            "ORDER BY t.id DESC")
     List<Transaction> findPurchaseHistory(ShopUser user);
 
 }

@@ -104,13 +104,7 @@ public class DatabaseInitializer {
 			productList.add(leather_coat);
 		}
 
-		Transaction transaction = new Transaction("CART", "24/02/22");
-		transaction.setUser(user);
-		transaction.setProducts(productList);
-		couponService.applyCoupon(transaction);
-		transactionRepository.save(transaction);
-
-		transaction = new Transaction("WISHLIST", "24/02/22");
+		Transaction transaction = new Transaction("WISHLIST", "24/02/22");
 		transaction.setUser(user);
 		transaction.setProducts(affectedProducts);
 		couponService.applyCoupon(transaction);
@@ -147,6 +141,12 @@ public class DatabaseInitializer {
 		transaction = new Transaction("PROCESSED", "17/02/22");
 		transaction.setUser(user);
 		transaction.setUsedCoupon(couponLeatherTot);
+		transaction.setProducts(productList);
+		couponService.applyCoupon(transaction);
+		transactionRepository.save(transaction);
+
+		transaction = new Transaction("CART", "24/02/22");
+		transaction.setUser(user);
 		transaction.setProducts(productList);
 		couponService.applyCoupon(transaction);
 		transactionRepository.save(transaction);
