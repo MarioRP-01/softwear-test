@@ -38,7 +38,7 @@ public class TransactionController {
 
     private String getCurrentDate() {
         Calendar calendar = Calendar.getInstance();
-        return Integer.toString(calendar.get(Calendar.DAY_OF_MONTH)) + "/" + Integer.toString(calendar.get(Calendar.MONTH)) + "/" + Integer.toString(calendar.get(Calendar.YEAR));
+        return String.format("%02d", calendar.get(Calendar.DAY_OF_MONTH)) + "/" + String.format("%02d", calendar.get(Calendar.MONTH)) + "/" + Integer.toString(calendar.get(Calendar.YEAR));
     }
 
     @GetMapping("/cart")
@@ -176,6 +176,7 @@ public class TransactionController {
                 productService.save(product);
             }
             cart.setType("PAID");
+            cart.setDate(getCurrentDate());
             transactionService.save(cart);
             return "successfulPayment";
         }
