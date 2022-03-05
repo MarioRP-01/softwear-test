@@ -39,7 +39,15 @@ public class TransactionController {
     @GetMapping("/cart")
     public String cart(Model model) {
         ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
-        Transaction cart = transactionService.findCart(user).get();
+        Optional<Transaction> optCart = transactionService.findCart(user);
+        TransactionView cart;
+        if(optCart.isPresent()) {
+            cart = new TransactionView(optCart.get());
+        } else {
+            cart = new TransactionView();
+        }
+        model.addAttribute("cart", cart);
+        model.addAttribute("totalPrice", cart.getTotalPrize());
         return "cart";
     }
 

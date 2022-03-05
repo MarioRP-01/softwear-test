@@ -7,32 +7,36 @@
             <div class="card-body">
                 <table class="table">
                     <tbody class="cart">
+                    {{#cart}}
+                    {{#transactionEntries}}
                     <tr>
-                        <td>#1</td>
-                        <td>Leather Jacket</td>
-                        <td>3</td>
+                        <td>#{{-index}}</td>
+                        {{#product}}
+                        <td>{{name}}</td>
+                        <td>{{quantity}}</td>
                         <td style="width: 60px;">
-                            <button type="button" class="btn btn-block btn-sm btn-outline-dark" onclick="">+</button>
+                            <form action="/cart/add" method="post">
+                                <input type="hidden" name="id" value="{{id}}"/>
+                                <button class="btn btn-block btn-sm btn-outline-dark fw-bold" type="submit">+</button>
+                            </form>
                         </td>
                         <td style="width: 60px;">
-                            <button type="button" class="btn btn-block btn-sm btn-outline-dark" onclick="">-</button>
+                            <form action="/cart/delete" method="post">
+                                <input type="hidden" name="id" value="{{id}}"/>
+                                <button class="btn btn-block btn-sm btn-outline-dark fw-bold" type="submit">-</button>
+                            </form>
                         </td>
-                        <td class="text-right">$18</td>
-                        <td class="text-right"><button class="btn btn-outline-dark" onclick="">Delete</button></td>
+                        <td class="text-right">${{price}}</td>
+                        <td class="text-right">
+                            <form action="/cart/deleteAll" method="post">
+                                <input type="hidden" name="id" value="{{id}}"/>
+                                <button class="btn btn-outline-dark fw-bold" type="submit">Delete</button>
+                            </form>
+                        </td>
+                        {{/product}}
                     </tr>
-                    <tr>
-                        <td>#2</td>
-                        <td>Softcoat</td>
-                        <td>3</td>
-                        <td style="width: 60px;">
-                            <button type="button" class="btn btn-block btn-sm btn-outline-dark" onclick="">+</button>
-                        </td>
-                        <td style="width: 60px;">
-                            <button type="button" class="btn btn-block btn-sm btn-outline-dark" onclick="">-</button>
-                        </td>
-                        <td class="text-right">$49.99</td>
-                        <td class="text-right"><button class="btn btn-outline-dark" onclick="">Delete</button></td>
-                    </tr>
+                    {{/transactionEntries}}
+                    {{/cart}}
                     </tbody>
                     <tfoot>
                         <tr><td></td>
@@ -40,7 +44,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td class="text-right">Total: <strong class="total">$67.99</strong></td>
+                        <td class="text-right">Total: <strong class="total">${{totalPrice}}</strong></td>
                         <td>Discount code:</td>
                         <td><input type="text" class="form-control form-control-sm" placeholder="Enter your discount code..."/></td>
                         <td><button type="submit" class="btn btn-outline-dark">Apply</button></td>
