@@ -47,6 +47,13 @@ public class DatabaseInitializer {
 	@PostConstruct
 	public void init() {
 
+
+
+		// Users
+		ShopUser user = new ShopUser("user", "user@user.com", "User", "Softwear", passwordEncoder.encode("pass"), "User Street 1", 654987321, "01/01/2000", "USER");
+		userRepository.save(new ShopUser("admin", "admin@admin.com", "Administrator", "Softwear", passwordEncoder.encode("pass"), "Admin Street 1", 654321987, "01/01/2000", "ADMIN"));
+		userRepository.save(user);
+
 		ArrayList<String> lista1 = new ArrayList<>();
 		ArrayList<String> lista2 = new ArrayList<>();
 		ArrayList<String> lista3 = new ArrayList<>();
@@ -71,8 +78,10 @@ public class DatabaseInitializer {
 
 		// Coupons
 
+		Product leather_coat = new Product("leather coat", "Test Product", 10, 150L, "DMW", "Spain", "Softwear", "20/11/21", new ArrayList<>());
 		List<Product> affectedProducts = new ArrayList<>();
-		affectedProducts.add(camisa);
+		affectedProducts.add(leather_coat);
+		productRepository.save(leather_coat);
 
 		Coupon coupon = new Coupon("ASTONISHOFFER", "total_percentage", "15/02/22", "26/06/22", 0f, 0.5f, null);
 		Coupon coupon2x1 = new Coupon("2X1", "2x1", "13/03/22", "26/06/22", null, null, affectedProducts);
@@ -92,45 +101,55 @@ public class DatabaseInitializer {
 
 		List<Product> productList = new ArrayList<>();
 		for(int i=0; i<3; i++) {
-			productList.add(camisa);
+			productList.add(leather_coat);
 		}
 
 		Transaction transaction = new Transaction("CART", "24/02/22");
+		transaction.setUser(user);
+		transaction.setProducts(productList);
+		couponService.applyCoupon(transaction);
+		transactionRepository.save(transaction);
+
+		transaction = new Transaction("WISHLIST", "24/02/22");
+		transaction.setUser(user);
+		transaction.setProducts(affectedProducts);
+		couponService.applyCoupon(transaction);
+		transactionRepository.save(transaction);
+
+		transaction = new Transaction("PROCESSED", "17/02/22");
+		transaction.setUser(user);
 		transaction.setUsedCoupon(coupon);
 		transaction.setProducts(productList);
 		couponService.applyCoupon(transaction);
 		transactionRepository.save(transaction);
 
 		transaction = new Transaction("PROCESSED", "17/02/22");
+		transaction.setUser(user);
 		transaction.setUsedCoupon(coupon2x1);
 		transaction.setProducts(productList);
 		couponService.applyCoupon(transaction);
 		transactionRepository.save(transaction);
 
 		transaction = new Transaction("PROCESSED", "17/02/22");
+		transaction.setUser(user);
 		transaction.setUsedCoupon(coupon3x2);
 		transaction.setProducts(productList);
 		couponService.applyCoupon(transaction);
 		transactionRepository.save(transaction);
 
 		transaction = new Transaction("PROCESSED", "17/02/22");
+		transaction.setUser(user);
 		transaction.setUsedCoupon(couponLeatherPer);
 		transaction.setProducts(productList);
 		couponService.applyCoupon(transaction);
 		transactionRepository.save(transaction);
 
 		transaction = new Transaction("PROCESSED", "17/02/22");
+		transaction.setUser(user);
 		transaction.setUsedCoupon(couponLeatherTot);
 		transaction.setProducts(productList);
 		couponService.applyCoupon(transaction);
 		transactionRepository.save(transaction);
-
-		
-		
-		// Users
-
-		userRepository.save(new ShopUser("admin", "admin@admin.com", "Administrator", "Softwear", passwordEncoder.encode("pass"), "Admin Street 1", 654321987, "01/01/2000", "ADMIN"));
-		userRepository.save(new ShopUser("user", "user@user.com", "User", "Softwear", passwordEncoder.encode("pass"), "User Street 1", 654987321, "01/01/2000", "USER"));
 		
 	}
 	

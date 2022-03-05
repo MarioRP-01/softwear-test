@@ -53,4 +53,12 @@ public class TransactionService {
         return transactionRepository.findPurchaseHistory(user);
     }
 
+    public void save(Transaction transaction) {
+        transactionRepository.save(transaction);
+    }
+
+    public void delete(Transaction transaction) {
+        transactionRepository.delete(transaction);
+    }
+
 }

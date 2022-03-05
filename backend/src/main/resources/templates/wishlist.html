@@ -6,7 +6,20 @@
             <div class="card-body">
                 <table class="table">
                     <tbody class="cart">
+                    {{#wishlist}}
+                    {{#transactionEntries}}
                     <tr>
+                        <td>#{{-index}}</td>
+                        {{#product}}
+                        <td>{{name}}</td>
+                        <td class="text-right">{{price}}$</td>
+                        <td class="text-right"><form action="/cart/add" method="post"><input type="hidden" name="id" value="{{id}}"/><button class="btn btn-outline-dark text-uppercase fw-bold" type="submit">Buy</button></form></td>
+                        <td class="text-right"><form action="/wishlist/delete" method="post"><input type="hidden" name="id" value="{{id}}"/><button class="btn btn-outline-dark text-uppercase fw-bold" type="submit">Buy</button></form></td>
+                        {{/product}}
+                    </tr>
+                    {{/transactionEntries}}
+                    {{/wishlist}}
+                    <!--<tr>
                         <td>#1</td>
                         <td>Leather Jacket</td>
                         <td class="text-right">$18</td>
@@ -19,7 +32,7 @@
                         <td class="text-right">$49.99</td>
                         <td class="text-right"><button class="btn btn-outline-dark text-uppercase fw-bold" onclick="">Buy</button></td>
                         <td class="text-right"><button class="btn btn-outline-dark text-uppercase fw-bold" onclick="">Delete</button></td>
-                    </tr>
+                    </tr>-->
                     </tbody>
                 </table>
             </div>
