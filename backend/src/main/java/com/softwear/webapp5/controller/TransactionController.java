@@ -154,6 +154,34 @@ public class TransactionController {
         return cart(model);
     }
 
+    @PostMapping("/cart/pay")
+    public String cartPay(Model model) {
+        ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
+        Optional<Transaction> optCart = transactionService.findCart(user);
+        if(optCart.isPresent()) {
+            Transaction cart = optCart.get();
+            TransactionView cartView = new TransactionView(cart);
+            if(cartView.getTransactionEntries().isEmpty()) {
+                return "redirect:/cart";
+            }
+            for(TransactionView.TransactionViewEntry entry: cartView.getTransactionEntries()) {
+                if(entry.getProduct().getStock() < entry.getQuantity()) {
+                    model.addAttribute("product", entry.getProduct());
+                    return "outOfStock";
+                }
+            }
+            for(TransactionView.TransactionViewEntry entry: cartView.getTransactionEntries()) {
+                Product product = entry.getProduct();
+                product.setStock(product.getStock() - entry.getQuantity());
+                productService.save(product);
+            }
+            cart.setType("PAID");
+            transactionService.save(cart);
+            return "successfulPayment";
+        }
+        return "error";
+    }
+
     @GetMapping("/wishlist")
     public String wishlist(Model model) {
         ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();

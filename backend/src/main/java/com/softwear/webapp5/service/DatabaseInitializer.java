@@ -78,7 +78,7 @@ public class DatabaseInitializer {
 
 		// Coupons
 
-		Product leather_coat = new Product("Leather Coat (Softwear)", "Test Product", 10.00, 150L, "DMW", "Spain", "Softwear", "20/11/21", lista1);
+		Product leather_coat = new Product("Leather Coat (Softwear)", "Test Product", 10.00, 2L, "DMW", "Spain", "Softwear", "20/11/21", lista1);
 		List<Product> affectedProducts = new ArrayList<>();
 		affectedProducts.add(leather_coat);
 		productRepository.save(leather_coat);
@@ -123,12 +123,12 @@ public class DatabaseInitializer {
 		couponService.applyCoupon(transaction);
 		transactionRepository.save(transaction);
 
-		transaction = new Transaction("PROCESSED", "17/02/22");
+		/*transaction = new Transaction("PROCESSED", "17/02/22");
 		transaction.setUser(user);
 		transaction.setUsedCoupon(coupon2x1);
 		transaction.setProducts(productList);
 		couponService.applyCoupon(transaction);
-		transactionRepository.save(transaction);
+		transactionRepository.save(transaction);*/
 
 		transaction = new Transaction("PROCESSED", "17/02/22");
 		transaction.setUser(user);
