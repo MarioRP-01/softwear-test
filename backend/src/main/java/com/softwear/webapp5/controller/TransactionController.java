@@ -220,8 +220,13 @@ public class TransactionController {
     @GetMapping("/purchaseHistory")
     public String purchaseHistory(Model model) {
         ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
-        List<Transaction> purchaseHistory = transactionService.findPurchaseHistory(user);
-        return "cart";
+        List<Transaction> transactions = transactionService.findPurchaseHistory(user);
+        List<TransactionView> purchaseHistory = new ArrayList<>();
+        for(Transaction transaction: transactions) {
+            purchaseHistory.add(new TransactionView(transaction));
+        }
+        model.addAttribute("purchaseHistory", purchaseHistory);
+        return "purchaseHistory";
     }
 
 }
