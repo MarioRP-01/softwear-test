@@ -11,7 +11,9 @@ import java.util.Objects;
 public class TransactionView {
 
     private List<TransactionViewEntry> transactionEntries= new ArrayList<>();
+    private String type;
     private String date;
+    private double totalPrice;
 
     public static class TransactionViewEntry {
 
@@ -75,6 +77,7 @@ public class TransactionView {
             }
         }
         date = transaction.getDate();
+        totalPrice = transaction.getTotalPrice();
     }
 
     public String getDate() {
@@ -83,6 +86,14 @@ public class TransactionView {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public List<TransactionViewEntry> getTransactionEntries() {
@@ -94,10 +105,11 @@ public class TransactionView {
     }
 
     public double getTotalPrice() {
-        double sum = 0.0;
-        for(TransactionViewEntry entry: transactionEntries) {
-            sum += entry.getTotalPrice();
-        }
-        return sum;
+        return totalPrice;
     }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
 }
