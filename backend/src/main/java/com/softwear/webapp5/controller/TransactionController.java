@@ -43,6 +43,74 @@ public class TransactionController {
         return "cart";
     }
 
+    @PostMapping("/cart/add")
+    public String cartadd(@RequestParam Long id, Model model) {
+        Optional<Product> optionalProduct = productService.findById(id);
+        if (optionalProduct.isPresent()){
+            Product product = optionalProduct.get();
+            ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
+            Optional<Transaction> optionalTransaction = transactionService.findCart(user);
+            Transaction cart;
+            if (optionalTransaction.isPresent()) {
+                cart = optionalTransaction.get();
+            } else {
+                cart = new Transaction("CART", user, null, getCurrentDate(), new ArrayList<>());
+            }
+            cart.getProducts().add(product);
+            productService.save(product);
+            return "redirect:/cart";
+        }
+        return "error";
+    }
+
+    @PostMapping("/cart/delete")
+    public String cartDelete(@RequestParam Long id, Model model) {
+        Optional<Product> optionalProduct = productService.findById(id);
+        if (optionalProduct.isPresent()) {
+            Product product = optionalProduct.get();
+            ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
+            Optional<Transaction> optCart = transactionService.findCart(user);
+            if (optCart.isPresent()) {
+                Transaction cart = optCart.get();
+                if (cart.getProducts().contains(product)) {
+                    cart.getProducts().remove(product);
+                    transactionService.save(cart);
+                    return "redirect:/cart";
+                }
+            }
+        }
+        return "error";
+    }
+
+    @PostMapping("/cart/deleteAll")
+    public String cartDeleteAll(@RequestParam Long id, Model model) {
+        Optional<Product> optionalProduct = productService.findById(id);
+        if (optionalProduct.isPresent()) {
+            Product product = optionalProduct.get();
+            ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
+            Optional<Transaction> optCart = transactionService.findCart(user);
+            if (optCart.isPresent()) {
+                Transaction cart = optCart.get();
+                while (cart.getProducts().contains(product)) {
+                    cart.getProducts().remove(product);
+                    transactionService.save(cart);
+                }
+                return "redirect:/cart";
+            }
+        }
+        return "error";
+    }
+
+    @PostMapping("/cart/empty")
+    public String cartEmpty(@RequestParam Long id, Model model) {
+        ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
+        Optional<Transaction> optCart = transactionService.findCart(user);
+        if (optCart.isPresent()) {
+            transactionService.delete(optCart.get());
+        }
+        return "redirect:/cart";
+    }
+
     @GetMapping("/wishlist")
     public String wishlist(Model model) {
         ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
