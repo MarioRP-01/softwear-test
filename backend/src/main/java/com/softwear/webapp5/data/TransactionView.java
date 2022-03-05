@@ -16,10 +16,10 @@ public class TransactionView {
 
         private Product product;
         private int quantity;
-        private double totalPrize;
+        private double totalPrice;
 
         private void updateTotalPrice() {
-            totalPrize = quantity * product.getPrice();
+            totalPrice = quantity * product.getPrice();
         }
 
         public TransactionViewEntry(Product product, int quantity) {
@@ -48,7 +48,7 @@ public class TransactionView {
 
         public double getTotalPrice() {
             updateTotalPrice();
-            return totalPrize;
+            return totalPrice;
         }
 
         @Override
@@ -83,7 +83,7 @@ public class TransactionView {
         this.transactionEntries = transactionEntries;
     }
 
-    public double getTotalPrize() {
+    public double getTotalPrice() {
         double sum = 0.0;
         for(TransactionViewEntry entry: transactionEntries) {
             sum += entry.getTotalPrice();
