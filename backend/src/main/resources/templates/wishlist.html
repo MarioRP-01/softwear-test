@@ -11,7 +11,12 @@
                     <tr>
                         <td class="cart-text">#{{-index}}</td>
                         {{#product}}
-                        <td class="cart-text">{{name}}</td>
+                        <td class="cart-text">
+                            <form action="/productView" method="post">
+                                <input type="hidden" name="id" value="{{id}}"/>
+                                <button class="btn border-0" type="submit">{{name}}</button>
+                            </form>
+                        </td>
                         <td class="cart-text text-right">{{price}}$</td>
                         <td class="text-right"><form action="/cart/add" method="post"><input type="hidden" name="id" value="{{id}}"/><input type="hidden" name="quantity" value="1"/><button class="btn btn-outline-dark text-uppercase fw-bold" type="submit">Buy</button></form></td>
                         <td class="text-right"><form action="/wishlist/delete" method="post"><input type="hidden" name="id" value="{{id}}"/><button class="btn btn-outline-dark text-uppercase fw-bold" type="submit">Remove</button></form></td>

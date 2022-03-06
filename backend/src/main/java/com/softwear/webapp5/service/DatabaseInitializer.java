@@ -116,7 +116,7 @@ public class DatabaseInitializer {
 			transactionRepository.save(transaction);
 		}
 
-		transaction = new Transaction("WISHLIST", user, null, "24/02/2022", new ArrayList<>());
+		transaction = new Transaction("WISHLIST", user, null, "24/02/2022", affectedProducts);
 		transactionRepository.save(transaction);
 
 		transaction = new Transaction("CART", user, null, "24/02/2022", productList);
