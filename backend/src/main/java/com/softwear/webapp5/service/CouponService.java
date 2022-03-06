@@ -224,9 +224,13 @@ public class CouponService {
 			transaction.setTotalPrice(transaction.calculateTotalProductPrice());
 		}
 		if(coupon.getMinimum() != null && transaction.getTotalPrice() < coupon.getMinimum()) {
+			transaction.setUsedCoupon(null);
+			transactionRepository.save(transaction);
 			return false;
 		}
 		if(!applyCouponByType(transaction)) {
+			transaction.setUsedCoupon(null);
+			transactionRepository.save(transaction);
 			return false;
 		}
 		transactionRepository.save(transaction);
