@@ -11,7 +11,6 @@ import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.repository.CouponRepository;
 import com.softwear.webapp5.repository.TransactionRepository;
-import com.softwear.webapp5.repository.UserRepository;
 
 @Service
 public class CouponService {

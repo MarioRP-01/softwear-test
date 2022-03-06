@@ -7,7 +7,6 @@ import com.softwear.webapp5.repository.TransactionRepository;
 import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.model.Transaction;
-import com.softwear.webapp5.model.ShopUser;
 
 public class TransactionService {
     

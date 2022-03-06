@@ -11,16 +11,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.softwear.webapp5.model.Coupon;
-import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.repository.CouponRepository;
-import com.softwear.webapp5.repository.ProductRepository;
 import com.softwear.webapp5.model.Transaction;
 import com.softwear.webapp5.model.ShopUser;
-import com.softwear.webapp5.repository.CouponRepository;
 import com.softwear.webapp5.repository.TransactionRepository;
 import com.softwear.webapp5.repository.UserRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
