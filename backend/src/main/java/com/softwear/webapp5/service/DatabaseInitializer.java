@@ -11,12 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.softwear.webapp5.model.Coupon;
-import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.repository.CouponRepository;
-import com.softwear.webapp5.repository.ProductRepository;
 import com.softwear.webapp5.model.Transaction;
 import com.softwear.webapp5.model.ShopUser;
-import com.softwear.webapp5.repository.CouponRepository;
 import com.softwear.webapp5.repository.TransactionRepository;
 import com.softwear.webapp5.repository.UserRepository;
 
@@ -73,7 +70,7 @@ public class DatabaseInitializer {
 
 		productRepository.save(camisa);
 		productRepository.save(new Product("chaqueta", "está cómoda", 20, (long) 156, "DMW", "Albacete", "Softwear", "26/4/21", lista2));
-		productRepository.save(new Product("pantalón", "ufff", 15, (long) 156, "Amazon", "Murcia", "Softwear", "12/2/22", lista3));
+		productRepository.save(new Product("pantalón", "ufff", 15, (long) 156, "Amazon", "Murcia", "Softwear", "12/2/2022", lista3));
 	
 
 		// Coupons
@@ -83,14 +80,14 @@ public class DatabaseInitializer {
 		affectedProducts.add(leather_coat);
 		productRepository.save(leather_coat);
 
-		Coupon coupon = new Coupon("ASTONISHOFFER", "total_percentage", "15/02/22", "26/06/22", 0f, 0.5f, null);
-		Coupon coupon2x1 = new Coupon("2X1", "2x1", "13/02/22", "26/06/22", null, null, affectedProducts);
-		Coupon coupon3x2 = new Coupon("TAKEALOOK3X2", "3x2", "12/02/22", "22/02/22", null, null, affectedProducts);
-		Coupon couponLeatherPer = new Coupon("I<3LEATHER", "product_percentage", "15/02/22", "15/06/22", null, 0.4f, affectedProducts);
-		Coupon couponLeatherTot = new Coupon("10LEATHER", "product_amount", "15/02/22", "15/06/22", null, 4.5f, affectedProducts);
+		Coupon coupon = new Coupon("ASTONISHOFFER", "total_percentage", "15/02/2022", "26/06/2022", 0f, 0.5f, null);
+		Coupon coupon2x1 = new Coupon("2X1", "2x1", "13/02/2022", "26/06/2022", null, null, affectedProducts);
+		Coupon coupon3x2 = new Coupon("TAKEALOOK3X2", "3x2", "12/02/2022", "22/02/2022", null, null, affectedProducts);
+		Coupon couponLeatherPer = new Coupon("I<3LEATHER", "product_percentage", "15/02/2022", "15/06/2022", null, 0.4f, affectedProducts);
+		Coupon couponLeatherTot = new Coupon("10LEATHER", "product_amount", "15/02/2022", "15/06/2022", null, 4.5f, affectedProducts);
 
-		couponRepository.save(new Coupon("10PER", "total_percentage", "15/02/22", "26/06/22", 10.00f, 0.1f, null));
-		couponRepository.save(new Coupon("GIVEME10", "total_amount", "15/02/22", "26/02/22", 10.00f, 2.5f, null));
+		couponRepository.save(new Coupon("10PER", "total_percentage", "15/02/2022", "26/06/2022", 10.00f, 0.1f, null));
+		couponRepository.save(new Coupon("GIVEME10", "total_amount", "15/02/2022", "26/02/2022", 10.00f, 2.5f, null));
 		couponRepository.save(coupon2x1);
 		couponRepository.save(coupon3x2);
 		couponRepository.save(couponLeatherPer);
@@ -104,51 +101,25 @@ public class DatabaseInitializer {
 			productList.add(leather_coat);
 		}
 
-		Transaction transaction = new Transaction("WISHLIST", "24/02/22");
-		transaction.setUser(user);
-		transaction.setProducts(affectedProducts);
-		couponService.applyCoupon(transaction);
+		Transaction transaction = new Transaction("PROCESSED", user, coupon3x2, "17/02/2022", productList);
+		if(!couponService.applyCoupon(transaction)) {
+			transactionRepository.save(transaction);
+		}
+
+		transaction = new Transaction("PROCESSED", user, couponLeatherPer, "17/02/2022", productList);
+		if(!couponService.applyCoupon(transaction)) {
+			transactionRepository.save(transaction);
+		}
+
+		transaction = new Transaction("PROCESSED", user, couponLeatherTot, "17/02/2022", productList);
+		if(!couponService.applyCoupon(transaction)) {
+			transactionRepository.save(transaction);
+		}
+
+		transaction = new Transaction("WISHLIST", user, null, "24/02/2022", new ArrayList<>());
 		transactionRepository.save(transaction);
 
-		transaction = new Transaction("PROCESSED", "17/02/22");
-		transaction.setUser(user);
-		transaction.setUsedCoupon(coupon);
-		transaction.setProducts(productList);
-		couponService.applyCoupon(transaction);
-		transactionRepository.save(transaction);
-
-		/*transaction = new Transaction("PROCESSED", "17/02/22");
-		transaction.setUser(user);
-		transaction.setUsedCoupon(coupon2x1);
-		transaction.setProducts(productList);
-		couponService.applyCoupon(transaction);
-		transactionRepository.save(transaction);*/
-
-		transaction = new Transaction("PROCESSED", "17/02/22");
-		transaction.setUser(user);
-		transaction.setUsedCoupon(coupon3x2);
-		transaction.setProducts(productList);
-		couponService.applyCoupon(transaction);
-		transactionRepository.save(transaction);
-
-		transaction = new Transaction("PROCESSED", "17/02/22");
-		transaction.setUser(user);
-		transaction.setUsedCoupon(couponLeatherPer);
-		transaction.setProducts(productList);
-		couponService.applyCoupon(transaction);
-		transactionRepository.save(transaction);
-
-		transaction = new Transaction("PROCESSED", "17/02/22");
-		transaction.setUser(user);
-		transaction.setUsedCoupon(couponLeatherTot);
-		transaction.setProducts(productList);
-		couponService.applyCoupon(transaction);
-		transactionRepository.save(transaction);
-
-		transaction = new Transaction("CART", "24/02/22");
-		transaction.setUser(user);
-		transaction.setProducts(productList);
-		couponService.applyCoupon(transaction);
+		transaction = new Transaction("CART", user, null, "24/02/2022", productList);
 		transactionRepository.save(transaction);
 		
 	}
