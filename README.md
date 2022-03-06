@@ -90,12 +90,14 @@ Property list of each entity:
 - price
 - name
 - description
+- size
 - stock
 - brand
 - supplier
-- madeIn
+- placeMade
 - manufacturingDate
 - productId
+
 ### Coupon
 - code
 - type
