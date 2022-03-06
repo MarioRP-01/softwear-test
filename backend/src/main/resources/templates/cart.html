@@ -29,6 +29,7 @@
                         <td style="width: 60px;">
                             <form action="/cart/add" method="post">
                                 <input type="hidden" name="id" value="{{id}}"/>
+                                <input type="hidden" name="quantity" value="1"/>
                                 <button class="btn btn-block btn-sm btn-outline-dark fw-bold" type="submit">+</button>
                             </form>
                         </td>
@@ -36,6 +37,7 @@
                         <td style="width: 60px;">
                             <form action="/cart/delete" method="post">
                                 <input type="hidden" name="id" value="{{id}}"/>
+                                <input type="hidden" name="quantity" value="1"/>
                                 <button class="btn btn-block btn-sm btn-outline-dark fw-bold" type="submit">-</button>
                             </form>
                         </td>
@@ -52,12 +54,17 @@
                     {{#coupon}}
                     <tr>
                         <td></td>
-                        <td class="text-right">Discount coupon "{{code}}":</td>
+                        <td class="cart-text text-right">Discount coupon "{{code}}":</td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td class="text-right">-${{discount}}</td>
+                        <td class="cart-text text-right">-${{discount}}</td>
+                        <td class="cart-text text-right">
+                            <form action="/cart/removeCoupon" method="post">
+                                <button class="btn btn-outline-dark fw-bold" type="submit">Delete</button>
+                            </form>
+                        </td>
                     </tr>
                     {{/coupon}}
                     {{/cart}}
