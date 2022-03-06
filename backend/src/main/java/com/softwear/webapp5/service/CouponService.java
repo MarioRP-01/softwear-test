@@ -2,6 +2,7 @@ package com.softwear.webapp5.service;
 
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.Transaction;
+import com.softwear.webapp5.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,6 @@ import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.repository.CouponRepository;
 import com.softwear.webapp5.repository.TransactionRepository;
-import com.softwear.webapp5.repository.UserRepository;
 
 @Service
 public class CouponService {
@@ -23,8 +23,8 @@ public class CouponService {
 	private TransactionRepository transactionRepository;
 	
 	//Uncomment when Product is finished
-	/*@Autowired
-	private ProductRepository productRepository;*/
+	@Autowired
+	private ProductRepository productRepository;
 
 	private int[] transformStringDateToIntArray(String date) {
 		String[] strArray = date.split("/");
@@ -53,10 +53,12 @@ public class CouponService {
 	}
 
 	public boolean checkCoupon(ShopUser user, Coupon coupon) {
-		// Uncomment block bellow when User is done
-		/*if(couponRepository.findCouponsByUser(user).contains(coupon)) {
+		if(couponRepository.findByCode(coupon.getCode()).isEmpty()) {
 			return false;
-		}*/
+		}
+		if(couponRepository.findCouponsByUser(user).contains(coupon)) {
+			return false;
+		}
 		Calendar currentDate = Calendar.getInstance();
 		int[] intCurrentDate = {currentDate.get(Calendar.DAY_OF_MONTH), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.YEAR)};
 		return checkDates(transformStringDateToIntArray(coupon.getStartDate()), intCurrentDate) && checkDates(intCurrentDate, transformStringDateToIntArray(coupon.getDateOfExpiry()));
@@ -215,7 +217,7 @@ public class CouponService {
 
 	public boolean applyCoupon(Transaction transaction) {
 		Coupon coupon = transaction.getUsedCoupon();
-		if(coupon == null || checkCoupon(/*Change when User is done*//*transaction.getUser()*/null, coupon)) {
+		if(coupon == null || checkCoupon(transaction.getUser(), coupon)) {
 			return false;
 		}
 		if(transaction.getTotalPrice() != transaction.calculateTotalProductPrice()) {

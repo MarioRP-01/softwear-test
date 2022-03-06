@@ -19,7 +19,7 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 	List<Coupon> findByDiscount(Float discount);
 
 	@Query("SELECT coupon FROM Coupon coupon, Transaction trans " +
-			"WHERE coupon=trans.usedCoupon and trans.user=:user")
+			"WHERE coupon=trans.usedCoupon and trans.user=:user and trans.type not in ('CART', 'WISHLIST')")
 	List<Coupon> findCouponsByUser(ShopUser user);
 	
 }
