@@ -1,7 +1,12 @@
 package com.softwear.webapp5.controller;
 
-import com.softwear.webapp5.service.MailService;
+import java.util.List;
 
+import com.softwear.webapp5.model.ShopUser;
+import com.softwear.webapp5.service.MailService;
+import com.softwear.webapp5.service.UserService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+
+    @Autowired
+    UserService userService;
 
 	@GetMapping("/mailTry")
 	public String mailTest(Model model) {
@@ -30,7 +38,9 @@ public class AdminController {
 
     
     @GetMapping("/manageUsers")
-    public String users(){
+    public String users(Model model){
+        List<ShopUser> users = userService.findAll();
+        model.addAttribute("users", users);
         return "manageUsers";
     }
 
