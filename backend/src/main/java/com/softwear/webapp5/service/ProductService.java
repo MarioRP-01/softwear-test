@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -61,6 +62,16 @@ public class ProductService {
 		if(product.isPresent()) {
 			productRepository.delete(product.get());
 		}
+	}
+
+	public String getFirstImg_rout(Product product){
+		return product.getImg_routes().get(0);
+	}
+
+	public ArrayList<String> getNonFirstImg_routes(Product product){
+		ArrayList<String> copiedArrayList = (ArrayList<String>) product.getImg_routes().clone();
+		copiedArrayList.remove(0);
+		return copiedArrayList;
 	}
 
 

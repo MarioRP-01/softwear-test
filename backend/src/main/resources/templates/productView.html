@@ -5,13 +5,11 @@
 
             <div id="product-slide-wrapper" >
                 <img id="product-slideLeft" class="product-arrow" src="../assets/arrow-left.png">
-                <div id="product-slider">
-                    
-                    <img class="product-thumbnail product-active" src="../assets/productos/{{product.img_routes.0}}">
-                     
-                    {{#product.img_routes}}
+                <div id="product-slider">                   
+                    <img class="product-thumbnail product-active" src="../assets/productos/{{firstImg_route}}">                     
+                    {{#nonFirstImg_routes}}
                         <img class="product-thumbnail" src="../assets/productos/{{this}}">
-                    {{/product.img_routes}}
+                    {{/nonFirstImg_routes}}
                 </div>			
                 <img id="product-slideRight" class="product-arrow" src="../assets/arrow-right.png">
             </div>

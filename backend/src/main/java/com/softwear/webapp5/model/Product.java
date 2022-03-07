@@ -38,12 +38,13 @@ public class Product{
 
     private ArrayList<String> img_routes = new ArrayList<>();
     
-	public Product(String name, String description, double price, Long stock, String supplier, 
+	public Product(String name, String description, double price, Long stock, Size size, String supplier, 
 	String placeMade, String brand, String manufactDate, ArrayList<String> img_routes) {
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.stock = stock;
+		this.size = size;
 		this.supplier = supplier;
 		this.placeMade = placeMade;
 		this.brand = brand;
