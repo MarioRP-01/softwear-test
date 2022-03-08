@@ -2,25 +2,30 @@ package com.softwear.webapp5.model;
 
 import javax.persistence.*;
 
-@Entity(name="users")
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
 public class ShopUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(unique=true)
+	@Column(unique=true, nullable = false)
 	private String username;
 	
-	@Column(unique=true)
+	@Column(unique=true, nullable = false)
 	private String email;
 	private String name;
 	private String lastName;
+	@Column(nullable = false)
+	@JsonIgnore
 	private String password;
 	private String address;
 	
 	@Column(unique=true)
 	private int mobileNumber;
 	private String birthdate;
+	@Column(nullable = false)
 	private String role;
 	
 	

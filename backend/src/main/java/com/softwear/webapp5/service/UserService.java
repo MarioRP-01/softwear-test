@@ -54,6 +54,7 @@ public class UserService {
 
 		oldShopUser.get().setUsername(u.getUsername());
 		oldShopUser.get().setAddress(u.getAddress());
+		oldShopUser.get().setPassword(u.getPassword());
 		oldShopUser.get().setBirthdate(u.getBirthdate());
 		oldShopUser.get().setEmail(u.getEmail());
 		oldShopUser.get().setLastName(u.getLastName());
@@ -63,6 +64,22 @@ public class UserService {
 		shopUsers.save(oldShopUser.get());
 		
 	}
+
+	public void updateInfo(ShopUser oldShopUser, ShopUser u) {
+
+		oldShopUser.setUsername(u.getUsername());
+		oldShopUser.setAddress(u.getAddress());
+		oldShopUser.setPassword(u.getPassword());
+		oldShopUser.setBirthdate(u.getBirthdate());
+		oldShopUser.setEmail(u.getEmail());
+		oldShopUser.setLastName(u.getLastName());
+		oldShopUser.setMobileNumber(u.getMobileNumber());
+		oldShopUser.setName(u.getName());
+		oldShopUser.setRole(u.getRole());
+		
+		shopUsers.save(oldShopUser);
+		
+	}
 	
 	public void updatePass(Optional<ShopUser> oldShopUser, String newPass) {
 
@@ -70,5 +87,13 @@ public class UserService {
 		shopUsers.save(oldShopUser.get());
 		
 	}
+
+	public void delete(Long id){
+		shopUsers.deleteById(id);
+	}
+
+    public void save(ShopUser newUser) {
+		shopUsers.save(newUser);
+    }
 
 }
