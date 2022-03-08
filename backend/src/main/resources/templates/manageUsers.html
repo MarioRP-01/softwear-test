@@ -27,14 +27,14 @@
                             <td class="user-username">{{username}}</td>
                             <td class="user-email">{{email}}</td>
                             <td class="user-name">{{name}}</td>
-                            <td class="user-lsatName">{{lastName}}</td>
+                            <td class="user-lastName">{{lastName}}</td>
                             <td class="user-address">{{address}}</td>
                             <td class="user-phone">{{mobileNumber}}</td>
                             <td class="user-birthdate">{{birthdate}}</td>
                             <td class="user-role">{{role}}</td>
                             <td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAddEditUserData"
-                                data-id="{{id}}" onclick="edit_user();">Edit</button></td>
-                            <td><button class="btn btn-primary" type="button">Delete</button></td>
+                                data-id="{{id}}" onclick="edit_user_load($(this).data('id'));">Edit</button></td>
+                            <td><button data-id="{{id}}" onclick="delete_user($(this).data('id'));" class="btn btn-primary" type="button">Delete</button></td>
                           </tr>
                           {{/users}}
                         </tbody>
@@ -42,10 +42,10 @@
                 </div>
 
                 <div class="row justify-content-start">
-                    <button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#modalAddEditUserData">Add User</button>
+                    <button class="btn btn-primary" id="button-add-user" type="button" data-bs-toggle="modal" data-bs-target="#modalAddEditUserData">Add User</button>
                 </div>
 
-                <!-- modal edit user data-->
+                <!-- modal add / edit user data-->
                 <div class="modal fade" id="modalAddEditUserData" tabindex="-1" role="dialog" aria-labelledby="modalAddEditUser" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -53,15 +53,18 @@
                                 <h5 class="modal-title" id="modalAddEditUser">Edit User Data</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form>
+                            <form id="formUsers">
                                 <div class="modal-body">
+                                        <input type="hidden" id="mode" name="mode">
+                                        <input type="hidden" id="editId" name="id">
+
                                         <div class="form-group">
                                             <label for="editUserName">Username *</label>
                                             <input type="text" class="form-control" id="editUserName" placeholder="Username" name="username" required>                
                                         </div>
                                         <div class="form-group">
                                             <label for="editPassword">Password *</label>
-                                            <input type="password" class="form-control" id="editUserName" placeholder="Username" name="username" required>                
+                                            <input type="password" class="form-control" id="editPassword" placeholder="Type new password" name="password">                
                                         </div>
                                         <div class="form-group">
                                             <label for="editEmail">E-mail *</label>
@@ -105,4 +108,6 @@
                 </div>
             </div>        
         </section>
+
+        <script src="../js/manageUsers.js" defer></script>
 {{>footer}}

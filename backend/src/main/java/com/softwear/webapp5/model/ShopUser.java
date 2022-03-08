@@ -2,6 +2,8 @@ package com.softwear.webapp5.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class ShopUser {
 	@Id
@@ -16,6 +18,7 @@ public class ShopUser {
 	private String name;
 	private String lastName;
 	@Column(nullable = false)
+	@JsonIgnore
 	private String password;
 	private String address;
 	
