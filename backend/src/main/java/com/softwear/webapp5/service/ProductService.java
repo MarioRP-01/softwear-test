@@ -1,5 +1,6 @@
 package com.softwear.webapp5.service;
 
+import com.softwear.webapp5.data.Size;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.repository.ProductRepository;
 
@@ -9,6 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -74,5 +78,17 @@ public class ProductService {
 		return copiedArrayList;
 	}
 
+	public Map<Size, Boolean> getAvailableSizes(Product product){
+		String name = product.getName();
+		List<Size> AvailableSizes = productRepository.FindSizeAvailableByName(name);
+		Map<Size, Boolean> AvailableSizesStatus = new HashMap<>();
 
+		for (Size size : Size.values()){
+			if (AvailableSizes.contains(size))
+				AvailableSizesStatus.put(size, true);
+			else 
+				AvailableSizesStatus.put(size, false);
+		}
+		return AvailableSizesStatus;
+	}
 }

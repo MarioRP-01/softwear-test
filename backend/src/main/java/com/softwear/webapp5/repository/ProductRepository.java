@@ -3,7 +3,12 @@ package com.softwear.webapp5.repository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
+import com.softwear.webapp5.data.Size;
 import com.softwear.webapp5.model.Product;
 
 public interface ProductRepository extends JpaRepository <Product, Long> {
@@ -16,4 +21,7 @@ public interface ProductRepository extends JpaRepository <Product, Long> {
     public Page<Product> findByPlaceMade(String placeMade, Pageable page);
     public Page<Product> findByBrand(String brand, Pageable page);
     public Page<Product> findByManufactDate(String ManufactDate, Pageable page);
+
+    @Query(value = "SELECT DISTINCT size FROM Products WHERE name = :name", nativeQuery = true)
+    public List<Size> FindSizeAvailableByName(@Param("name") String name);
 }

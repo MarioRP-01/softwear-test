@@ -6,8 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import net.bytebuddy.implementation.bytecode.collection.ArrayLength;
-
 import java.util.ArrayList;
 
 import com.softwear.webapp5.model.Product;
@@ -19,7 +17,6 @@ public class ProductController {
     @Autowired
     private ProductService productService;
     
-
     @GetMapping("/productView/{id}")
     public String getProduct(@PathVariable long id, Model model) {
         Product product = productService.findById(id).orElseThrow();
