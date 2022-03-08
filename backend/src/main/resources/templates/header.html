@@ -28,6 +28,12 @@
                         <li class="dropdown-item">{{username}}</li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="/userProfile">Profile</a></li>
+                        {{#isAdmin}}
+                        <li><a class="dropdown-item" href="/admin/home">Admin Panel</a></li>
+                        {{/isAdmin}}
+                        {{^isAdmin}}
+                        <li><a class="dropdown-item" href="/admin/home">2 Panel</a></li>
+                        {{/isAdmin}}
                         <li><a class="dropdown-item" href="/logout">Log Out</a></li>
                     </ul>
                 </div>
@@ -68,6 +74,9 @@
                         <li class="dropdown-item">{{username}}</li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="/userProfile">Profile</a></li>
+                        {{#isAdmin}}
+                        <li><a class="dropdown-item" href="/admin/home">Admin Panel</a></li>
+                        {{/isAdmin}}
                         <li><a class="dropdown-item" href="/logout">Log Out</a></li>
                     </ul>
                 </div>
