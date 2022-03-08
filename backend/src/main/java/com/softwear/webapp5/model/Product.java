@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.softwear.webapp5.data.Size;
+import com.softwear.webapp5.data.ProductSize;
 
 @Entity
 public class Product{
@@ -29,7 +29,7 @@ public class Product{
 	private Long stock;
 	
 	@Column(nullable = false)
-	private Size size; 
+	private ProductSize size; 
 
 	private String supplier;
 	private String placeMade;
@@ -38,7 +38,7 @@ public class Product{
 
     private ArrayList<String> img_routes = new ArrayList<>();
     
-	public Product(String name, String description, double price, Long stock, Size size, String supplier, 
+	public Product(String name, String description, double price, Long stock, ProductSize size, String supplier, 
 	String placeMade, String brand, String manufactDate, ArrayList<String> img_routes) {
 		this.name = name;
 		this.description = description;
@@ -134,11 +134,11 @@ public class Product{
 		this.img_routes = img_routes;
 	}
 
-	public Size getSize() {
+	public ProductSize getSize() {
 		return size;
 	}
 
-	public void setSize(Size size) {
+	public void setSize(ProductSize size) {
 		this.size = size;
 	}
 }

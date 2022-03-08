@@ -1,6 +1,7 @@
 package com.softwear.webapp5.service;
 
-import com.softwear.webapp5.data.Size;
+import com.softwear.webapp5.data.ProductAvailabilityBySize;
+import com.softwear.webapp5.data.ProductSize;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.repository.ProductRepository;
 
@@ -10,9 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -78,17 +78,19 @@ public class ProductService {
 		return copiedArrayList;
 	}
 
-	public Map<Size, Boolean> getAvailableSizes(Product product){
+	public ProductAvailabilityBySize getAvailableSizesStatus(Product product){
 		String name = product.getName();
-		List<Size> AvailableSizes = productRepository.FindSizeAvailableByName(name);
-		Map<Size, Boolean> AvailableSizesStatus = new HashMap<>();
+		List<ProductSize> availableSizes = productRepository.FindSizeAvailableByName(name);
+		List<Boolean> availableSizesStatus = new ArrayList<>();
 
-		for (Size size : Size.values()){
-			if (AvailableSizes.contains(size))
-				AvailableSizesStatus.put(size, true);
-			else 
-				AvailableSizesStatus.put(size, false);
+		for (ProductSize size : ProductSize.values()){
+			availableSizesStatus.add(availableSizes.contains(size));
 		}
-		return AvailableSizesStatus;
+
+		ProductAvailabilityBySize productAvailabilityBySize = 
+			new ProductAvailabilityBySize(availableSizesStatus, Arrays.asList(ProductSize.values()));
+			
+		return productAvailabilityBySize;
 	}
+
 }

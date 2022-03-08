@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-import com.softwear.webapp5.data.Size;
+import com.softwear.webapp5.data.ProductSize;
 import com.softwear.webapp5.model.Product;
 
 public interface ProductRepository extends JpaRepository <Product, Long> {
@@ -23,5 +23,5 @@ public interface ProductRepository extends JpaRepository <Product, Long> {
     public Page<Product> findByManufactDate(String ManufactDate, Pageable page);
 
     @Query(value = "SELECT DISTINCT size FROM Products WHERE name = :name", nativeQuery = true)
-    public List<Size> FindSizeAvailableByName(@Param("name") String name);
+    public List<ProductSize> FindSizeAvailableByName(@Param("name") String name);
 }
