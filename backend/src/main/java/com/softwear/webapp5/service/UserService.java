@@ -54,7 +54,7 @@ public class UserService {
 
 		oldShopUser.get().setUsername(u.getUsername());
 		oldShopUser.get().setAddress(u.getAddress());
-		oldShopUser.get().setAddress(u.getPassword());
+		oldShopUser.get().setPassword(u.getPassword());
 		oldShopUser.get().setBirthdate(u.getBirthdate());
 		oldShopUser.get().setEmail(u.getEmail());
 		oldShopUser.get().setLastName(u.getLastName());
@@ -69,12 +69,13 @@ public class UserService {
 
 		oldShopUser.setUsername(u.getUsername());
 		oldShopUser.setAddress(u.getAddress());
-		oldShopUser.setAddress(u.getPassword());
+		oldShopUser.setPassword(u.getPassword());
 		oldShopUser.setBirthdate(u.getBirthdate());
 		oldShopUser.setEmail(u.getEmail());
 		oldShopUser.setLastName(u.getLastName());
 		oldShopUser.setMobileNumber(u.getMobileNumber());
 		oldShopUser.setName(u.getName());
+		oldShopUser.setRole(u.getRole());
 		
 		shopUsers.save(oldShopUser);
 		

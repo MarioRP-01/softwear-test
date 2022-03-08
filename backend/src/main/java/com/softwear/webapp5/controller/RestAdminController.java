@@ -43,8 +43,9 @@ public class RestAdminController {
     @RequestParam(required = false) String role){
 
         if(mode.equals("EDIT")){
-            
+            Logger log = LoggerFactory.getLogger(SampleLogController.class);
             Optional<ShopUser> oOldUser = userService.findById(id);
+            log.info(oOldUser.toString());
             if(oOldUser.isPresent()){
                 ShopUser oldUser = oOldUser.get();
                 if(!password.equals(""))
@@ -53,7 +54,8 @@ public class RestAdminController {
                     password = oldUser.getPassword();
                 ShopUser newUser = new ShopUser(username, email, name, lastName, password, address, mobileNumber, birthdate, role);
                 userService.updateInfo(oldUser, newUser);
-                return newUser;
+                log.info(String.valueOf(oldUser.getId()));
+                return oldUser;
             }
             
         }else if(mode.equals("ADD")){
