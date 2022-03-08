@@ -104,7 +104,7 @@ public class TransactionController {
         return "wishlist";
     }
 
-    @PostMapping("/wishlist/add")
+    /*@PostMapping("/wishlist/add")
     public String wishlistAdd(@RequestParam Long id, Model model) {
         if (transactionService.addToWishlist(id, userService.findByUsername((String) model.getAttribute("username")).get())) {
             return "redirect:/wishlist";
@@ -125,7 +125,7 @@ public class TransactionController {
     public String wishlistEmpty(@RequestParam Long id, Model model) {
         transactionService.emptyWishlist(userService.findByUsername((String) model.getAttribute("username")).get());
         return "redirect:/wishlist";
-    }
+    }*/
 
     // PURCHASE HISTORY
     @GetMapping("/purchaseHistory")
