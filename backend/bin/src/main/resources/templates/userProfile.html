@@ -26,8 +26,12 @@
 		            <div class="card mb-4">
 		                <div class="card-header">Account Details</div>
 		                <div class="card-body">
-		                    <form action="/userProfile" method="post">
-		                        
+		                    <form action="/userProfile/{{id}}" method="post">
+		                        <!-- Form Group (username)-->
+		                        <div class="mb-3">
+		                            <label class="small mb-1" for="inputUsername">Username</label>
+		                            <input class="form-control" name="username" type="text" placeholder="Enter your username" value="{{username}}">
+		                        </div>
 		                        <!-- Form Row-->
 		                        <div class="row gx-3 mb-3">
 		                            <!-- Form Group (first name)-->
@@ -80,8 +84,8 @@
 		    </div>
 		</div>
         
-        <div class="form-popup" id="change-password-form">
-             <form  class="form-container" action="/userProfile/changePassword" method="post">
+        <div class="form-popup" id="change-password-form" >
+             <form  class="form-container" action="/userProfile/changePassword/{{id}}" method="post">
                  <h2 style="margin-bottom: 8vh; margin-top: 2vh;">Change Password</h2>
 
                  <div class="form-floating mb-3">
@@ -101,7 +105,5 @@
                          <div class="row"><button type="button" class="btn btn-outline-dark text-uppercase fw-bold" id="cancel-changePassword" onclick="closeFormChangePassword()">Cancel</button></div>
                  </div>
              </form>
-         </div>
-         
-         <script src="../js/editProfile.js"></script> 
+         </div> 
 {{>footer}}

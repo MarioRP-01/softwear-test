@@ -51,8 +51,8 @@ public class UserService {
 	///////////////////////////////////////////
 	
 	public void updateInfo(Optional<ShopUser> oldShopUser, ShopUser u) {
-
-		oldShopUser.get().setUsername(u.getUsername());
+		
+		
 		oldShopUser.get().setAddress(u.getAddress());
 		oldShopUser.get().setBirthdate(u.getBirthdate());
 		oldShopUser.get().setEmail(u.getEmail());

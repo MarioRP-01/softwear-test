@@ -38,5 +38,17 @@ public class DefaultModelAttributes {
         }
         return "NO_AUTH";
     }
+    
+    @ModelAttribute("isAdmin")
+    public boolean isAdmin(HttpServletRequest request) {
+        
+        if(logged(request)) {
+            Optional<ShopUser> oUser = users.findByUsername(request.getUserPrincipal().getName());
+            if(oUser.isPresent()) {
+                return oUser.get().getRole().equals("ADMIN");
+            }
+        }
+        return false;
+    }
 
 }
