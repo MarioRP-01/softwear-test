@@ -1,110 +1,102 @@
 {{>header}}
 
-        <div class="card mb-4 shadow-sm" style="border: 1px solid rgba(114, 114, 114, 0.26); margin: 30px; border-radius: 5px;">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-11"><h2 class="softFont">Cart</h2></div>
-                    <div class="col-1">
-                        <form action="/cart/empty" method="post">
-                            <button class="btn btn-outline-dark fa-solid fa-trash" type="submit"></button>
-                        </form>
-                    </div>
+    <div class="card mb-4 shadow-sm" style="border: 1px solid rgba(114, 114, 114, 0.26); margin: 30px; border-radius: 5px;">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-11"><h2 class="softFont">Cart</h2></div>
+                <div class="col-1">
+                    <button class="btn btn-outline-dark fa-solid fa-trash" onclick="emptyCart()" type="button"></button>
                 </div>
-            </div>
-            <div class="card-body">
-                <table class="table">
-                    <tbody class="cart">
-                    {{#cart}}
-                    {{#transactionEntries}}
-                    <tr>
-                        <td class="cart-text">#{{-index}}</td>
-                        {{#product}}
-                        <td>
-                            <form action="/productView" method="post">
-                                <input type="hidden" name="id" value="{{id}}"/>
-                                <button class="btn border-0" type="submit">{{name}}</button>
-                            </form>
-                        </td>
-                        <td class="cart-text">${{price}}</td>
-                        <td style="width: 60px;">
-                            <form action="/cart/add" method="post">
-                                <input type="hidden" name="id" value="{{id}}"/>
-                                <input type="hidden" name="quantity" value="1"/>
-                                <button class="btn btn-block btn-sm btn-outline-dark fw-bold" type="submit">+</button>
-                            </form>
-                        </td>
-                        <td class="cart-text text-right">{{quantity}}</td>
-                        <td style="width: 60px;">
-                            <form action="/cart/delete" method="post">
-                                <input type="hidden" name="id" value="{{id}}"/>
-                                <input type="hidden" name="quantity" value="1"/>
-                                <button class="btn btn-block btn-sm btn-outline-dark fw-bold" type="submit">-</button>
-                            </form>
-                        </td>
-                        <td class="cart-text text-right">${{totalPrice}}</td>
-                        <td class="text-right">
-                            <form action="/cart/deleteAll" method="post">
-                                <input type="hidden" name="id" value="{{id}}"/>
-                                <button class="btn btn-outline-dark fw-bold" type="submit">Delete</button>
-                            </form>
-                        </td>
-                        {{/product}}
-                    </tr>
-                    {{/transactionEntries}}
-                    {{#coupon}}
-                    <tr>
-                        <td></td>
-                        <td class="cart-text text-right">Discount coupon "{{code}}":</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="cart-text text-right">-${{discount}}</td>
-                        <td class="cart-text text-right">
-                            <form action="/cart/removeCoupon" method="post">
-                                <button class="btn btn-outline-dark fw-bold" type="submit">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                    {{/coupon}}
-                    {{/cart}}
-                    </tbody>
-                    <tfoot>
-                    <tr><td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="text-right">Total: <strong class="total">${{totalPrice}}</strong></td>
-                        <form action="/cart/applyCoupon" method="post">
-                            <td>Discount code:</td>
-                            <td><input type="text" class="form-control form-control-sm" placeholder="Enter your discount code..." name="code" value="{{#coupon}}{{code}}{{/coupon}}"/></td>
-                            <td><button type="submit" class="btn btn-outline-dark">Apply</button></td>
-                        </form>
-                    </tr>
-                    {{#wrongCoupon}}
-                    <tr><td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="col-form-label">Wrong Coupon Code</td>
-                    </tr>
-                    {{/wrongCoupon}}
-                    </tfoot>
-                </table>
-                <form action="/cart/pay" method="post">
-                <div style="display: flex; justify-content: center; align-items: center; gap: 2rem;">
-                    <button class="btn btn-outline-dark checkout-btn fa-brands fa-paypal" type="submit"></button>
-                    <button class="btn btn-outline-dark checkout-btn fa-brands fa-cc-amazon-pay" type="submit"></button>
-                    <button class="btn btn-outline-dark checkout-btn fa-solid fa-credit-card" type="submit"></button>
-                </div>
-                </form>
             </div>
         </div>
+        <div class="card-body">
+            <table class="table">
+                <tbody class="cart">
+                {{#cart}}
+                {{#transactionEntries}}
+                <tr id="product_{{product.id}}" class="product-row">
+                    <td class="cart-text product-index">#{{-index}}</td>
+                    {{#product}}
+                    <td>
+                        <form action="/productView" method="post">
+                            <input type="hidden" name="id" value="{{id}}"/>
+                            <button class="btn border-0" type="button">{{name}}</button>
+                        </form>
+                    </td>
+                    <td class="cart-text product-unit-price">${{price}}</td>
+                    <td class="text-center" style="width: 60px;">
+                        <button class="btn btn-block btn-sm btn-outline-dark fw-bold" onclick="addProduct({{id}}, 1)" type="button">+</button>
+                    </td>
+                    <td class="cart-text text-center product-quantity">{{quantity}}</td>
+                    <td class="text-center" style="width: 60px;">
+                        <button class="btn btn-block btn-sm btn-outline-dark fw-bold" onclick="deleteProduct({{id}}, 1)" type="button">-</button>
+                    </td>
+                    <td class="cart-text text-right product-total-price">${{totalPrice}}</td>
+                    <td class="text-right">
+                        <button class="btn btn-outline-dark fw-bold" onclick="deleteAllOfProduct({{id}})" type="button">Delete</button>
+                    </td>
+                    {{/product}}
+                </tr>
+                {{/transactionEntries}}
+                {{#coupon}}
+                <tr class="cart-coupon-row">
+                    <td></td>
+                    <td class="cart-text text-right coupon-name">Discount coupon "{{code}}"</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="cart-text text-right coupon-discount">-${{discount}}</td>
+                    <td class="cart-text text-right">
+                        <button class="btn btn-outline-dark fw-bold" onclick="removeCoupon()" type="button">Delete</button>
+                    </td>
+                </tr>
+                {{/coupon}}
+                </tbody>
+                <tfoot>
+                <tr id="apply-coupon"><td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="text-right">Total: <strong class="total cart-total-price">${{totalPrice}}</strong></td>
+                    <td>Discount code:</td>
+                    <td id="coupon-code"><input type="text" class="form-control form-control-sm" placeholder="Enter your discount code..." name="code" value="{{#coupon}}{{code}}{{/coupon}}"/></td>
+                    <td><button type="button" class="btn btn-outline-dark" onclick="applyCoupon()">Apply</button></td>
+                </tr>
+                {{/cart}}
+                <tr id="wrong-coupon"><td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="col-form-label"><div class="rounded p-1 text-center text-white bg-danger">Wrong Coupon</div></td>
+                </tr>
+                <tr id="valid-coupon"><td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="col-form-label"><div class="rounded p-1 text-center text-white bg-success">Valid Coupon</div></td>
+                </tr>
+                </tfoot>
+            </table>
+            <form action="/cart/pay" method="post">
+            <div style="display: flex; justify-content: center; align-items: center; gap: 2rem;">
+                <button class="btn btn-outline-dark checkout-btn fa-brands fa-paypal" type="submit"></button>
+                <button class="btn btn-outline-dark checkout-btn fa-brands fa-cc-amazon-pay" type="submit"></button>
+                <button class="btn btn-outline-dark checkout-btn fa-solid fa-credit-card" type="submit"></button>
+            </div>
+            </form>
+        </div>
+    </div>
+    <script src="js/cart.js"></script>
 
 {{>footer}}

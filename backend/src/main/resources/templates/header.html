@@ -14,6 +14,11 @@
         <link href="../css/styles.css" rel="stylesheet" />
         <!-- FontAwesome CDN -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"></link>
+        <!-- JQuery CDN-->
+        <script
+                src="https://code.jquery.com/jquery-3.6.0.min.js"
+                integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+                crossorigin="anonymous"></script>
     </head>
     <body>
         <!-- Navigation-->
@@ -57,7 +62,7 @@
                         <a class="btn btn-outline-dark" href="/cart">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">{{nCartItems}}</span>
+                            <span id="cart-items-number" class="badge bg-dark text-white ms-1 rounded-pill">{{nCartItems}}</span>
                         </a>
                     </form>
                     

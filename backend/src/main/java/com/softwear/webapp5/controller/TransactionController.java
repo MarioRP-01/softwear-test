@@ -1,7 +1,6 @@
 package com.softwear.webapp5.controller;
 
 import com.softwear.webapp5.data.TransactionView;
-import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.model.Transaction;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +33,7 @@ public class TransactionController {
     @Autowired
     private ProductService productService;
 
+    // CART
     @GetMapping("/cart")
     public String cart(Model model) {
         ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
@@ -59,61 +58,6 @@ public class TransactionController {
         model.addAttribute("cart", cartView);
         model.addAttribute("totalPrice", cartView.getTotalPrice());
         return "cart";
-    }
-
-    @PostMapping("/cart/add")
-    public String cartadd(@RequestParam Long id, @RequestParam int quantity, Model model) {
-        if (transactionService.addToCart(id, userService.findByUsername((String) model.getAttribute("username")).get(), quantity)){
-            return "redirect:/cart";
-        }
-        return "error";
-    }
-
-    @PostMapping("/cart/delete")
-    public String cartDelete(@RequestParam Long id, @RequestParam int quantity, Model model) {
-        if (transactionService.removeFromCart(id, userService.findByUsername((String) model.getAttribute("username")).get(), quantity)){
-            return "redirect:/cart";
-        }
-        return "error";
-    }
-
-    @PostMapping("/cart/deleteAll")
-    public String cartDeleteAll(@RequestParam Long id, Model model) {
-        if (transactionService.removeAllFromCart(id, userService.findByUsername((String) model.getAttribute("username")).get())){
-            return "redirect:/cart";
-        }
-        return "error";
-    }
-
-    @PostMapping("/cart/empty")
-    public String cartEmpty(Model model) {
-        transactionService.emptyCart(userService.findByUsername((String) model.getAttribute("username")).get());
-        return "redirect:/cart";
-    }
-
-    @PostMapping("/cart/applyCoupon")
-    public String cartApplyCoupon(@RequestParam String code, Model model) {
-        ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
-        Optional<Transaction> optCart = transactionService.findCart(user);
-        if (optCart.isPresent()) {
-            Transaction cart = optCart.get();
-            Optional<Coupon> optionalCoupon = couponService.findByCode(code);
-            if(optionalCoupon.isPresent()) {
-                cart.setUsedCoupon(optionalCoupon.get());
-                couponService.applyCoupon(cart);
-            } else {
-                model.addAttribute("wrongCoupon", true);
-            }
-        }
-        return cart(model);
-    }
-
-    @PostMapping("/cart/removeCoupon")
-    public String cartRemoveCoupon(Model model) {
-        if(transactionService.removeCouponFromCart(userService.findByUsername((String) model.getAttribute("username")).get())) {
-            return "redirect:/cart";
-        }
-        return "error";
     }
 
     @PostMapping("/cart/pay")
@@ -145,6 +89,7 @@ public class TransactionController {
         return "error";
     }
 
+    // WISHLIST
     @GetMapping("/wishlist")
     public String wishlist(Model model) {
         ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
@@ -182,6 +127,7 @@ public class TransactionController {
         return "redirect:/wishlist";
     }
 
+    // PURCHASE HISTORY
     @GetMapping("/purchaseHistory")
     public String purchaseHistory(Model model) {
         ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
