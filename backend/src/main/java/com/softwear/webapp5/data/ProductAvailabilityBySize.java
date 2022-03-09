@@ -1,13 +1,11 @@
 package com.softwear.webapp5.data;
 
-import java.util.List;
-
 public class ProductAvailabilityBySize {
-    List<Boolean> availableSize;
-    List<ProductSize> size;
+    Boolean availableSize;
+    ProductSize size;
 
-    public ProductAvailabilityBySize(List<Boolean> availableSize, List<ProductSize> size) {
+    public ProductAvailabilityBySize(Boolean availableSize, ProductSize size) {
         this.availableSize = availableSize;
         this.size = size;
     }
-}
+} 

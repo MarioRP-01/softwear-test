@@ -11,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,16 +44,12 @@ public class ProductService {
 		return productRepository.findByStock(stock, pageable);
 	}
 
-    public Page<Product> findBySupplier(String supplier, Pageable pageable) {
-		return productRepository.findBySupplier(supplier, pageable);
+	public Page<Product> findBySize(ProductSize size, Pageable pageable){
+		return productRepository.findBySize(size, pageable);
 	}
 
-    public Page<Product> findByBrand(String Brand, Pageable pageable) {
-		return productRepository.findByBrand(Brand, pageable);
-	}
-
-    public Page<Product> findByManufactDate(String ManufactDate, Pageable pageable) {
-		return productRepository.findByManufactDate(ManufactDate, pageable);
+	public String getFirstImg_rout(Product product){
+		return product.getImg_routes().get(0);
 	}
 
     public void save(Product product){
@@ -68,29 +63,27 @@ public class ProductService {
 		}
 	}
 
-	public String getFirstImg_rout(Product product){
-		return product.getImg_routes().get(0);
-	}
-
 	public ArrayList<String> getNonFirstImg_routes(Product product){
 		ArrayList<String> copiedArrayList = (ArrayList<String>) product.getImg_routes().clone();
 		copiedArrayList.remove(0);
 		return copiedArrayList;
 	}
 
-	public ProductAvailabilityBySize getAvailableSizesStatus(Product product){
+	public List<ProductAvailabilityBySize> getAvailableSizesStatus(Product product){
 		String name = product.getName();
 		List<ProductSize> availableSizes = productRepository.FindSizeAvailableByName(name);
-		List<Boolean> availableSizesStatus = new ArrayList<>();
+		List<ProductAvailabilityBySize> availableSizesStatus = new ArrayList<>();
 
+		boolean isAvailableSize;
 		for (ProductSize size : ProductSize.values()){
-			availableSizesStatus.add(availableSizes.contains(size));
+			isAvailableSize = availableSizes.contains(size);
+			ProductAvailabilityBySize productAvailabilityBySize; 
+			productAvailabilityBySize = new ProductAvailabilityBySize(isAvailableSize, size);
+
+			availableSizesStatus.add(productAvailabilityBySize);
 		}
 
-		ProductAvailabilityBySize productAvailabilityBySize = 
-			new ProductAvailabilityBySize(availableSizesStatus, Arrays.asList(ProductSize.values()));
-			
-		return productAvailabilityBySize;
+		return availableSizesStatus;
 	}
 
 }

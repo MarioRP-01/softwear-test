@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.softwear.webapp5.data.ProductAvailabilityBySize;
 import com.softwear.webapp5.model.Product;
@@ -24,9 +25,9 @@ public class ProductController {
 		String firstImg_route = productService.getFirstImg_rout(product);
 		ArrayList<String> nonFirstImg_routes = productService.getNonFirstImg_routes(product);
 		
-	//	ProductAvailabilityBySize productAvailabilityBySize = productService.getAvailableSizesStatus(product);
-	//	model.addAttribute("productAvailabilityBySize", productAvailabilityBySize);
-		
+		List<ProductAvailabilityBySize> availableSizesStatus; 
+		availableSizesStatus = productService.getAvailableSizesStatus(product);
+		model.addAttribute("availableSizesStatus", availableSizesStatus);		
 
         model.addAttribute("product", product);
 		model.addAttribute("firstImg_route", firstImg_route);
