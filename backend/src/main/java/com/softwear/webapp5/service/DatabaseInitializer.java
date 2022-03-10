@@ -75,7 +75,7 @@ public class DatabaseInitializer {
 
 		// Coupons
 
-		Product leather_coat = new Product("Leather Coat (Softwear)", "Test Product", 10.00, 2L, Size.M,"DMW", "Spain", "Softwear", "20/11/21", lista1);
+		Product leather_coat = new Product("Leather Coat (Softwear)", "Test Product", 10.00, 2L, ProductSize.M, lista1);
 		List<Product> affectedProducts = new ArrayList<>();
 		affectedProducts.add(leather_coat);
 		productRepository.save(leather_coat);

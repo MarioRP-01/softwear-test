@@ -1,39 +1,8 @@
-let thumbnails = document.getElementsByClassName('product-thumbnail')
-
-let activeImages = document.getElementsByClassName('product-active')
-
-for (var i=0; i < thumbnails.length; i++){
-
-	thumbnails[i].addEventListener('mouseover', function(){
-		console.log(activeImages)
-		
-		if (activeImages.length > 0){
-			activeImages[0].classList.remove('product-active')
-		}
-		
-
-		this.classList.add('product-active')
-		document.getElementById('product-featured').src = this.src
-	})
-}
-
-
-let buttonRight = document.getElementById('product-slideRight');
-let buttonLeft = document.getElementById('product-slideLeft');
-
-buttonLeft.addEventListener('click', function(){
-	document.getElementById('product-slider').scrollLeft -= 180
-})
-
-buttonRight.addEventListener('click', function(){
-	document.getElementById('product-slider').scrollLeft += 180
-})
-
 
 //Load items from server
 function loadProduct(callback) {
   $.ajax({
-      url: 'http://localhost:8080/products/'
+      url: 'https://localhost:8443/products/'
   }).done(function (products) {
       console.log('products loaded: ' + JSON.stringify(products));
       callback(products);
@@ -52,10 +21,41 @@ function showProduct(product) {
 
 $(document).ready(function () {
 
-  loadProduct(function (products) {
-      //When items are loaded from server
-      for (var i = 0; i < products.length; i++) {
-          showProduct(products[i]);
-      }
-  });
+	loadProduct(function (products) {
+		//When items are loaded from server
+		for (var i = 0; i < products.length; i++) {
+			showProduct(products[i]);
+		}
+	});
+
+	let thumbnails = document.getElementsByClassName('product-thumbnail')
+
+	let activeImages = document.getElementsByClassName('product-active')
+
+	for (var i=0; i < thumbnails.length; i++){
+
+		thumbnails[i].addEventListener('mouseover', function(){
+			console.log(activeImages)
+
+			if (activeImages.length > 0){
+				activeImages[0].classList.remove('product-active')
+			}
+
+
+			this.classList.add('product-active')
+			document.getElementById('product-featured').src = this.src
+		})
+	}
+
+	let buttonRight = document.getElementById('product-slideRight');
+	let buttonLeft = document.getElementById('product-slideLeft');
+
+	buttonLeft.addEventListener('click', function(){
+		document.getElementById('product-slider').scrollLeft -= 180
+	})
+
+	buttonRight.addEventListener('click', function(){
+		document.getElementById('product-slider').scrollLeft += 180
+	})
+
 })
