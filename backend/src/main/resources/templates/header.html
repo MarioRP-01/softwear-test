@@ -34,6 +34,8 @@
                         {{#isAdmin}}
                         <li><a class="dropdown-item" href="/admin/home">Admin Panel</a></li>
                         {{/isAdmin}}
+                        <li><a class="dropdown-item" href="/wishlist">Wishlist</a></li>
+                        <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="/logout">Log Out</a></li>
                     </ul>
                 </div>
@@ -73,6 +75,11 @@
                        aria-expanded="false"><img src="../assets/user-icon.png" class="user-icon" style = "width: 3vw"></a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/userProfile">Profile</a></li>
+                        {{#isAdmin}}
+                        <li><a class="dropdown-item" href="/admin/home">Admin Panel</a></li>
+                        {{/isAdmin}}
+                        <li><a class="dropdown-item" href="/wishlist">Wishlist</a></li>
+                        <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="/logout">Log Out</a></li>
                     </ul>
                     
