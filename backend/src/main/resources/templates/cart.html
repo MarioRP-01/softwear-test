@@ -35,6 +35,8 @@
                     <td class="text-right">
                         <button class="btn btn-outline-dark fw-bold" onclick="deleteAllOfProduct({{id}})" type="button">Delete</button>
                     </td>
+                    <td></td>
+                    <td></td>
                     {{/product}}
                 </tr>
                 {{/transactionEntries}}
@@ -47,26 +49,30 @@
                     <td></td>
                     <td></td>
                     <td class="cart-text text-right coupon-discount">-${{discount}}</td>
-                    <td class="cart-text text-right">
+                    <td class="text-right">
                         <button class="btn btn-outline-dark fw-bold" onclick="removeCoupon()" type="button">Delete</button>
                     </td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 {{/coupon}}
                 </tbody>
                 <tfoot>
-                <tr id="apply-coupon"><td></td>
+                <tr id="apply-coupon">
+                    <td></td>
+                    <td class="cart-text">Total</td>
                     <td></td>
                     <td></td>
+                    <td class="cart-text text-center cart-items-number">{{nCartItems}}</td>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="text-right">Total: <strong class="total cart-total-price">${{totalPrice}}</strong></td>
-                    <td>Discount code:</td>
+                    <td class="cart-text text-right"><strong class="total cart-total-price">${{totalPrice}}</strong></td>
+                    <td class="cart-text text-center">Discount code:</td>
                     <td id="coupon-code"><input type="text" class="form-control form-control-sm" placeholder="Enter your discount code..." name="code" value="{{#coupon}}{{code}}{{/coupon}}"/></td>
                     <td><button type="button" class="btn btn-outline-dark" onclick="applyCoupon()">Apply</button></td>
                 </tr>
                 {{/cart}}
-                <tr id="wrong-coupon"><td></td>
+                <tr id="wrong-coupon">
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -75,16 +81,19 @@
                     <td></td>
                     <td></td>
                     <td class="col-form-label"><div class="rounded p-1 text-center text-white bg-danger">Wrong Coupon</div></td>
+                    <td></td>
                 </tr>
-                <tr id="valid-coupon"><td></td>
+                <tr id="valid-coupon">
+                    <td></td>
+                    <td class="cart-text">Total</td>
                     <td></td>
                     <td></td>
+                    <td class="cart-text text-center cart-items-number">{{nCartItems}}</td>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td class="text-right"><strong class="total cart-total-price">${{#cart.coupon}}{{totalPrice}}{{/cart.coupon}}</strong></td>
                     <td></td>
                     <td class="col-form-label"><div class="rounded p-1 text-center text-white bg-success">Valid Coupon</div></td>
+                    <td></td>
                 </tr>
                 </tfoot>
             </table>

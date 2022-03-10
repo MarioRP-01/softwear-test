@@ -1,4 +1,12 @@
-$("document").ready(hideCouponLabels())
+$("document").ready(function () {
+    if($(".cart-coupon-row").length) {
+        $("#apply-coupon").hide();
+        $("#wrong-coupon").hide();
+        $("#valid-coupon").show();
+    } else {
+        hideCouponLabels();
+    }
+})
 
 function createCouponRow(cart) {
     $("tbody.cart").append("<tr class=\"cart-coupon-row\">" +
