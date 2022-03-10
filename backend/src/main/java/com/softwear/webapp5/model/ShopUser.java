@@ -3,6 +3,7 @@ package com.softwear.webapp5.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name="Users")
 public class ShopUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

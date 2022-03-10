@@ -70,5 +70,9 @@ public class UserService {
 		shopUsers.save(oldShopUser.get());
 		
 	}
+	
+	public void saveUser(ShopUser u) {
+		shopUsers.save(u);
+	}
 
 }

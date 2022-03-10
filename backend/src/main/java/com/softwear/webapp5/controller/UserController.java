@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.service.UserService;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
@@ -98,6 +99,29 @@ public class UserController {
 			return "redirect:/";
 		}
 		return "error";
+	}
+	
+	@PostMapping("/login/register")
+	public String registerUser(Model model, HttpServletRequest request, ShopUser u, @RequestParam(name="confPassword") String confPass) {
+		
+		if(u.getPassword().equals(confPass)) {
+			u.setPassword(passwordEncoder.encode(confPass));
+			u.setName("");
+			u.setAddress("");
+			u.setBirthdate("");
+			u.setEmail("");
+			u.setLastName("");
+			u.setName("");
+			u.setRole("USER");
+			users.saveUser(u);
+			try {
+				request.login(u.getUsername(), confPass);
+			} catch (ServletException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return "redirect:/userProfile";
 	}
 	
 }
