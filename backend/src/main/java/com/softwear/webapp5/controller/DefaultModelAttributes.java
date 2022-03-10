@@ -1,6 +1,9 @@
 package com.softwear.webapp5.controller;
 
+import com.softwear.webapp5.data.TransactionView;
 import com.softwear.webapp5.model.ShopUser;
+import com.softwear.webapp5.model.Transaction;
+import com.softwear.webapp5.service.TransactionService;
 import com.softwear.webapp5.service.UserService;
 
 import org.slf4j.Logger;
@@ -17,6 +20,9 @@ public class DefaultModelAttributes {
 
     @Autowired
     private UserService users;
+
+    @Autowired
+    private TransactionService transactions;
 
     @ModelAttribute("logged")
     public boolean logged(HttpServletRequest request) {
@@ -63,6 +69,20 @@ public class DefaultModelAttributes {
             }
         }
         return false;
+    }
+
+    @ModelAttribute("nCartItems")
+    public int nCartItems(HttpServletRequest request) {
+        if(logged(request)) {
+            Optional<ShopUser> oUser = users.findByUsername(request.getUserPrincipal().getName());
+            if(oUser.isPresent()) {
+                Optional<Transaction> oCart = transactions.findCart(oUser.get());
+                if(oCart.isPresent()) {
+                    return oCart.get().getProducts().size();
+                }
+            }
+        }
+        return 0;
     }
 
 }

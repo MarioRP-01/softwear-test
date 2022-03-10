@@ -14,6 +14,11 @@
         <link href="../css/styles.css" rel="stylesheet" />
         <!-- FontAwesome CDN -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"></link>
+        <!-- JQuery CDN-->
+        <script
+                src="https://code.jquery.com/jquery-3.6.0.min.js"
+                integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+                crossorigin="anonymous"></script>
     </head>
     <body>
         <!-- Navigation-->
@@ -28,6 +33,8 @@
                         <li class="dropdown-item">{{username}}</li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="/userProfile">Profile</a></li>
+                        <li><a class="dropdown-item" href="/wishlist">Wishlist</a></li>
+                        <li><hr class="dropdown-divider" /></li>
                         {{#isAdmin}}
                         <li><a class="dropdown-item" href="/admin/home">Admin Panel</a></li>
                         {{/isAdmin}}
@@ -61,7 +68,7 @@
                         <a class="btn btn-outline-dark" href="/cart">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                            <span class="badge bg-dark text-white ms-1 rounded-pill cart-items-number">{{nCartItems}}</span>
                         </a>
                     </form>
                     
@@ -74,6 +81,8 @@
                         <li class="dropdown-item">{{username}}</li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="/userProfile">Profile</a></li>
+                        <li><a class="dropdown-item" href="/wishlist">Wishlist</a></li>
+                        <li><hr class="dropdown-divider" /></li>
                         {{#isAdmin}}
                         <li><a class="dropdown-item" href="/admin/home">Admin Panel</a></li>
                         {{/isAdmin}}
