@@ -18,9 +18,11 @@ function updateWishlist(wishlist, id) {
 function updateCartItemsNumber(cart) {
     let number = 0;
     if(cart != null) {
-        number = cart.transactionEntries.length;
+        for(const entry of cart.transactionEntries) {
+            number += entry.quantity;
+        }
     }
-    $("span#cart-items-number").html(number)
+    $(".cart-items-number").html(number);
 }
 
 function buy(id) {

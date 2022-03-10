@@ -52,8 +52,7 @@ public class DefaultModelAttributes {
             if(oUser.isPresent()) {
                 Optional<Transaction> oCart = transactions.findCart(oUser.get());
                 if(oCart.isPresent()) {
-                    TransactionView cart = new TransactionView(oCart.get());
-                    return cart.getTransactionEntries().size();
+                    return oCart.get().getProducts().size();
                 }
             }
         }
