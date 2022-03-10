@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.softwear.webapp5.data.Size;
+import com.softwear.webapp5.data.ProductSize;
 import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.repository.CouponRepository;
 import com.softwear.webapp5.model.Transaction;
@@ -66,11 +66,11 @@ public class DatabaseInitializer {
 		lista3.add("item7.webp");
 		lista3.add("item8.webp");
 
-		Product camisa = new Product("camisa", "es cómoda", 10, (long) 156, Size.XL, "Correos", "China", "Softwear", "15/3/21", lista1);
+		Product camisa = new Product("camisa", "es cómoda", 10, (long) 156, ProductSize.XL, lista1);
 
 		productRepository.save(camisa);
-		productRepository.save(new Product("chaqueta", "está cómoda", 20, (long) 156, Size.XS, "DMW", "Albacete", "Softwear", "26/4/21", lista2));
-		productRepository.save(new Product("pantalón", "ufff", 15, (long) 156, Size.S, "Amazon", "Murcia", "Softwear", "12/2/22", lista3));
+		productRepository.save(new Product("chaqueta", "está cómoda", 20, (long) 156, ProductSize.XS, lista2));
+		productRepository.save(new Product("pantalón", "ufff", 15, (long) 156, ProductSize.S, lista3));
 	
 
 		// Coupons

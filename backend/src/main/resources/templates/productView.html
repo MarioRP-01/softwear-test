@@ -20,13 +20,22 @@
             <hr>
             <h3>${{product.price}}</h3>
             <div class="pick-size">
-                <a class="btn btn-outline-dark">XS</a>
-                <a class="btn btn-outline-dark">S</a>
-                <a class="btn btn-outline-dark">M</a>
-                <a class="btn btn-outline-dark">L</a>
-                <a class="btn btn-outline-dark">XL</a>
+
+                {{#availableSizesStatus}}
+                    {{#this.availableSize}}
+                        <button type="button" class="btn btn-outline-dark">
+                            {{this.size}}
+                        </button>
+                    {{/this.availableSize}}
+                    {{^this.availableSize}}
+                        <button type="button" class="btn btn-outline-secondary" disabled>
+                            {{this.size}}
+                        </button>
+                    {{/this.availableSize}}
+                {{/availableSizesStatus}}
             </div>
             <p class="product-description">{{product.description}}</p>
 	    </div>
+        
     </div>
 {{>footer}}

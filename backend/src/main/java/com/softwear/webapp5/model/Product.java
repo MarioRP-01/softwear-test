@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.softwear.webapp5.data.Size;
+import com.softwear.webapp5.data.ProductSize;
 
 @Entity
 public class Product{
@@ -29,46 +29,21 @@ public class Product{
 	private Long stock;
 	
 	@Column(nullable = false)
-	private Size size; 
-
-	private String supplier;
-	private String placeMade;
-	private String brand;
-	private String manufactDate;
+	private ProductSize size;
 
     private ArrayList<String> img_routes = new ArrayList<>();
     
-	public Product(String name, String description, double price, Long stock, Size size, String supplier, 
-	String placeMade, String brand, String manufactDate, ArrayList<String> img_routes) {
+	public Product(String name, String description, double price, Long stock, ProductSize size, 
+			ArrayList<String> img_routes) {
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.stock = stock;
 		this.size = size;
-		this.supplier = supplier;
-		this.placeMade = placeMade;
-		this.brand = brand;
-		this.manufactDate = manufactDate;
 		this.img_routes = img_routes;
 	}
 
 	public Product() {}
-
-	public String getBrand() {
-		return brand;
-	}
-
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
-
-	public String getManufactDate() {
-		return manufactDate;
-	}
-
-	public void setManufactDate(String manufactDate) {
-		this.manufactDate = manufactDate;
-	}
 
 	public Long getId() {
 		return id;
@@ -110,22 +85,6 @@ public class Product{
 		this.stock = stock;
 	}
 
-	public String getSupplier() {
-		return supplier;
-	}
-
-	public void setSupplier(String supplier) {
-		this.supplier = supplier;
-	}
-
-	public String getPlaceMade() {
-		return placeMade;
-	}
-
-	public void setPlaceMade(String place)  {
-		this.placeMade = place;
-	}
-
 	public ArrayList<String> getImg_routes() {
 		return img_routes;
 	}
@@ -134,11 +93,11 @@ public class Product{
 		this.img_routes = img_routes;
 	}
 
-	public Size getSize() {
+	public ProductSize getSize() {
 		return size;
 	}
 
-	public void setSize(Size size) {
+	public void setSize(ProductSize size) {
 		this.size = size;
 	}
 }

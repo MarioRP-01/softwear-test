@@ -1,7 +1,3 @@
-
-
-
-
 let thumbnails = document.getElementsByClassName('product-thumbnail')
 
 let activeImages = document.getElementsByClassName('product-active')

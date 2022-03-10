@@ -1,6 +1,6 @@
 package com.softwear.webapp5.data;
 
-public enum Size {
+public enum ProductSize {
     XS,
     S,
     M,

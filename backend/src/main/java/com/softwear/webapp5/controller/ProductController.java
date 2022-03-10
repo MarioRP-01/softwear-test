@@ -7,13 +7,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import com.softwear.webapp5.data.ProductAvailabilityBySize;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.service.ProductService;
 
 @Controller
 public class ProductController {
-    
+
     @Autowired
     private ProductService productService;
     
@@ -22,9 +24,15 @@ public class ProductController {
         Product product = productService.findById(id).orElseThrow();
 		String firstImg_route = productService.getFirstImg_rout(product);
 		ArrayList<String> nonFirstImg_routes = productService.getNonFirstImg_routes(product);
+		
+		List<ProductAvailabilityBySize> availableSizesStatus; 
+		availableSizesStatus = productService.getAvailableSizesStatus(product);
+		model.addAttribute("availableSizesStatus", availableSizesStatus);		
+
         model.addAttribute("product", product);
 		model.addAttribute("firstImg_route", firstImg_route);
 		model.addAttribute("nonFirstImg_routes", nonFirstImg_routes);
+
         return "productView";
     }
 
