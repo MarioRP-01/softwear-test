@@ -60,18 +60,6 @@ public class DefaultModelAttributes {
         return false;
     }
 
-    @ModelAttribute("isAdmin")
-    public boolean isAdmin(HttpServletRequest request) {
-        
-        if(logged(request)) {
-            Optional<ShopUser> oUser = users.findByUsername(request.getUserPrincipal().getName());
-            if(oUser.isPresent()) {
-                return oUser.get().getRole().equals("ADMIN");
-            }
-        }
-        return false;
-    }
-
     @ModelAttribute("isUser")
     public boolean isUser(HttpServletRequest request) {
         if(logged(request)) {
