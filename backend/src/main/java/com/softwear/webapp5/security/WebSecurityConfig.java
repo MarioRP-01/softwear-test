@@ -37,6 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/loginerror").permitAll();
         http.authorizeRequests().antMatchers("/logout").permitAll();
 
+       
         // Private pages
         http.authorizeRequests().antMatchers("/cart*").hasAnyRole("USER", "ADMIN");
         http.authorizeRequests().antMatchers("/purchaseHistory*").hasAnyRole("USER", "ADMIN");

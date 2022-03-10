@@ -2,8 +2,8 @@
         <div class="container-xl px-4 mt-4">
 		    <!-- Account page navigation-->
 		    <nav class="nav nav-borders">
-		        <a class="nav-link active ms-0" href="/userProfile">Profile</a>
-				<a class="nav-link ms-0" href="/purchaseHistory">Orders</a>
+		        <a class="nav-link active ms-0" href="./" target="__blank">Profile</a>
+				<a class="nav-link ms-0" href="./userProfile/purchaseHistory" target="__blank">Orders</a>
 		    </nav>
 		    <hr class="mt-0 mb-4">
 		    <div class="row">
@@ -26,19 +26,23 @@
 		            <div class="card mb-4">
 		                <div class="card-header">Account Details</div>
 		                <div class="card-body">
-		                    <form action="/userProfile" method="post">
-		                        
+		                    <form action="/userProfile/{{id}}" method="post">
+		                        <!-- Form Group (username)-->
+		                        <div class="mb-3">
+		                            <label class="small mb-1" for="inputUsername">Username</label>
+		                            <input class="form-control" name="username" type="text" placeholder="Enter your username" value="{{username}}">
+		                        </div>
 		                        <!-- Form Row-->
 		                        <div class="row gx-3 mb-3">
 		                            <!-- Form Group (first name)-->
 		                            <div class="col-md-6">
 		                                <label class="small mb-1" for="inputFirstName">First name</label>
-		                                <input class="form-control" name="name" type="text" placeholder="Enter your first name" value="{{name}}" id="inputFirstName">
+		                                <input class="form-control" name="name" type="text" placeholder="Enter your first name" value="{{name}}">
 		                            </div>
 		                            <!-- Form Group (last name)-->
 		                            <div class="col-md-6">
 		                                <label class="small mb-1" for="inputLastName">Last name</label>
-		                                <input class="form-control" name="lastName" type="text" placeholder="Enter your last name" value="{{lastName}}" id="inputLastName">
+		                                <input class="form-control" name="lastName" type="text" placeholder="Enter your last name" value="{{lastName}}">
 		                            </div>
 		                        </div>
 		                        <!-- Form Row        -->
@@ -47,25 +51,25 @@
 		                            <!-- Form Group (location)-->
 		                            <div class="col-md-6">
 		                                <label class="small mb-1" for="inputLocation">Location</label>
-		                                <input class="form-control" name="address" type="text" placeholder="Enter your location" value="{{address}}" id="inputLocation">
+		                                <input class="form-control" name="address" type="text" placeholder="Enter your location" value="{{address}}">
 		                            </div>
 		                        </div>
 		                        <!-- Form Group (email address)-->
 		                        <div class="mb-3">
 		                            <label class="small mb-1" for="inputEmailAddress">Email address</label>
-		                            <input class="form-control" name="email" type="email" placeholder="Enter your email address" value="{{email}}"  id="inputEmailAddress">
+		                            <input class="form-control" name="email" type="email" placeholder="Enter your email address" value="{{email}}">
 		                        </div>
 		                        <!-- Form Row-->
 		                        <div class="row gx-3 mb-3">
 		                            <!-- Form Group (phone number)-->
 		                            <div class="col-md-6">
 		                                <label class="small mb-1" for="inputPhone">Phone number</label>
-		                                <input class="form-control" name="mobileNumber" type="text" placeholder="Enter your phone number" value="{{mobileNumber}}" id="inputPhone">
+		                                <input class="form-control" name="mobileNumber" type="text" placeholder="Enter your phone number" value="{{mobileNumber}}">
 		                            </div>
 		                            <!-- Form Group (birthday)-->
 		                            <div class="col-md-6">
 		                                <label class="small mb-1" for="inputBirthday">Birthday</label>
-		                                <input class="form-control" name="birthdate" type="text" placeholder="Enter your birthday" value="{{birthdate}}" id="inputBirthday">
+		                                <input class="form-control" name="birthdate" type="text" placeholder="Enter your birthday" value="{{birthdate}}">
 		                            </div>
 		                        </div>
 		                        <!-- Save changes button-->
@@ -80,20 +84,20 @@
 		    </div>
 		</div>
         
-        <div class="form-popup" id="change-password-form">
-             <form  class="form-container" action="/userProfile/changePassword" method="post">
+        <div class="form-popup" id="change-password-form" >
+             <form  class="form-container" action="/userProfile/changePassword/{{id}}" method="post">
                  <h2 style="margin-bottom: 8vh; margin-top: 2vh;">Change Password</h2>
 
                  <div class="form-floating mb-3">
-                     <input type="password" class="form-control" name="oldPass" placeholder="Old Password" id="floatingPasswordOld" required>
+                     <input type="password" class="form-control" name="oldPass" placeholder="Old Password" required>
                      <label for="floatingPasswordOld">Previous Password</label>
                  </div>
                  <div class="form-floating mb-3">
-                     <input type="password" class="form-control" name="newPass" placeholder="New Password" id="floatingPasswordNew" required>
+                     <input type="password" class="form-control" name="newPass" placeholder="New Password" required>
                      <label for="floatingPasswordNew">New Password</label>
                  </div>
                  <div class="form-floating mb-3">
-                     <input type="password" class="form-control" name="newConfPass" placeholder="New Password"  id="floatingPasswordNewRepeat"required>
+                     <input type="password" class="form-control" name="newConfPass" placeholder="New Password" required>
                      <label for="floatingPasswordNewRepeat">Repeat New Password</label>
                  </div>
                  <div class="container" id="changePassword-btn-container">
@@ -101,7 +105,5 @@
                          <div class="row"><button type="button" class="btn btn-outline-dark text-uppercase fw-bold" id="cancel-changePassword" onclick="closeFormChangePassword()">Cancel</button></div>
                  </div>
              </form>
-         </div>
-         
-         <script src="../js/editProfile.js"></script> 
+         </div> 
 {{>footer}}
