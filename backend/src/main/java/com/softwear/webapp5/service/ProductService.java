@@ -86,4 +86,22 @@ public class ProductService {
 		return availableSizesStatus;
 	}
 
+	public void addStock(Product product, int quantity) {
+		if(quantity > 0){
+			product.setStock(product.getStock() + quantity);
+			save(product);
+		}
+	}
+
+	public boolean checkStock(Product product, int quantity) {
+		return product.getStock() <= quantity;
+	}
+
+	public void deleteStock(Product product, int quantity) {
+		if(checkStock(product, quantity)) {
+			product.setStock(product.getStock() - quantity);
+			save(product);
+		}
+	}
+
 }
