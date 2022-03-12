@@ -81,10 +81,11 @@ public class RestAdminController {
 
     @PostMapping("/manageProducts")
     public Product products(@RequestParam String mode, @RequestParam(required = false) Long id, @RequestParam(required = false) String name, 
-    @RequestParam(required = false) String description, @RequestParam(required = false) float price,
-    @RequestParam(required = false) int stock, @RequestParam(required = false) Size size,
+    @RequestParam(required = false) String description, @RequestParam(required = false) String price,
+    @RequestParam(required = false) String stock, @RequestParam(required = false) String size,
     @RequestParam(required = false) ArrayList<File> imgs){
-
+        Logger log = LoggerFactory.getLogger(SampleLogController.class);
+        log.info("llega");
         if(mode.equals("EDIT")){
             // Logger log = LoggerFactory.getLogger(SampleLogController.class);
             // Optional<ShopUser> oOldUser = userService.findById(id);
