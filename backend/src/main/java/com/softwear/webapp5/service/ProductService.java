@@ -94,7 +94,7 @@ public class ProductService {
 	}
 
 	public boolean checkStock(Product product, int quantity) {
-		return product.getStock() <= quantity;
+		return quantity <= product.getStock();
 	}
 
 	public void deleteStock(Product product, int quantity) {
@@ -102,6 +102,10 @@ public class ProductService {
 			product.setStock(product.getStock() - quantity);
 			save(product);
 		}
+	}
+
+	public Optional<Product> findByNameAndSize(String name, ProductSize size) {
+		return productRepository.findByNameAndSize(name, size);
 	}
 
 }

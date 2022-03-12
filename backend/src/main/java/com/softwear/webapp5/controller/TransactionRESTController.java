@@ -70,13 +70,19 @@ public class TransactionRESTController {
     }
 
     @PostMapping("/wishlist")
-    public TransactionView postWishlist(Model model, @RequestParam String action, @RequestParam(required = false) Long productId) {
+    public TransactionView postWishlist(Model model, @RequestParam String action, @RequestParam(required = false) Long productId, @RequestParam(required = false) String productName) {
         ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
         boolean result = false;
         if(action.equals("add")) {
             result = productId != null && transactionService.addToWishlist(productId, user);
         } else if(action.equals("delete")) {
-            result = productId != null && transactionService.removeFromWishlist(productId, user);
+            if (productId != null) {
+                result = transactionService.removeFromWishlist(productId, user);
+            } else if(productName != null) {
+                result = transactionService.removeFromWishlist(productName, user);
+            } else {
+                result = false;
+            }
         } else if(action.equals("empty")) {
             transactionService.emptyWishlist(user);
             result = transactionService.findWishlist(user).isEmpty();
