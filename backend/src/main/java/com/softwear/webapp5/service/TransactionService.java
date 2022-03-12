@@ -73,13 +73,7 @@ public class TransactionService {
     }
 
     public Page<Transaction> findPurchaseHistory(ShopUser user, Pageable pageable) {
-    	Page<Transaction> tran = transactionRepository.findAll(pageable);
-
-		Page<Transaction> pages = tran.map(entity -> {
-			System.out.println("-----------------------------------------------------"+entity);
-			return entity;
-		});
-        return pages;
+    	return transactionRepository.findPurchaseHistory(user, pageable);
     }
     
     public List<Transaction> findPurchaseHistory(ShopUser user) {

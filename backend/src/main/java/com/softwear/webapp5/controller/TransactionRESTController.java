@@ -96,28 +96,15 @@ public class TransactionRESTController {
         return new TransactionView();
     }
     
-    // PURCHASE HISTORY
-    /*@GetMapping("/purchaseHistory/{num}")
-    public String purchaseHistory(Model model, @PathVariable int num) {
-        ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
-        Page<Transaction> transactions = transactionService.findPurchaseHistory(user, PageRequest.of(num, 2));
-        List<TransactionView> purchaseHistory = new ArrayList<>();
-        for(Transaction transaction: transactions) {
-            purchaseHistory.add(new TransactionView(transaction));
-        }
-        model.addAttribute("purchaseHistory", purchaseHistory);
-        model.addAttribute("hasPrev", transactions.hasPrevious());
-        model.addAttribute("hasNext", transactions.hasNext());
-        model.addAttribute("nextPage", transactions.getNumber()+1);
-        model.addAttribute("prevPage", transactions.getNumber()-1);
-        
-        return "purchaseHistory";
-    }*/
-    
-    @GetMapping("/purchaseHistory")
-    public Page<Transaction> purchaseHistory(Model model){
+    @GetMapping("/purchaseHistory/{pageNumber}")
+    public List<TransactionView> purchaseHistory(Model model, @PathVariable int pageNumber){
     	ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
-        return transactionService.findPurchaseHistory(user, PageRequest.of(0, 2));
+        Page<Transaction> transactionsPage = transactionService.findPurchaseHistory(user, PageRequest.of(pageNumber, 10));
+        List<TransactionView> transactions = new ArrayList<>();
+        for(Transaction transaction: transactionsPage) {
+            transactions.add(new TransactionView(transaction));
+        }
+        return transactions;
     }
 
 }

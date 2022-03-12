@@ -1,7 +1,7 @@
 {{>header}}
 
 
-<div class="container" xmlns="http://www.w3.org/1999/html">
+<div id="purchases-container" class="container" xmlns="http://www.w3.org/1999/html">
             <nav class="nav nav-borders" style="margin-top: 3vh;">
                 <a class="nav-link ms-0" href="/userProfile">Profile</a>
                 <a class="nav-link active ms-0" href="/purchaseHistory">Orders</a>
@@ -16,13 +16,13 @@
                 </div>
                 <div class="card-body">
                     <table class="table">
-                        <tbody class="cart">
+                        <tbody id="purchase-{{id}}" class="cart">
                         {{#transactionEntries}}
                         <tr>
                             <td>#{{-index}}</td>
                             <td style="padding: 0;"><form action="/productView" method="post" style="margin-top: 0; padding: 0;">
                                 <button class="btn border-0" type="submit">{{product.name}}</button>
-                                <intput type="hidden" name="id" value="{{product.id}}"/>
+                                <input type="hidden" name="id" value="{{product.id}}"/>
                             </form></td>
                             <td>{{quantity}} x ${{product.price}}</td>
                             <td class="text-right">${{totalPrice}}</td>
@@ -51,13 +51,11 @@
             </div>
                        
             {{/purchaseHistory}}
-        </div>
-		{{#hasPrev}}
-        <a href="./{{prevPage}}" style="text-align: center">Prev</a>
-        {{/hasPrev}}
-        
-        {{#hasNext}}
-        <a href="./{{nextPage}}" style="text-align: center">Next</a>
-        {{/hasNext}}
 
+            {{#hasNext}}
+            <div class="row p-2"><a id="more-btn" class="btn btn-outline-dark m-auto w-75 text-center fw-bold text-uppercase" onclick="more()">More</a></div>
+            {{/hasNext}}
+            <meta id="max-pages" content="{{maxPages}}"/>
+        </div>
+<script src="js/purchaseHistory.js"></script>
 {{>footer}}

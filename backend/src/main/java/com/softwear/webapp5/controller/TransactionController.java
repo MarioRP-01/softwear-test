@@ -132,6 +132,25 @@ public class TransactionController {
         return "redirect:/wishlist";
     }*/
 
-    
+
+
+    // PURCHASE HISTORY
+    @GetMapping("/purchaseHistory")
+    public String purchaseHistory(Model model) {
+        ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
+        Page<Transaction> transactions = transactionService.findPurchaseHistory(user, PageRequest.of(0, 10));
+        List<TransactionView> purchaseHistory = new ArrayList<>();
+        for(Transaction transaction: transactions) {
+            purchaseHistory.add(new TransactionView(transaction));
+        }
+        model.addAttribute("purchaseHistory", purchaseHistory);
+        model.addAttribute("hasPrev", transactions.hasPrevious());
+        model.addAttribute("hasNext", transactions.hasNext());
+        model.addAttribute("nextPage", transactions.getNumber()+1);
+        model.addAttribute("prevPage", transactions.getNumber()-1);
+        model.addAttribute("maxPages", transactions.getTotalPages());
+
+        return "purchaseHistory";
+    }
 
 }
