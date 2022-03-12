@@ -17,11 +17,7 @@ public interface ProductRepository extends JpaRepository <Product, Long> {
     public Page<Product> findByDescription(String description, Pageable page);
     public Page<Product> findByPrice(double price, Pageable page);
     public Page<Product> findByStock(Long stock, Pageable page);
-    public Page<Product> findBySupplier(String supplier, Pageable page);
-    public Page<Product> findByPlaceMade(String placeMade, Pageable page);
-    public Page<Product> findByBrand(String brand, Pageable page);
-    public Page<Product> findByManufactDate(String ManufactDate, Pageable page);
-
+     
     @Query(value = "SELECT DISTINCT size FROM Products WHERE name = :name", nativeQuery = true)
     public List<Size> FindSizeAvailableByName(@Param("name") String name);
 }

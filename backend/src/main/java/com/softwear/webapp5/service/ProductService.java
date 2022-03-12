@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,18 +46,6 @@ public class ProductService {
 		return productRepository.findByStock(stock, pageable);
 	}
 
-    public Page<Product> findBySupplier(String supplier, Pageable pageable) {
-		return productRepository.findBySupplier(supplier, pageable);
-	}
-
-    public Page<Product> findByBrand(String Brand, Pageable pageable) {
-		return productRepository.findByBrand(Brand, pageable);
-	}
-
-    public Page<Product> findByManufactDate(String ManufactDate, Pageable pageable) {
-		return productRepository.findByManufactDate(ManufactDate, pageable);
-	}
-
     public void save(Product product){
         productRepository.save(product);
     }
@@ -68,12 +57,12 @@ public class ProductService {
 		}
 	}
 
-	public String getFirstImg_rout(Product product){
-		return product.getImg_routes().get(0);
+	public File getFirstImg(Product product){
+		return product.getImgs().get(0);
 	}
 
-	public ArrayList<String> getNonFirstImg_routes(Product product){
-		ArrayList<String> copiedArrayList = (ArrayList<String>) product.getImg_routes().clone();
+	public ArrayList<File> getNonFirstImgs(Product product){
+		ArrayList<File> copiedArrayList = (ArrayList<File>) product.getImgs().clone();
 		copiedArrayList.remove(0);
 		return copiedArrayList;
 	}
@@ -91,4 +80,5 @@ public class ProductService {
 		}
 		return AvailableSizesStatus;
 	}
+
 }

@@ -1,5 +1,6 @@
 package com.softwear.webapp5.service;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
@@ -44,26 +45,26 @@ public class DatabaseInitializer {
 	@PostConstruct
 	public void init() {
 
-		ArrayList<String> lista1 = new ArrayList<>();
-		ArrayList<String> lista2 = new ArrayList<>();
-		ArrayList<String> lista3 = new ArrayList<>();
+		ArrayList<File> lista1 = new ArrayList<>();
+		ArrayList<File> lista2 = new ArrayList<>();
+		ArrayList<File> lista3 = new ArrayList<>();
 
-		lista1.add("item1.webp");
-		lista1.add("item2.webp");
-		lista1.add("item3.webp");
+		lista1.add(new File("item1.webp"));
+		lista1.add(new File("item2.webp"));
+		lista1.add(new File("item3.webp"));
 
-		lista2.add("item4.webp");
-		lista2.add("item5.webp");
-		lista2.add("item6.webp");
+		lista2.add(new File("item4.webp"));
+		lista2.add(new File("item5.webp"));
+		lista2.add(new File("item6.webp"));
 
-		lista3.add("item7.webp");
-		lista3.add("item8.webp");
+		lista3.add(new File("item7.webp"));
+		lista3.add(new File("item8.webp"));
 
-		Product camisa = new Product("camisa", "es cómoda", 10, (long) 156, Size.XL, "Correos", "China", "Softwear", "15/3/21", lista1);
+		Product camisa = new Product("camisa", "es cómoda", 10, (long) 156, Size.XL, lista1);
 
 		productRepository.save(camisa);
-		productRepository.save(new Product("chaqueta", "está cómoda", 20, (long) 156, Size.XS, "DMW", "Albacete", "Softwear", "26/4/21", lista2));
-		productRepository.save(new Product("pantalón", "ufff", 15, (long) 156, Size.S, "Amazon", "Murcia", "Softwear", "12/2/22", lista3));
+		productRepository.save(new Product("chaqueta", "está cómoda", 20, (long) 156, Size.XS, lista2));
+		productRepository.save(new Product("pantalón", "ufff", 15, (long) 156, Size.S, lista3));
 	
 
 		// Coupons
