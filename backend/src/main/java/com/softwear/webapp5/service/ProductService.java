@@ -81,4 +81,15 @@ public class ProductService {
 		return AvailableSizesStatus;
 	}
 
+	public void updateInfo(Product oldProduct, Product u) {
+		oldProduct.setName(u.getName());
+		oldProduct.setDescription(u.getDescription());
+		oldProduct.setPrice(u.getPrice());
+		oldProduct.setStock(u.getStock());
+		oldProduct.setSize(u.getSize());
+		oldProduct.setImgs(u.getImgs());
+
+		save(oldProduct);
+	}
+
 }

@@ -50,9 +50,7 @@ public class RestAdminController {
     @RequestParam(required = false) String role){
 
         if(mode.equals("EDIT")){
-            Logger log = LoggerFactory.getLogger(SampleLogController.class);
             Optional<ShopUser> oOldUser = userService.findById(id);
-            log.info(oOldUser.toString());
             if(oOldUser.isPresent()){
                 ShopUser oldUser = oOldUser.get();
                 if(!password.equals(""))
@@ -61,7 +59,6 @@ public class RestAdminController {
                     password = oldUser.getPassword();
                 ShopUser newUser = new ShopUser(username, email, name, lastName, password, address, mobileNumber, birthdate, role);
                 userService.updateInfo(oldUser, newUser);
-                log.info(String.valueOf(oldUser.getId()));
                 return oldUser;
             }
             
@@ -87,33 +84,22 @@ public class RestAdminController {
         Logger log = LoggerFactory.getLogger(SampleLogController.class);
         log.info("llega");
         if(mode.equals("EDIT")){
-            // Logger log = LoggerFactory.getLogger(SampleLogController.class);
-            // Optional<ShopUser> oOldUser = userService.findById(id);
-            // log.info(oOldUser.toString());
-            // if(oOldUser.isPresent()){
-            //     ShopUser oldUser = oOldUser.get();
-            //     if(!password.equals(""))
-            //         password = passwordEncoder.encode(password);
-            //     else
-            //         password = oldUser.getPassword();
-            //     ShopUser newUser = new ShopUser(username, email, name, lastName, password, address, mobileNumber, birthdate, role);
-            //     userService.updateInfo(oldUser, newUser);
-            //     log.info(String.valueOf(oldUser.getId()));
-            //     return oldUser;
-                return null;
-            // }
-            
+            Optional<Product> oOldProduct = productService.findById(id);
+            if(oOldProduct.isPresent()){
+                Product oldProduct = oOldProduct.get();
+                Product newProduct = new Product(name, description, Double.valueOf(price), Long.valueOf(stock), Size.valueOf(size), imgs);
+                productService.updateInfo(oldProduct, newProduct);
+                log.info(String.valueOf(oldProduct.getId()));
+                return oldProduct;
+            }
         }else if(mode.equals("ADD")){
-            // password = passwordEncoder.encode(password);
-            // ShopUser newUser = new ShopUser(username, email, name, lastName, password, address, mobileNumber, birthdate, role);
-            // userService.save(newUser);
-            // return newUser;
-
+            Product newProduct = new Product(name, description, Double.valueOf(price), Long.valueOf(stock), Size.valueOf(size), imgs);
+            productService.save(newProduct);
+            return newProduct;
         }else if(mode.equals("DELETE")){
             productService.deleteProduct(id);
             return null;
         }
-
         return null;
     }
 }
