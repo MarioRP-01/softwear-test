@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.softwear.webapp5.model.ShopUser;
@@ -15,6 +17,10 @@ public class UserService {
 	
 	@Autowired
 	private UserRepository shopUsers;
+	
+	public Page<ShopUser> findAll(Pageable page){
+		return shopUsers.findAll(page);
+	}
 	
 	public Optional<ShopUser> findById(Long id){
 		return shopUsers.findById(id);

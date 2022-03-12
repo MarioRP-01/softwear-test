@@ -45,11 +45,19 @@
                             <td class="text-right"><strong class="total">${{totalPrice}}</strong></td>
                         </tr>
                         </tfoot>
+                        
                     </table>
                 </div>
             </div>
+                       
             {{/purchaseHistory}}
         </div>
-
+		{{#hasPrev}}
+        <a href="./{{prevPage}}" style="text-align: center">Prev</a>
+        {{/hasPrev}}
+        
+        {{#hasNext}}
+        <a href="./{{nextPage}}" style="text-align: center">Next</a>
+        {{/hasNext}}
 
 {{>footer}}

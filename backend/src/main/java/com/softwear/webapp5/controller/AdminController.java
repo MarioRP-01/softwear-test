@@ -11,6 +11,8 @@ import com.softwear.webapp5.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -52,8 +54,13 @@ public class AdminController {
     
     @GetMapping("/manageUsers")
     public String users(Model model){
-        List<ShopUser> users = userService.findAll();
+    	//List<ShopUser> users= userService.findAll();
+        Page<ShopUser> users = userService.findAll(PageRequest.of(0, 1));
         model.addAttribute("users", users);
+        /*model.addAttribute("hasPrev", users.hasPrevious());
+        model.addAttribute("hasNext", users.hasNext());
+        model.addAttribute("nextPage", users.getNumber()+1);
+        model.addAttribute("prevPage", users.getNumber()-1);*/
         return "manageUsers";
     }
 
