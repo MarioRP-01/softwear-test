@@ -80,7 +80,12 @@
                         {{/isAdmin}}
                         <li><a class="dropdown-item" href="/wishlist">Wishlist</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="/logout">Log Out</a></li>
+                        <li>
+                            <form action="/logout" method="post">
+                                <input type="submit" class="dropdown-item" value="Log out"/>
+                                <input type="hidden" name="_csrf" value="{{token}}">
+                            </form>
+                        </li>
                     </ul>
                     
                 </div>
