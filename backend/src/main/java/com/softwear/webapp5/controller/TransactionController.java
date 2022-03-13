@@ -60,7 +60,7 @@ public class TransactionController {
         return "cart";
     }
 
-    @PostMapping("/cart/pay")
+    @GetMapping("/cart/pay")
     public String cartPay(Model model) {
         ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
         Optional<Transaction> optCart = transactionService.findCart(user);
