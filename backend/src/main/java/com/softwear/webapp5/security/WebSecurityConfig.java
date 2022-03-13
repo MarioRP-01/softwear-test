@@ -37,11 +37,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/loginerror").permitAll();
         http.authorizeRequests().antMatchers("/logout").permitAll();
 
+       
         // Private pages
+        http.authorizeRequests().antMatchers("/cart*").hasAnyRole("USER", "ADMIN");
+        http.authorizeRequests().antMatchers("/purchaseHistory*").hasAnyRole("USER", "ADMIN");
+        http.authorizeRequests().antMatchers("/wishlist*").hasAnyRole("USER", "ADMIN");
         http.authorizeRequests().antMatchers("/loginSuccess").hasAnyRole("USER", "ADMIN");
         http.authorizeRequests().antMatchers("/userProfile").hasAnyRole("USER", "ADMIN");
         http.authorizeRequests().antMatchers("/userProfile/*").hasAnyRole("USER", "ADMIN");
         http.authorizeRequests().antMatchers("/admin/*").hasAnyRole("ADMIN");
+        http.authorizeRequests().antMatchers("/apiadmin/*").hasAnyRole("ADMIN");
 
         // Login form
         http.formLogin().loginPage("/login");
@@ -53,7 +58,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Logout
         http.logout().logoutUrl("/logout");
         http.logout().logoutSuccessUrl("/");
-        
-        http.csrf().disable();
     }
 }

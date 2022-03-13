@@ -1,30 +1,55 @@
 package com.softwear.webapp5.controller;
 
+import com.softwear.webapp5.model.ShopUser;
+import com.softwear.webapp5.service.TransactionService;
+import com.softwear.webapp5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
+import com.softwear.webapp5.data.ProductAvailabilityBySize;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.service.ProductService;
 
 @Controller
 public class ProductController {
-    
+
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private TransactionService transactionService;
+
+    @Autowired
+    private UserService userService;
     
     @GetMapping("/productView/{id}")
     public String getProduct(@PathVariable long id, Model model) {
         Product product = productService.findById(id).orElseThrow();
-		String firstImg_route = productService.getFirstImg_rout(product);
-		ArrayList<String> nonFirstImg_routes = productService.getNonFirstImg_routes(product);
+		File firstImg = productService.getFirstImg(product);
+		ArrayList<File> nonFirstImgs = productService.getNonFirstImgs(product);
+		
+		List<ProductAvailabilityBySize> availableSizesStatus; 
+		availableSizesStatus = productService.getAvailableSizesStatus(product);
+
+		//TODO rutas imagenes
+		model.addAttribute("availableSizesStatus", availableSizesStatus);		
         model.addAttribute("product", product);
-		model.addAttribute("firstImg_route", firstImg_route);
-		model.addAttribute("nonFirstImg_routes", nonFirstImg_routes);
+        model.addAttribute("inStock", product.getStock() > 0);
+        model.addAttribute("lowStock", product.getStock() <= 30);
+		model.addAttribute("firstImg", firstImg);
+		model.addAttribute("nonFirstImgs", nonFirstImgs);
+
+        if((boolean) model.getAttribute("logged")) {
+            model.addAttribute("inWishlist", transactionService.findProductInWishlist(userService.findByUsername((String) model.getAttribute("username")).get(), product.getName()).isPresent());
+        }
+
         return "productView";
     }
 

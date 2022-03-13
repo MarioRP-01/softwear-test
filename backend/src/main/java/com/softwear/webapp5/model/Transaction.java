@@ -20,7 +20,7 @@ public class Transaction {
 	@Column(nullable = false)
     private String type;
 
-	@ManyToOne(/*Uncomment when User is finished*//*optional = false*/)
+	@ManyToOne(optional = false)
     private ShopUser user;
 
 	@ManyToOne
@@ -33,7 +33,7 @@ public class Transaction {
 	private Double totalPrice;
 
 	@ManyToMany
-	@Column(/*Uncomment when Product is finished*//*nullable = false*/)
+	@Column(nullable = false)
     private List<Product> products;
 
 	public Transaction(String type, String date) {

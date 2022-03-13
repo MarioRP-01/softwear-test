@@ -51,8 +51,8 @@ public class UserService {
 	///////////////////////////////////////////
 	
 	public void updateInfo(Optional<ShopUser> oldShopUser, ShopUser u) {
-
-		oldShopUser.get().setUsername(u.getUsername());
+		
+		
 		oldShopUser.get().setAddress(u.getAddress());
 		oldShopUser.get().setPassword(u.getPassword());
 		oldShopUser.get().setBirthdate(u.getBirthdate());
@@ -86,6 +86,10 @@ public class UserService {
 		oldShopUser.get().setPassword(newPass);
 		shopUsers.save(oldShopUser.get());
 		
+	}
+	
+	public void saveUser(ShopUser u) {
+		shopUsers.save(u);
 	}
 
 	public void delete(Long id){

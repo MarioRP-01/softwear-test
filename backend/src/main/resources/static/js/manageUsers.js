@@ -108,7 +108,6 @@ $('#formUsers').submit(function(e){
                     '<td><button data-id="'+data.id+'" onclick="delete_user($(this).data(\'+id+\'));" '+
                     'class="btn btn-primary" type="button">Delete</button></td> </tr>';
                     $('tbody').append(addHTML);
-                    
                 }
             }else{ //Deleted
                 trSelected = "#user-" + idAux;
