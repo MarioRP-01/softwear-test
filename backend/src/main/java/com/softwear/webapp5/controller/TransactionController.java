@@ -1,7 +1,6 @@
 package com.softwear.webapp5.controller;
 
 import com.softwear.webapp5.data.TransactionView;
-import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.model.Transaction;
 import com.softwear.webapp5.service.CouponService;

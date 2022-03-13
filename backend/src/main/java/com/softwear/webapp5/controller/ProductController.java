@@ -1,6 +1,5 @@
 package com.softwear.webapp5.controller;
 
-import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.service.TransactionService;
 import com.softwear.webapp5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

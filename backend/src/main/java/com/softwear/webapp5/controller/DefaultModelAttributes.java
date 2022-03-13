@@ -1,13 +1,10 @@
 package com.softwear.webapp5.controller;
 
-import com.softwear.webapp5.data.TransactionView;
 import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.model.Transaction;
 import com.softwear.webapp5.service.TransactionService;
 import com.softwear.webapp5.service.UserService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
