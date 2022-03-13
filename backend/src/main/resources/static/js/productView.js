@@ -1,5 +1,6 @@
 let inWishlist;
 let size;
+let token = "";
 
 function hideActionLabels() {
 	$(".msg-label").each(function () {
@@ -87,7 +88,8 @@ function addToCart(id, quantity) {
 		data:{
 			action: "add",
 			productId: id,
-			quantity: quantity
+			quantity: quantity,
+			_csrf: token
 		},
 		dataType: "json"
 	}).done(function (cart) {
@@ -112,7 +114,8 @@ function addToWishlist(productId) {
 		type: "post",
 		data: {
 			action: "add",
-			productId: productId
+			productId: productId,
+			_csrf: token
 		},
 		dataType: "json"
 	}).done(function (wishlist) {
@@ -132,7 +135,8 @@ function removeFromWishlist(productName) {
 		type: "post",
 		data: {
 			action: "delete",
-			productName: productName
+			productName: productName,
+			_csrf: token
 		},
 		dataType: "json"
 	}).done(function (wishlist) {
@@ -163,6 +167,8 @@ function changeSize(new_size) {
 }
 
 $(document).ready(function () {
+
+	token = $("#csrf-token").attr("content");
 
 	loadProduct(function (products) {
 		//When items are loaded from server
