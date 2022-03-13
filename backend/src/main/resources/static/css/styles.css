@@ -11805,3 +11805,13 @@ color:#69707a;
   background-position: center;
   background-size: cover;
 }
+
+#addImgIcon{
+  transition: font-size .2s;
+  margin: 5px;
+}
+
+#addImgIcon:hover{
+  color: #000;
+  font-size: 20px;
+}

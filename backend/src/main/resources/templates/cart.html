@@ -94,13 +94,11 @@
                 </tr>
                 </tfoot>
             </table>
-            <form action="/cart/pay" method="post">
             <div style="display: flex; justify-content: center; align-items: center; gap: 2rem;">
-                <button class="btn btn-outline-dark checkout-btn fa-brands fa-paypal" type="submit"></button>
-                <button class="btn btn-outline-dark checkout-btn fa-brands fa-cc-amazon-pay" type="submit"></button>
-                <button class="btn btn-outline-dark checkout-btn fa-solid fa-credit-card" type="submit"></button>
+                <a class="btn btn-outline-dark checkout-btn fa-brands fa-paypal" href="/cart/pay"></a>
+                <a class="btn btn-outline-dark checkout-btn fa-brands fa-cc-amazon-pay" href="/cart/pay"></a>
+                <a class="btn btn-outline-dark checkout-btn fa-solid fa-credit-card" href="/cart/pay"></a>
             </div>
-            </form>
         </div>
     </div>
     <script src="js/cart.js"></script>

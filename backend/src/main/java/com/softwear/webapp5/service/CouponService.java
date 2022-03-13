@@ -217,7 +217,7 @@ public class CouponService {
 
 	public boolean applyCoupon(Transaction transaction) {
 		Coupon coupon = transaction.getUsedCoupon();
-		if(coupon == null || checkCoupon(transaction.getUser(), coupon)) {
+		if(coupon == null || !checkCoupon(transaction.getUser(), coupon)) {
 			return false;
 		}
 		if(transaction.getTotalPrice() != transaction.calculateTotalProductPrice()) {

@@ -1,3 +1,5 @@
+let token = "";
+
 function updateWishlistLabels() {
     $(".product").each(function () {
         let id = Number($(
@@ -71,13 +73,13 @@ function wishlist(productId, productName) {
         type: "get",
         dataType: "json"
     }).done(function (product) {
-            if(product.id != null && product.id !== 0) {
-                removeFromWishlist(productId, productName);
-            } else {
-                addToWishlist(productId, productName);
-            }
-            updateWishlistLabel(productId);
-        });
+        if(product.id != null && product.id !== 0) {
+            removeFromWishlist(productId, productName);
+        } else {
+            addToWishlist(productId, productName);
+        }
+        updateWishlistLabel(productId);
+    });
 }
 
 function addToWishlist(productId, productName) {
@@ -86,7 +88,8 @@ function addToWishlist(productId, productName) {
         type: "post",
         data: {
             action: "add",
-            productId: productId
+            productId: productId,
+            _csrf: token
         },
         dataType: "json"
     }).done(function (wishlist) {
@@ -102,7 +105,8 @@ function removeFromWishlist(productId, productName) {
         type: "post",
         data: {
             action: "delete",
-            productName: productName
+            productName: productName,
+            _csrf: token
         },
         dataType: "json"
     }).done(function (wishlist) {
@@ -114,5 +118,6 @@ function removeFromWishlist(productId, productName) {
 }
 
 $(document).ready(function () {
+    token = $("#csrf-token").attr("content");
     updateWishlistLabels();
 });

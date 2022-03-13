@@ -1,5 +1,6 @@
 package com.softwear.webapp5.service;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
@@ -44,27 +45,25 @@ public class DatabaseInitializer {
 	@PostConstruct
 	public void init() {
 
-
-
 		// Users
 		ShopUser user = new ShopUser("user", "user@user.com", "User", "Softwear", passwordEncoder.encode("pass"), "User Street 1", 654987321, "01/01/2000", "USER");
 		userRepository.save(new ShopUser("admin", "admin@admin.com", "Administrator", "Softwear", passwordEncoder.encode("pass"), "Admin Street 1", 654321987, "01/01/2000", "ADMIN"));
 		userRepository.save(user);
 
-		ArrayList<String> lista1 = new ArrayList<>();
-		ArrayList<String> lista2 = new ArrayList<>();
-		ArrayList<String> lista3 = new ArrayList<>();
+		ArrayList<File> lista1 = new ArrayList<>();
+		ArrayList<File> lista2 = new ArrayList<>();
+		ArrayList<File> lista3 = new ArrayList<>();
 
-		lista1.add("item1.webp");
-		lista1.add("item2.webp");
-		lista1.add("item3.webp");
+		lista1.add(new File("item1.webp"));
+		lista1.add(new File("item2.webp"));
+		lista1.add(new File("item3.webp"));
 
-		lista2.add("item4.webp");
-		lista2.add("item5.webp");
-		lista2.add("item6.webp");
+		lista2.add(new File("item4.webp"));
+		lista2.add(new File("item5.webp"));
+		lista2.add(new File("item6.webp"));
 
-		lista3.add("item7.webp");
-		lista3.add("item8.webp");
+		lista3.add(new File("item7.webp"));
+		lista3.add(new File("item8.webp"));
 
 		Product camisa = new Product("camisa", "es cómoda", 10, (long) 156, ProductSize.XL, lista1);
 

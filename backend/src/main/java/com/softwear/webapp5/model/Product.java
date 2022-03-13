@@ -1,5 +1,8 @@
 package com.softwear.webapp5.model;
 
+import java.io.File;
+import java.io.File;
+import java.sql.Blob;
 import java.util.ArrayList;
 
 import javax.persistence.Column;
@@ -7,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 import com.softwear.webapp5.data.ProductSize;
 
@@ -31,16 +35,16 @@ public class Product{
 	@Column(nullable = false)
 	private ProductSize size;
 
-    private ArrayList<String> img_routes = new ArrayList<>();
+    private ArrayList<File> imgs = new ArrayList<>();
     
 	public Product(String name, String description, double price, Long stock, ProductSize size, 
-			ArrayList<String> img_routes) {
+			ArrayList<File> imgs) {
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.stock = stock;
 		this.size = size;
-		this.img_routes = img_routes;
+		this.imgs = imgs;
 	}
 
 	public Product() {}
@@ -85,12 +89,12 @@ public class Product{
 		this.stock = stock;
 	}
 
-	public ArrayList<String> getImg_routes() {
-		return img_routes;
+	public ArrayList<File> getImgs() {
+		return imgs;
 	}
 
-	public void setImg_routes(ArrayList<String> img_routes) {
-		this.img_routes = img_routes;
+	public void setImgs(ArrayList<File> img_routes) {
+		this.imgs = imgs;
 	}
 
 	public ProductSize getSize() {
@@ -99,5 +103,9 @@ public class Product{
 
 	public void setSize(ProductSize size) {
 		this.size = size;
+	}
+
+	public Blob getImageFile(int imageIndex) {
+		return (Blob) imgs.get(imageIndex);
 	}
 }
