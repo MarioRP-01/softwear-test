@@ -31,40 +31,60 @@ We provide a catalog that can be filtered through different categories, allowing
 - Login / register: where a user can create an account or log into it with a mail adress, a nickname and a password. Allows to navigate to Home, About and Cart.
 
 \
-![login](readmeAssets/cart.jpg)
+![cart](readmeAssets/cart.jpg)
 - Cart: list with products the user wants to buy. To end the transaction the user must be logged in. Allows to navigate to Home, About and Login.
 
 \
-![login](readmeAssets/wishlist.jpg)
+![wishlist](readmeAssets/wishlist.jpg)
 - Wish list: list with products the user likes and can add to cart. They can be added from this list. Allows to navigate to Home, About, Cart and Login.
 
 \
-![login](readmeAssets/productView.jpg)
+![productView](readmeAssets/productView.jpg)
 - Product view: where a single product is displayed and specific details are shown. Allows to navigate to Home, About, Shop and Login.
 
 \
-![login](readmeAssets/adminHome.jpg)
+![adminHome](readmeAssets/adminHome.jpg)
 - Admin home: where admins can choose what to do (manage categories, manage users, manage products) and a sales graph is displayed. Allows to navigate to Home, Manage Products and Manage Users.
 
 \
-![login](readmeAssets/manageUsers.jpg)
+![manageUsers](readmeAssets/manageUsers.jpg)
 - Manage users: where an admin can ban a user, make a user admin or revoke admin privilege from a user. Allows to navigate to  Home, Admin Home and Manage Products.
 
 \
-![login](readmeAssets/manageProducts.jpg)
+![manageProducts](readmeAssets/manageProducts.jpg)
 - Manage products: where an admin can create and delete products. Allows to navigate to Home, Admin Home and Manage Users.
 
 \
-![login](readmeAssets/about.jpg)
+![about](readmeAssets/about.jpg)
 - About: some information about us: the brand, our values and the webpage. Allows to navigate to Home, Cart and Login.
 
 \
-![login](readmeAssets/purchaseHistory.jpg)
+![purchaseHistory](readmeAssets/purchaseHistory.jpg)
 - Purchase history: different purchases with the products information. Allows to navigate to Home, About, Cart and Login.
 
 \
-![login](readmeAssets/userProfile.jpg)
+![userProfile](readmeAssets/userProfile.jpg)
 - User profile: account details of each user. Allows to navigate to Home, About and Cart.
+
+\
+![error](readmeAssets/error.jpg)
+- Error: shown when there is an error with loading page. Allows to navigate to Home, About, Cart and Login.
+
+\
+![errorPayment](readmeAssets/errorPayment.jpg)
+- Error Payment: shown when there is some error with the product payment. Allows to navigate to Home, About, Cart and Login.
+
+\
+![outOfStock](readmeAssets/outOfStock.jpg)
+- Out of stock: reports there is no stock of a product that the user is trying to buy. Allows to navigate to Home, About, Cart and Login.
+
+\
+![successfulPayment](readmeAssets/successfulPayment.jpg)
+- Successful Payment: landing message when the purchase is correctly done. Allows to navigate to Home, About, Cart and Login.
+
+
+
+
 
 ## Entities
 
