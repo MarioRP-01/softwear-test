@@ -12,7 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
-import com.softwear.webapp5.data.Size;
+import com.softwear.webapp5.data.ProductSize;
 
 @Entity
 public class Product{
@@ -33,12 +33,12 @@ public class Product{
 	private Long stock;
 	
 	@Column(nullable = false)
-	private Size size;
+	private ProductSize size;
 
-	@Lob
     private ArrayList<File> imgs = new ArrayList<>();
     
-	public Product(String name, String description, double price, Long stock, Size size, ArrayList<File> imgs) {
+	public Product(String name, String description, double price, Long stock, ProductSize size, 
+			ArrayList<File> imgs) {
 		this.name = name;
 		this.description = description;
 		this.price = price;
@@ -97,11 +97,11 @@ public class Product{
 		this.imgs = imgs;
 	}
 
-	public Size getSize() {
+	public ProductSize getSize() {
 		return size;
 	}
 
-	public void setSize(Size size) {
+	public void setSize(ProductSize size) {
 		this.size = size;
 	}
 

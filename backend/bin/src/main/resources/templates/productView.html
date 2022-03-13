@@ -1,0 +1,34 @@
+{{>header}}	
+	<div id="product-content-wrapper">				
+        <div class="product-column">
+            <img id=product-featured src="../assets/productos/item1.webp">
+
+            <div id="product-slide-wrapper" >
+                <img id="product-slideLeft" class="product-arrow" src="../assets/arrow-left.png">
+                <div id="product-slider">
+                    
+                    <img class="product-thumbnail product-active" src="../assets/productos/{{product.img_routes.0}}">
+                     
+                    {{#product.img_routes}}
+                        <img class="product-thumbnail" src="../assets/productos/{{this}}">
+                    {{/product.img_routes}}
+                </div>			
+                <img id="product-slideRight" class="product-arrow" src="../assets/arrow-right.png">
+            </div>
+        </div>
+
+        <div class="product-column">
+            <h1 class="softFont">${{product.name}}</h1>
+            <hr>
+            <h3>${{product.price}}</h3>
+            <div class="pick-size">
+                <a class="btn btn-outline-dark">XS</a>
+                <a class="btn btn-outline-dark">S</a>
+                <a class="btn btn-outline-dark">M</a>
+                <a class="btn btn-outline-dark">L</a>
+                <a class="btn btn-outline-dark">XL</a>
+            </div>
+            <p class="product-description">{{product.description}}</p>
+	    </div>
+    </div>
+{{>footer}}

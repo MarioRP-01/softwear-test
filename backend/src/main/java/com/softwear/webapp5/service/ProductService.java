@@ -1,6 +1,7 @@
 package com.softwear.webapp5.service;
 
-import com.softwear.webapp5.data.Size;
+import com.softwear.webapp5.data.ProductAvailabilityBySize;
+import com.softwear.webapp5.data.ProductSize;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.repository.ProductRepository;
 
@@ -11,9 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -46,6 +45,17 @@ public class ProductService {
 		return productRepository.findByStock(stock, pageable);
 	}
 
+<<<<<<< HEAD
+=======
+	public Page<Product> findBySize(ProductSize size, Pageable pageable){
+		return productRepository.findBySize(size, pageable);
+	}
+
+	public String getFirstImg_rout(Product product){
+		return product.getImg_routes().get(0);
+	}
+
+>>>>>>> origin/CSRF
     public void save(Product product){
         productRepository.save(product);
     }
@@ -67,20 +77,31 @@ public class ProductService {
 		return copiedArrayList;
 	}
 
-	public Map<Size, Boolean> getAvailableSizes(Product product){
+	public List<ProductAvailabilityBySize> getAvailableSizesStatus(Product product){
 		String name = product.getName();
-		List<Size> AvailableSizes = productRepository.FindSizeAvailableByName(name);
-		Map<Size, Boolean> AvailableSizesStatus = new HashMap<>();
+		List<ProductSize> availableSizes = productRepository.FindSizeAvailableByName(name);
+		List<ProductAvailabilityBySize> availableSizesStatus = new ArrayList<>();
 
-		for (Size size : Size.values()){
-			if (AvailableSizes.contains(size))
-				AvailableSizesStatus.put(size, true);
-			else 
-				AvailableSizesStatus.put(size, false);
+		boolean isAvailableSize;
+		for (ProductSize size : ProductSize.values()){
+			isAvailableSize = availableSizes.contains(size);
+			ProductAvailabilityBySize productAvailabilityBySize; 
+			productAvailabilityBySize = new ProductAvailabilityBySize(isAvailableSize, size);
+
+			availableSizesStatus.add(productAvailabilityBySize);
 		}
-		return AvailableSizesStatus;
+
+		return availableSizesStatus;
 	}
 
+	public void addStock(Product product, int quantity) {
+		if(quantity > 0){
+			product.setStock(product.getStock() + quantity);
+			save(product);
+		}
+	}
+
+<<<<<<< HEAD
 	public void updateInfo(Product oldProduct, Product u) {
 		oldProduct.setName(u.getName());
 		oldProduct.setDescription(u.getDescription());
@@ -90,6 +111,21 @@ public class ProductService {
 		oldProduct.setImgs(u.getImgs());
 
 		save(oldProduct);
+=======
+	public boolean checkStock(Product product, int quantity) {
+		return quantity <= product.getStock();
+	}
+
+	public void deleteStock(Product product, int quantity) {
+		if(checkStock(product, quantity)) {
+			product.setStock(product.getStock() - quantity);
+			save(product);
+		}
+	}
+
+	public Optional<Product> findByNameAndSize(String name, ProductSize size) {
+		return productRepository.findByNameAndSize(name, size);
+>>>>>>> origin/CSRF
 	}
 
 }

@@ -25,6 +25,7 @@
                                 <button class="btn btn-outline-dark btn-login text-uppercase fw-bold" type="submit">Sign
                                   in</button>
                               </div>
+                              <input type="hidden" name="_csrf" value="{{token}}"/>
                             </form>
                           </div>
                         </div>
@@ -41,25 +42,24 @@
                           <div class="row">
                             <form id="form-register" action="/login/register" method="post">
                               <div class="form-floating mb-3">
-                                  <input type="text" class="form-control" id="floatingName" placeholder="Name" name="name" required>
-                                  <label for="floatingPassword">Name</label>
+                                  <input type="text" class="form-control" id="floatingUsernameReg" placeholder="Username" name="Username" required>
+                                  <label for="floatingUsernameReg">Username</label>
                               </div>
                               <div class="form-floating mb-3">
                                 <input type="email" class="form-control" id="floatingEmailReg" placeholder="name@example.com" name="email" required>
-                                <label for="floatingEmail">Email address</label>
+                                <label for="floatingEmailReg">Email address</label>
                               </div>
                               <div class="form-floating mb-3">
                                 <input type="password" class="form-control" id="floatingPasswordReg" placeholder="Password" name="password" required>
-                                <label for="floatingPassword">Password</label>
+                                <label for="floatingPasswordReg">Password</label>
                               </div>
                               <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingPasswordRepeatReg" placeholder="Password" name="confPassword" required>
-                                <label for="floatingPasswordRepeat">Repeat Password</label>
+                                <input type="password" class="form-control" id="floatingPasswordRepeatReg" placeholder="Confirmation Password" name="confPassword" required>
+                                <label for="floatingPasswordRepeatReg">Repeat Password</label>
                               </div>
-                
+                              <input type="hidden" name="_csrf" value="{{token}}">
                               <div class="d-grid">
-                                <button class="btn btn-outline-dark btn-login text-uppercase fw-bold" type="submit">Sign
-                                  up</button>
+                                <button class="btn btn-outline-dark btn-login text-uppercase fw-bold" type="submit">Sign up</button>
                               </div>
                             </form>
                           </div>
