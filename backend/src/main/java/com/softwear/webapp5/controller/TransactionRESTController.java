@@ -2,13 +2,17 @@ package com.softwear.webapp5.controller;
 
 import com.softwear.webapp5.data.TransactionView;
 import com.softwear.webapp5.model.Coupon;
+import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.model.Transaction;
 import com.softwear.webapp5.service.CouponService;
+import com.softwear.webapp5.service.ProductService;
 import com.softwear.webapp5.service.TransactionService;
 import com.softwear.webapp5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +27,8 @@ public class TransactionRESTController {
 
     @Autowired
     private CouponService couponService;
+    @Autowired
+    private ProductService productService;
     @Autowired
     private TransactionService transactionService;
     @Autowired
@@ -69,14 +75,33 @@ public class TransactionRESTController {
         return new TransactionView();
     }
 
+    @GetMapping("/wishlist/{productId}")
+    public Product productInWishlist(Model model, @PathVariable Long productId) {
+        ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
+        Optional<Product> optProd = productService.findById(productId);
+        if(optProd.isPresent()) {
+            optProd = transactionService.findProductInWishlist(user, optProd.get().getName());
+            if(optProd.isPresent()) {
+                return optProd.get();
+            }
+        }
+        return new Product();
+    }
+
     @PostMapping("/wishlist")
-    public TransactionView postWishlist(Model model, @RequestParam String action, @RequestParam(required = false) Long productId) {
+    public TransactionView postWishlist(Model model, @RequestParam String action, @RequestParam(required = false) Long productId, @RequestParam(required = false) String productName) {
         ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
         boolean result = false;
         if(action.equals("add")) {
             result = productId != null && transactionService.addToWishlist(productId, user);
         } else if(action.equals("delete")) {
-            result = productId != null && transactionService.removeFromWishlist(productId, user);
+            if (productId != null) {
+                result = transactionService.removeFromWishlist(productId, user);
+            } else if(productName != null) {
+                result = transactionService.removeFromWishlist(productName, user);
+            } else {
+                result = false;
+            }
         } else if(action.equals("empty")) {
             transactionService.emptyWishlist(user);
             result = transactionService.findWishlist(user).isEmpty();

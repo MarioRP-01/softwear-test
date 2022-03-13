@@ -1,5 +1,8 @@
 package com.softwear.webapp5.controller;
 
+import com.softwear.webapp5.model.ShopUser;
+import com.softwear.webapp5.service.TransactionService;
+import com.softwear.webapp5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +21,12 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private TransactionService transactionService;
+
+    @Autowired
+    private UserService userService;
     
     @GetMapping("/productView/{id}")
     public String getProduct(@PathVariable long id, Model model) {
@@ -30,8 +39,14 @@ public class ProductController {
 		model.addAttribute("availableSizesStatus", availableSizesStatus);		
 
         model.addAttribute("product", product);
+        model.addAttribute("inStock", product.getStock() > 0);
+        model.addAttribute("lowStock", product.getStock() <= 30);
 		model.addAttribute("firstImg_route", firstImg_route);
 		model.addAttribute("nonFirstImg_routes", nonFirstImg_routes);
+
+        if((boolean) model.getAttribute("logged")) {
+            model.addAttribute("inWishlist", transactionService.findProductInWishlist(userService.findByUsername((String) model.getAttribute("username")).get(), product.getName()).isPresent());
+        }
 
         return "productView";
     }
