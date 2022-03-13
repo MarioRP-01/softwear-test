@@ -104,6 +104,15 @@ public class TransactionController {
         return "wishlist";
     }
 
+
+    //ERRORPAYMENT
+    @GetMapping("/errorPayment")
+    public String getErrorPayment() {
+
+        return "errorPayment";
+    }
+
+
     /*@PostMapping("/wishlist/add")
     public String wishlistAdd(@RequestParam Long id, Model model) {
         if (transactionService.addToWishlist(id, userService.findByUsername((String) model.getAttribute("username")).get())) {
