@@ -2,11 +2,15 @@ package com.softwear.webapp5.controller;
 
 import java.util.List;
 
+import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.service.MailService;
+import com.softwear.webapp5.service.ProductService;
 import com.softwear.webapp5.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,23 +24,27 @@ public class AdminController {
     @Autowired
     UserService userService;
     @Autowired
+    ProductService productService;
+    @Autowired
     PasswordEncoder passwordEncoder;
 
 	@GetMapping("/mailTry")
 	public String mailTest(Model model) {
-		MailService ms = new MailService("softwearDAW@gmail.com", "9SEc6FMyIvPB");
+		MailService ms = new MailService();
 		try {
 			ms.send("p.pinillos.2019@alumnos.urjc.es", "Trying..", "Does this work?");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    return "error";
+	    return "index";
 	}
 
     @GetMapping("/manageProducts")
-    public String products(){
-        return "manageProducts";
+    public String products(Model model){
+        Page<Product> products = productService.findAll(PageRequest.of(0, 10));
+        model.addAttribute("products", products);
+        return "manageProducts"; 
     }
 
     

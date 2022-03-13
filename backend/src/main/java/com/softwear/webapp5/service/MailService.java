@@ -1,54 +1,45 @@
 package com.softwear.webapp5.service;
 
 import java.util.Properties;
-import javax.mail.Message;
-import javax.mail.Multipart;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.stereotype.Service;
+
+@Service
 public class MailService {
 
-    Properties prop;
-    Session session;
+    private JavaMailSender emailSender;
 
-    public MailService(String mailUsername, String mailPassword){
-        this.prop = new Properties();
-        this.prop.put("mail.smtp.auth", true);
-        this.prop.put("mail.smtp.starttls.enable", "true");
-        this.prop.put("mail.smtp.host", "smtp.mailtrap.io");
-        this.prop.put("mail.smtp.port", "25");
-        this.prop.put("mail.smtp.ssl.trust", "smtp.mailtrap.io");
-        this.session = Session.getInstance(this.prop, new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                //softwearDAW@gmail.com 9SEc6FMyIvPB
-                return new PasswordAuthentication(mailUsername, mailPassword);
-            }
-        });
+    public JavaMailSender getJavaMailSender() {
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost("smtp.gmail.com");
+        mailSender.setPort(587);
+        
+        mailSender.setUsername("softwearDAW@gmail.com");
+        mailSender.setPassword("9SEc6FMyIvPB");
+        
+        Properties props = mailSender.getJavaMailProperties();
+        props.put("mail.transport.protocol", "smtp");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.debug", "true");
+        
+        return mailSender;
     }
 
-    public void send(String receiverMail, String subject, String msg) throws Exception{
-   
-        Message message = new MimeMessage(this.session);
-        message.setFrom(new InternetAddress("softwearDAW@gmail.com"));
-        message.setRecipients(
-        Message.RecipientType.TO, InternetAddress.parse(receiverMail));
-        message.setSubject(subject);
-
-        MimeBodyPart mimeBodyPart = new MimeBodyPart();
-        mimeBodyPart.setContent(msg, "text/html; charset=utf-8");
-
-        Multipart multipart = new MimeMultipart();
-        multipart.addBodyPart(mimeBodyPart);
-
-        message.setContent(multipart);
-
-        Transport.send(message);
+    public MailService(){
+        this.emailSender = getJavaMailSender();
     }
 
+    public void send(String receiverMail, String subject, String msg){
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("softwearDAW@gmail.com");
+        message.setTo(receiverMail); 
+        message.setSubject(subject); 
+        message.setText(msg);
+        emailSender.send(message);
+    }
 
 }

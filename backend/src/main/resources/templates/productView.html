@@ -1,15 +1,15 @@
 {{>header}}	
 	<div id="product-content-wrapper">
         <div class="product-column">
-            <img id=product-featured src="../assets/productos/{{product.img_routes.0}}">
+            <img id=product-featured src="../assets/productos/{{product.imgs.0}}">
 
             <div id="product-slide-wrapper" >
                 <img id="product-slideLeft" class="product-arrow" src="../assets/arrow-left.png">
                 <div id="product-slider">
-                    <img class="product-thumbnail product-active" src="../assets/productos/{{firstImg_route}}">
-                    {{#nonFirstImg_routes}}
+                    <img class="product-thumbnail product-active" src="../assets/productos/{{firstImg}}">
+                    {{#nonFirstImgs}}
                         <img class="product-thumbnail" src="../assets/productos/{{this}}">
-                    {{/nonFirstImg_routes}}
+                    {{/nonFirstImgs}}
                 </div>
                 <img id="product-slideRight" class="product-arrow" src="../assets/arrow-right.png">
             </div>

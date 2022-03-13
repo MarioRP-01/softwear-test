@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +58,7 @@ public class TransactionController {
         return "cart";
     }
 
-    @PostMapping("/cart/pay")
+    @GetMapping("/cart/pay")
     public String cartPay(Model model) {
         ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
         Optional<Transaction> optCart = transactionService.findCart(user);
@@ -100,6 +99,15 @@ public class TransactionController {
         model.addAttribute("wishlist", wishlist);
         return "wishlist";
     }
+
+
+    //ERRORPAYMENT
+    @GetMapping("/errorPayment")
+    public String getErrorPayment() {
+
+        return "errorPayment";
+    }
+
 
     /*@PostMapping("/wishlist/add")
     public String wishlistAdd(@RequestParam Long id, Model model) {

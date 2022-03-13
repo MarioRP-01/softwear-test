@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -48,10 +49,6 @@ public class ProductService {
 		return productRepository.findBySize(size, pageable);
 	}
 
-	public String getFirstImg_rout(Product product){
-		return product.getImg_routes().get(0);
-	}
-
     public void save(Product product){
         productRepository.save(product);
     }
@@ -63,8 +60,12 @@ public class ProductService {
 		}
 	}
 
-	public ArrayList<String> getNonFirstImg_routes(Product product){
-		ArrayList<String> copiedArrayList = (ArrayList<String>) product.getImg_routes().clone();
+	public File getFirstImg(Product product){
+		return product.getImgs().get(0);
+	}
+
+	public ArrayList<File> getNonFirstImgs(Product product){
+		ArrayList<File> copiedArrayList = (ArrayList<File>) product.getImgs().clone();
 		copiedArrayList.remove(0);
 		return copiedArrayList;
 	}
@@ -91,6 +92,16 @@ public class ProductService {
 			product.setStock(product.getStock() + quantity);
 			save(product);
 		}
+	}
+
+	public void updateInfo(Product oldProduct, Product u) {
+		oldProduct.setName(u.getName());
+		oldProduct.setDescription(u.getDescription());
+		oldProduct.setPrice(u.getPrice());
+		oldProduct.setStock(u.getStock());
+		oldProduct.setSize(u.getSize());
+		oldProduct.setImgs(u.getImgs());
+		save(oldProduct);
 	}
 
 	public boolean checkStock(Product product, int quantity) {

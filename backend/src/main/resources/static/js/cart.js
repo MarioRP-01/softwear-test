@@ -1,3 +1,5 @@
+let token = "";
+
 $("document").ready(function () {
     if($(".cart-coupon-row").length) {
         $("#apply-coupon").hide();
@@ -6,6 +8,7 @@ $("document").ready(function () {
     } else {
         hideCouponLabels();
     }
+    token = $("#csrf-token").attr("content");
 })
 
 function createCouponRow(cart) {
@@ -93,7 +96,8 @@ function addProduct(id, quantity) {
         data: {
             action: "add",
             productId: id,
-            quantity: quantity
+            quantity: quantity,
+            _csrf: token
         },
         dataType: "json"
     }).done(function (cart) {
@@ -121,7 +125,8 @@ function deleteProduct(id, quantity) {
         data: {
             action: "delete",
             productId: id,
-            quantity: quantity
+            quantity: quantity,
+            _csrf: token
         },
         dataType: "json"
     }).done(function (cart) {
@@ -140,7 +145,8 @@ function deleteAllOfProduct(id) {
         type: "POST",
         data: {
             action: "deleteAll",
-            productId: id
+            productId: id,
+            _csrf: token
         },
         dataType: "json"
     }).done(function (cart) {
@@ -160,7 +166,8 @@ function applyCoupon() {
         type: "POST",
         data: {
             action: "applyCoupon",
-            couponCode: code
+            couponCode: code,
+            _csrf: token
         },
         dataType: "json"
     }).done(function (cart) {
@@ -181,7 +188,8 @@ function removeCoupon() {
         url: "/cart",
         type: "POST",
         data: {
-            action: "removeCoupon"
+            action: "removeCoupon",
+            _csrf: token
         },
         dataType: "json"
     }).done(function (cart) {
@@ -199,6 +207,7 @@ function emptyCart() {
         type: "POST",
         data: {
             action: "empty",
+            _csrf: token
         },
         dataType: "json"
     }).done(function(cart) {

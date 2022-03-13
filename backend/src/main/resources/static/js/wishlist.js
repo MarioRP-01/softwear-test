@@ -1,3 +1,5 @@
+let token = ""
+
 function updateWishlist(wishlist, id) {
     if(wishlist != null) {
         let i = 0;
@@ -32,7 +34,8 @@ function buy(id) {
             data: {
                 action: "add",
                 productId: id,
-                quantity: 1
+                quantity: 1,
+                _csrf: token
             },
             dataType: "json"
     }).done(function (cart) {
@@ -48,7 +51,8 @@ function deleteFromWishlist(id) {
         type: "POST",
         data: {
             action: "delete",
-            productId: id
+            productId: id,
+            _csrf: token
         },
         dataType: "json"
     }).done(function (wishlist) {
@@ -63,7 +67,8 @@ function empty() {
         url: "/wishlist",
         type: "POST",
         data: {
-            action: "empty"
+            action: "empty",
+            _csrf: token
         },
         dataType: "json"
     }).done(function (wishlist) {ç
@@ -72,3 +77,7 @@ function empty() {
         });
     });
 }
+
+$(document).ready(function () {
+    token = $("#csrf-token").attr("content");
+});
