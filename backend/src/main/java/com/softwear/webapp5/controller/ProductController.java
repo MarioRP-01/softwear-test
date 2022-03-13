@@ -32,8 +32,8 @@ public class ProductController {
     @GetMapping("/productView/{id}")
     public String getProduct(@PathVariable long id, Model model) {
         Product product = productService.findById(id).orElseThrow();
-		File firstImg_route = productService.getFirstImg(product);
-		ArrayList<File> nonFirstImg_routes = productService.getNonFirstImgs(product);
+		File firstImg = productService.getFirstImg(product);
+		ArrayList<File> nonFirstImgs = productService.getNonFirstImgs(product);
 		
 		List<ProductAvailabilityBySize> availableSizesStatus; 
 		availableSizesStatus = productService.getAvailableSizesStatus(product);
@@ -43,8 +43,8 @@ public class ProductController {
         model.addAttribute("product", product);
         model.addAttribute("inStock", product.getStock() > 0);
         model.addAttribute("lowStock", product.getStock() <= 30);
-		model.addAttribute("firstImg_route", firstImg_route);
-		model.addAttribute("nonFirstImg_routes", nonFirstImg_routes);
+		model.addAttribute("firstImg", firstImg);
+		model.addAttribute("nonFirstImgs", nonFirstImgs);
 
         if((boolean) model.getAttribute("logged")) {
             model.addAttribute("inWishlist", transactionService.findProductInWishlist(userService.findByUsername((String) model.getAttribute("username")).get(), product.getName()).isPresent());

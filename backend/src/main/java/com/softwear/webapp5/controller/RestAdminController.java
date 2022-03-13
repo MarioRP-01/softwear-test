@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.softwear.webapp5.data.Size;
+import com.softwear.webapp5.data.ProductSize;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.service.MailService;
@@ -87,13 +87,13 @@ public class RestAdminController {
             Optional<Product> oOldProduct = productService.findById(id);
             if(oOldProduct.isPresent()){
                 Product oldProduct = oOldProduct.get();
-                Product newProduct = new Product(name, description, Double.valueOf(price), Long.valueOf(stock), Size.valueOf(size), imgs);
+                Product newProduct = new Product(name, description, Double.valueOf(price), Long.valueOf(stock), ProductSize.valueOf(size), imgs);
                 productService.updateInfo(oldProduct, newProduct);
                 log.info(String.valueOf(oldProduct.getId()));
                 return oldProduct;
             }
         }else if(mode.equals("ADD")){
-            Product newProduct = new Product(name, description, Double.valueOf(price), Long.valueOf(stock), Size.valueOf(size), imgs);
+            Product newProduct = new Product(name, description, Double.valueOf(price), Long.valueOf(stock), ProductSize.valueOf(size), imgs);
             productService.save(newProduct);
             return newProduct;
         }else if(mode.equals("DELETE")){

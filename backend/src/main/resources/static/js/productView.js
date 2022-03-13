@@ -27,7 +27,7 @@ function loadProduct(callback) {
 function showProduct(product) {
 
 	$("#product-featured")[0].src= product.img_routes[0];
-	$("img.product-thumbnail")[0].src= product.img_routes[0]; //FOR RECORRER LAS RUTAS
+	$("img.product-thumbnail")[0].src= product.img_routes[0];
 	$("h1.softFont")[0].innerHTML = product.name;
 	$("h3")[0].innerHTML = "$"+ product.price;
 	$("p.product-description")[0].innerHTML = product.description;
