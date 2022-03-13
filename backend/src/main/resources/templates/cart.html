@@ -18,10 +18,7 @@
                     <td class="cart-text product-index">#{{-index}}</td>
                     {{#product}}
                     <td>
-                        <form action="/productView" method="post">
-                            <input type="hidden" name="id" value="{{id}}"/>
-                            <button class="btn border-0" type="button">{{name}}</button>
-                        </form>
+                        <a href="/productView/{{id}}" class="btn border-0">{{name}} ({{size}})</a>
                     </td>
                     <td class="cart-text product-unit-price">${{price}}</td>
                     <td class="text-center" style="width: 60px;">
