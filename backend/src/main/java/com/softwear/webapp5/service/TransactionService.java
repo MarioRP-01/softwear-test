@@ -10,6 +10,8 @@ import com.softwear.webapp5.model.*;
 import com.softwear.webapp5.repository.ProductRepository;
 import com.softwear.webapp5.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -59,6 +61,10 @@ public class TransactionService {
 
     public Optional<Transaction> findWishlist(ShopUser user) {
         return transactionRepository.findWishlist(user);
+    }
+
+    public Optional<Product> findProductInWishlist(ShopUser user, String productName) {
+        return transactionRepository.findProductInWishlist(user, productName);
     }
 
     public List<Transaction> findPurchaseHistory(ShopUser user) {
@@ -186,6 +192,27 @@ public class TransactionService {
             if (optWishlist.isPresent()) {
                 Product product = optionalProduct.get();
                 Transaction wishlist = optWishlist.get();
+                boolean contained = wishlist.getProducts().contains(product);
+                if(contained) {
+                    while (contained) {
+                        wishlist.getProducts().remove(product);
+                        contained = wishlist.getProducts().contains(product);
+                    }
+                    updateAndSave(wishlist);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean removeFromWishlist(String productName, ShopUser user) {
+
+        Page<Product> products = productRepository.findByName(productName, PageRequest.of(0, 10));
+        Optional<Transaction> optWishlist = transactionRepository.findWishlist(user);
+        if (optWishlist.isPresent()) {
+            Transaction wishlist = optWishlist.get();
+            for(Product product: products) {
                 boolean contained = wishlist.getProducts().contains(product);
                 if(contained) {
                     while (contained) {

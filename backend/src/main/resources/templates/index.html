@@ -10,16 +10,17 @@
                 <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     {{#products}}
                     <div class="col mb-5">
-                        <div class="card h-100 product">
+                        <div id="product-{{id}}" class="card h-100 product">
+                            <meta class="product-id" content="{{id}}"/>
                             <!-- Fav badge-->
-                            <div class="badge bg-dark text-white position-absolute favIcon"><i class="fa-solid fa-heart"></i></div>
+                            <div id="product-{{id}}-fav-badge" class="badge bg-dark text-white position-absolute favIcon" onclick="wishlist({{id}}, '{{name}}')"><i class="fa-solid fa-heart"></i></div>
                             <!-- Product image-->
                             <a href="/productView/{{id}}"><img class="card-img-top" src="../assets/productos/{{img_routes.0}}" alt="Product{{id}}" /></a>
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">{{name}}</h5>
+                                    <h5 class="fw-bolder product-name">{{name}}</h5>
                                     <!-- Product price-->
                                     ${{price}}
                                 </div>
@@ -28,7 +29,7 @@
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent product-actions">
                                 <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/productView/{{id}}">View options</a></div>
                                 <!-- if product is in wish list print fav icon -->
-                                <i class="fa-solid fa-heart"></i>
+                                <i id="product-{{id}}-fav-icon" class="fa-solid fa-heart"></i>
                             </div>
                         </div>
                     </div>
@@ -36,5 +37,6 @@
                 </div>
             </div>
         </section>
- 
+
+<script src="js/index.js"></script>
 {{>footer}}
