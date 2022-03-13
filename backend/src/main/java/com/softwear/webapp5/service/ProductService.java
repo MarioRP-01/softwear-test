@@ -86,4 +86,26 @@ public class ProductService {
 		return availableSizesStatus;
 	}
 
+	public void addStock(Product product, int quantity) {
+		if(quantity > 0){
+			product.setStock(product.getStock() + quantity);
+			save(product);
+		}
+	}
+
+	public boolean checkStock(Product product, int quantity) {
+		return quantity <= product.getStock();
+	}
+
+	public void deleteStock(Product product, int quantity) {
+		if(checkStock(product, quantity)) {
+			product.setStock(product.getStock() - quantity);
+			save(product);
+		}
+	}
+
+	public Optional<Product> findByNameAndSize(String name, ProductSize size) {
+		return productRepository.findByNameAndSize(name, size);
+	}
+
 }

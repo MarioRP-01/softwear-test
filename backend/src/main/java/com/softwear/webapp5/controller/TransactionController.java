@@ -71,15 +71,13 @@ public class TransactionController {
                 return "redirect:/cart";
             }
             for(TransactionView.TransactionViewEntry entry: cartView.getTransactionEntries()) {
-                if(entry.getProduct().getStock() < entry.getQuantity()) {
+                if(!productService.checkStock(entry.getProduct(), entry.getQuantity())) {
                     model.addAttribute("product", entry.getProduct());
                     return "outOfStock";
                 }
             }
             for(TransactionView.TransactionViewEntry entry: cartView.getTransactionEntries()) {
-                Product product = entry.getProduct();
-                product.setStock(product.getStock() - entry.getQuantity());
-                productService.save(product);
+                productService.deleteStock(entry.getProduct(), entry.getQuantity());
             }
             cart.setType("PAID");
             cart.setDate(TransactionService.getCurrentDate());

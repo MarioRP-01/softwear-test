@@ -79,6 +79,7 @@ public class DatabaseInitializer {
 		List<Product> affectedProducts = new ArrayList<>();
 		affectedProducts.add(leather_coat);
 		productRepository.save(leather_coat);
+		productRepository.save(new Product("Leather Coat (Softwear)", "Test Product", 10.00, 21L, ProductSize.L, lista1));
 
 		Coupon coupon = new Coupon("ASTONISHOFFER", "total_percentage", "15/02/2022", "26/06/2022", 0f, 0.5f, null);
 		Coupon coupon2x1 = new Coupon("2X1", "2x1", "13/02/2022", "26/06/2022", null, null, affectedProducts);
