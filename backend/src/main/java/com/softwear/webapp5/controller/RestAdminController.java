@@ -1,16 +1,22 @@
 package com.softwear.webapp5.controller;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.softwear.webapp5.data.ShopUserView;
+import com.softwear.webapp5.data.TransactionView;
 import com.softwear.webapp5.model.ShopUser;
+import com.softwear.webapp5.model.Transaction;
 import com.softwear.webapp5.service.MailService;
 import com.softwear.webapp5.service.UserService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -70,5 +76,16 @@ public class RestAdminController {
         }
 
         return null;
+    }
+    
+    @GetMapping("/manageUsers/{pageNumber}")
+    public List<ShopUserView> users(Model model, @PathVariable int pageNumber){
+    	ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
+        Page<ShopUser> usersPage = userService.findAll(PageRequest.of(pageNumber, 10));
+        List<ShopUserView> listUser= new ArrayList<>();
+        for(ShopUser u: usersPage) {
+        	listUser.add(new ShopUserView(u));
+        }
+        return listUser;
     }
 }

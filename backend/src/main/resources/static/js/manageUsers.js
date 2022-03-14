@@ -1,3 +1,40 @@
+let currentPage = 0;
+let maxPages = 0;
+
+
+
+function more() {
+    if(currentPage < maxPages - 1) {
+        $.ajax({
+            url: "/apiadmin/manageUsers/" + (currentPage + 1),
+            type: "get",
+            dataType: "json"
+        }).done(function (users) {
+        	for(let i=0; i<users.length; i++) {
+        		let user= users[i];
+        		$("tbody").append("<tr id=\"user-"+user.id+"\">\r\n"
+        				+ "                            <td scope=\"row\" class=\"user-id\">"+user.id+"</td>\r\n"
+        				+ "                            <td class=\"user-username\">"+user.username+"</td>\r\n"
+        				+ "                            <td class=\"user-email\">"+user.email+"</td>\r\n"
+        				+ "                            <td class=\"user-name\">"+user.name+"</td>\r\n"
+        				+ "                            <td class=\"user-lastName\">"+user.lastName+"</td>\r\n"
+        				+ "                            <td class=\"user-address\">"+user.address+"</td>\r\n"
+        				+ "                            <td class=\"user-phone\">"+user.phoneNumber+"</td>\r\n"
+        				+ "                            <td class=\"user-birthdate\">"+user.birthDate+"</td>\r\n"
+        				+ "                            <td class=\"user-role\">"+user.role+"</td>\r\n"
+        				+ "                            <td><button class=\"btn btn-primary\" type=\"button\" data-bs-toggle=\"modal\" data-bs-target=\"#modalAddEditUserData\"\r\n"
+        				+ "                                data-id=\""+user.id+"\" onclick=\"edit_user_load($(this).data('id'));\">Edit</button></td>\r\n"
+        				+ "                            <td><button data-id=\""+user.id+"\" onclick=\"delete_user($(this).data('id'));\" class=\"btn btn-primary\" type=\"button\">Delete</button></td>\r\n"
+        				+ "                          </tr>")
+        	}
+        	currentPage++;
+            if(currentPage >= maxPages - 1) {
+                $("#more-btn").hide();
+            }
+        });
+    }
+};
+
 function edit_user_load(id){
     $("#mode").val("EDIT");
 
@@ -22,16 +59,16 @@ function edit_user_load(id){
     $("#editRole").val($(editRole)[0].innerHTML);
 
     $("editPassword").attr("required", "false");
-}
+};
 
 function delete_user(id){
     $("#mode").val("DELETE");
 
     $("#editId").val(id);
     $('#formUsers').submit();
-}
+};
 
-$("#button-add-user").click(function(){
+$('#button-add-user').click(function(){
     $("#mode").val("ADD");
     $("editPassword").attr("required", "true");
 
@@ -45,7 +82,7 @@ $("#button-add-user").click(function(){
     $("#editPhone").val('');
     $('#editBirthDate').val('');
     $("#editRole").val('');
-})
+});
 
 
 $('#formUsers').submit(function(e){
@@ -120,4 +157,8 @@ $('#formUsers').submit(function(e){
             console.log('An error occurred.');
         }
     })
-})
+});
+
+$(document).ready(function () {
+    maxPages = Number($("#max-pages").attr("content"));
+});
