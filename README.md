@@ -42,7 +42,7 @@ We provide a catalog that can be filtered through different categories, allowing
 - Product view: where a single product is displayed and specific details are shown. 
 
 \
-![adminHome](readmeAssets/adminHome.jpg)
+![adminHome](readmeAssets/adminHome1.jpg)
 - Admin home: where admins can choose what to do (manage categories, manage users, manage products) and a sales graph is displayed.
 
 \
