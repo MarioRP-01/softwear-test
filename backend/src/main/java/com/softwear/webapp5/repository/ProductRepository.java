@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.softwear.webapp5.data.ProductSize;
+import com.softwear.webapp5.data.StaticsDTO;
 import com.softwear.webapp5.model.Product;
 
 public interface ProductRepository extends JpaRepository <Product, Long> {
@@ -23,4 +24,9 @@ public interface ProductRepository extends JpaRepository <Product, Long> {
 
     @Query(value = "SELECT DISTINCT size FROM Product WHERE name = :name AND stock <> 0", nativeQuery = true)
     public List<ProductSize> FindSizeAvailableByName(@Param("name") String name);
+
+    @Query("SELECT new StatiscsDTO(p.name, earns, sales) "
+            + "FROM Product p "
+            + "JOIN Transaction t")
+    public List<StaticsDTO> GetStatics();
 }
