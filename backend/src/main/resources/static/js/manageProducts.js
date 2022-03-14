@@ -68,8 +68,8 @@ $('#formProducts').submit(function(e){
         images.push($(edit).val());
         imgNum++;
     }
-    console.log(images);
-    alert(images);
+    // console.log(images);
+    // alert(images);
     var idAux = formElements[1].value;
     $.ajax({
         type: "POST",

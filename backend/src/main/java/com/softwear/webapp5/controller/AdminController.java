@@ -4,8 +4,10 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
+import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.ShopUser;
+import com.softwear.webapp5.service.CouponService;
 import com.softwear.webapp5.service.MailService;
 import com.softwear.webapp5.service.ProductService;
 import com.softwear.webapp5.service.UserService;
@@ -37,6 +39,8 @@ public class AdminController {
     @Autowired
     ProductService productService;
     @Autowired
+    CouponService couponService;
+    @Autowired
     PasswordEncoder passwordEncoder;
 
 	@GetMapping("/mailTry")
@@ -58,6 +62,22 @@ public class AdminController {
         return "manageProducts"; 
     }
 
+    @GetMapping("/manageCoupons")
+    public String coupons(Model model){
+        // Page<Coupon> coupons = CouponService.findAll(PageRequest.of(0, 10));
+        List<Coupon> coupons = couponService.findAll();
+        model.addAttribute("coupons", coupons);
+        // model.addAttribute("id", coupons.get(0).getId());
+        // model.addAttribute("code", coupons.get(0).getCode());
+        // model.addAttribute("type", coupons.get(0).getType());
+        // model.addAttribute("startDate", coupons.get(0).getStartDate());
+        // model.addAttribute("minumum", coupons.get(0).getMinimum());
+        // model.addAttribute("discount", coupons.get(0).getDiscount());
+        // model.addAttribute("dateOfExpiry", coupons.get(0).getDateOfExpiry());
+
+
+        return "manageCoupons"; 
+    }
     
     @GetMapping("/manageUsers")
     public String users(Model model){
