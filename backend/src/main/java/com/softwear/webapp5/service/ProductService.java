@@ -118,5 +118,4 @@ public class ProductService {
 	public Optional<Product> findByNameAndSize(String name, ProductSize size) {
 		return productRepository.findByNameAndSize(name, size);
 	}
-
 }

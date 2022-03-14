@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import com.softwear.webapp5.data.StaticsDTO;
 import com.softwear.webapp5.model.*;
 import com.softwear.webapp5.repository.ProductRepository;
 import com.softwear.webapp5.repository.TransactionRepository;
@@ -232,6 +233,10 @@ public class TransactionService {
         if (optWishlist.isPresent()) {
             transactionRepository.delete(optWishlist.get());
         }
+    }
+
+    public List<StaticsDTO> getStatics() {
+        return transactionRepository.GetStatics();
     }
 
 }

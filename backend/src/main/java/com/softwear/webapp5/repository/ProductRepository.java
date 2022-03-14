@@ -24,9 +24,4 @@ public interface ProductRepository extends JpaRepository <Product, Long> {
 
     @Query(value = "SELECT DISTINCT size FROM Product WHERE name = :name AND stock <> 0", nativeQuery = true)
     public List<ProductSize> FindSizeAvailableByName(@Param("name") String name);
-
-    @Query("SELECT new StatiscsDTO(p.name, earns, sales) "
-            + "FROM Product p "
-            + "JOIN Transaction t")
-    public List<StaticsDTO> GetStatics();
 }

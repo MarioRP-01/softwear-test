@@ -2,18 +2,24 @@ package com.softwear.webapp5.controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.softwear.webapp5.data.ProductSize;
+import com.softwear.webapp5.data.StaticsDTO;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.service.ProductService;
+import com.softwear.webapp5.service.TransactionService;
 import com.softwear.webapp5.service.UserService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +35,8 @@ public class RestAdminController {
     ProductService productService;
     @Autowired
     PasswordEncoder passwordEncoder;
-
+    @Autowired
+    TransactionService transactionService;
 
     @PostMapping("/manageUsers")
     public ShopUser users(@RequestParam String mode, @RequestParam(required = false) Long id, @RequestParam(required = false) String username, 
@@ -91,5 +98,11 @@ public class RestAdminController {
             return null;
         }
         return null;
+    }
+
+    @GetMapping("/statics")
+    public List<StaticsDTO> getStatics(HttpServletResponse response) {
+        List<StaticsDTO> statics = transactionService.getStatics();
+        return statics;
     }
 }

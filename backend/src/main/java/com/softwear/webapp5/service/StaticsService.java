@@ -17,5 +17,4 @@ public class StaticsService {
     public Page<Statics> findAll(Pageable pageable){
         return staticsRepository.findAll(pageable);
 	}
-     
 }
