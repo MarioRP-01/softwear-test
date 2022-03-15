@@ -8,8 +8,10 @@ import java.util.Optional;
 
 import com.softwear.webapp5.data.ProductSize;
 import com.softwear.webapp5.data.ProductView;
+import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.ShopUser;
+import com.softwear.webapp5.service.CouponService;
 import com.softwear.webapp5.service.MailService;
 import com.softwear.webapp5.service.ProductService;
 import com.softwear.webapp5.service.UserService;
@@ -40,6 +42,8 @@ public class RestAdminController {
     UserService userService;
     @Autowired
     ProductService productService;
+    @Autowired
+    CouponService couponService;
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -143,5 +147,4 @@ public class RestAdminController {
         }
         return listProduct;
     }
-
 }

@@ -1,3 +1,5 @@
+let token = "";
+
 function edit_user_load(id){
     $("#mode").val("EDIT");
 
@@ -67,7 +69,8 @@ $('#formUsers').submit(function(e){
             address: formElements[7].value,
             mobileNumber: formElements[8].value,
             birthdate: formElements[9].value,
-            role: formElements[10].value
+            role: formElements[10].value,
+            _csrf: token
         },
         success: function(data)
         {
@@ -96,7 +99,7 @@ $('#formUsers').submit(function(e){
                     $(editPhone).html(data.mobileNumber);
                     $(editBirthdate).html(data.birthdate);
                     $(editRole).html(data.role);
-                
+
                 }else{ // We have added
                     let addHTML = '<tr id="user-'+data.id+'"> <td scope="row" class="user-id">'+data.id+'</td> <td class="user-username">'+
                     data.username+'</td>' + '<td class="user-email">'+data.email+'</td> <td class="user-name">'+data.name+'</td>' +
@@ -118,4 +121,8 @@ $('#formUsers').submit(function(e){
             console.log('An error occurred.');
         }
     })
+})
+
+$(document).ready(function () {
+    token = $("#csrf-token").attr("content");
 })

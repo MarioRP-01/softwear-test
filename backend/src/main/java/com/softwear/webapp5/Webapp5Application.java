@@ -14,5 +14,4 @@ public class Webapp5Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Webapp5Application.class, args);
 	}
-
-} 
+}
