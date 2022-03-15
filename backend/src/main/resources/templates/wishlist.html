@@ -2,7 +2,12 @@
 
     <div class="card mb-4 shadow-sm" style="border: 1px solid rgba(114, 114, 114, 0.26); margin: 30px; border-radius: 5px;">
         <div class="card-header">
-            <h2 class="softFont">Wish List</h2>
+            <div class="row">
+                <div class="col-11"><h2 class="softFont">Wish List</h2></div>
+                <div class="col-1">
+                    <button class="btn btn-outline-dark fa-solid fa-trash" onclick="empty()" type="button"></button>
+                </div>
+            </div>
         </div>
         <div class="card-body">
             <table class="table">
