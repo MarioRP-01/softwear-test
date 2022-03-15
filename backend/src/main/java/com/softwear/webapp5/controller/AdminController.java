@@ -1,9 +1,11 @@
 package com.softwear.webapp5.controller;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.softwear.webapp5.data.ProductView;
 import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.ShopUser;
@@ -55,11 +57,20 @@ public class AdminController {
 	    return "index";
 	}
 
-    @GetMapping("/manageProducts")
+	@GetMapping("/manageProducts")
     public String products(Model model){
-        Page<Product> products = productService.findAll(PageRequest.of(0, 10));
+		Page<Product> products = productService.findAll(PageRequest.of(0, 10));
+        List<ProductView> listProduct= new ArrayList<>();
+        for(Product p: products) {
+        	listProduct.add(new ProductView(p));
+        }
         model.addAttribute("products", products);
-        return "manageProducts"; 
+        model.addAttribute("hasPrev", products.hasPrevious());
+        model.addAttribute("hasNext", products.hasNext());
+        model.addAttribute("nextPage", products.getNumber()+1);
+        model.addAttribute("prevPage", products.getNumber()-1);
+        model.addAttribute("maxPages", products.getTotalPages());
+        return "manageProducts";
     }
 
     @GetMapping("/manageCoupons")

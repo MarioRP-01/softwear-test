@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.softwear.webapp5.data.ProductSize;
+import com.softwear.webapp5.data.ProductView;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.service.MailService;
@@ -16,6 +17,8 @@ import com.softwear.webapp5.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -102,4 +105,43 @@ public class RestAdminController {
         }
         return null;
     }
+
+
+    @PostMapping("/manageCoupons")
+    public Coupon coupons(@RequestParam String mode, @RequestParam(required = false) Long id, @RequestParam(required = false) String type, 
+    @RequestParam(required = false) String startDate, @RequestParam(required = false) String dateOfExpiry,
+    @RequestParam(required = false) String minimum, @RequestParam(required = false) String discount,
+    @RequestParam(required = false) String affectedProductsIDs){
+        Logger log = LoggerFactory.getLogger(SampleLogController.class);
+        log.info("llega");
+        if(mode.equals("EDIT")){
+            // Optional<Product> oOldProduct = productService.findById(id);
+            // if(oOldProduct.isPresent()){
+            //     Product oldProduct = oOldProduct.get();
+            //     Product newProduct = new Product(name, description, Double.valueOf(price), Long.valueOf(stock), ProductSize.valueOf(size), imgs);
+            //     productService.updateInfo(oldProduct, newProduct);
+            //     log.info(String.valueOf(oldProduct.getId()));
+            //     return oldProduct;
+            // }
+        }else if(mode.equals("ADD")){
+            // Product newProduct = new Product(name, description, Double.valueOf(price), Long.valueOf(stock), ProductSize.valueOf(size), imgs);
+            // productService.save(newProduct);
+            // return newProduct;
+        }else if(mode.equals("DELETE")){
+            couponService.deleteCoupon(id);
+            return null;
+        }
+        return null;
+    }
+    
+    @GetMapping("/manageProducts/{pageNumber}")
+    public List<ProductView> users(Model model, @PathVariable int pageNumber){
+        Page<Product> productPage = productService.findAll(PageRequest.of(pageNumber, 10));
+        List<ProductView> listProduct= new ArrayList<>();
+        for(Product p: productPage) {
+        	listProduct.add(new ProductView(p));
+        }
+        return listProduct;
+    }
+
 }
