@@ -256,6 +256,7 @@ public class CouponService {
 		oldCoupon.setType(u.getType());
 		oldCoupon.setStartDate(u.getStartDate());
 		oldCoupon.setDateOfExpiry(u.getDateOfExpiry());
+		oldCoupon.setMinimum(u.getMinimum());
 		oldCoupon.setDiscount(u.getDiscount());
 		oldCoupon.setAffectedProducts(u.getAffectedProducts());
 

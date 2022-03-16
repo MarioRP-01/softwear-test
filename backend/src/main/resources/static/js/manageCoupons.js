@@ -77,6 +77,17 @@ $("#button-add-coupon").click(function(){
     $("#editAffectedProducts").val('');
 })
 
+function set_html_column(data, htmlProductTD){
+    return '<tr id="coupon-'+data.id+'"> <td scope="row" class="coupon-id">'+data.id+'</td> <td class="coupon-code">'+
+                    data.code+'</td>' + '<td class="coupon-type">'+data.type+'</td> <td class="coupon-startDate">'+data.startDate+'</td>' +
+                    '<td class="coupon-dateOfExpiry">'+data.dateOfExpiry+'</td> <td class="coupon-minimum">'+data.minimum+'</td>' +
+                    '<td class="coupon-discount">'+data.discount+'</td> <td class="coupon-affectedProducts">'+ htmlProductTD + '</td>' +
+                    '<td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAddEditCouponData" '+
+                    'data-id="'+data.id+'" onclick="edit_coupon_load('+data.id+');"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>' +
+                    '<td><button data-id="'+data.id+'" onclick="delete_coupon('+data.id+');" '+
+                    'class="btn btn-primary" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></button></td> </tr>';
+}
+
 function build_html_affected_products(id, prod){
     htmlProductTD = '<i class="fa fa-plus'+
     ' add-coupons-button d-none" id="add-coupons-button-'+id+'" data-id="'+id+'" aria-hidden="true"></i> '+'<ul>';
@@ -151,14 +162,7 @@ $('#formCoupons').submit(function(e){
                 }else{ // We have added
                     htmlProductTD = build_html_affected_products(data.id, data.affectedProducts);
 
-                    let addHTML = '<tr id="coupon-'+data.id+'"> <td scope="row" class="coupon-id">'+data.id+'</td> <td class="coupon-code">'+
-                    data.code+'</td>' + '<td class="coupon-type">'+data.type+'</td> <td class="coupon-startDate">'+data.startDate+'</td>' +
-                    '<td class="coupon-dateOfExpiry">'+data.dateOfExpiry+'</td> <td class="coupon-minimum">'+data.minimum+'</td>' +
-                    '<td class="coupon-discount">'+data.discount+'</td> <td class="coupon-affectedProducts">'+ htmlProductTD + '</td>' +
-                    '<td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAddEditCouponData" '+
-                    'data-id="'+data.id+'" onclick="edit_coupon_load('+data.id+');"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>' +
-                    '<td><button data-id="'+data.id+'" onclick="delete_coupon('+data.id+');" '+
-                    'class="btn btn-primary" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></button></td> </tr>';
+                    let addHTML = set_html_column(data, htmlProductTD);
                     $('tbody').append(addHTML);
                     set_icons_beautiful();
                     hide_list(data.id);
@@ -184,38 +188,10 @@ function more() {
         }).done(function (coupons) {
         	for(let i=0; i<coupons.length; i++) {
         		let coupon= coupons[i];
-        		$("tbody").append("<tr id=\"coupon-"+coupon.id+"\">\r\n"
-        				+ "                                <td scope=\"row\" class=\"coupon-id\">"+coupon.id+"</td>\r\n"
-        				+ "                                <td class=\"coupon-name\">"+coupon.code+"</td>\r\n"
-        				+ "                                <td class=\"coupon-type\">"+coupon.type+"</td>\r\n"
-        				+ "                                <td class=\"coupon-startDate\">"+coupon.startDate+"</td>\r\n"
-        				+ "                                <td class=\"coupon-dateOfExpiry\">"+coupon.dateOfExpiry+"</td>\r\n"
-        				+ "                                <td class=\"coupon-minimum\">"+coupon.minimum+"</td>\r\n"
-        				+ "                                <td class=\"coupon-discount\">"+coupon.discount+"</td>\r\n"
-        				+ "                                <td class=\"coupon-affectedProducts\">\r\n"
-        				+ "                                </td>\r\n"
-        				+ "                                \r\n"
-        				+ "                                <td><button class=\"btn btn-primary\" type=\"button\" data-bs-toggle=\"modal\" data-bs-target=\"#modalAddEditCouponData\"\r\n"
-        				+ "                                    data-id=\""+coupon.id+"\" onclick=\"edit_coupon_load($(this).data('id'));\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i></button></td>\r\n"
-        				+ "                                <td><button data-id=\""+coupon.id+"\" onclick=\"delete_coupon($(this).data('id'));\" class=\"btn btn-primary\" type=\"button\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td>\r\n"
-        				+ "                            </tr>")
-        		if(coupon.affectedProducts.length==0) {
-        			$("#coupon-"+$("tbody")[0].childElementCount +"> .coupon-affectedProducts").append("<i class=\"fa fa-plus add-coupons-button d-none\" aria-hidden=\"true\"></i>\r\n"
-        					+ "                                    <ul>\r\n"
-        					+"  								   </ul>")
-        			$("  #coupon-"+$("tbody")[0].childElementCount +" ul").append("<li style=\"list-style: none;\">All</li>")
-        		}else {
-        			$("#coupon-"+$("tbody")[0].childElementCount +"> .coupon-affectedProducts").append("<i class=\"fa fa-plus add-coupons-button\" data-id="+coupon.id+" aria-hidden=\"true\" onclick=\"hide($(this).data('id'));\"></i>\r\n"
-        					+ "                                    <ul style=\"display:none\">\r\n"
-        					+ "									   </ul>")
-        			$("  #coupon-"+$("tbody")[0].childElementCount + " i.fa.fa-plus.add-coupons-button.d-none").removeClass("d-none")
-        			for(let j=0 ; j<coupon.affectedProducts.length; j++) {
-        				let product= coupon.affectedProducts[j];
-        				$("  #coupon-"+$("tbody")[0].childElementCount +" ul").append("<li style=\"list-style: none;\" class=\"product-li\">#<span>"+product.id+"</span> - "+product.name+"</li>")
-        			}
-        			
-        		}
-        		
+                htmlProductTD = build_html_affected_products(coupon.id, coupon.affectedProducts);
+        		$("tbody").append(set_html_column(coupon, htmlProductTD));  
+                set_icons_beautiful();
+                hide_list(coupon.id);      		
         	}
         	currentPage++;
             if(currentPage >= maxPages - 1) {

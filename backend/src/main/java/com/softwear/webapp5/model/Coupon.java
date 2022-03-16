@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 public class Coupon {
 
@@ -33,6 +36,7 @@ public class Coupon {
     private Float discount;
 
 	@ManyToMany
+	@OnDelete(action = OnDeleteAction.CASCADE)
     private List<Product> affectedProducts;
     
     
