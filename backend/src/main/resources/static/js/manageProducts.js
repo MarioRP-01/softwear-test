@@ -113,8 +113,8 @@ $('#formProducts').submit(function(e){
                     data.name+'</td>' + '<td class="product-description">'+data.description+'</td> <td class="product-price">'+data.price+'</td>' +
                     '<td class="product-stock">'+data.stock+'</td> <td class="product-size">'+data.size+'</td>' +
                     '<td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAddEditProductData" '+
-                    'data-id="'+data.id+'" onclick="edit_product_load($(this).data(\'+id+\'));">Edit</button></td>' +
-                    '<td><button data-id="'+data.id+'" onclick="delete_product($(this).data(\'+id+\'));" '+
+                    'data-id="'+data.id+'" onclick="edit_product_load('+data.id+');">Edit</button></td>' +
+                    '<td><button data-id="'+data.id+'" onclick="delete_product('+data.id+');" '+
                     'class="btn btn-primary" type="button">Delete</button></td> </tr>';
                     $('tbody').append(addHTML);
                 }

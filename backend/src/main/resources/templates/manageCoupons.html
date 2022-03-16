@@ -8,7 +8,7 @@
                         <thead>
                           <tr>
                             <th scope="col">coupon ID</th>
-                            <th scope="col">Name</th>
+                            <th scope="col">Code</th>
                             <th scope="col">Type</th>
                             <th scope="col">Start Date</th>
                             <th scope="col">Date of Expiry</th>
@@ -23,7 +23,7 @@
                             {{#coupons}}
                             <tr id="coupon-{{id}}">
                                 <td scope="row" class="coupon-id">{{id}}</td>
-                                <td class="coupon-name">{{code}}</td>
+                                <td class="coupon-code">{{code}}</td>
                                 <td class="coupon-type">{{type}}</td>
                                 <td class="coupon-startDate">{{startDate}}</td>
                                 <td class="coupon-dateOfExpiry">{{dateOfExpiry}}</td>
@@ -33,7 +33,7 @@
                                     {{^discount}}0{{/discount}}</td>
                                 
                                 <td class="coupon-affectedProducts">
-                                    <i class="fa fa-plus add-coupons-button d-none" aria-hidden="true"></i>
+                                    <i class="fa fa-plus add-coupons-button d-none" id="add-coupons-button-{{id}}" aria-hidden="true"></i>
                                     <ul>
                                     {{#affectedProducts}}
                                             <li style="list-style: none;" class="product-li">#<span>{{this.id}}</span> - {{this.name}}</li>
@@ -71,20 +71,20 @@
                                         <input type="hidden" id="editId" name="id">
 
                                         <div class="form-group">
-                                            <label for="editName">Name *</label>
-                                            <input type="text" class="form-control" id="editName" placeholder="Name" name="name" required>                
+                                            <label for="editCode">Code *</label>
+                                            <input type="text" class="form-control" id="editCode" placeholder="Code" name="code" required>                
                                         </div>
                                         <div class="form-group">
                                             <label for="editType">Type *</label>
-                                            <input type="text" class="form-control" id="editType" placeholder="Coupon Type" name="type">                
+                                            <input type="text" class="form-control" id="editType" placeholder="Coupon Type" name="type" required>                
                                         </div>
                                         <div class="form-group">
                                             <label for="editStartDate">Start Date *</label>
                                             <input type="text" class="form-control" id="editStartDate" placeholder="Starting date" name="startDate" required>                
                                         </div>
                                         <div class="form-group">
-                                            <label for="editDateOfExpiry">Date of Expiry</label>
-                                            <input type="text" class="form-control" id="editDateOfExpiry" placeholder="Date of Expiry" name="dateOfExpiry">                
+                                            <label for="editDateOfExpiry">Date of Expiry *</label>
+                                            <input type="text" class="form-control" id="editDateOfExpiry" placeholder="Date of Expiry" name="dateOfExpiry" required>                
                                         </div>
                                         <div class="form-group">
                                             <label for="editMinimum">Minimum</label>

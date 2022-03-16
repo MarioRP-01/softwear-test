@@ -107,8 +107,8 @@ $('#formUsers').submit(function(e){
                     '<td class="user-phone">'+data.mobileNumber+'</td> <td class="user-birthdate">'+data.birthdate+'</td>' +
                     '<td class="user-role">'+data.role+'</td>'+
                     '<td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAddEditUserData" '+
-                    'data-id="'+data.id+'" onclick="edit_user_load($(this).data(\'+id+\'));">Edit</button></td>' +
-                    '<td><button data-id="'+data.id+'" onclick="delete_user($(this).data(\'+id+\'));" '+
+                    'data-id="'+data.id+'" onclick="edit_user_load('+data.id+');">Edit</button></td>' +
+                    '<td><button data-id="'+data.id+'" onclick="delete_user('+data.id+');" '+
                     'class="btn btn-primary" type="button">Delete</button></td> </tr>';
                     $('tbody').append(addHTML);
                 }

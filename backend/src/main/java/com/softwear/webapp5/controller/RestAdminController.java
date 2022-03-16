@@ -109,25 +109,41 @@ public class RestAdminController {
 
 
     @PostMapping("/manageCoupons")
-    public Coupon coupons(@RequestParam String mode, @RequestParam(required = false) Long id, @RequestParam(required = false) String type, 
-    @RequestParam(required = false) String startDate, @RequestParam(required = false) String dateOfExpiry,
-    @RequestParam(required = false) String minimum, @RequestParam(required = false) String discount,
-    @RequestParam(required = false) String affectedProductsIDs){
-        Logger log = LoggerFactory.getLogger(SampleLogController.class);
-        log.info("llega");
+    public Coupon coupons(@RequestParam String mode, @RequestParam(required = false) Long id, @RequestParam(required = false) String code,
+    @RequestParam(required = false) String type, @RequestParam(required = false) String startDate,
+    @RequestParam(required = false) String dateOfExpiry, @RequestParam(required = false) String minimum,
+    @RequestParam(required = false) String discount, @RequestParam(required = false) String affectedProductsIDs){
+
+        ArrayList<Product> affectedProducts = new ArrayList<>();
+        if(mode.equals("EDIT") || mode.equals("ADD")){ //If we need data besides the ID and mode, we make some checking beforehand
+            if(affectedProductsIDs.equals("All") || affectedProductsIDs.equals("")){
+                affectedProducts = null;
+            }else{
+                String[] ids = affectedProductsIDs.split(",");
+                for(String i : ids){
+                    Optional<Product> oProductAux = productService.findById(Long.valueOf(i.trim()));
+                    if(oProductAux.isPresent())
+                        affectedProducts.add(oProductAux.get());
+                }
+            }
+            if(minimum.equals(""))
+                minimum = "0";
+            if(discount.equals(""))
+                discount = "0";
+        }
         if(mode.equals("EDIT")){
-            // Optional<Product> oOldProduct = productService.findById(id);
-            // if(oOldProduct.isPresent()){
-            //     Product oldProduct = oOldProduct.get();
-            //     Product newProduct = new Product(name, description, Double.valueOf(price), Long.valueOf(stock), ProductSize.valueOf(size), imgs);
-            //     productService.updateInfo(oldProduct, newProduct);
-            //     log.info(String.valueOf(oldProduct.getId()));
-            //     return oldProduct;
-            // }
+            Optional<Coupon> oOldCoupon = couponService.findById(id);
+            if(oOldCoupon.isPresent()){
+                Coupon oldCoupon = oOldCoupon.get();
+                Coupon newCoupon = new Coupon(code, type, startDate, dateOfExpiry, Float.valueOf(minimum), Float.valueOf(discount), affectedProducts);
+                couponService.updateInfo(oldCoupon, newCoupon);
+                return oldCoupon;
+            }
         }else if(mode.equals("ADD")){
-            // Product newProduct = new Product(name, description, Double.valueOf(price), Long.valueOf(stock), ProductSize.valueOf(size), imgs);
-            // productService.save(newProduct);
-            // return newProduct;
+            Coupon newCoupon = new Coupon(code, type, startDate, dateOfExpiry, Float.valueOf(minimum), Float.valueOf(discount), affectedProducts);
+            couponService.addCoupon(newCoupon);
+            return newCoupon;
+        
         }else if(mode.equals("DELETE")){
             couponService.deleteCoupon(id);
             return null;

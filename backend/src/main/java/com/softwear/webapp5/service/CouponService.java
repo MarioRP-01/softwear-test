@@ -245,4 +245,15 @@ public class CouponService {
 		return applyCoupon(transactionOptional.get());
 	}
 
+    public void updateInfo(Coupon oldCoupon, Coupon u) {
+		oldCoupon.setCode(u.getCode());
+		oldCoupon.setType(u.getType());
+		oldCoupon.setStartDate(u.getStartDate());
+		oldCoupon.setDateOfExpiry(u.getDateOfExpiry());
+		oldCoupon.setDiscount(u.getDiscount());
+		oldCoupon.setAffectedProducts(u.getAffectedProducts());
+
+		couponRepository.save(oldCoupon);
+    }
+
 }
