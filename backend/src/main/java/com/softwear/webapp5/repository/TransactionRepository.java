@@ -38,9 +38,10 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
             "ORDER BY t.id DESC")
     List<Transaction> findPurchaseHistory(ShopUser user);
 
-    @Query("SELECT new com.softwear.webapp5.data.StaticsDTO(p.name, COUNT(p.name)*p.price, COUNT(p.name)) "
+    @Query("SELECT new com.softwear.webapp5.data.StaticsDTO(p.name, SUM(p.price), COUNT(p.name)) "
             + "FROM Transaction t "
-            + "JOIN t.products p "
+            + "LEFT JOIN t.products p "
+            + "WHERE NOT (t.type = 'CART' OR t.type = 'WISHLIST') "
             + "GROUP BY p.name")
-    public List<StaticsDTO> GetStatics();
+    public List<StaticsDTO> getStatics();
 }

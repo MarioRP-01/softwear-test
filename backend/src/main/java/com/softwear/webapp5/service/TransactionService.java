@@ -236,7 +236,7 @@ public class TransactionService {
     }
 
     public List<StaticsDTO> getStatics() {
-        return transactionRepository.GetStatics();
+        return transactionRepository.getStatics();
     }
 
 }
