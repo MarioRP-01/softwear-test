@@ -152,7 +152,7 @@ public class RestAdminController {
     
     @GetMapping("/manageCoupons/{pageNumber}")
     public List<CouponView> coupons(Model model, @PathVariable int pageNumber){
-    	Page<Coupon> coupons = couponService.findAll(PageRequest.of(pageNumber, 3));
+    	Page<Coupon> coupons = couponService.findAll(PageRequest.of(pageNumber, 10));
     	List<CouponView> listCoupon= new ArrayList<>();
     	for(Coupon c: coupons) {
     		listCoupon.add(new CouponView(c));

@@ -72,7 +72,7 @@ public class AdminController {
 
     @GetMapping("/manageCoupons")
     public String coupons(Model model){
-        Page<Coupon> coupons = couponService.findAll(PageRequest.of(0, 3));
+        Page<Coupon> coupons = couponService.findAll(PageRequest.of(0, 10));
         model.addAttribute("coupons", coupons);
         model.addAttribute("hasPrev", coupons.hasPrevious());
         model.addAttribute("hasNext", coupons.hasNext());

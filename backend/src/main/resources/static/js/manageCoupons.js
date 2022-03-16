@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 	maxPages = Number($("#max-pages").attr("content"));
-    $('i').each(function(){
+	$('i').each(function(){
         if($(this).next().children().hasClass('product-li')){
             $(this).removeClass("d-none")
             $(this).next().css("display", "none")
@@ -141,6 +141,7 @@ let maxPages = 0;
 
 
 function more() {
+	
     if(currentPage < maxPages - 1) {
         $.ajax({
             url: "/apiadmin/manageCoupons/" + (currentPage + 1),
@@ -170,7 +171,7 @@ function more() {
         					+"  								   </ul>")
         			$("  #coupon-"+$("tbody")[0].childElementCount +" ul").append("<li style=\"list-style: none;\">All</li>")
         		}else {
-        			$("#coupon-"+$("tbody")[0].childElementCount +"> .coupon-affectedProducts").append("<i class=\"fa fa-plus add-coupons-button\" data-id="+coupon.id+" aria-hidden=\"true\" onclick=\"hide($(this).data('id'));\" ></i>\r\n"
+        			$("#coupon-"+$("tbody")[0].childElementCount +"> .coupon-affectedProducts").append("<i class=\"fa fa-plus add-coupons-button\" data-id="+coupon.id+" aria-hidden=\"true\" onclick=\"hide($(this).data('id'));\"></i>\r\n"
         					+ "                                    <ul style=\"display:none\">\r\n"
         					+ "									   </ul>")
         			$("  #coupon-"+$("tbody")[0].childElementCount + " i.fa.fa-plus.add-coupons-button.d-none").removeClass("d-none")
@@ -198,3 +199,4 @@ function hide(id){
 	}
 	
 }
+
