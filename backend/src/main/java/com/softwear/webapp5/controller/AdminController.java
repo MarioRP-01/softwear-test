@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.softwear.webapp5.data.CouponView;
 import com.softwear.webapp5.data.ProductView;
 import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Product;
@@ -60,10 +61,6 @@ public class AdminController {
 	@GetMapping("/manageProducts")
     public String products(Model model){
 		Page<Product> products = productService.findAll(PageRequest.of(0, 10));
-        List<ProductView> listProduct= new ArrayList<>();
-        for(Product p: products) {
-        	listProduct.add(new ProductView(p));
-        }
         model.addAttribute("products", products);
         model.addAttribute("hasPrev", products.hasPrevious());
         model.addAttribute("hasNext", products.hasNext());
@@ -75,16 +72,13 @@ public class AdminController {
 
     @GetMapping("/manageCoupons")
     public String coupons(Model model){
-        // Page<Coupon> coupons = CouponService.findAll(PageRequest.of(0, 10));
-        List<Coupon> coupons = couponService.findAll();
+        Page<Coupon> coupons = couponService.findAll(PageRequest.of(0, 3));
         model.addAttribute("coupons", coupons);
-        // model.addAttribute("id", coupons.get(0).getId());
-        // model.addAttribute("code", coupons.get(0).getCode());
-        // model.addAttribute("type", coupons.get(0).getType());
-        // model.addAttribute("startDate", coupons.get(0).getStartDate());
-        // model.addAttribute("minumum", coupons.get(0).getMinimum());
-        // model.addAttribute("discount", coupons.get(0).getDiscount());
-        // model.addAttribute("dateOfExpiry", coupons.get(0).getDateOfExpiry());
+        model.addAttribute("hasPrev", coupons.hasPrevious());
+        model.addAttribute("hasNext", coupons.hasNext());
+        model.addAttribute("nextPage", coupons.getNumber()+1);
+        model.addAttribute("prevPage", coupons.getNumber()-1);
+        model.addAttribute("maxPages", coupons.getTotalPages());
 
 
         return "manageCoupons"; 

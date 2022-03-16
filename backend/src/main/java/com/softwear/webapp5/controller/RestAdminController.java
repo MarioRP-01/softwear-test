@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.softwear.webapp5.data.CouponView;
 import com.softwear.webapp5.data.ProductSize;
 import com.softwear.webapp5.data.ProductView;
 import com.softwear.webapp5.model.Coupon;
@@ -146,5 +147,16 @@ public class RestAdminController {
         	listProduct.add(new ProductView(p));
         }
         return listProduct;
+    }
+
+    
+    @GetMapping("/manageCoupons/{pageNumber}")
+    public List<CouponView> coupons(Model model, @PathVariable int pageNumber){
+    	Page<Coupon> coupons = couponService.findAll(PageRequest.of(pageNumber, 3));
+    	List<CouponView> listCoupon= new ArrayList<>();
+    	for(Coupon c: coupons) {
+    		listCoupon.add(new CouponView(c));
+    	}
+    	return listCoupon;
     }
 }

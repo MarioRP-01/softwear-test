@@ -4,6 +4,8 @@ import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.Transaction;
 import com.softwear.webapp5.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -82,6 +84,10 @@ public class CouponService {
 		}
 	}
 
+	public Page<Coupon> findAll(Pageable pageable) {
+		return couponRepository.findAll(pageable);
+	}
+	
 	public List<Coupon> findAll() {
 		return couponRepository.findAll();
 	}

@@ -33,7 +33,7 @@
                                     {{^discount}}0{{/discount}}</td>
                                 
                                 <td class="coupon-affectedProducts">
-                                    <i class="fa fa-plus add-coupons-button d-none" aria-hidden="true"></i>
+                                    <i class="fa fa-plus add-coupons-button d-none" data-id={{id}} aria-hidden="true" onclick="hide($(this).data('id'))"></i>
                                     <ul>
                                     {{#affectedProducts}}
                                             <li style="list-style: none;" class="product-li">#<span>{{this.id}}</span> - {{this.name}}</li>
@@ -53,7 +53,12 @@
                     </table>
                 </div>
 
+				<meta id="max-pages" content="{{maxPages}}"/>
+
                 <div class="row justify-content-start">
+                	{{#hasNext}}
+		            <div class="row p-2"><a id="more-btn" class="btn btn-outline-dark m-auto w-75 text-center fw-bold text-uppercase" onclick="more()">More</a></div>
+		            {{/hasNext}}
                     <button class="btn btn-primary" id="button-add-coupon" type="button" data-bs-toggle="modal" data-bs-target="#modalAddEditCouponData">Add Coupon</button>
                 </div>
 
