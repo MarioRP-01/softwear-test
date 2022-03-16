@@ -39,8 +39,13 @@
                         </tbody>
                     </table>
                 </div>
+                
+                <meta id="max-pages" content="{{maxPages}}"/>
 
                 <div class="row justify-content-start">
+                	{{#hasNext}}
+		            <div class="row p-2"><a id="more-btn" class="btn btn-outline-dark m-auto w-75 text-center fw-bold text-uppercase" onclick="more()">More</a></div>
+		            {{/hasNext}}
                     <button class="btn btn-primary" id="button-add-product" type="button" data-bs-toggle="modal" data-bs-target="#modalAddEditProductData">Add product</button>
                 </div>
 

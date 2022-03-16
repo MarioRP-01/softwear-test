@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.softwear.webapp5.data.CouponView;
 import com.softwear.webapp5.data.ProductSize;
+import com.softwear.webapp5.data.ProductView;
 import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.ShopUser;
@@ -18,6 +20,8 @@ import com.softwear.webapp5.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -149,5 +153,26 @@ public class RestAdminController {
             return null;
         }
         return null;
+    }
+    
+    @GetMapping("/manageProducts/{pageNumber}")
+    public List<ProductView> users(Model model, @PathVariable int pageNumber){
+        Page<Product> productPage = productService.findAll(PageRequest.of(pageNumber, 10));
+        List<ProductView> listProduct= new ArrayList<>();
+        for(Product p: productPage) {
+        	listProduct.add(new ProductView(p));
+        }
+        return listProduct;
+    }
+
+    
+    @GetMapping("/manageCoupons/{pageNumber}")
+    public List<CouponView> coupons(Model model, @PathVariable int pageNumber){
+    	Page<Coupon> coupons = couponService.findAll(PageRequest.of(pageNumber, 10));
+    	List<CouponView> listCoupon= new ArrayList<>();
+    	for(Coupon c: coupons) {
+    		listCoupon.add(new CouponView(c));
+    	}
+    	return listCoupon;
     }
 }

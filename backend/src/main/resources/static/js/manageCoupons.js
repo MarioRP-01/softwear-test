@@ -1,12 +1,15 @@
 let token = "";
+let currentPage = 0;
+let maxPages = 0;
 
 $( document ).ready(function() {
     set_icons_beautiful();
     token = $("#csrf-token").attr("content");
+    maxPages = Number($("#max-pages").attr("content"));
 });
 
-function set_icons_beautiful(){
-    $('i').each(function(){
+function set_icons_beautiful(){	
+	$('i').each(function(){
         if($(this).next().children().hasClass('product-li')){
             $(this).removeClass("d-none")
             $(this).next().css("display", "none")
@@ -15,7 +18,7 @@ function set_icons_beautiful(){
 }
 
 $('.add-coupons-button').click(function(){
-    $(this).next().toggle();;
+    $(this).next().toggle();
 })
 
 function edit_coupon_load(id){
@@ -76,7 +79,7 @@ $("#button-add-coupon").click(function(){
 
 function build_html_affected_products(id, prod){
     htmlProductTD = '<i class="fa fa-plus'+
-    ' add-coupons-button d-none" id="add-coupons-button-'+id+'" aria-hidden="true"></i> '+'<ul>';
+    ' add-coupons-button d-none" id="add-coupons-button-'+id+'" data-id="'+id+'" aria-hidden="true"></i> '+'<ul>';
     if(prod == null ||prod.length === 0){
         htmlProductTD += '<li style="list-style: none;">All</li>';
     }else{
@@ -170,3 +173,64 @@ $('#formCoupons').submit(function(e){
         }
     })
 })
+
+function more() {
+	
+    if(currentPage < maxPages - 1) {
+        $.ajax({
+            url: "/apiadmin/manageCoupons/" + (currentPage + 1),
+            type: "get",
+            dataType: "json"
+        }).done(function (coupons) {
+        	for(let i=0; i<coupons.length; i++) {
+        		let coupon= coupons[i];
+        		$("tbody").append("<tr id=\"coupon-"+coupon.id+"\">\r\n"
+        				+ "                                <td scope=\"row\" class=\"coupon-id\">"+coupon.id+"</td>\r\n"
+        				+ "                                <td class=\"coupon-name\">"+coupon.code+"</td>\r\n"
+        				+ "                                <td class=\"coupon-type\">"+coupon.type+"</td>\r\n"
+        				+ "                                <td class=\"coupon-startDate\">"+coupon.startDate+"</td>\r\n"
+        				+ "                                <td class=\"coupon-dateOfExpiry\">"+coupon.dateOfExpiry+"</td>\r\n"
+        				+ "                                <td class=\"coupon-minimum\">"+coupon.minimum+"</td>\r\n"
+        				+ "                                <td class=\"coupon-discount\">"+coupon.discount+"</td>\r\n"
+        				+ "                                <td class=\"coupon-affectedProducts\">\r\n"
+        				+ "                                </td>\r\n"
+        				+ "                                \r\n"
+        				+ "                                <td><button class=\"btn btn-primary\" type=\"button\" data-bs-toggle=\"modal\" data-bs-target=\"#modalAddEditCouponData\"\r\n"
+        				+ "                                    data-id=\""+coupon.id+"\" onclick=\"edit_coupon_load($(this).data('id'));\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i></button></td>\r\n"
+        				+ "                                <td><button data-id=\""+coupon.id+"\" onclick=\"delete_coupon($(this).data('id'));\" class=\"btn btn-primary\" type=\"button\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td>\r\n"
+        				+ "                            </tr>")
+        		if(coupon.affectedProducts.length==0) {
+        			$("#coupon-"+$("tbody")[0].childElementCount +"> .coupon-affectedProducts").append("<i class=\"fa fa-plus add-coupons-button d-none\" aria-hidden=\"true\"></i>\r\n"
+        					+ "                                    <ul>\r\n"
+        					+"  								   </ul>")
+        			$("  #coupon-"+$("tbody")[0].childElementCount +" ul").append("<li style=\"list-style: none;\">All</li>")
+        		}else {
+        			$("#coupon-"+$("tbody")[0].childElementCount +"> .coupon-affectedProducts").append("<i class=\"fa fa-plus add-coupons-button\" data-id="+coupon.id+" aria-hidden=\"true\" onclick=\"hide($(this).data('id'));\"></i>\r\n"
+        					+ "                                    <ul style=\"display:none\">\r\n"
+        					+ "									   </ul>")
+        			$("  #coupon-"+$("tbody")[0].childElementCount + " i.fa.fa-plus.add-coupons-button.d-none").removeClass("d-none")
+        			for(let j=0 ; j<coupon.affectedProducts.length; j++) {
+        				let product= coupon.affectedProducts[j];
+        				$("  #coupon-"+$("tbody")[0].childElementCount +" ul").append("<li style=\"list-style: none;\" class=\"product-li\">#<span>"+product.id+"</span> - "+product.name+"</li>")
+        			}
+        			
+        		}
+        		
+        	}
+        	currentPage++;
+            if(currentPage >= maxPages - 1) {
+                $("#more-btn").hide();
+            }
+        });
+    }
+};
+
+function hide(id){
+	if($("#coupon-"+id+" .coupon-affectedProducts ul").css("display")== "none") {
+		$("#coupon-"+id+" .coupon-affectedProducts ul").css("display","")
+	}else {
+		$("#coupon-"+id+" .coupon-affectedProducts ul").css("display","none")
+	}
+	
+}
+

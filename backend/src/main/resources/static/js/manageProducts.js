@@ -1,3 +1,43 @@
+let currentPage = 0;
+let maxPages = 0;
+
+
+
+function more() {
+    if(currentPage < maxPages - 1) {
+        $.ajax({
+            url: "/apiadmin/manageProducts/" + (currentPage + 1),
+            type: "get",
+            dataType: "json"
+        }).done(function (products) {
+        	for(let i=0; i<products.length; i++) {
+        		let product= products[i];
+        		$("tbody").append("<tr id=\"product-"+product.id+"\">\r\n"
+        				+ "                            <td scope=\"row\" class=\"product-id\">"+product.id+"</td>\r\n"
+        				+ "                            <td class=\"product-name\">"+product.name+"</td>\r\n"
+        				+ "                            <td class=\"product-description\">"+product.description+"</td>\r\n"
+        				+ "                            <td class=\"product-price\">"+product.price+"</td>\r\n"
+        				+ "                            <td class=\"product-stock\">"+product.stock+"</td>\r\n"
+        				+ "                            <td class=\"product-size\">"+product.size+"</td>\r\n"
+        				+ "                            <td class=\"product-imgs d-none\">\r\n"                                    
+    				    + "                            </td>\r\n"
+        				+ "                            <td><button class=\"btn btn-primary\" type=\"button\" data-bs-toggle=\"modal\" data-bs-target=\"#modalAddEditProductData\"\r\n"
+        				+ "                                data-id=\""+product.id+"\" onclick=\"edit_product_load($(this).data('id'));\">Edit</button></td>\r\n"
+        				+ "                            <td><button data-id=\""+product.id+"\" onclick=\"delete_product($(this).data('id'));\" class=\"btn btn-primary\" type=\"button\">Delete</button></td>\r\n"
+        				+ "                          </tr>")
+        		for(let j=0; j<product.imgs.length; j++) {
+        			let img = product.imgs[j]
+        			$(" #product-"+$("tbody")[0].childElementCount +" >.product-imgs").append("<img src=\""+img+"\" class=\"d-none\"/>")
+        		}
+        	}
+        	currentPage++;
+            if(currentPage >= maxPages - 1) {
+                $("#more-btn").hide();
+            }
+        });
+    }
+};
+
 function edit_product_load(id){
     $("#mode").val("EDIT");
 
@@ -131,3 +171,7 @@ $('#formProducts').submit(function(e){
         }
     })
 })
+
+$(document).ready(function () {
+    maxPages = Number($("#max-pages").attr("content"));
+});
