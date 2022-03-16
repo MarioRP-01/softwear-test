@@ -1,7 +1,7 @@
 {{>adminHeader}}
         <!-- Section-->
         <section class="py-5">
-            <div class="container">
+            <div class="container" id="manage-products-container">
                 <!-- Table-->
                 <div class="row">
                     <table class="table">
@@ -32,8 +32,8 @@
                                     <img src="{{.}}" class="d-none"/>
                                 {{/imgs}}</td>
                             <td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAddEditProductData"
-                                data-id="{{id}}" onclick="edit_product_load($(this).data('id'));">Edit</button></td>
-                            <td><button data-id="{{id}}" onclick="delete_product($(this).data('id'));" class="btn btn-primary" type="button">Delete</button></td>
+                                data-id="{{id}}" onclick="edit_product_load($(this).data('id'));"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+                            <td><button data-id="{{id}}" onclick="delete_product($(this).data('id'));" class="btn btn-primary" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
                           </tr>
                           {{/products}}
                         </tbody>

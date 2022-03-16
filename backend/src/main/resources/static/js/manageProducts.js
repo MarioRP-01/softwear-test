@@ -95,6 +95,20 @@ $('#addImgIcon').click(function(){
     $('.img-group').append(htmlInput);
 })
 
+function success_alert(){
+    $('#manage-products-container').prepend('<div class="alert alert-success" role="alert" id="success-alert"> Operation succeded! </div>');
+    setTimeout(function() {
+        $('#success-alert').remove();
+      }, 3000);
+}
+
+function error_alert(){
+    $('#manage-products-container').prepend('<div class="alert alert-danger" role="alert" id="error-alert"> Operation failed! </div>');
+    setTimeout(function() {
+        $('#error-alert').remove();
+      }, 3000);
+}
+
 $('#formProducts').submit(function(e){
     e.preventDefault();
 
@@ -126,6 +140,7 @@ $('#formProducts').submit(function(e){
         },
         success: function(data)
         {
+            success_alert();
             $('#dismiss-modal-products').click();
             if(data != ""){ //If we added or edited a product
                 let arrayIds = [] //Create an array of all ids currently in the page
@@ -153,9 +168,9 @@ $('#formProducts').submit(function(e){
                     data.name+'</td>' + '<td class="product-description">'+data.description+'</td> <td class="product-price">'+data.price+'</td>' +
                     '<td class="product-stock">'+data.stock+'</td> <td class="product-size">'+data.size+'</td>' +
                     '<td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAddEditProductData" '+
-                    'data-id="'+data.id+'" onclick="edit_product_load('+data.id+');">Edit</button></td>' +
+                    'data-id="'+data.id+'" onclick="edit_product_load('+data.id+');"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>' +
                     '<td><button data-id="'+data.id+'" onclick="delete_product('+data.id+');" '+
-                    'class="btn btn-primary" type="button">Delete</button></td> </tr>';
+                    'class="btn btn-primary" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></td> </tr>';
                     $('tbody').append(addHTML);
                 }
             }else{ //Deleted
@@ -164,7 +179,7 @@ $('#formProducts').submit(function(e){
             }
         },
         error: function (data) {
-            console.log('An error occurred.');
+            error_alert();
         },
         always: function(){
             delete_img_fields_form();

@@ -49,6 +49,20 @@ $("#button-add-user").click(function(){
     $("#editRole").val('');
 })
 
+function success_alert(){
+    $('#manage-users-container').prepend('<div class="alert alert-success" role="alert" id="success-alert"> Operation succeded! </div>');
+    setTimeout(function() {
+        $('#success-alert').remove();
+      }, 3000);
+}
+
+function error_alert(){
+    $('#manage-users-container').prepend('<div class="alert alert-danger" role="alert" id="error-alert"> Operation failed! </div>');
+    setTimeout(function() {
+        $('#error-alert').remove();
+      }, 3000);
+}
+
 $('#formUsers').submit(function(e){
     e.preventDefault();
 
@@ -74,6 +88,7 @@ $('#formUsers').submit(function(e){
         },
         success: function(data)
         {
+            success_alert();
             $('#dismiss-modal-users').click();
             if(data != ""){ //If we added or edited a user
                 let arrayIds = [] //Create an array of all ids currently in the page
@@ -107,9 +122,9 @@ $('#formUsers').submit(function(e){
                     '<td class="user-phone">'+data.mobileNumber+'</td> <td class="user-birthdate">'+data.birthdate+'</td>' +
                     '<td class="user-role">'+data.role+'</td>'+
                     '<td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAddEditUserData" '+
-                    'data-id="'+data.id+'" onclick="edit_user_load('+data.id+');">Edit</button></td>' +
+                    'data-id="'+data.id+'" onclick="edit_user_load('+data.id+');"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>' +
                     '<td><button data-id="'+data.id+'" onclick="delete_user('+data.id+');" '+
-                    'class="btn btn-primary" type="button">Delete</button></td> </tr>';
+                    'class="btn btn-primary" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></td> </tr>';
                     $('tbody').append(addHTML);
                 }
             }else{ //Deleted
@@ -117,12 +132,12 @@ $('#formUsers').submit(function(e){
                 $(trSelected).remove();
             }
         },
-        error: function (data) {
-            console.log('An error occurred.');
+        error: function () {
+            error_alert();
         }
     })
 })
 
 $(document).ready(function () {
     token = $("#csrf-token").attr("content");
-})
+});

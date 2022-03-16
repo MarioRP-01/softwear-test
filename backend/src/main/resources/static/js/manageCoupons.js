@@ -110,6 +110,20 @@ function hide_list(id){
     })
 }
 
+function success_alert(){
+    $('#manage-coupons-container').prepend('<div class="alert alert-success" role="alert" id="success-alert"> Operation succeded! </div>');
+    setTimeout(function() {
+        $('#success-alert').remove();
+      }, 3000);
+}
+
+function error_alert(){
+    $('#manage-coupons-container').prepend('<div class="alert alert-danger" role="alert" id="error-alert"> Operation failed! </div>');
+    setTimeout(function() {
+        $('#error-alert').remove();
+      }, 3000);
+}
+
 $('#formCoupons').submit(function(e){
     e.preventDefault();
 
@@ -133,6 +147,7 @@ $('#formCoupons').submit(function(e){
         },
         success: function(data)
         {
+            success_alert();
             $('#dismiss-modal-coupons').click();
             if(data != ""){ //If we added or edited a coupon
                 let arrayIds = [] //Create an array of all ids currently in the page
@@ -173,7 +188,7 @@ $('#formCoupons').submit(function(e){
             }
         },
         error: function (data) {
-            console.log('An error occurred.');
+            error_alert();
         }
     })
 })
