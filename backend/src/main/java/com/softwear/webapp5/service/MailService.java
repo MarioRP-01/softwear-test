@@ -17,12 +17,16 @@ public class MailService {
     Session session;
 
     public MailService(String mailUsername, String mailPassword){
+
         this.prop = new Properties();
+
+        this.prop.put("mail.transport.protocol", "smtp");
+        this.prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
         this.prop.put("mail.smtp.auth", true);
         this.prop.put("mail.smtp.starttls.enable", "true");
-        this.prop.put("mail.smtp.host", "smtp.mailtrap.io");
-        this.prop.put("mail.smtp.port", "25");
-        this.prop.put("mail.smtp.ssl.trust", "smtp.mailtrap.io");
+        this.prop.put("mail.smtp.host", "smtp.gmail.com");
+        this.prop.put("mail.smtp.port", "587");
+        this.prop.put("mail.smtp.ssl.trust", "*");
         this.session = Session.getInstance(this.prop, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 //softwearDAW@gmail.com 9SEc6FMyIvPB
@@ -40,7 +44,8 @@ public class MailService {
         message.setSubject(subject);
 
         MimeBodyPart mimeBodyPart = new MimeBodyPart();
-        mimeBodyPart.setContent(msg, "text/html; charset=utf-8");
+        // Change type to "text/html" in order to send a html body
+        mimeBodyPart.setContent(msg, "text/plain; charset=utf-8");
 
         Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(mimeBodyPart);
