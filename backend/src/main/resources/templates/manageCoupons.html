@@ -1,0 +1,120 @@
+{{>adminHeader}}
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container" id="manage-coupons-container">
+                <!-- Table-->
+                <div class="row">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">coupon ID</th>
+                            <th scope="col">Code</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">Date of Expiry</th>
+                            <th scope="col">Minimum</th>
+                            <th scope="col">Discount</th>
+                            <th scope="col">Affected products</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {{#coupons}}
+                            <tr id="coupon-{{id}}">
+                                <td scope="row" class="coupon-id">{{id}}</td>
+                                <td class="coupon-code">{{code}}</td>
+                                <td class="coupon-type">{{type}}</td>
+                                <td class="coupon-startDate">{{startDate}}</td>
+                                <td class="coupon-dateOfExpiry">{{dateOfExpiry}}</td>
+                                <td class="coupon-minimum">{{#minimum}}{{minimum}}{{/minimum}}
+                                    {{^minimum}}0{{/minimum}}</td>
+                                <td class="coupon-discount">{{#discount}}{{discount}}{{/discount}}
+                                    {{^discount}}0{{/discount}}</td>
+                                
+                                <td class="coupon-affectedProducts">
+                                    <i class="fa fa-plus add-coupons-button d-none" id="add-coupons-button-{{id}}" data-id={{id}} aria-hidden="true"></i>
+                                    <ul>
+                                    {{#affectedProducts}}
+                                            <li style="list-style: none;" class="product-li">#<span>{{this.id}}</span> - {{this.name}}</li>
+                                    {{/affectedProducts}}
+                                    {{^affectedProducts}}
+                                        <li style="list-style: none;">All</li>
+                                    {{/affectedProducts}}
+                                    </ul>
+                                </td>
+                                
+                                <td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAddEditCouponData"
+                                    data-id="{{id}}" onclick="edit_coupon_load($(this).data('id'));"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+                                <td><button data-id="{{id}}" onclick="delete_coupon($(this).data('id'));" class="btn btn-primary" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                            </tr>
+                            {{/coupons}}
+                        </tbody>
+                    </table>
+                </div>
+
+				<meta id="max-pages" content="{{maxPages}}"/>
+
+                <div class="row justify-content-start">
+                	{{#hasNext}}
+		            <div class="row p-2"><a id="more-btn" class="btn btn-outline-dark m-auto w-75 text-center fw-bold text-uppercase" onclick="more()">More</a></div>
+		            {{/hasNext}}
+                    <button class="btn btn-primary" id="button-add-coupon" type="button" data-bs-toggle="modal" data-bs-target="#modalAddEditCouponData">Add Coupon</button>
+                    <button class="btn btn-primary" id="button-suggest-coupon" type="button" data-bs-toggle="modal" data-bs-target="#modalAddEditCouponData">Suggest Coupon</button>
+                </div>
+
+                <!-- modal add / edit coupon data-->
+                <div class="modal fade" id="modalAddEditCouponData" tabindex="-1" role="dialog" aria-labelledby="modalAddEditCoupon" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalAddEditCoupon">Coupon Data</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form id="formCoupons">
+                                <div class="modal-body">
+                                        <input type="hidden" id="mode" name="mode">
+                                        <input type="hidden" id="editId" name="id">
+
+                                        <div class="form-group">
+                                            <label for="editCode">Code *</label>
+                                            <input type="text" class="form-control" id="editCode" placeholder="Code" name="code" required>                
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="editType">Type *</label>
+                                            <input type="text" class="form-control" id="editType" placeholder="Coupon Type" name="type" required>                
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="editStartDate">Start Date *</label>
+                                            <input type="text" class="form-control" id="editStartDate" placeholder="Starting date" name="startDate" required>                
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="editDateOfExpiry">Date of Expiry *</label>
+                                            <input type="text" class="form-control" id="editDateOfExpiry" placeholder="Date of Expiry" name="dateOfExpiry" required>                
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="editMinimum">Minimum</label>
+                                            <input type="number" step="0.01" class="form-control" id="editMinimum" placeholder="Minimum ammount" name="minimum">                
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="editDiscount">Discount</label>
+                                            <input type="number" step="0.01" class="form-control" id="editDiscount" placeholder="Discount" name="discount">                
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="editAffectedProducts">Affected products ID/s (separated by ",")</label>
+                                            <input type="text" class="form-control" id="editAffectedProducts" placeholder="Affected products" name="affectedProducts">                
+                                        </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" id="dismiss-modal-coupons" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>    
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>        
+        </section>
+
+        <script src="../js/manageCoupons.js" defer></script>
+{{>footer}}

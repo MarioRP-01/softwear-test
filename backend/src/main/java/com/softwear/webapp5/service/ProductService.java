@@ -119,4 +119,9 @@ public class ProductService {
 		return productRepository.findByNameAndSize(name, size);
 	}
 
+	
+	public List<Long> getLeastBoughtProducts(int num) {
+        List<Long> leastBoughtProducts = productRepository.getLeastBoughtProducts(num);
+        return leastBoughtProducts;
+    }
 }
