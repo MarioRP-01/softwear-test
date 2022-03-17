@@ -1,5 +1,6 @@
 package com.softwear.webapp5.controller;
 
+import com.softwear.webapp5.data.CouponView;
 import com.softwear.webapp5.data.TransactionView;
 import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.model.Transaction;
@@ -7,6 +8,7 @@ import com.softwear.webapp5.service.CouponService;
 import com.softwear.webapp5.service.ProductService;
 import com.softwear.webapp5.service.TransactionService;
 import com.softwear.webapp5.service.UserService;
+import com.softwear.webapp5.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +32,9 @@ public class TransactionController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private MailService mailService;
 
     // CART
     @GetMapping("/cart")
@@ -80,6 +85,7 @@ public class TransactionController {
             cart.setType("PAID");
             cart.setDate(TransactionService.getCurrentDate());
             transactionService.save(cart);
+            mailService.sendPurchaseMail(cart);
             return "successfulPayment";
         }
         return "error";

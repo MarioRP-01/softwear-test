@@ -71,7 +71,7 @@ function empty() {
             _csrf: token
         },
         dataType: "json"
-    }).done(function (wishlist) {ç
+    }).done(function (wishlist) {
         $(".product-row").each(function () {
             $(this).remove();
         });
