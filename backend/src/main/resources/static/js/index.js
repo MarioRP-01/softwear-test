@@ -1,4 +1,6 @@
 let token = "";
+let currentPage = 0;
+let maxPages = 0;
 
 function updateWishlistLabels() {
     $(".product").each(function () {
@@ -119,5 +121,55 @@ function removeFromWishlist(productId, productName) {
 
 $(document).ready(function () {
     token = $("#csrf-token").attr("content");
+    maxPages = Number($("#max-pages").attr("content"));
     updateWishlistLabels();
 });
+
+
+
+
+
+function more() {
+    if(currentPage < maxPages - 1) {
+        $.ajax({
+            url: "/products/" + (currentPage + 1),
+            type: "get",
+            dataType: "json"
+        }).done(function (products) {
+        	for(let i=0; i<products.length; i++) {
+        		let product= products[i];
+        		let img= product.imgs[0].split("\\")[product.imgs[0].split("\\").length-1]
+        		$("#products").append("<div class=\"col mb-5\">\r\n"
+        				+ "                        <div id=\"product-"+product.id+"\" class=\"card h-100 product\">\r\n"
+        				+ "                            <meta class=\"product-id\" content=\""+product.id+"\"/>\r\n"
+        				+ "                            <!-- Fav badge-->\r\n"
+        				+ "                            <div id=\"product-"+product.id+"-fav-badge\" class=\"badge bg-dark text-white position-absolute favIcon\" onclick=\"wishlist("+product.id+", '"+product.name+"')\"><i class=\"fa-solid fa-heart\"></i></div>\r\n"
+        				+ "                            <!-- Product image-->\r\n"
+        				+ "                            <a href=\"/productView/"+product.id+"\"><img class=\"card-img-top\" src=\"../assets/productos/"+img+"\" alt=\"Product"+product.id+"\" /></a>\r\n"
+        				+ "                            <!-- Product details-->\r\n"
+        				+ "                            <div class=\"card-body p-4\">\r\n"
+        				+ "                                <div class=\"text-center\">\r\n"
+        				+ "                                    <!-- Product name-->\r\n"
+        				+ "                                    <h5 class=\"fw-bolder product-name\">"+product.name+"</h5>\r\n"
+        				+ "                                    <!-- Product price-->\r\n"
+        				+ "                                    $"+product.price+"\r\n"
+        				+ "                                </div>\r\n"
+        				+ "                            </div>\r\n"
+        				+ "                            <!-- Product actions-->\r\n"
+        				+ "                            <div class=\"card-footer p-4 pt-0 border-top-0 bg-transparent product-actions\">\r\n"
+        				+ "                                <div class=\"text-center\"><a class=\"btn btn-outline-dark mt-auto\" href=\"/productView/"+product.id+"\">View options</a></div>\r\n"
+        				+ "                                <!-- if product is in wish list print fav icon -->\r\n"
+        				+ "                                <i id=\"product-"+product.id+"-fav-icon\" class=\"fa-solid fa-heart\"></i>\r\n"
+        				+ "                            </div>\r\n"
+        				+ "                        </div>\r\n"
+        				+ "                    </div>")
+        		updateWishlistLabel(product.id)
+        		
+        	}
+        	currentPage++;
+            if(currentPage >= maxPages - 1) {
+                $("#more-btn").hide();
+            }
+        });
+    }
+};

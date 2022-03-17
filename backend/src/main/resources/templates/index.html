@@ -7,7 +7,7 @@
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-center" id="products">
                     {{#products}}
                     <div class="col mb-5">
                         <div id="product-{{id}}" class="card h-100 product">
@@ -35,6 +35,10 @@
                     </div>
                     {{/products}}            
                 </div>
+                <meta id="max-pages" content="{{maxPages}}"/>
+                {{#hasNext}}
+	            <div class="row p-2"><a id="more-btn" class="btn btn-outline-dark m-auto w-75 text-center fw-bold text-uppercase" onclick="more()">More</a></div>
+	            {{/hasNext}}
             </div>
         </section>
 
