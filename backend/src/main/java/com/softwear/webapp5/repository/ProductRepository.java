@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.softwear.webapp5.data.ProductSize;
-import com.softwear.webapp5.data.StaticsDTO;
 import com.softwear.webapp5.model.Product;
 
 public interface ProductRepository extends JpaRepository <Product, Long> {

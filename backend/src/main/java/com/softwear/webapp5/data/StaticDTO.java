@@ -1,12 +1,12 @@
 package com.softwear.webapp5.data;
 
-public class StaticsDTO {
+public class StaticDTO {
 
     private String productName;
     private double earns; 
     private Long sales;
 
-    public StaticsDTO(String productName, double earns, Long sales) {
+    public StaticDTO(String productName, double earns, Long sales) {
         this.productName = productName;
         this.earns = earns;
         this.sales = sales;

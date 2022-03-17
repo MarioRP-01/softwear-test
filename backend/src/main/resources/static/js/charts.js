@@ -1,5 +1,7 @@
 
-var Earnings = new Chart(document.getElementById('Earnings'), {
+var ctx_earning = document.getElementById('Earnings');
+
+var Earnings = new Chart(ctx_earning, {
     type: 'bar',
     data: {
         labels: [],
@@ -7,7 +9,8 @@ var Earnings = new Chart(document.getElementById('Earnings'), {
             data: [],
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
             borderColor: 'rgba(255, 99, 132, 1)',
-            borderWidth: 1
+            borderWidth: 1,
+            label: 'Amount',
         }]
     },
     options: {
@@ -26,11 +29,15 @@ var Earnings = new Chart(document.getElementById('Earnings'), {
 
 function loadCharts(){
     $.ajax({
-        url: 'https://localhost:8443/apiadmin/statics'
+        url: "/apiadmin/statics",
+        type: "GET",
+        _csrf: token
     }).done(function(response) {
+        
+        console.log('products loaded: ' + JSON.stringify(response.data));
         response.data.forEach(static=> {
             Earnings.data.labels.push(static.productName);
-            Earnings.data.dayasets[0].data.push(static.earns);
+            Earnings.data.datasets[0].data.push(static.earns);
         })
         Earnings.update();
     })
@@ -71,4 +78,6 @@ const Sales = new Chart(document.getElementById('Sales'), {
     }
 });
 
-
+$(document).ready(function() {
+    loadCharts();
+});

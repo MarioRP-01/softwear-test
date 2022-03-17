@@ -8,7 +8,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 
 import com.softwear.webapp5.data.ProductSize;
-import com.softwear.webapp5.data.StaticsDTO;
+import com.softwear.webapp5.data.StaticDTO;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.service.ProductService;
@@ -101,8 +101,8 @@ public class RestAdminController {
     }
 
     @GetMapping("/statics")
-    public List<StaticsDTO> getStatics(HttpServletResponse response) {
-        List<StaticsDTO> statics = transactionService.getStatics();
+    public List<StaticDTO> getStatics(HttpServletResponse response) {
+        List<StaticDTO> statics = transactionService.getStatics();
         return statics;
     }
 }
