@@ -28,7 +28,7 @@ public class AdminController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-	@GetMapping("/mailTry")
+	/*@GetMapping("/mailTry")
 	public String mailTest(Model model) {
 		MailService ms = new MailService();
 		try {
@@ -38,7 +38,7 @@ public class AdminController {
 			e.printStackTrace();
 		}
 	    return "index";
-	}
+	}*/
 
     @GetMapping("/manageProducts")
     public String products(Model model){
