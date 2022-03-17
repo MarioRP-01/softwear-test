@@ -40,9 +40,8 @@ function more() {
                         "                        <tr>\n" +
                         "                            <td>#" + (i + 1) + "</td>\n" +
                         "                            <td style=\"padding: 0;\"><form action=\"/productView\" method=\"post\" style=\"margin-top: 0; padding: 0;\">\n" +
-                        "                                <button class=\"btn border-0\" type=\"submit\">" + entry.product.name + "</button>\n" +
-                        "                                <intput type=\"hidden\" name=\"id\" value=\"" + entry.product.id + "\"/>\n" +
-                        "                            </form></td>\n" +
+                        "                                <a class=\"btn border-0\" href=\"/productView/" + entry.product.id + "\">" + entry.product.name + "</a>\n" +
+                        "                            </td>\n" +
                         "                            <td>" + entry.quantity + " x $" + entry.product.price + "</td>\n" +
                         "                            <td class=\"text-right\">$" + entry.totalPrice + "</td>\n" +
                         "                        </tr>\n"

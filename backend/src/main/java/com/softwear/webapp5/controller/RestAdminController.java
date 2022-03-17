@@ -1,6 +1,6 @@
 package com.softwear.webapp5.controller;
 
-import java.lang.reflect.Field;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -8,10 +8,7 @@ import java.util.Optional;
 import com.softwear.webapp5.data.ProductSize;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.data.ShopUserView;
-import com.softwear.webapp5.data.TransactionView;
 import com.softwear.webapp5.model.ShopUser;
-import com.softwear.webapp5.model.Transaction;
-import com.softwear.webapp5.service.MailService;
 import com.softwear.webapp5.service.ProductService;
 import com.softwear.webapp5.service.UserService;
 
@@ -20,12 +17,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/apiadmin")
