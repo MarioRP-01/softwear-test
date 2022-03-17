@@ -64,36 +64,6 @@ public class TransactionController {
         return "cart";
     }
 
-    private String createCartSummary(Transaction cart) {
-        StringBuilder products = new StringBuilder();
-        TransactionView cartView = new TransactionView(cart);
-        for(int i = 0; i < cartView.getTransactionEntries().size(); i++) {
-            TransactionView.TransactionViewEntry entry = cartView.getTransactionEntries().get(i);
-            products.append(String.format("\t#%d\t%s - %s\t$%01.02f x %d\t->\t$%01.02f\n",
-                    i + 1, entry.getProduct().getName(), entry.getProduct().getSize(), entry.getProduct().getPrice(), entry.getQuantity(), entry.getTotalPrice()));
-        }
-        if(cartView.getCoupon() != null) {
-            CouponView coupon = cartView.getCoupon();
-            products.append(String.format("\tCoupon: %s\t\t\t- $%01.02f\n", coupon.getCode(), coupon.getDiscount()));
-        }
-        products.append(String.format("Total: $%01.02f\n", cartView.getTotalPrice()));
-        return String.format("Transaction ID: %d\nDate: %s\nStatus: %s\nShipping Address: %s\nSummary:\n%s", cart.getId(), cart.getDate(), cart.getType(), cart.getUser().getAddress(), products.toString());
-    }
-
-    private void sendMail(Transaction cart) {
-        ShopUser user = cart.getUser();
-        StringBuilder msg = new StringBuilder();
-        msg.append(String.format("Hi Mr./Ms. %s,\n", user.getLastName()));
-        msg.append("We have recived the payment of your new oder. It will be processed soon\n");
-        msg.append("Order details:\n");
-        msg.append(createCartSummary(cart));
-        try {
-            mailService.send(user.getEmail(), "Your order has been paid", msg.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     @GetMapping("/cart/pay")
     public String cartPay(Model model) {
         ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
@@ -116,7 +86,7 @@ public class TransactionController {
             cart.setType("PAID");
             cart.setDate(TransactionService.getCurrentDate());
             transactionService.save(cart);
-            sendMail(cart);
+            mailService.sendPurchaseMail(cart);
             return "successfulPayment";
         }
         return "error";
