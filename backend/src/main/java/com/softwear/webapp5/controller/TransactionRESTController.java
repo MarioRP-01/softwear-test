@@ -10,6 +10,8 @@ import com.softwear.webapp5.service.ProductService;
 import com.softwear.webapp5.service.TransactionService;
 import com.softwear.webapp5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -114,6 +117,17 @@ public class TransactionRESTController {
             }
         }
         return new TransactionView();
+    }
+    
+    @GetMapping("/purchaseHistory/{pageNumber}")
+    public List<TransactionView> purchaseHistory(Model model, @PathVariable int pageNumber){
+    	ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
+        Page<Transaction> transactionsPage = transactionService.findPurchaseHistory(user, PageRequest.of(pageNumber, 10));
+        List<TransactionView> transactions = new ArrayList<>();
+        for(Transaction transaction: transactionsPage) {
+            transactions.add(new TransactionView(transaction));
+        }
+        return transactions;
     }
 
 }

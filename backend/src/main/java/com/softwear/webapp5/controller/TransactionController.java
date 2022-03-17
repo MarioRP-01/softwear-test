@@ -10,9 +10,15 @@ import com.softwear.webapp5.service.TransactionService;
 import com.softwear.webapp5.service.UserService;
 import com.softwear.webapp5.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,16 +144,24 @@ public class TransactionController {
         return "redirect:/wishlist";
     }*/
 
+
+
     // PURCHASE HISTORY
     @GetMapping("/purchaseHistory")
     public String purchaseHistory(Model model) {
         ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
-        List<Transaction> transactions = transactionService.findPurchaseHistory(user);
+        Page<Transaction> transactions = transactionService.findPurchaseHistory(user, PageRequest.of(0, 10));
         List<TransactionView> purchaseHistory = new ArrayList<>();
         for(Transaction transaction: transactions) {
             purchaseHistory.add(new TransactionView(transaction));
         }
         model.addAttribute("purchaseHistory", purchaseHistory);
+        model.addAttribute("hasPrev", transactions.hasPrevious());
+        model.addAttribute("hasNext", transactions.hasNext());
+        model.addAttribute("nextPage", transactions.getNumber()+1);
+        model.addAttribute("prevPage", transactions.getNumber()-1);
+        model.addAttribute("maxPages", transactions.getTotalPages());
+
         return "purchaseHistory";
     }
 
