@@ -29,7 +29,6 @@ public class MailService {
         this.prop.put("mail.smtp.ssl.trust", "*");
         this.session = Session.getInstance(this.prop, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                //softwearDAW@gmail.com 9SEc6FMyIvPB
                 return new PasswordAuthentication(mailUsername, mailPassword);
             }
         });
