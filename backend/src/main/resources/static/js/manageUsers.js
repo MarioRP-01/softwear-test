@@ -24,8 +24,8 @@ function more() {
         				+ "                            <td class=\"user-birthdate\">"+user.birthDate+"</td>\r\n"
         				+ "                            <td class=\"user-role\">"+user.role+"</td>\r\n"
         				+ "                            <td><button class=\"btn btn-primary\" type=\"button\" data-bs-toggle=\"modal\" data-bs-target=\"#modalAddEditUserData\"\r\n"
-        				+ "                                data-id=\""+user.id+"\" onclick=\"edit_user_load($(this).data('id'));\">Edit</button></td>\r\n"
-        				+ "                            <td><button data-id=\""+user.id+"\" onclick=\"delete_user($(this).data('id'));\" class=\"btn btn-primary\" type=\"button\">Delete</button></td>\r\n"
+        				+ "                                data-id=\""+user.id+"\" onclick=\"edit_user_load($(this).data('id'));\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i></button></td>\r\n"
+        				+ "                            <td><button data-id=\""+user.id+"\" onclick=\"delete_user($(this).data('id'));\" class=\"btn btn-primary\" type=\"button\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td>\r\n"
         				+ "                          </tr>")
         	}
         	currentPage++;
@@ -126,12 +126,12 @@ $('#formUsers').submit(function(e){
         {
             success_alert();
             $('#dismiss-modal-users').click();
-            if(data != ""){ //If we added or edited a user
+            if(data !== ""){ //If we added or edited a user
                 let arrayIds = [] //Create an array of all ids currently in the page
                 $('.user-id').each(function(){
                     arrayIds.push(Number($(this).html()));
                 })
-                if(arrayIds.indexOf(data.id) != -1){ //If the array is currently in the page, we have edited
+                if(arrayIds.indexOf(data.id) !== -1){ //If the array is currently in the page, we have edited
                     trSelected = "#user-" + data.id;
                     editUsername = trSelected + " .user-username";
                     editEmail = trSelected + " .user-email";

@@ -22,8 +22,8 @@ function more() {
         				+ "                            <td class=\"product-imgs d-none\">\r\n"                                    
     				    + "                            </td>\r\n"
         				+ "                            <td><button class=\"btn btn-primary\" type=\"button\" data-bs-toggle=\"modal\" data-bs-target=\"#modalAddEditProductData\"\r\n"
-        				+ "                                data-id=\""+product.id+"\" onclick=\"edit_product_load($(this).data('id'));\">Edit</button></td>\r\n"
-        				+ "                            <td><button data-id=\""+product.id+"\" onclick=\"delete_product($(this).data('id'));\" class=\"btn btn-primary\" type=\"button\">Delete</button></td>\r\n"
+        				+ "                                data-id=\""+product.id+"\" onclick=\"edit_product_load($(this).data('id'));\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i></button></td>\r\n"
+        				+ "                            <td><button data-id=\""+product.id+"\" onclick=\"delete_product($(this).data('id'));\" class=\"btn btn-primary\" type=\"button\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td>\r\n"
         				+ "                          </tr>")
         		for(let j=0; j<product.imgs.length; j++) {
         			let img = product.imgs[j]
@@ -142,12 +142,12 @@ $('#formProducts').submit(function(e){
         {
             success_alert();
             $('#dismiss-modal-products').click();
-            if(data != ""){ //If we added or edited a product
+            if(data !== ""){ //If we added or edited a product
                 let arrayIds = [] //Create an array of all ids currently in the page
                 $('.product-id').each(function(){
                     arrayIds.push(Number($(this).html()));
                 })
-                if(arrayIds.indexOf(data.id) != -1){ //If the array is currently in the page, we have edited
+                if(arrayIds.indexOf(data.id) !== -1){ //If the array is currently in the page, we have edited
                     trSelected = "#product-" + data.id;
                     editName = trSelected + " .product-name";
                     editDescription = trSelected + " .product-description";

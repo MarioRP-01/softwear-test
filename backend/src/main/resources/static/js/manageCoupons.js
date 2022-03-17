@@ -147,12 +147,12 @@ $('#formCoupons').submit(function(e){
         {
             success_alert();
             $('#dismiss-modal-coupons').click();
-            if(data != ""){ //If we added or edited a coupon
+            if(data !== ""){ //If we added or edited a coupon
                 let arrayIds = [] //Create an array of all ids currently in the page
                 $('.coupon-id').each(function(){
                     arrayIds.push(Number($(this).html()));
                 })
-                if(arrayIds.indexOf(data.id) != -1){ //If the array is currently in the page, we have edited
+                if(arrayIds.indexOf(data.id) !== -1){ //If the array is currently in the page, we have edited
                     trSelected = "#coupon-" + data.id;
                     editCode = trSelected + " .coupon-code";
                     editType = trSelected + " .coupon-type";
@@ -207,7 +207,8 @@ $('#button-suggest-coupon').click(function(e){
         {
             $('#dismiss-modal-coupons').click();
                 $("#editId").val(data.id);
-                $("#editCode").val("ADD");
+                $("#editMode").val("ADD");
+                $("#editCode").val(data.code);
                 $("#editType").val(data.type);
                 $("#editStartDate").val(data.startDate);
                 $("#editDateOfExpiry").val(data.dateOfExpiry);
@@ -250,7 +251,7 @@ function more() {
 };
 
 function hide(id){
-	if($("#coupon-"+id+" .coupon-affectedProducts ul").css("display")== "none") {
+	if($("#coupon-"+id+" .coupon-affectedProducts ul").css("display")=== "none") {
 		$("#coupon-"+id+" .coupon-affectedProducts ul").css("display","")
 	}else {
 		$("#coupon-"+id+" .coupon-affectedProducts ul").css("display","none")

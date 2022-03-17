@@ -111,7 +111,7 @@ public class RestAdminController {
         }
         return null;
     }
-    
+
     @GetMapping("/manageUsers/{pageNumber}")
     public List<ShopUserView> users(Model model, @PathVariable int pageNumber){
     	ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
@@ -168,7 +168,7 @@ public class RestAdminController {
     }
     
     @GetMapping("/manageProducts/{pageNumber}")
-    public List<ProductView> users(Model model, @PathVariable int pageNumber){
+    public List<ProductView> products(Model model, @PathVariable int pageNumber){
         Page<Product> productPage = productService.findAll(PageRequest.of(pageNumber, 10));
         List<ProductView> listProduct= new ArrayList<>();
         for(Product p: productPage) {
