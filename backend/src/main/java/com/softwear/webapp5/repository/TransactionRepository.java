@@ -38,15 +38,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
             "ORDER BY t.id DESC")
     List<Transaction> findPurchaseHistory(ShopUser user);
 
-    @Query(
-            value="SELECT pr.id"+
-            "FROM product pr FULL JOIN transaction_products tp "+
-            "on pr.id = tp.products_id "+
-            "group by pr.id "+
-            "order by count(tp.products_id) asc "+
-            "limit :num",
-            nativeQuery = true
-    )
-    List<Long> getLeastBoughtProducts(@Param("num") int num);
+    
 
 }

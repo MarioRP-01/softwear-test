@@ -234,9 +234,6 @@ public class TransactionService {
         }
     }
 
-    public List<Long> getLeastBoughtProducts(int num) {
-        List<Long> leastBoughtProducts = transactionRepository.getLeastBoughtProducts(num);
-        return leastBoughtProducts;
-    }
+    
 
 }

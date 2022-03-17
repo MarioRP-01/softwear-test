@@ -186,7 +186,7 @@ public class RestAdminController {
 
     @PostMapping("/suggestCoupon")
     public Coupon suggestCoupon(){
-        List<Long> productIDs = transactionService.getLeastBoughtProducts(3);
+        List<Long> productIDs = productService.getLeastBoughtProducts(3);
         ArrayList<Product> products = new ArrayList<>();
         Double productsPrice = Double.valueOf(0);
         int numberOfProductsInCoupon = 0;

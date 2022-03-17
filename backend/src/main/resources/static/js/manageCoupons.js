@@ -215,8 +215,8 @@ $('#button-suggest-coupon').click(function(e){
                 $('#editDiscount').val(data.discount);
 
                 productsAux = ""
-                for(prod in data.affectedProducts){
-                    productsAux =+ prod.id + ","
+                for(let index in data.affectedProducts){
+                    productsAux += data.affectedProducts[index].id + ","
                 }
                 $("#editAffectedProducts").val(productsAux.slice(0, -1));
         },

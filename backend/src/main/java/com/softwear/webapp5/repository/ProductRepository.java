@@ -23,4 +23,15 @@ public interface ProductRepository extends JpaRepository <Product, Long> {
 
     @Query(value = "SELECT DISTINCT size FROM Product WHERE name = :name AND stock <> 0", nativeQuery = true)
     public List<ProductSize> FindSizeAvailableByName(@Param("name") String name);
+    
+    @Query(
+            value="SELECT product.id " +
+            "FROM product left JOIN transaction_products " +
+            "on product.id = products_id " +
+            "group by product.id " +
+            "order by count(products_id) asc " +
+            "limit :num ",
+            nativeQuery = true
+    )
+    List<Long> getLeastBoughtProducts(@Param("num") int num);
 }
