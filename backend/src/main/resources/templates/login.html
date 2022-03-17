@@ -41,6 +41,8 @@
                           </div>
                           <div class="row">
                             <form id="form-register" action="/login/register" method="post">
+                            
+                              <input type="hidden" name="_csrf" value="{{token}}">
                               <div class="form-floating mb-3">
                                   <input type="text" class="form-control" id="floatingUsernameReg" placeholder="Username" name="Username" required>
                                   <label for="floatingUsernameReg">Username</label>

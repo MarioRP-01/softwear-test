@@ -27,7 +27,7 @@
 		                <div class="card-header">Account Details</div>
 		                <div class="card-body">
 		                    <form action="/userProfile" method="post">
-		                        
+		                        <input type="hidden" name="_csrf" value="{{token}}">
 		                        <!-- Form Row-->
 		                        <div class="row gx-3 mb-3">
 		                            <!-- Form Group (first name)-->
@@ -82,6 +82,8 @@
         
         <div class="form-popup" id="change-password-form">
              <form  class="form-container" action="/userProfile/changePassword" method="post">
+             	
+         		 <input type="hidden" name="_csrf" value="{{token}}">
                  <h2 style="margin-bottom: 8vh; margin-top: 2vh;">Change Password</h2>
 
                  <div class="form-floating mb-3">
