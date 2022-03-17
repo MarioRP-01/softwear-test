@@ -105,7 +105,6 @@ public class UserController {
 			u.setName("");
 			u.setAddress("");
 			u.setBirthdate("");
-			u.setEmail("");
 			u.setLastName("");
 			u.setName("");
 			u.setRole("USER");

@@ -60,7 +60,6 @@ public class UserService {
 		
 		
 		oldShopUser.get().setAddress(u.getAddress());
-		oldShopUser.get().setPassword(u.getPassword());
 		oldShopUser.get().setBirthdate(u.getBirthdate());
 		oldShopUser.get().setEmail(u.getEmail());
 		oldShopUser.get().setLastName(u.getLastName());
