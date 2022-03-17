@@ -10,6 +10,7 @@ import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Transaction;
 import com.softwear.webapp5.model.ShopUser;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
@@ -36,5 +37,16 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
             "WHERE t.user = :user and not (t.type = 'CART' or t.type = 'WISHLIST') " +
             "ORDER BY t.id DESC")
     List<Transaction> findPurchaseHistory(ShopUser user);
+
+    @Query(
+            value="SELECT pr.id"+
+            "FROM product pr FULL JOIN transaction_products tp "+
+            "on pr.id = tp.products_id "+
+            "group by pr.id "+
+            "order by count(tp.products_id) asc "+
+            "limit :num",
+            nativeQuery = true
+    )
+    List<Long> getLeastBoughtProducts(@Param("num") int num);
 
 }

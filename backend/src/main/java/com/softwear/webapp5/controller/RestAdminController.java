@@ -2,9 +2,13 @@ package com.softwear.webapp5.controller;
 
 import java.io.File;
 import java.lang.reflect.Field;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.transaction.TransactionScoped;
 
 import com.softwear.webapp5.data.CouponView;
 import com.softwear.webapp5.data.ProductSize;
@@ -12,9 +16,11 @@ import com.softwear.webapp5.data.ProductView;
 import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.ShopUser;
+import com.softwear.webapp5.repository.ProductRepository;
 import com.softwear.webapp5.service.CouponService;
 import com.softwear.webapp5.service.MailService;
 import com.softwear.webapp5.service.ProductService;
+import com.softwear.webapp5.service.TransactionService;
 import com.softwear.webapp5.service.UserService;
 
 import org.slf4j.Logger;
@@ -45,6 +51,8 @@ public class RestAdminController {
     ProductService productService;
     @Autowired
     CouponService couponService;
+    @Autowired
+    TransactionService transactionService;
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -175,4 +183,35 @@ public class RestAdminController {
     	}
     	return listCoupon;
     }
+
+    @PostMapping("/suggestCoupon")
+    public Coupon suggestCoupon(){
+        List<Long> productIDs = transactionService.getLeastBoughtProducts(3);
+        ArrayList<Product> products = new ArrayList<>();
+        Double productsPrice = Double.valueOf(0);
+        int numberOfProductsInCoupon = 0;
+        Double mediumPrice = Double.valueOf(0);
+
+        for(Long id : productIDs){
+            Optional<Product> oProductCoupon = productService.findById(id);
+            if(oProductCoupon.isPresent()){
+                Product productCoupon = productService.findById(id).get();
+                products.add(productCoupon);
+                productsPrice += productCoupon.getPrice();
+                numberOfProductsInCoupon++;
+            }
+        }
+        mediumPrice = (Double) productsPrice / numberOfProductsInCoupon;
+        Double couponPrice = mediumPrice * 2 + Double.valueOf(0.01);
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/mm/yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        String startDate = dtf.format(now).toString();
+        String dateOfExpiry = dtf.format(now.plusDays(15)).toString();
+
+
+        Coupon coupon = new Coupon("[SET_NAME]", "total_percentage", startDate, dateOfExpiry, Float.valueOf(couponPrice.toString()), 25.00f, products);
+        return coupon;
+    }
+
 }

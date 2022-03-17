@@ -53,8 +53,6 @@ function edit_coupon_load(id){
         })
         $("#editAffectedProducts").val(productsAux);
     }
-
-
 }
 
 function delete_coupon(id){
@@ -187,7 +185,42 @@ $('#formCoupons').submit(function(e){
                 $(trSelected).remove();
             }
         },
-        error: function (data) {
+        error: function () {
+            error_alert();
+        }
+    })
+})
+
+
+$('#button-suggest-coupon').click(function(e){
+    e.preventDefault();
+
+    var ajaxUrl = '/apiadmin/suggestCoupon';
+    var formElements = this.elements;
+    $.ajax({
+        type: "POST",
+        url: ajaxUrl,
+        data: {
+            _csrf: token
+        },
+        success: function(data)
+        {
+            $('#dismiss-modal-coupons').click();
+                $("#editId").val(data.id);
+                $("#editCode").val("ADD");
+                $("#editType").val(data.type);
+                $("#editStartDate").val(data.startDate);
+                $("#editDateOfExpiry").val(data.dateOfExpiry);
+                $("#editMinimum").val(data.minimum);
+                $('#editDiscount').val(data.discount);
+
+                productsAux = ""
+                for(prod in data.affectedProducts){
+                    productsAux =+ prod.id + ","
+                }
+                $("#editAffectedProducts").val(productsAux.slice(0, -1));
+        },
+        error: function () {
             error_alert();
         }
     })
