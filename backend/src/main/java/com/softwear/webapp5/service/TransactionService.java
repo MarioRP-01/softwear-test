@@ -13,6 +13,7 @@ import com.softwear.webapp5.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -55,11 +56,19 @@ public class TransactionService {
     public List<Transaction> findByDate(String date) {
         return transactionRepository.findByDate(date);
     }
-
+ 
+    public Page<Transaction> findCart(ShopUser user, Pageable page) {
+        return transactionRepository.findCart(user, PageRequest.of(0, 10));
+    }
+    
     public Optional<Transaction> findCart(ShopUser user) {
         return transactionRepository.findCart(user);
     }
 
+    public Page<Transaction> findWishlist(ShopUser user, Pageable page) {
+        return transactionRepository.findWishlist(user, PageRequest.of(0, 10));
+    }
+    
     public Optional<Transaction> findWishlist(ShopUser user) {
         return transactionRepository.findWishlist(user);
     }
@@ -68,6 +77,10 @@ public class TransactionService {
         return transactionRepository.findProductInWishlist(user, productName);
     }
 
+    public Page<Transaction> findPurchaseHistory(ShopUser user, Pageable pageable) {
+    	return transactionRepository.findPurchaseHistory(user, pageable);
+    }
+    
     public List<Transaction> findPurchaseHistory(ShopUser user) {
         return transactionRepository.findPurchaseHistory(user);
     }

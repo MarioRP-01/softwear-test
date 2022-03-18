@@ -1,6 +1,8 @@
 package com.softwear.webapp5.repository;
 
 import com.softwear.webapp5.model.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -22,8 +24,17 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
     @Query("SELECT t FROM Transaction t " +
             "WHERE t.user = :user and t.type = 'CART'")
-    Optional<Transaction> findCart(ShopUser user);
+    Page<Transaction> findCart(ShopUser user, Pageable page);
 
+    
+    @Query("SELECT t FROM Transaction t " +
+            "WHERE t.user = :user and t.type = 'CART'")
+    Optional<Transaction> findCart(ShopUser user);
+    
+    @Query("SELECT t FROM Transaction t " +
+            "WHERE t.user = :user and t.type = 'WISHLIST'")
+    Page<Transaction> findWishlist(ShopUser user, Pageable page);
+    
     @Query("SELECT t FROM Transaction t " +
             "WHERE t.user = :user and t.type = 'WISHLIST'")
     Optional<Transaction> findWishlist(ShopUser user);
@@ -33,6 +44,11 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
             "WHERE t.user = :user and t.type = 'WISHLIST' and p MEMBER OF t.products and p.name = :productName")
     Optional<Product> findProductInWishlist(ShopUser user, String productName);
 
+    @Query("SELECT t FROM Transaction t " +
+            "WHERE t.user = :user and not (t.type = 'CART' or t.type = 'WISHLIST') " +
+            "ORDER BY t.id DESC")
+    Page<Transaction> findPurchaseHistory(ShopUser user, Pageable page);
+    
     @Query("SELECT t FROM Transaction t " +
             "WHERE t.user = :user and not (t.type = 'CART' or t.type = 'WISHLIST') " +
             "ORDER BY t.id DESC")

@@ -7,10 +7,7 @@
         {{#product}}
         <div class="row">
             <div class="col">
-                <form action="/productView" method="post">
-                    <button class="btn btn-outline-dark border-0 fs-3" type="submit">{{name}}&emsp;Stock: {{stock}}</button>
-                    <input type="hidden" name="id" value="{{id}}">
-                </form>
+                <a class="btn btn-outline-dark border-0 fs-3" href="/productView/{{id}}">{{name}}&emsp;Stock: {{stock}}</a>
             </div>
         </div>
         {{/product}}

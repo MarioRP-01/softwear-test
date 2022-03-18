@@ -1,3 +1,41 @@
+let token = "";
+let currentPage = 0;
+let maxPages = 0;
+
+
+
+function more() {
+    if(currentPage < maxPages - 1) {
+        $.ajax({
+            url: "/apiadmin/manageUsers/" + (currentPage + 1),
+            type: "get",
+            dataType: "json"
+        }).done(function (users) {
+        	for(let i=0; i<users.length; i++) {
+        		let user= users[i];
+        		$("tbody").append("<tr id=\"user-"+user.id+"\">\r\n"
+        				+ "                            <td scope=\"row\" class=\"user-id\">"+user.id+"</td>\r\n"
+        				+ "                            <td class=\"user-username\">"+user.username+"</td>\r\n"
+        				+ "                            <td class=\"user-email\">"+user.email+"</td>\r\n"
+        				+ "                            <td class=\"user-name\">"+user.name+"</td>\r\n"
+        				+ "                            <td class=\"user-lastName\">"+user.lastName+"</td>\r\n"
+        				+ "                            <td class=\"user-address\">"+user.address+"</td>\r\n"
+        				+ "                            <td class=\"user-phone\">"+user.phoneNumber+"</td>\r\n"
+        				+ "                            <td class=\"user-birthdate\">"+user.birthDate+"</td>\r\n"
+        				+ "                            <td class=\"user-role\">"+user.role+"</td>\r\n"
+        				+ "                            <td><button class=\"btn btn-primary\" type=\"button\" data-bs-toggle=\"modal\" data-bs-target=\"#modalAddEditUserData\"\r\n"
+        				+ "                                data-id=\""+user.id+"\" onclick=\"edit_user_load($(this).data('id'));\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i></button></td>\r\n"
+        				+ "                            <td><button data-id=\""+user.id+"\" onclick=\"delete_user($(this).data('id'));\" class=\"btn btn-primary\" type=\"button\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td>\r\n"
+        				+ "                          </tr>")
+        	}
+        	currentPage++;
+            if(currentPage >= maxPages - 1) {
+                $("#more-btn").hide();
+            }
+        });
+    }
+};
+
 function edit_user_load(id){
     $("#mode").val("EDIT");
 
@@ -22,16 +60,16 @@ function edit_user_load(id){
     $("#editRole").val($(editRole)[0].innerHTML);
 
     $("editPassword").attr("required", "false");
-}
+};
 
 function delete_user(id){
     $("#mode").val("DELETE");
 
     $("#editId").val(id);
     $('#formUsers').submit();
-}
+};
 
-$("#button-add-user").click(function(){
+$('#button-add-user').click(function(){
     $("#mode").val("ADD");
     $("editPassword").attr("required", "true");
 
@@ -45,7 +83,21 @@ $("#button-add-user").click(function(){
     $("#editPhone").val('');
     $('#editBirthDate').val('');
     $("#editRole").val('');
-})
+});
+
+function success_alert(){
+    $('#manage-users-container').prepend('<div class="alert alert-success" role="alert" id="success-alert"> Operation succeded! </div>');
+    setTimeout(function() {
+        $('#success-alert').remove();
+      }, 3000);
+}
+
+function error_alert(){
+    $('#manage-users-container').prepend('<div class="alert alert-danger" role="alert" id="error-alert"> Operation failed! </div>');
+    setTimeout(function() {
+        $('#error-alert').remove();
+      }, 3000);
+}
 
 $('#formUsers').submit(function(e){
     e.preventDefault();
@@ -67,17 +119,19 @@ $('#formUsers').submit(function(e){
             address: formElements[7].value,
             mobileNumber: formElements[8].value,
             birthdate: formElements[9].value,
-            role: formElements[10].value
+            role: formElements[10].value,
+            _csrf: token
         },
         success: function(data)
         {
+            success_alert();
             $('#dismiss-modal-users').click();
-            if(data != ""){ //If we added or edited a user
+            if(data !== ""){ //If we added or edited a user
                 let arrayIds = [] //Create an array of all ids currently in the page
                 $('.user-id').each(function(){
                     arrayIds.push(Number($(this).html()));
                 })
-                if(arrayIds.indexOf(data.id) != -1){ //If the array is currently in the page, we have edited
+                if(arrayIds.indexOf(data.id) !== -1){ //If the array is currently in the page, we have edited
                     trSelected = "#user-" + data.id;
                     editUsername = trSelected + " .user-username";
                     editEmail = trSelected + " .user-email";
@@ -96,7 +150,7 @@ $('#formUsers').submit(function(e){
                     $(editPhone).html(data.mobileNumber);
                     $(editBirthdate).html(data.birthdate);
                     $(editRole).html(data.role);
-                
+
                 }else{ // We have added
                     let addHTML = '<tr id="user-'+data.id+'"> <td scope="row" class="user-id">'+data.id+'</td> <td class="user-username">'+
                     data.username+'</td>' + '<td class="user-email">'+data.email+'</td> <td class="user-name">'+data.name+'</td>' +
@@ -104,9 +158,9 @@ $('#formUsers').submit(function(e){
                     '<td class="user-phone">'+data.mobileNumber+'</td> <td class="user-birthdate">'+data.birthdate+'</td>' +
                     '<td class="user-role">'+data.role+'</td>'+
                     '<td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAddEditUserData" '+
-                    'data-id="'+data.id+'" onclick="edit_user_load($(this).data(\'+id+\'));">Edit</button></td>' +
-                    '<td><button data-id="'+data.id+'" onclick="delete_user($(this).data(\'+id+\'));" '+
-                    'class="btn btn-primary" type="button">Delete</button></td> </tr>';
+                    'data-id="'+data.id+'" onclick="edit_user_load('+data.id+');"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>' +
+                    '<td><button data-id="'+data.id+'" onclick="delete_user('+data.id+');" '+
+                    'class="btn btn-primary" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></td> </tr>';
                     $('tbody').append(addHTML);
                 }
             }else{ //Deleted
@@ -114,8 +168,13 @@ $('#formUsers').submit(function(e){
                 $(trSelected).remove();
             }
         },
-        error: function (data) {
-            console.log('An error occurred.');
+        error: function () {
+            error_alert();
         }
     })
 })
+
+$(document).ready(function () {
+    token = $("#csrf-token").attr("content");
+    maxPages = Number($("#max-pages").attr("content"));
+});
