@@ -32,7 +32,7 @@ public class UserController {
 	
 	
 	@GetMapping("/userProfile")
-	public String getUser(Model model) {
+	public String getUser(Model model, @RequestParam(required = false) Boolean fromCart) {
 
 		ShopUser user = users.findByUsername((String) model.getAttribute("username")).get();
 		this.id = user.getId();
@@ -44,18 +44,24 @@ public class UserController {
 		model.addAttribute("email", user.getEmail());
 		model.addAttribute("mobileNumber", user.getMobileNumber());
 		model.addAttribute("birthdate", user.getBirthdate());
-		
+
+		model.addAttribute("fromCart", fromCart);
+
 		return "userProfile";
 	}
 	
 	@PostMapping("/userProfile")
-	public String updateUser(Model model, HttpServletRequest request, ShopUser u) throws IOException{
+	public String updateUser(Model model, HttpServletRequest request, ShopUser u, @RequestParam(required = false) Boolean fromCart) throws IOException{
 		
 		Optional<ShopUser> oldUser= users.findById(id);
 		
 		users.updateInfo(oldUser,u);
-		
-		return getUser(model);
+
+		if (fromCart != null && fromCart) {
+			return "redirect:/cart";
+		}
+
+		return getUser(model, false);
 	}
 	
 	@PostMapping("/userProfile/changePassword")
@@ -65,7 +71,7 @@ public class UserController {
 		
 		if(passwordEncoder.matches(oldPass, oldUser.get().getPassword()) && newPass.equals(newConfPass)) {
 			users.updatePass(oldUser, passwordEncoder.encode(newPass));
-			return getUser(model);
+			return getUser(model, false);
 		}
 		
 		

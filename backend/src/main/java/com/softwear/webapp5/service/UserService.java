@@ -29,7 +29,7 @@ public class UserService {
 	public List<ShopUser> findAll(){
 		return shopUsers.findAll();
 	}
-	
+
 	public Optional<ShopUser> findByUsername(String username){
 		return shopUsers.findByUsername(username);
 	}
@@ -104,5 +104,9 @@ public class UserService {
     public void save(ShopUser newUser) {
 		shopUsers.save(newUser);
     }
+
+	public boolean checkShippingData(ShopUser user) {
+		return !user.getName().equals("") && !user.getLastName().equals("") && !user.getAddress().equals("");
+	}
 
 }

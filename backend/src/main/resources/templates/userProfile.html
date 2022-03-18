@@ -28,17 +28,18 @@
 		                <div class="card-body">
 		                    <form action="/userProfile" method="post">
 		                        <input type="hidden" name="_csrf" value="{{token}}">
+		                        {{#fromCart}}<input type="hidden" name="fromCart" value="true">{{/fromCart}}
 		                        <!-- Form Row-->
 		                        <div class="row gx-3 mb-3">
 		                            <!-- Form Group (first name)-->
 		                            <div class="col-md-6">
 		                                <label class="small mb-1" for="inputFirstName">First name</label>
-		                                <input class="form-control" name="name" type="text" placeholder="Enter your first name" value="{{name}}" id="inputFirstName">
+		                                <input class="form-control" name="name" type="text" placeholder="Enter your first name" value="{{name}}" id="inputFirstName" {{#fromCart}}required{{/fromCart}}>
 		                            </div>
 		                            <!-- Form Group (last name)-->
 		                            <div class="col-md-6">
 		                                <label class="small mb-1" for="inputLastName">Last name</label>
-		                                <input class="form-control" name="lastName" type="text" placeholder="Enter your last name" value="{{lastName}}" id="inputLastName">
+		                                <input class="form-control" name="lastName" type="text" placeholder="Enter your last name" value="{{lastName}}" id="inputLastName" {{#fromCart}}required{{/fromCart}}>
 		                            </div>
 		                        </div>
 		                        <!-- Form Row        -->
@@ -47,13 +48,13 @@
 		                            <!-- Form Group (Address)-->
 		                            <div class="col-md-6">
 		                                <label class="small mb-1" for="inputAddress">Address</label>
-		                                <input class="form-control" name="address" type="text" placeholder="Enter your address" value="{{address}}" id="inputAddress">
+		                                <input class="form-control" name="address" type="text" placeholder="Enter your address" value="{{address}}" id="inputAddress" {{#fromCart}}required{{/fromCart}}>
 		                            </div>
 		                        </div>
 		                        <!-- Form Group (email address)-->
 		                        <div class="mb-3">
 		                            <label class="small mb-1" for="inputEmailAddress">Email address</label>
-		                            <input class="form-control" name="email" type="email" placeholder="Enter your email address" value="{{email}}"  id="inputEmailAddress">
+		                            <input class="form-control" name="email" type="email" placeholder="Enter your email address" value="{{email}}"  id="inputEmailAddress" {{#fromCart}}required{{/fromCart}}>
 		                        </div>
 		                        <!-- Form Row-->
 		                        <div class="row gx-3 mb-3">
