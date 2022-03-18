@@ -1,3 +1,7 @@
+
+const randomNum = () => Math.floor(Math.random() * (235 - 52 + 1) + 52);
+const randomRGB = () => `rgba(${randomNum()}, ${randomNum()}, ${randomNum()}, 0.2)`;
+
 function loadCharts(){
     $.ajax({
         url: "/apiadmin/statics",
@@ -5,44 +9,40 @@ function loadCharts(){
     }).done(function(response) {
         console.log(response)
         let label = []
-        let dataEarns = []
+        let dataIncomes = []
         let dataSales = []
         let backgroundColor = []
         response.forEach(product =>{
             console.log(product)
             label.push(product.productName)
-            dataEarns.push(product.earns)
+            dataIncomes.push(product.incomes)
             dataSales.push(product.sales)
             backgroundColor.push(randomRGB())
         })
-        initCharts(label, dataEarns, dataSales, backgroundColor)
+        initCharts(label, dataIncomes, dataSales, backgroundColor)
     })
 }
 
-const randomNum = () => Math.floor(Math.random() * (235 - 52 + 1) + 52);
+function initCharts(label, dataIncomes, dataSales, backgroundColor){
+    var ctx_incomes = document.getElementById('Incomes');
 
-const randomRGB = () => `rgba(${randomNum()}, ${randomNum()}, ${randomNum()}, 0.2)`;
-
-function initCharts(label, dataEarns, dataSales, backgroundColor){
-    var ctx_earning = document.getElementById('Earnings');
-
-    var Earnings = new Chart(ctx_earning, {
+    var Incomes = new Chart(ctx_incomes, {
         type: 'bar',
         data: {
             labels: label,
             datasets: [{
-                data: dataEarns,
+                data: dataIncomes,
                 backgroundColor: backgroundColor,
                 borderColor: 'rgba(43, 6, 23)',
                 borderWidth: 2,
-                label: 'Amount',
+                label: 'quantity (u)',
             }]
         },
         options: {
             responsive: true,
             title: {
                 display: true,
-                text: "Earnings chart",
+                text: "Incomes chart",
             },
             scales: {
                 y: {
@@ -63,7 +63,7 @@ function initCharts(label, dataEarns, dataSales, backgroundColor){
                 backgroundColor: backgroundColor,
                 borderColor: 'rgba(43, 6, 23)',
                 borderWidth: 2,
-                label: 'Amount',
+                label: 'dollars ($)',
             }]
         },
         options: {

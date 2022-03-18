@@ -3,12 +3,12 @@ package com.softwear.webapp5.data;
 public class StaticDTO {
 
     private String productName;
-    private double earns; 
+    private double incomes; 
     private Long sales;
 
-    public StaticDTO(String productName, double earns, Long sales) {
+    public StaticDTO(String productName, double incomes, Long sales) {
         this.productName = productName;
-        this.earns = earns;
+        this.incomes = incomes;
         this.sales = sales;
     }
 
@@ -20,12 +20,12 @@ public class StaticDTO {
         this.productName = productName;
     }
 
-    public double getEarns() {
-        return earns;
+    public double getIncomes() {
+        return incomes;
     }
 
-    public void setEarns(double earns) {
-        this.earns = earns;
+    public void setIncomes(double incomes) {
+        this.incomes = incomes;
     }
 
     public Long getSales() {
