@@ -101,7 +101,22 @@ public class DatabaseInitializer {
 			productList.add(leather_coat);
 		}
 
-		Transaction transaction = new Transaction("PROCESSED", user, coupon3x2, "17/02/2022", productList);
+		List<Product> addCamisa = new ArrayList<>();
+        for(int i=0; i<3; i++) {
+            addCamisa.add(camisa);
+        }
+
+		Transaction transaction = new Transaction("PROCESSED", user, coupon3x2, "17/02/2022", addCamisa);
+        if(!couponService.applyCoupon(transaction)) {
+            transactionRepository.save(transaction);
+        }
+
+        transaction = new Transaction("PROCESSED", user, couponLeatherPer, "17/02/2022", addCamisa);
+        if(!couponService.applyCoupon(transaction)) {
+            transactionRepository.save(transaction);
+		}
+		
+		transaction = new Transaction("PROCESSED", user, coupon3x2, "17/02/2022", productList);
 		if(!couponService.applyCoupon(transaction)) {
 			transactionRepository.save(transaction);
 		}
