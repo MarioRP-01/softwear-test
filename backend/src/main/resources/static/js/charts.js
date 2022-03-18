@@ -21,7 +21,7 @@ function loadCharts(){
 
 const randomNum = () => Math.floor(Math.random() * (235 - 52 + 1) + 52);
 
-const randomRGB = () => `rgb(${randomNum()}, ${randomNum()}, ${randomNum()})`;
+const randomRGB = () => `rgba(${randomNum()}, ${randomNum()}, ${randomNum()}, 0.2)`;
 
 function initCharts(label, dataEarns, dataSales, backgroundColor){
     var ctx_earning = document.getElementById('Earnings');
