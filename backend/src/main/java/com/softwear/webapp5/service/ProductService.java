@@ -123,4 +123,8 @@ public class ProductService {
         List<Long> leastBoughtProducts = productRepository.getLeastBoughtProducts(num);
         return leastBoughtProducts;
     }
+
+	public Page<Product> findAllNames(Pageable page){
+		return productRepository.findAllNames(page);
+	}
 }
