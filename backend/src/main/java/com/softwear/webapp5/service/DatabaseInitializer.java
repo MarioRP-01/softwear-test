@@ -177,11 +177,11 @@ public class DatabaseInitializer {
 		Product black_shirt_L = new Product("Black shirt", "Black simple cotton made shirt", 40, (long) 30, ProductSize.L, null);
 		Product black_shirt_XL = new Product("Black shirt", "Black simple cotton made shirt", 40, (long) 44, ProductSize.XL, null);
 
-		productRepository.save(black_body_XS);
-		productRepository.save(black_body_S);
-		productRepository.save(black_body_M);
-		productRepository.save(black_body_L);
-		productRepository.save(black_body_XL);
+		productRepository.save(black_shirt_XS);
+		productRepository.save(black_shirt_S);
+		productRepository.save(black_shirt_M);
+		productRepository.save(black_shirt_L);
+		productRepository.save(black_shirt_XL);
 		
 		String description_arizona_jeans = "";
 
@@ -359,7 +359,9 @@ public class DatabaseInitializer {
 
 
 		List<Product> productListTransaction2 = new ArrayList<>();
-		productListTransaction2.add(cowboy_jacket_M);
+		for (int i=0; i<3; i++){
+			productListTransaction2.add(cowboy_jacket_M);	
+		}
 
 		List<Product> productListTransaction3 = new ArrayList<>();
 
@@ -373,49 +375,65 @@ public class DatabaseInitializer {
 		List<Product> productListTransaction11 = new ArrayList<>();
 		List<Product> productListTransaction12 = new ArrayList<>();
 
-		List<Product> productListwishList = new ArrayList<>();
+		List<Product> productListWishList = new ArrayList<>();
+		productListWishList.add(black_body_L);
+
 		List<Product> productListCart = new ArrayList<>();
-
 		for(int i=0; i<2; i++) {
-			puffer_jacket_S
+			productListCart.add(arizona_jeans_XL);
+		}
+		productListCart.add(cowboy_jacket_XL);
+
+		Transaction transaction1 = new Transaction("PROCESSED", user, freeSelected, "17/02/2022", productListTransaction1);
+        if(!couponService.applyCoupon(transaction1)) {
+            transactionRepository.save(transaction1);
 		}
 
-		List<Product> addCamisa = new ArrayList<>();
-        for(int i=0; i<3; i++) {
-            addCamisa.add(camisa);
+		Transaction transaction2 = new Transaction("PROCESSED", user, threeXtwo, "17/02/2022", productListTransaction2);
+        if(!couponService.applyCoupon(transaction2)) {
+            transactionRepository.save(transaction2);
         }
-
-		Transaction transaction = new Transaction("PROCESSED", user, coupon3x2, "17/02/2022", addCamisa);
-        if(!couponService.applyCoupon(transaction)) {
-            transactionRepository.save(transaction);
-        }
-
-        transaction = new Transaction("PROCESSED", user, couponLeatherPer, "17/02/2022", addCamisa);
-        if(!couponService.applyCoupon(transaction)) {
-            transactionRepository.save(transaction);
-		}
 		
-		transaction = new Transaction("PROCESSED", user, coupon3x2, "17/02/2022", productList);
-		if(!couponService.applyCoupon(transaction)) {
-			transactionRepository.save(transaction);
+		Transaction transaction3 = new Transaction("PROCESSED", user, coupon3x2, "17/02/2022", productListTransaction3);
+		if(!couponService.applyCoupon(transaction3)) {
+			transactionRepository.save(transaction3);
 		}
 
-		transaction = new Transaction("PROCESSED", user, couponLeatherPer, "17/02/2022", productList);
-		if(!couponService.applyCoupon(transaction)) {
-			transactionRepository.save(transaction);
+		Transaction transaction4 = new Transaction("PROCESSED", user, couponLeatherPer, "17/02/2022", productListTransaction4);
+		if(!couponService.applyCoupon(transaction4)) {
+			transactionRepository.save(transaction4);
 		}
 
-		transaction = new Transaction("PROCESSED", user, couponLeatherTot, "17/02/2022", productList);
-		if(!couponService.applyCoupon(transaction)) {
-			transactionRepository.save(transaction);
+		Transaction transaction5 = new Transaction("PROCESSED", user, couponLeatherTot, "17/02/2022", productListTransaction5);
+		if(!couponService.applyCoupon(transaction5)) {
+			transactionRepository.save(transaction5);
 		}
 
-		transaction = new Transaction("WISHLIST", user, null, "24/02/2022", affectedProducts);
-		transactionRepository.save(transaction);
-
-		transaction = new Transaction("CART", user, null, "24/02/2022", productList);
-		transactionRepository.save(transaction);
+		Transaction transaction6 = new Transaction("PROCESSED", user, null, "17/02/2022", productListTransaction6);
+		transactionRepository.save(transaction6);
 		
+		Transaction transaction7 = new Transaction("PROCESSED", user, null, "01/13/2022",productListTransaction7);
+		transactionRepository.save(transaction7);
+
+		Transaction transaction8 = new Transaction("PROCESSED", user, null, "01/13/2022",productListTransaction8);
+		transactionRepository.save(transaction8);
+
+		Transaction transaction9 = new Transaction("PROCESSED", user, null, "01/13/2022",productListTransaction9);
+		transactionRepository.save(transaction9);
+
+		Transaction transaction10 = new Transaction("PROCESSED", user, null, "01/13/2022",productListTransaction10);
+		transactionRepository.save(transaction10);
+
+		Transaction transaction11 = new Transaction("PROCESSED", user, null, "01/13/2022",productListTransaction11);
+		transactionRepository.save(transaction11);
+
+		Transaction transaction12 = new Transaction("PROCESSED", user, null, "01/13/2022",productListTransaction12);
+		transactionRepository.save(transaction12);
+
+		Transaction wishList = new Transaction("WISHLIST", user, null, "24/02/2022", productListWishList);
+		transactionRepository.save(wishList);
+
+		Transaction cart = new Transaction("CART", user, null, "24/02/2022", productListCart);
+		transactionRepository.save(cart);		
 	}
-	
 }
