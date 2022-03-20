@@ -127,36 +127,75 @@ public class DatabaseInitializer {
 		productRepository.save(happy_jaccket_L);
 		productRepository.save(happy_jaccket_XL);
 
-		
-	
 
 		// Coupons
 
-		Product leather_coat = new Product("Leather Coat (Softwear)", "Test Product", 10.00, 2L, ProductSize.M, lista1);
-		List<Product> affectedProducts = new ArrayList<>();
-		affectedProducts.add(leather_coat);
-		productRepository.save(leather_coat);
-		productRepository.save(new Product("Leather Coat (Softwear)", "Test Product", 10.00, 21L, ProductSize.L, lista1));
+		List<Product> productListA = new ArrayList<>();
 
-		Coupon coupon = new Coupon("ASTONISHOFFER", "total_percentage", "15/02/2022", "26/06/2022", 0f, 0.5f, null);
-		Coupon coupon2x1 = new Coupon("2X1", "2x1", "13/02/2022", "26/06/2022", null, null, affectedProducts);
-		Coupon coupon3x2 = new Coupon("TAKEALOOK3X2", "3x2", "12/02/2022", "22/02/2022", null, null, affectedProducts);
-		Coupon couponLeatherPer = new Coupon("I<3LEATHER", "product_percentage", "15/02/2022", "15/06/2022", null, 0.4f, affectedProducts);
-		Coupon couponLeatherTot = new Coupon("10LEATHER", "product_amount", "15/02/2022", "15/06/2022", null, 4.5f, affectedProducts);
+		productListA.add(puffer_jacket_XS);
+		productListA.add(puffer_jacket_S);
+		productListA.add(puffer_jacket_M);
+		productListA.add(puffer_jacket_L);
+		productListA.add(puffer_jacket_XL);
 
-		couponRepository.save(new Coupon("10PER", "total_percentage", "15/02/2022", "26/06/2022", 10.00f, 0.1f, null));
-		couponRepository.save(new Coupon("GIVEME10", "total_amount", "15/02/2022", "26/02/2022", 10.00f, 2.5f, null));
-		couponRepository.save(coupon2x1);
-		couponRepository.save(coupon3x2);
-		couponRepository.save(couponLeatherPer);
-		couponRepository.save(couponLeatherTot);
-		couponRepository.save(coupon);
+		List<Product> productListB = new ArrayList<>();
+
+		productListB.add(puffer_jacket_XS);
+		productListB.add(puffer_jacket_S);
+		productListB.add(puffer_jacket_M);
+		productListB.add(puffer_jacket_L);
+		productListB.add(puffer_jacket_XL);
+		productListB.add(happy_jaccket_XS);
+		productListB.add(happy_jaccket_S);
+		productListB.add(happy_jaccket_M);
+		productListB.add(happy_jaccket_L);
+		productListB.add(happy_jaccket_XL);
+
+		Coupon globalDiscount50 = new Coupon("ASTONISHOFFER", "total_percentage", "15/02/2022", "26/06/2022", 0f, 0.5f, null);
+		Coupon twoXone = new Coupon("2X1", "2x1", "13/02/2022", "26/06/2022", null, null, productListA);
+		Coupon threeXtwo = new Coupon("TAKEALOOK3X2", "3x2", "12/02/2022", "22/02/2022", null, null, productListA);
+		Coupon productListADiscount = new Coupon("I<3LEATHER", "product_percentage", "15/02/2022", "15/06/2022", null, 0.4f, productListA);
+		Coupon freeSelected = new Coupon("FREESELECTEDA", "product_amount", "15/02/2022", "15/06/2022", null, 4.5f, productListA);
+		Coupon globalDiscount10 = new Coupon("10PER", "total_percentage", "15/02/2022", "26/06/2022", 10.00f, 0.1f, null);
+		Coupon getTen = new Coupon("GIVEME10", "total_amount", "15/02/2022", "26/02/2022", 10.00f, 2.5f, null);
+		
+		couponRepository.save(globalDiscount50);
+		couponRepository.save(twoXone);
+		couponRepository.save(threeXtwo);
+		couponRepository.save(productListADiscount);
+		couponRepository.save(freeSelected);
+		couponRepository.save(globalDiscount10);
+		couponRepository.save(getTen);
+
 
 		// Transactions
 
-		List<Product> productList = new ArrayList<>();
-		for(int i=0; i<3; i++) {
-			productList.add(leather_coat);
+		List<Product> productListTransaction1 = new ArrayList<>();
+		productListTransaction1.add(puffer_jacket_XS);
+		productListTransaction1.add(puffer_jacket_S);
+		productListTransaction1.add(puffer_jacket_L);
+
+
+		List<Product> productListTransaction2 = new ArrayList<>();
+		productListTransaction2.add(cowboy_jacket_M);
+
+		List<Product> productListTransaction3 = new ArrayList<>();
+
+		List<Product> productListTransaction4 = new ArrayList<>();
+		List<Product> productListTransaction5 = new ArrayList<>();
+		List<Product> productListTransaction6 = new ArrayList<>();
+		List<Product> productListTransaction7 = new ArrayList<>();
+		List<Product> productListTransaction8 = new ArrayList<>();
+		List<Product> productListTransaction9 = new ArrayList<>();
+		List<Product> productListTransaction10 = new ArrayList<>();
+		List<Product> productListTransaction11 = new ArrayList<>();
+		List<Product> productListTransaction12 = new ArrayList<>();
+
+		List<Product> productListwishList = new ArrayList<>();
+		List<Product> productListCart = new ArrayList<>();
+
+		for(int i=0; i<2; i++) {
+			puffer_jacket_S
 		}
 
 		List<Product> addCamisa = new ArrayList<>();

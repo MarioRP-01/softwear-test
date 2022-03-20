@@ -91,8 +91,8 @@ public class Product{
 		return imgs;
 	}
 
-	public void setImgs(ArrayList<File> img_routes) {
-		this.imgs = imgs;
+	public void setImgs(ArrayList<File> imgs) {
+		imgs.addAll(this.imgs);
 	}
 
 	public ProductSize getSize() {
