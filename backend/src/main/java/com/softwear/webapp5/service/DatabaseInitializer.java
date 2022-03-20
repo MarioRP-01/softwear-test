@@ -47,29 +47,87 @@ public class DatabaseInitializer {
 
 		// Users
 		ShopUser user = new ShopUser("user", "user@user.com", "User", "Softwear", passwordEncoder.encode("pass"), "User Street 1", 654987321, "01/01/2000", "USER");
-		userRepository.save(new ShopUser("admin", "admin@admin.com", "Administrator", "Softwear", passwordEncoder.encode("pass"), "Admin Street 1", 654321987, "01/01/2000", "ADMIN"));
+		ShopUser admin = new ShopUser("admin", "admin@admin.com", "Administrator", "Softwear", passwordEncoder.encode("pass"), "Admin Street 1", 654321987, "01/01/2000", "ADMIN");
+		userRepository.save(admin);
 		userRepository.save(user);
 
-		ArrayList<File> lista1 = new ArrayList<>();
-		ArrayList<File> lista2 = new ArrayList<>();
-		ArrayList<File> lista3 = new ArrayList<>();
+		ArrayList<File> imgsItem1 = new ArrayList<>();
+		ArrayList<File> imgsItem2 = new ArrayList<>();
+		ArrayList<File> imgsItem3 = new ArrayList<>();
+		ArrayList<File> imgsItem4 = new ArrayList<>();
+		ArrayList<File> imgsItem5 = new ArrayList<>();
+		ArrayList<File> imgsItem6 = new ArrayList<>();
+		ArrayList<File> imgsItem7 = new ArrayList<>();
+		ArrayList<File> imgsItem9 = new ArrayList<>();
+		ArrayList<File> imgsItem10 = new ArrayList<>();
+		ArrayList<File> imgsItem11 = new ArrayList<>();
+		ArrayList<File> imgsItem12 = new ArrayList<>();
+		ArrayList<File> imgsItem13 = new ArrayList<>();
+		ArrayList<File> imgsItem14 = new ArrayList<>();
 
-		lista1.add(new File("item1.webp"));
-		lista1.add(new File("item2.webp"));
-		lista1.add(new File("item3.webp"));
+		imgsItem1.add(new File("item1.webp"));
+		imgsItem2.add(new File("item2.webp"));
+		imgsItem3.add(new File("item3.webp"));
+		imgsItem4.add(new File("item4.webp"));
+		imgsItem5.add(new File("item5.webp"));
 
-		lista2.add(new File("item4.webp"));
-		lista2.add(new File("item5.webp"));
-		lista2.add(new File("item6.webp"));
+		String description_puffer_jacket = "";
 
-		lista3.add(new File("item7.webp"));
-		lista3.add(new File("item8.webp"));
+		Product puffer_jacket_XS = new Product("Puffer jacket", description_puffer_jacket, 45, (long) 13, ProductSize.XS, imgsItem1);
+		Product puffer_jacket_S = new Product("Puffer jacket", description_puffer_jacket, 45, (long) 99, ProductSize.S, imgsItem1);
+		Product puffer_jacket_M = new Product("Puffer jacket", description_puffer_jacket, 45, (long) 23, ProductSize.M, imgsItem1);
+		Product puffer_jacket_L = new Product("Puffer jacket", description_puffer_jacket, 45, (long) 109, ProductSize.L, imgsItem1);
+		Product puffer_jacket_XL = new Product("Puffer jacket", description_puffer_jacket, 45, (long) 0, ProductSize.XL, imgsItem1);
 
-		Product camisa = new Product("camisa", "es cómoda", 10, (long) 156, ProductSize.XL, lista1);
+		productRepository.save(puffer_jacket_XS);
+		productRepository.save(puffer_jacket_S);
+		productRepository.save(puffer_jacket_M);
+		productRepository.save(puffer_jacket_L);
+		productRepository.save(puffer_jacket_XL);
 
-		productRepository.save(camisa);
-		productRepository.save(new Product("chaqueta", "está cómoda", 20, (long) 156, ProductSize.XS, lista2));
-		productRepository.save(new Product("pantalón", "ufff", 15, (long) 156, ProductSize.S, lista3));
+		String description_cowboy_jacket = "";
+
+		Product cowboy_jacket_XS = new Product("Cowboy jacket", description_cowboy_jacket, 60, (long) 6, ProductSize.XS, imgsItem2);
+		Product cowboy_jacket_S = new Product("Cowboy jacket", description_cowboy_jacket, 60, (long) 8, ProductSize.S, imgsItem2);
+		Product cowboy_jacket_M = new Product("Cowboy jacket", description_cowboy_jacket, 60, (long) 44, ProductSize.M, imgsItem2);
+		Product cowboy_jacket_L = new Product("Cowboy jacket", description_cowboy_jacket, 60, (long) 0, ProductSize.L, imgsItem2);
+		Product cowboy_jacket_XL = new Product("Cowboy jacket", description_cowboy_jacket, 60, (long) 2, ProductSize.XL, imgsItem2);
+
+		productRepository.save(cowboy_jacket_XS);
+		productRepository.save(cowboy_jacket_S);
+		productRepository.save(cowboy_jacket_M);
+		productRepository.save(cowboy_jacket_L);
+		productRepository.save(cowboy_jacket_XL);
+
+		String description_Facha_jacket = "";
+
+		Product facha_jacket_XS = new Product("Facha jacket", description_Facha_jacket, 40, (long) 10, ProductSize.XS, imgsItem3);
+		Product facha_jacket_S = new Product("Facha jacket", description_Facha_jacket, 40, (long) 45, ProductSize.S, imgsItem3);
+		Product facha_jacket_M = new Product("Facha jacket", description_Facha_jacket, 40, (long) 0, ProductSize.M, imgsItem3);
+		Product facha_jacket_L = new Product("Facha jacket", description_Facha_jacket, 40, (long) 2, ProductSize.L, imgsItem3);
+		Product facha_jacket_XL = new Product("Facha jacket", description_Facha_jacket, 40, (long) 7, ProductSize.XL, imgsItem3);
+
+		productRepository.save(facha_jacket_XS);
+		productRepository.save(facha_jacket_S);
+		productRepository.save(facha_jacket_M);
+		productRepository.save(facha_jacket_L);
+		productRepository.save(facha_jacket_XL);
+
+		String description_Happy_jacket = "";
+
+		Product happy_jaccket_XS = new Product("Happy jacket", description_Happy_jacket, 55, (long) 2, ProductSize.XS, imgsItem4);
+		Product happy_jaccket_S = new Product("Happy jacket", description_Happy_jacket, 55, (long) 0, ProductSize.S, imgsItem4);
+		Product happy_jaccket_M = new Product("Happy jacket", description_Happy_jacket, 55, (long) 0, ProductSize.M, imgsItem4);
+		Product happy_jaccket_L = new Product("Happy jacket", description_Happy_jacket, 55, (long) 1, ProductSize.L, imgsItem4);
+		Product happy_jaccket_XL = new Product("Happy jacket", description_Happy_jacket, 55, (long) 4, ProductSize.XL, imgsItem4);
+
+		productRepository.save(happy_jaccket_XS);
+		productRepository.save(happy_jaccket_S);
+		productRepository.save(happy_jaccket_M);
+		productRepository.save(happy_jaccket_L);
+		productRepository.save(happy_jaccket_XL);
+
+		
 	
 
 		// Coupons
