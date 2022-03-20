@@ -140,6 +140,23 @@ public class Product{
 	}
 
 	public Blob getImageFile(int imageIndex) {
-		return (Blob) imgs.get(imageIndex);
+		return (Blob) imageFiles.get(imageIndex);
 	}
+
+	public void setImageFile(int imageIndex, Blob image) {
+		if(imageFiles.size() > imageIndex) {
+			imageFiles.set(imageIndex, image);
+		}
+	}
+
+	public void addImageFile(Blob image) {
+		imageFiles.add(image);
+	}
+
+	public void removeImageFile(int imageIndex) {
+		if(imageFiles.size() > imageIndex) {
+			imageFiles.remove(imageIndex);
+		}
+	}
+
 }
