@@ -56,14 +56,14 @@ public class DatabaseInitializer {
 		ArrayList<File> imgsItem3 = new ArrayList<>();
 		ArrayList<File> imgsItem4 = new ArrayList<>();
 		ArrayList<File> imgsItem5 = new ArrayList<>();
-		ArrayList<File> imgsItem6 = new ArrayList<>();
-		ArrayList<File> imgsItem7 = new ArrayList<>();
-		ArrayList<File> imgsItem9 = new ArrayList<>();
-		ArrayList<File> imgsItem10 = new ArrayList<>();
-		ArrayList<File> imgsItem11 = new ArrayList<>();
-		ArrayList<File> imgsItem12 = new ArrayList<>();
-		ArrayList<File> imgsItem13 = new ArrayList<>();
-		ArrayList<File> imgsItem14 = new ArrayList<>();
+//		ArrayList<File> imgsItem6 = new ArrayList<>();
+//		ArrayList<File> imgsItem7 = new ArrayList<>();
+//		ArrayList<File> imgsItem9 = new ArrayList<>();
+//		ArrayList<File> imgsItem10 = new ArrayList<>();
+//		ArrayList<File> imgsItem11 = new ArrayList<>();
+//		ArrayList<File> imgsItem12 = new ArrayList<>();
+//		ArrayList<File> imgsItem13 = new ArrayList<>();
+//		ArrayList<File> imgsItem14 = new ArrayList<>();
 
 		imgsItem1.add(new File("item1.webp"));
 		imgsItem2.add(new File("item2.webp"));
@@ -365,6 +365,9 @@ public class DatabaseInitializer {
 
 
 		List<Product> productListTransaction3 = new ArrayList<>();
+		for (int i=0; i<3; i++){
+			productListTransaction2.add(puffer_jacket_XL);	
+		}
 		productListTransaction3.add(facha_jacket_XL);
 		productListTransaction3.add(arizona_jeans_L);
 
@@ -433,17 +436,17 @@ public class DatabaseInitializer {
             transactionRepository.save(transaction2);
         }
 		
-		Transaction transaction3 = new Transaction("PROCESSED", user, coupon3x2, "17/02/2022", productListTransaction3);
+		Transaction transaction3 = new Transaction("PROCESSED", user, threeXtwo, "17/02/2022", productListTransaction3);
 		if(!couponService.applyCoupon(transaction3)) {
 			transactionRepository.save(transaction3);
 		}
 
-		Transaction transaction4 = new Transaction("PROCESSED", user, couponLeatherPer, "17/02/2022", productListTransaction4);
+		Transaction transaction4 = new Transaction("PROCESSED", user, globalDiscount10, "17/02/2022", productListTransaction4);
 		if(!couponService.applyCoupon(transaction4)) {
 			transactionRepository.save(transaction4);
 		}
 
-		Transaction transaction5 = new Transaction("PROCESSED", user, couponLeatherTot, "17/02/2022", productListTransaction5);
+		Transaction transaction5 = new Transaction("PROCESSED", user, getTen, "17/02/2022", productListTransaction5);
 		if(!couponService.applyCoupon(transaction5)) {
 			transactionRepository.save(transaction5);
 		}
@@ -473,6 +476,6 @@ public class DatabaseInitializer {
 		transactionRepository.save(wishList);
 
 		Transaction cart = new Transaction("CART", user, null, "24/02/2022", productListCart);
-		transactionRepository.save(cart);		
+		transactionRepository.save(cart);
 	}
 }
