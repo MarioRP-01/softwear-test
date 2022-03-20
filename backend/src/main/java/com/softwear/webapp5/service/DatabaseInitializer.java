@@ -127,13 +127,13 @@ public class DatabaseInitializer {
 		productRepository.save(happy_jaccket_L);
 		productRepository.save(happy_jaccket_XL);
 
-		String description_longsleeves_shirt = "";
+		String description_longsleeves_shirt = "Oversize shirt in grey with round neck and long sleeves";
 
-		Product longsleeves_XS = new Product("Long sleeves shirt", "Oversize shirt in grey with round neck and long sleeves", 35, (long) 19, ProductSize.XS, null);
-		Product longsleeves_S = new Product("Long sleeves shirt", "Oversize shirt in grey with round neck and long sleeves", 35, (long) 32, ProductSize.S, null);
-		Product longsleeves_M = new Product("Long sleeves shirt", "Oversize shirt in grey with round neck and long sleeves", 35, (long) 61, ProductSize.M, null);
-		Product longsleeves_L = new Product("Long sleeves shirt", "Oversize shirt in grey with round neck and long sleeves", 35, (long) 3, ProductSize.L, null);
-		Product longsleeves_XL = new Product("Long sleeves shirt", "Oversize shirt in grey with round neck and long sleeves", 35, (long) 40, ProductSize.XL, null);
+		Product longsleeves_XS = new Product("Long sleeves shirt", description_longsleeves_shirt, 35, (long) 19, ProductSize.XS, null);
+		Product longsleeves_S = new Product("Long sleeves shirt", description_happy_jacket, 35, (long) 32, ProductSize.S, null);
+		Product longsleeves_M = new Product("Long sleeves shirt", description_happy_jacket, 35, (long) 61, ProductSize.M, null);
+		Product longsleeves_L = new Product("Long sleeves shirt", description_happy_jacket, 35, (long) 3, ProductSize.L, null);
+		Product longsleeves_XL = new Product("Long sleeves shirt", description_happy_jacket, 35, (long) 40, ProductSize.XL, null);
 
 		productRepository.save(longsleeves_XS);
 		productRepository.save(longsleeves_S);
@@ -141,13 +141,13 @@ public class DatabaseInitializer {
 		productRepository.save(longsleeves_L);
 		productRepository.save(longsleeves_XL);
 
-		String description_paris_shirt = "";
+		String description_paris_shirt = "Black shirt with Paris logo and simple style";
 
-		Product paris_shirt_XS = new Product("Paris shirt", "Black shirt with Paris logo and simple style", 31, (long) 50, ProductSize.XS, null);
-		Product paris_shirt_S = new Product("Paris shirt", "Black shirt with Paris logo and simple style", 31, (long) 21, ProductSize.S, null);
-		Product paris_shirt_M = new Product("Paris shirt", "Black shirt with Paris logo and simple style", 31, (long) 29, ProductSize.M, null);
-		Product paris_shirt_L = new Product("Paris shirt", "Black shirt with Paris logo and simple style", 31, (long) 35, ProductSize.L, null);
-		Product paris_shirt_XL = new Product("Paris shirt", "Black shirt with Paris logo and simple style", 31, (long) 54, ProductSize.XL, null);
+		Product paris_shirt_XS = new Product("Paris shirt", description_paris_shirt, 31, (long) 50, ProductSize.XS, null);
+		Product paris_shirt_S = new Product("Paris shirt", description_paris_shirt, 31, (long) 21, ProductSize.S, null);
+		Product paris_shirt_M = new Product("Paris shirt", description_paris_shirt, 31, (long) 29, ProductSize.M, null);
+		Product paris_shirt_L = new Product("Paris shirt", description_paris_shirt, 31, (long) 35, ProductSize.L, null);
+		Product paris_shirt_XL = new Product("Paris shirt", description_paris_shirt, 31, (long) 54, ProductSize.XL, null);
 
 		productRepository.save(paris_shirt_XS);
 		productRepository.save(paris_shirt_S);
@@ -155,13 +155,13 @@ public class DatabaseInitializer {
 		productRepository.save(paris_shirt_L);
 		productRepository.save(paris_shirt_XL);
 
-		String description_black_body = "";
+		String description_black_body = "Black and adjusted body with asymetric sleeves";
 
-		Product black_body_XS = new Product("Black body", "Black and adjusted body with asymetric sleeves", 40, (long) 70, ProductSize.XS, null);
-		Product black_body_S = new Product("Black body", "Black and adjusted body with asymetric sleeves", 40, (long) 31, ProductSize.S, null);
-		Product black_body_M = new Product("Black body", "Black and adjusted body with asymetric sleeves", 40, (long) 46, ProductSize.M, null);
-		Product black_body_L = new Product("Black body", "Black and adjusted body with asymetric sleeves", 40, (long) 30, ProductSize.L, null);
-		Product black_body_XL = new Product("Black body", "Black and adjusted body with asymetric sleeves", 40, (long) 44, ProductSize.XL, null);
+		Product black_body_XS = new Product("Black body", description_black_body, 40, (long) 70, ProductSize.XS, null);
+		Product black_body_S = new Product("Black body", description_black_body, 40, (long) 31, ProductSize.S, null);
+		Product black_body_M = new Product("Black body", description_black_body, 40, (long) 46, ProductSize.M, null);
+		Product black_body_L = new Product("Black body", description_black_body, 40, (long) 30, ProductSize.L, null);
+		Product black_body_XL = new Product("Black body", description_black_body, 40, (long) 44, ProductSize.XL, null);
 
 		productRepository.save(black_body_XS);
 		productRepository.save(black_body_S);
@@ -169,13 +169,13 @@ public class DatabaseInitializer {
 		productRepository.save(black_body_L);
 		productRepository.save(black_body_XL);
 
-		String description_black_shirt = "";
+		String description_black_shirt = "Black simple cotton made shirt";
 
-		Product black_shirt_XS = new Product("Black shirt", "Black simple cotton made shirt", 40, (long) 70, ProductSize.XS, null);
-		Product black_shirt_S = new Product("Black shirt", "Black simple cotton made shirt", 40, (long) 31, ProductSize.S, null);
-		Product black_shirt_M = new Product("Black shirt", "Black simple cotton made shirt", 40, (long) 46, ProductSize.M, null);
-		Product black_shirt_L = new Product("Black shirt", "Black simple cotton made shirt", 40, (long) 30, ProductSize.L, null);
-		Product black_shirt_XL = new Product("Black shirt", "Black simple cotton made shirt", 40, (long) 44, ProductSize.XL, null);
+		Product black_shirt_XS = new Product("Black shirt", description_black_shirt, 40, (long) 70, ProductSize.XS, null);
+		Product black_shirt_S = new Product("Black shirt", description_black_shirt, 40, (long) 31, ProductSize.S, null);
+		Product black_shirt_M = new Product("Black shirt", description_black_shirt, 40, (long) 46, ProductSize.M, null);
+		Product black_shirt_L = new Product("Black shirt", description_black_shirt, 40, (long) 30, ProductSize.L, null);
+		Product black_shirt_XL = new Product("Black shirt", description_black_shirt, 40, (long) 44, ProductSize.XL, null);
 
 		productRepository.save(black_body_XS);
 		productRepository.save(black_body_S);
@@ -183,13 +183,13 @@ public class DatabaseInitializer {
 		productRepository.save(black_body_L);
 		productRepository.save(black_body_XL);
 		
-		String description_arizona_jeans = "";
+		String description_arizona_jeans = "Straight high waisted jeans with zipper and rounded button";
 
-		Product arizona_jeans_XS = new Product("Arizona jeans", "Straight high waisted jeans with zipper and rounded button", 95, (long) 40, ProductSize.XS, null);
-		Product arizona_jeans_S = new Product("Arizona jeans", "Straight high waisted jeans with zipper and rounded button", 95, (long) 31, ProductSize.S, null);
-		Product arizona_jeans_M = new Product("Arizona jeans", "Straight high waisted jeans with zipper and rounded button", 95, (long) 10, ProductSize.M, null);
-		Product arizona_jeans_L = new Product("Arizona jeans", "Straight high waisted jeans with zipper and rounded button", 95, (long) 35, ProductSize.L, null);
-		Product arizona_jeans_XL = new Product("Arizona jeans", "Straight high waisted jeans with zipper and rounded button", 95, (long) 48, ProductSize.XL, null);
+		Product arizona_jeans_XS = new Product("Arizona jeans", description_arizona_jeans, 95, (long) 40, ProductSize.XS, null);
+		Product arizona_jeans_S = new Product("Arizona jeans", description_arizona_jeans, 95, (long) 31, ProductSize.S, null);
+		Product arizona_jeans_M = new Product("Arizona jeans", description_arizona_jeans, 95, (long) 10, ProductSize.M, null);
+		Product arizona_jeans_L = new Product("Arizona jeans", description_arizona_jeans, 95, (long) 35, ProductSize.L, null);
+		Product arizona_jeans_XL = new Product("Arizona jeans", description_arizona_jeans, 95, (long) 48, ProductSize.XL, null);
 
 		productRepository.save(arizona_jeans_XS);
 		productRepository.save(arizona_jeans_S);
@@ -198,13 +198,13 @@ public class DatabaseInitializer {
 		productRepository.save(arizona_jeans_XL);
 
 		
-		String description_topos_dress = "";
+		String description_topos_dress = "Short and ruffled dress in blue with white topos";
 
-		Product topos_dress_XS = new Product("Topos dress", "Short and ruffled dress in blue with white topos", 72, (long) 12, ProductSize.XS, null);
-		Product topos_dress_S = new Product("Topos dress", "Short and ruffled dress in blue with white topos", 72, (long) 24, ProductSize.S, null);
-		Product topos_dress_M = new Product("Topos dress", "Short and ruffled dress in blue with white topos", 72, (long) 31, ProductSize.M, null);
-		Product topos_dress_L = new Product("Topos dress", "Short and ruffled dress in blue with white topos", 72, (long) 30, ProductSize.L, null);
-		Product topos_dress_XL = new Product("Topos dress", "Short and ruffled dress in blue with white topos", 72, (long) 68, ProductSize.XL, null);
+		Product topos_dress_XS = new Product("Topos dress", description_topos_dress, 72, (long) 12, ProductSize.XS, null);
+		Product topos_dress_S = new Product("Topos dress", description_topos_dress, 72, (long) 24, ProductSize.S, null);
+		Product topos_dress_M = new Product("Topos dress", description_topos_dress, 72, (long) 31, ProductSize.M, null);
+		Product topos_dress_L = new Product("Topos dress", description_topos_dress, 72, (long) 30, ProductSize.L, null);
+		Product topos_dress_XL = new Product("Topos dress", description_topos_dress, 72, (long) 68, ProductSize.XL, null);
 
 		productRepository.save(topos_dress_XS);
 		productRepository.save(topos_dress_S);
@@ -212,13 +212,13 @@ public class DatabaseInitializer {
 		productRepository.save(topos_dress_L);
 		productRepository.save(topos_dress_XL);
 
-		String description_winter_jacket = "";
+		String description_winter_jacket = "Black waterproof jacket with zipper. Made with goose feather";
 
-		Product winter_jacket_XS = new Product("Winter jacket", "Black waterproof jacket with zipper. Made with goose feather", 99, (long) 15, ProductSize.XS, null);
-		Product winter_jacket_S = new Product("Winter jacket", "Black waterproof jacket with zipper. Made with goose feather", 99, (long) 24, ProductSize.S, null);
-		Product winter_jacket_M = new Product("Winter jacket", "Black waterproof jacket with zipper. Made with goose feather", 99, (long) 34, ProductSize.M, null);
-		Product winter_jacket_L = new Product("Winter jacket", "Black waterproof jacket with zipper. Made with goose feather", 99, (long) 3, ProductSize.L, null);
-		Product winter_jacket_XL = new Product("Winter jacket", "Black waterproof jacket with zipper. Made with goose feather", 99, (long) 25, ProductSize.XL, null);
+		Product winter_jacket_XS = new Product("Winter jacket", description_winter_jacket, 99, (long) 15, ProductSize.XS, null);
+		Product winter_jacket_S = new Product("Winter jacket", description_winter_jacket, 99, (long) 24, ProductSize.S, null);
+		Product winter_jacket_M = new Product("Winter jacket", description_winter_jacket, 99, (long) 34, ProductSize.M, null);
+		Product winter_jacket_L = new Product("Winter jacket", description_winter_jacket, 99, (long) 3, ProductSize.L, null);
+		Product winter_jacket_XL = new Product("Winter jacket", description_winter_jacket, 99, (long) 25, ProductSize.XL, null);
 
 		productRepository.save(winter_jacket_XS);
 		productRepository.save(winter_jacket_S);
@@ -226,13 +226,13 @@ public class DatabaseInitializer {
 		productRepository.save(winter_jacket_L);
 		productRepository.save(winter_jacket_XL);
 
-		String description_creamy_pants = "";
+		String description_creamy_pants = "Creamy loose fit medium waisted pants";
 
-		Product creamy_pants_XS = new Product("Winter jacket", "Creamy loose fit medium waisted pants", 86, (long) 45, ProductSize.XS, null);
-		Product creamy_pants_S = new Product("Winter jacket", "Creamy loose fit medium waisted pants", 86, (long) 40, ProductSize.S, null);
-		Product creamy_pants_M = new Product("Winter jacket", "Creamy loose fit medium waisted pants", 86, (long) 16, ProductSize.M, null);
-		Product creamy_pants_L = new Product("Winter jacket", "Creamy loose fit medium waisted pants", 86, (long) 11, ProductSize.L, null);
-		Product creamy_pants_XL = new Product("Winter jacket", "Creamy loose fit medium waisted pants", 86, (long) 5, ProductSize.XL, null);
+		Product creamy_pants_XS = new Product("Winter jacket", description_creamy_pants, 86, (long) 45, ProductSize.XS, null);
+		Product creamy_pants_S = new Product("Winter jacket", description_creamy_pants, 86, (long) 40, ProductSize.S, null);
+		Product creamy_pants_M = new Product("Winter jacket", description_creamy_pants, 86, (long) 16, ProductSize.M, null);
+		Product creamy_pants_L = new Product("Winter jacket", description_creamy_pants, 86, (long) 11, ProductSize.L, null);
+		Product creamy_pants_XL = new Product("Winter jacket", description_creamy_pants, 86, (long) 5, ProductSize.XL, null);
 
 		productRepository.save(creamy_pants_XS);
 		productRepository.save(creamy_pants_S);
@@ -240,13 +240,13 @@ public class DatabaseInitializer {
 		productRepository.save(creamy_pants_L);
 		productRepository.save(creamy_pants_XL);
 
-		String description_oversize_hoodie = "";
+		String description_oversize_hoodie = "Basic hoodie in grey with hood and long sleeve";
 
-		Product oversize_hoodie_XS = new Product("Oversize hoodie", "Basic hoodie in grey with hood and long sleeve", 74, (long) 12, ProductSize.XS, null);
-		Product oversize_hoodie_S = new Product("Oversize hoodie", "Basic hoodie in grey with hood and long sleeve", 74, (long) 4, ProductSize.S, null);
-		Product oversize_hoodie_M = new Product("Oversize hoodie", "Basic hoodie in grey with hood and long sleeve", 74, (long) 16, ProductSize.M, null);
-		Product oversize_hoodie_L = new Product("Oversize hoodie", "Basic hoodie in grey with hood and long sleeve", 74, (long) 0, ProductSize.L, null);
-		Product oversize_hoodie_XL = new Product("Oversize hoodie", "Basic hoodie in grey with hood and long sleeve", 74, (long) 9, ProductSize.XL, null);
+		Product oversize_hoodie_XS = new Product("Oversize hoodie", description_oversize_hoodie, 74, (long) 12, ProductSize.XS, null);
+		Product oversize_hoodie_S = new Product("Oversize hoodie", description_oversize_hoodie, 74, (long) 4, ProductSize.S, null);
+		Product oversize_hoodie_M = new Product("Oversize hoodie", description_oversize_hoodie, 74, (long) 16, ProductSize.M, null);
+		Product oversize_hoodie_L = new Product("Oversize hoodie", description_oversize_hoodie, 74, (long) 0, ProductSize.L, null);
+		Product oversize_hoodie_XL = new Product("Oversize hoodie", description_oversize_hoodie, 74, (long) 9, ProductSize.XL, null);
 
 		productRepository.save(oversize_hoodie_XS);
 		productRepository.save(oversize_hoodie_S);
@@ -254,13 +254,13 @@ public class DatabaseInitializer {
 		productRepository.save(oversize_hoodie_L);
 		productRepository.save(oversize_hoodie_XL);
 
-		String description_yellow_set = "";
+		String description_yellow_set = "Yellow set with short sleeves and pocket shirt and short pants";
 
-		Product yellow_set_XS = new Product("Yellow set", "Yellow set with short sleeves and pocket shirt and short pants", 110, (long) 23, ProductSize.XS, null);
-		Product yellow_set_S = new Product("Yellow set", "Yellow set with short sleeves and pocket shirt and short pants", 110, (long) 0, ProductSize.S, null);
-		Product yellow_set_M = new Product("Yellow set", "Yellow set with short sleeves and pocket shirt and short pants", 110, (long) 15, ProductSize.M, null);
-		Product yellow_set_L = new Product("Yellow set", "Yellow set with short sleeves and pocket shirt and short pants", 110, (long) 3, ProductSize.L, null);
-		Product yellow_set_XL = new Product("Yellow set", "Yellow set with short sleeves and pocket shirt and short pants", 110, (long) 36, ProductSize.XL, null);
+		Product yellow_set_XS = new Product("Yellow set", description_yellow_set, 110, (long) 23, ProductSize.XS, null);
+		Product yellow_set_S = new Product("Yellow set", description_yellow_set, 110, (long) 0, ProductSize.S, null);
+		Product yellow_set_M = new Product("Yellow set", description_yellow_set, 110, (long) 15, ProductSize.M, null);
+		Product yellow_set_L = new Product("Yellow set", description_yellow_set, 110, (long) 3, ProductSize.L, null);
+		Product yellow_set_XL = new Product("Yellow set", description_yellow_set, 110, (long) 36, ProductSize.XL, null);
 
 		productRepository.save(yellow_set_XS);
 		productRepository.save(yellow_set_S);
@@ -268,13 +268,13 @@ public class DatabaseInitializer {
 		productRepository.save(yellow_set_L);
 		productRepository.save(yellow_set_XL);
 
-		String description_pocket_pants = "";
+		String description_pocket_pants = "Long short waisted troussers with pockets in pistachio tone";
 
-		Product pocket_pants_XS = new Product("Pocket pistachio pants", "Long short waisted troussers with pockets in pistachio tone", 84, (long) 37, ProductSize.XS, null);
-		Product pocket_pants_S = new Product("Pocket pistachio pants", "Long short waisted troussers with pockets in pistachio tone", 84, (long) 15, ProductSize.S, null);
-		Product pocket_pants_M = new Product("Pocket pistachio pants", "Long short waisted troussers with pockets in pistachio tone", 84, (long) 1, ProductSize.M, null);
-		Product pocket_pants_L = new Product("Pocket pistachio pants", "Long short waisted troussers with pockets in pistachio tone", 84, (long) 34, ProductSize.L, null);
-		Product pocket_pants_XL = new Product("Pocket pistachio pants", "Long short waisted troussers with pockets in pistachio tone", 84, (long) 6, ProductSize.XL, null);
+		Product pocket_pants_XS = new Product("Pocket pistachio pants", description_pocket_pants, 84, (long) 37, ProductSize.XS, null);
+		Product pocket_pants_S = new Product("Pocket pistachio pants", description_pocket_pants, 84, (long) 15, ProductSize.S, null);
+		Product pocket_pants_M = new Product("Pocket pistachio pants", description_pocket_pants, 84, (long) 1, ProductSize.M, null);
+		Product pocket_pants_L = new Product("Pocket pistachio pants", description_pocket_pants, 84, (long) 34, ProductSize.L, null);
+		Product pocket_pants_XL = new Product("Pocket pistachio pants", description_pocket_pants, 84, (long) 6, ProductSize.XL, null);
 
 		productRepository.save(pocket_pants_XS);
 		productRepository.save(pocket_pants_S);
@@ -282,13 +282,13 @@ public class DatabaseInitializer {
 		productRepository.save(pocket_pants_L);
 		productRepository.save(pocket_pants_XL);
 
-		String description_goodvibes_set = "";
+		String description_goodvibes_set = "White & green shirt and Good vibes logo complementing green sporty shorts";
 
-		Product goodvibes_set_XS = new Product("Good vibes set", "White & green shirt and Good vibes logo complementing green sporty shorts", 125, (long) 7, ProductSize.XS, null);
-		Product goodvibes_set_S = new Product("Good vibes set", "White & green shirt and Good vibes logo complementing green sporty shorts", 125, (long) 13, ProductSize.S, null);
-		Product goodvibes_set_M = new Product("Good vibes set", "White & green shirt and Good vibes logo complementing green sporty shorts", 125, (long) 4, ProductSize.M, null);
-		Product goodvibes_set_L = new Product("Good vibes set", "White & green shirt and Good vibes logo complementing green sporty shorts", 125, (long) 25, ProductSize.L, null);
-		Product goodvibes_set_XL = new Product("Good vibes set", "White & green shirt and Good vibes logo complementing green sporty shorts", 125, (long) 6, ProductSize.XL, null);
+		Product goodvibes_set_XS = new Product("Good vibes set", description_goodvibes_set, 125, (long) 7, ProductSize.XS, null);
+		Product goodvibes_set_S = new Product("Good vibes set", description_goodvibes_set, 125, (long) 13, ProductSize.S, null);
+		Product goodvibes_set_M = new Product("Good vibes set", description_goodvibes_set, 125, (long) 4, ProductSize.M, null);
+		Product goodvibes_set_L = new Product("Good vibes set", description_goodvibes_set, 125, (long) 25, ProductSize.L, null);
+		Product goodvibes_set_XL = new Product("Good vibes set", description_goodvibes_set, 125, (long) 6, ProductSize.XL, null);
 
 		productRepository.save(goodvibes_set_XS);
 		productRepository.save(goodvibes_set_S);
@@ -296,13 +296,13 @@ public class DatabaseInitializer {
 		productRepository.save(goodvibes_set_L);
 		productRepository.save(goodvibes_set_XL);
 		
-		String description_palmspring_shirt = "";
+		String description_palmspring_shirt = "Beige tshirt palmspring logo";
 
-		Product palmspring_shirt_XS = new Product("Palmspring set", "Beige tshirt palmspring logo", 43, (long) 26, ProductSize.XS, null);
-		Product palmspring_shirt_S = new Product("Palmspring set", "Beige tshirt palmspring logo", 43, (long) 3, ProductSize.S, null);
-		Product palmspring_shirt_M = new Product("Palmspring set", "Beige tshirt palmspring logo", 43, (long) 24, ProductSize.M, null);
-		Product palmspring_shirt_L = new Product("Palmspring set", "Beige tshirt palmspring logo", 43, (long) 5, ProductSize.L, null);
-		Product palmspring_shirt_XL = new Product("Palmspring set", "Beige tshirt palmspring logo", 43, (long) 16, ProductSize.XL, null);
+		Product palmspring_shirt_XS = new Product("Palmspring set", description_palmspring_shirt, 43, (long) 26, ProductSize.XS, null);
+		Product palmspring_shirt_S = new Product("Palmspring set", description_palmspring_shirt, 43, (long) 3, ProductSize.S, null);
+		Product palmspring_shirt_M = new Product("Palmspring set", description_palmspring_shirt, 43, (long) 24, ProductSize.M, null);
+		Product palmspring_shirt_L = new Product("Palmspring set", description_palmspring_shirt, 43, (long) 5, ProductSize.L, null);
+		Product palmspring_shirt_XL = new Product("Palmspring set", description_palmspring_shirt, 43, (long) 16, ProductSize.XL, null);
 
 		productRepository.save(palmspring_shirt_XS);
 		productRepository.save(palmspring_shirt_S);
@@ -361,17 +361,56 @@ public class DatabaseInitializer {
 		List<Product> productListTransaction2 = new ArrayList<>();
 		productListTransaction2.add(cowboy_jacket_M);
 
+
 		List<Product> productListTransaction3 = new ArrayList<>();
+		productListTransaction3.add(facha_jacket_XL);
+		productListTransaction3.add(arizona_jeans_L);
+
 
 		List<Product> productListTransaction4 = new ArrayList<>();
+		productListTransaction4.add(topos_dress_XS);
+		productListTransaction4.add(goodvibes_set_L);
+		productListTransaction4.add(palmspring_shirt_S);
+		productListTransaction4.add(palmspring_shirt_M);
+
+		
 		List<Product> productListTransaction5 = new ArrayList<>();
+		productListTransaction5.add(black_body_S);
+		productListTransaction5.add(paris_shirt_S);
+
+
 		List<Product> productListTransaction6 = new ArrayList<>();
+		productListTransaction6.add(pocket_pants_XL);
+		productListTransaction6.add(winter_jacket_L);
+		productListTransaction6.add(yellow_set_L);
+
+
 		List<Product> productListTransaction7 = new ArrayList<>();
+		productListTransaction7.add(winter_jacket_M);
+
+
 		List<Product> productListTransaction8 = new ArrayList<>();
+		productListTransaction8.add(longsleeves_M);
+		productListTransaction8.add(happy_jaccket_M);
+
+
 		List<Product> productListTransaction9 = new ArrayList<>();
+		productListTransaction9.add(oversize_hoodie_L);
+
+
 		List<Product> productListTransaction10 = new ArrayList<>();
+		productListTransaction10.add(oversize_hoodie_M);
+		productListTransaction10.add(oversize_hoodie_S);
+
+
 		List<Product> productListTransaction11 = new ArrayList<>();
+		productListTransaction11.add(pocket_pants_M);
+		productListTransaction11.add(facha_jacket_M);
+
+
 		List<Product> productListTransaction12 = new ArrayList<>();
+		productListTransaction12.add(creamy_pants_L);
+
 
 		List<Product> productListwishList = new ArrayList<>();
 		List<Product> productListCart = new ArrayList<>();
