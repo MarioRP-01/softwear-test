@@ -1,7 +1,10 @@
 package com.softwear.webapp5.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.lang.reflect.Field;
+import java.sql.Blob;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -24,6 +27,7 @@ import com.softwear.webapp5.service.ProductService;
 import com.softwear.webapp5.service.TransactionService;
 import com.softwear.webapp5.service.UserService;
 
+import org.hibernate.engine.jdbc.BlobProxy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +37,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/apiadmin")
@@ -88,21 +93,20 @@ public class RestAdminController {
     @PostMapping("/manageProducts")
     public Product products(@RequestParam String mode, @RequestParam(required = false) Long id, @RequestParam(required = false) String name, 
     @RequestParam(required = false) String description, @RequestParam(required = false) String price,
-    @RequestParam(required = false) String stock, @RequestParam(required = false) String size,
-    @RequestParam(required = false) ArrayList<File> imgs){
+    @RequestParam(required = false) String stock, @RequestParam(required = false) String size) {
         Logger log = LoggerFactory.getLogger(SampleLogController.class);
         log.info("llega");
         if(mode.equals("EDIT")){
             Optional<Product> oOldProduct = productService.findById(id);
             if(oOldProduct.isPresent()){
                 Product oldProduct = oOldProduct.get();
-                Product newProduct = new Product(name, description, Double.valueOf(price), Long.valueOf(stock), ProductSize.valueOf(size), imgs);
+                Product newProduct = new Product(name, description, Double.valueOf(price), Long.valueOf(stock), ProductSize.valueOf(size), null, null);
                 productService.updateInfo(oldProduct, newProduct);
                 log.info(String.valueOf(oldProduct.getId()));
                 return oldProduct;
             }
         }else if(mode.equals("ADD")){
-            Product newProduct = new Product(name, description, Double.valueOf(price), Long.valueOf(stock), ProductSize.valueOf(size), imgs);
+            Product newProduct = new Product(name, description, Double.valueOf(price), Long.valueOf(stock), ProductSize.valueOf(size), new ArrayList<>(), new ArrayList<>());
             productService.save(newProduct);
             return newProduct;
         }else if(mode.equals("DELETE")){
@@ -110,6 +114,34 @@ public class RestAdminController {
             return null;
         }
         return null;
+    }
+
+    @PostMapping("/manageProducts/{productId}/image/{imageIndex}")
+    public Product productImages(@PathVariable Long productId, @PathVariable int imageIndex, @RequestParam("img") MultipartFile img) throws IOException {
+        Product product = productService.findById(productId).get();
+        if(imageIndex < product.getImages().size()) {
+            product.setImageFile(imageIndex, BlobProxy.generateProxy(
+                    img.getInputStream(), img.getSize()));
+        } else {
+            imageIndex = product.getImages().size();
+            product.addImage("/product/" + product.getId() + "/image/" + imageIndex);
+            product.addImageFile(BlobProxy.generateProxy(
+                    img.getInputStream(), img.getSize()));
+        }
+        /*ArrayList<String> images = new ArrayList<>();
+        ArrayList<Blob> imageFiles = new ArrayList<>();
+        if(imgs != null){
+            for (int index = 0; index < imgs.size(); index++) {
+                MultipartFile imageFile = imgs.get(index);
+                images.add("/product/" + product.getId() + "/image/" + index);
+                imageFiles.add(BlobProxy.generateProxy(
+                        imageFile.getInputStream(), imageFile.getSize()));
+            }
+        }
+        product.setImages(images);
+        product.setImageFiles(imageFiles);*/
+        productService.save(product);
+        return product;
     }
 
     @GetMapping("/manageUsers/{pageNumber}")
