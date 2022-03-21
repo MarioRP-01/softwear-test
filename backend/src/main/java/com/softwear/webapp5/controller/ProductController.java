@@ -31,8 +31,8 @@ public class ProductController {
     @GetMapping("/productView/{id}")
     public String getProduct(@PathVariable long id, Model model) {
         Product product = productService.findById(id).orElseThrow();
-		File firstImg = productService.getFirstImg(product);
-		ArrayList<File> nonFirstImgs = productService.getNonFirstImgs(product);
+		String firstImg = productService.getFirstImage(product);
+		List<String> nonFirstImgs = productService.getNonFirstImages(product);
 		
 		List<ProductAvailabilityBySize> availableSizesStatus; 
 		availableSizesStatus = productService.getAvailableSizesStatus(product);

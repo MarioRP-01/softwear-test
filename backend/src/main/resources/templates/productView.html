@@ -1,14 +1,14 @@
 {{>header}}	
 	<div id="product-content-wrapper">
         <div class="product-column">
-            <img id=product-featured src="../assets/productos/{{product.imgs.0}}">
+            <img id=product-featured src="{{product.images.0}}">
 
             <div id="product-slide-wrapper" >
                 <img id="product-slideLeft" class="product-arrow" src="../assets/arrow-left.png">
                 <div id="product-slider">
-                    <img class="product-thumbnail product-active" src="../assets/productos/{{firstImg}}">
+                    <img class="product-thumbnail product-active" src="{{firstImg}}">
                     {{#nonFirstImgs}}
-                        <img class="product-thumbnail" src="../assets/productos/{{this}}">
+                        <img class="product-thumbnail" src="{{this}}">
                     {{/nonFirstImgs}}
                 </div>
                 <img id="product-slideRight" class="product-arrow" src="../assets/arrow-right.png">

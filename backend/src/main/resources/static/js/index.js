@@ -153,14 +153,14 @@ function more() {
         }).done(function (products) {
         	for(let i=0; i<products.length; i++) {
         		let product= products[i];
-        		let img= product.imgs[0].split("\\")[product.imgs[0].split("\\").length-1]
+        		let img= product.images[0];
         		$("#products").append("<div class=\"col mb-5\">\r\n"
         				+ "                        <div id=\"product-"+product.id+"\" class=\"card h-100 product\">\r\n"
         				+ "                            <meta class=\"product-id\" content=\""+product.id+"\"/>\r\n"
         				+ "                            <!-- Fav badge-->\r\n"
         				+ "                            <div id=\"product-"+product.id+"-fav-badge\" class=\"badge product-fav-badge bg-dark text-white position-absolute favIcon\" onclick=\"wishlist("+product.id+", '"+product.name+"')\"><i class=\"fa-solid fa-heart\"></i></div>\r\n"
         				+ "                            <!-- Product image-->\r\n"
-        				+ "                            <a href=\"/productView/"+product.id+"\"><img class=\"card-img-top\" src=\"../assets/productos/"+img+"\" alt=\"Product"+product.id+"\" /></a>\r\n"
+        				+ "                            <a href=\"/productView/"+product.id+"\"><img class=\"card-img-top\" src=\""+img+"\" alt=\"Product"+product.id+"\" /></a>\r\n"
         				+ "                            <!-- Product details-->\r\n"
         				+ "                            <div class=\"card-body p-4\">\r\n"
         				+ "                                <div class=\"text-center\">\r\n"

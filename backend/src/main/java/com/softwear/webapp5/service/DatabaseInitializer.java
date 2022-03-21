@@ -1,12 +1,16 @@
 package com.softwear.webapp5.service;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.sql.Blob;
 import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.repository.ProductRepository;
+import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -43,7 +47,7 @@ public class DatabaseInitializer {
 	private PasswordEncoder passwordEncoder;
 	
 	@PostConstruct
-	public void init() {
+	public void init() throws FileNotFoundException {
 
 		// Users
 		ShopUser user = new ShopUser("user", "user@user.com", "User", "Softwear", passwordEncoder.encode("pass"), "User Street 1", 654987321, "01/01/2000", "USER");
@@ -51,6 +55,12 @@ public class DatabaseInitializer {
 		userRepository.save(admin);
 		userRepository.save(user);
 
+		List<String> productImages1 = new ArrayList<>();
+		List<String> productImages2 = new ArrayList<>();
+		List<String> productImages3 = new ArrayList<>();
+		ArrayList<Blob> list1 = new ArrayList<>();
+		ArrayList<Blob> list2 = new ArrayList<>();
+		ArrayList<Blob> list3 = new ArrayList<>();
 		ArrayList<File> imgsItem1 = new ArrayList<>();
 		ArrayList<File> imgsItem2 = new ArrayList<>();
 		ArrayList<File> imgsItem3 = new ArrayList<>();
@@ -65,12 +75,27 @@ public class DatabaseInitializer {
 //		ArrayList<File> imgsItem13 = new ArrayList<>();
 //		ArrayList<File> imgsItem14 = new ArrayList<>();
 
+		productImages1.add("src/main/resources/static/assets/productos/item1.webp");
+		productImages1.add("src/main/resources/static/assets/productos/item2.webp");
+		productImages1.add("src/main/resources/static/assets/productos/item3.webp");
+		productImages2.add("src/main/resources/static/assets/productos/item4.webp");
+		productImages2.add("src/main/resources/static/assets/productos/item5.webp");
+		productImages2.add("src/main/resources/static/assets/productos/item6.webp");
+		productImages3.add("src/main/resources/static/assets/productos/item7.webp");
+		productImages3.add("src/main/resources/static/assets/productos/item8.webp");
 		imgsItem1.add(new File("item1.webp"));
 		imgsItem2.add(new File("item2.webp"));
 		imgsItem3.add(new File("item3.webp"));
 		imgsItem4.add(new File("item4.webp"));
 		imgsItem5.add(new File("item5.webp"));
 
+		for(int i = 0; i < productImages1.size(); i++) {
+			String image = productImages1.get(i);
+			File imageFile = new File(image);
+			list1.add(BlobProxy.generateProxy(
+					new FileInputStream(imageFile), imageFile.length()));
+			productImages1.set(i, "/product/1/image/" + i);
+		}
 		String description_puffer_jacket = "";
 
 		Product puffer_jacket_XS = new Product("Puffer jacket", description_puffer_jacket, 45, (long) 13, ProductSize.XS, imgsItem1);
@@ -312,7 +337,11 @@ public class DatabaseInitializer {
 
 		// Coupons
 
-		List<Product> productListA = new ArrayList<>();
+		Product leather_coat = new Product("Leather Coat (Softwear)", "Test Product", 10.00, 2L, ProductSize.M, productImages2, list2);
+		List<Product> affectedProducts = new ArrayList<>();
+		affectedProducts.add(leather_coat);
+		productRepository.save(leather_coat);
+		productRepository.save(new Product("Leather Coat (Softwear)", "Test Product", 10.00, 21L, ProductSize.L, productImages2, null));
 
 		productListA.add(puffer_jacket_XS);
 		productListA.add(puffer_jacket_S);
