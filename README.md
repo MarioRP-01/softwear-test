@@ -247,4 +247,5 @@ Among others, the more outstanding files are:
 * Product.java
 * ProductRepository.java
 * Databaseinitializer.java
+
 Also other files of the project. For further information about them, you should check commits filtering by our users.
