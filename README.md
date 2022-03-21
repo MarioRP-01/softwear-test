@@ -197,4 +197,30 @@ Project compilation:
 	then go to the browser and access https://localhost:8443/
 	-To stop the proccess, press Ctr+C, enter and "S".
 	
-	
+## Participation
+
+### Adrián
+
+I've been focused on transaction's block and coupon's block but I've been making changes and functions for nearly all classes.
+
+#### Important Commits
+
+Among others, the more outstanding commits are:
+* [Wishlist transaction](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/c933892be32c817ce1a583a67637f4fe3f2d3256): Donde se creó TransactionView.
+* [Added purchase history](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/2f0e982e571a3e7c8899af9075fa8f4c2e423b07)
+* [AJAX in Cart](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/4a582b5ce05bd9357f166c170a68b5e943e1059c)
+* [AJAX in Wishlist](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/1fc2f798529c074b1b42f8a1039fec2e63fff5cb)
+* [CSRF enabled (NOT STABLE)](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/e3570a268d569428e396abba310dd30f84f3b3b5)
+
+Those commits are develop versions of the files and they may have errors that have been fixed in other commits. For further information about it, you should check the version history of the file.
+
+#### Important Files
+
+Among others, the more outstanding files are:
+* [Transaction.java (com.softwear.webapp5.model.Transaction)](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/model/Transaction.java)
+* [Coupon.java (com.softwear.webapp5.model.Coupon)](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/model/Coupon.java)
+* [CouponService.java (com.softwear.webapp5.service.CouponService)](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/service/CouponService.java)
+* [TransactionController.java (com.softwear.webapp5.controller.TransactionController)](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/controller/TransactionController.java)
+* [TransactionRESTController.java (com.softwear.webapp5.controller.TransactionRESTController)](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/controller/TransactionRESTController.java)
+
+Apart from those files, i've been working on a lot of the project files. For further information about them, you should check commits filtering by my user.
