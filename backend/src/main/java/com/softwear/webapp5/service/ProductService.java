@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -60,13 +61,33 @@ public class ProductService {
 		}
 	}
 
-	public File getFirstImg(Product product){
-		return product.getImgs().get(0);
+	public String getFirstImage(Product product) {
+		if(product.getImages().size() > 0) {
+			return product.getImage(0);
+		}
+		return "";
 	}
 
-	public ArrayList<File> getNonFirstImgs(Product product){
-		ArrayList<File> copiedArrayList = (ArrayList<File>) product.getImgs().clone();
-		copiedArrayList.remove(0);
+	public Blob getFirstImageFile(Product product){
+		if(product.getImageFiles().size() > 0){
+			return product.getImageFile(0);
+		}
+		return null;
+	}
+
+	public List<String> getNonFirstImages(Product product) {
+		List<String> listCopy = new ArrayList<>(product.getImages());
+		if(listCopy.size() > 0) {
+			listCopy.remove(0);
+		}
+		return listCopy;
+	}
+
+	public ArrayList<Blob> getNonFirstImageFiles(Product product){
+		ArrayList<Blob> copiedArrayList = new ArrayList<>(product.getImageFiles());
+		if (copiedArrayList.size() > 0) {
+			copiedArrayList.remove(0);
+		}
 		return copiedArrayList;
 	}
 
@@ -100,7 +121,6 @@ public class ProductService {
 		oldProduct.setPrice(u.getPrice());
 		oldProduct.setStock(u.getStock());
 		oldProduct.setSize(u.getSize());
-		oldProduct.setImgs(u.getImgs());
 		save(oldProduct);
 	}
 
