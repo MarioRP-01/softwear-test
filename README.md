@@ -155,6 +155,11 @@ Property list of each entity:
 	* Use: registered
 	* Owner: registered
 
+## Diagrams
+![navitagion_diagram.jpeg](readmeAssets/navitagion_diagram.jpeg)
+![entity_diagram](readmeAssets/entity_diagram.jpeg)
+![class_diagram](readmeAssets/class_diagram.jpeg)
+
 ## Algorithms
 
 Our app tracks the least favorite products and calculates a discount for them based on their popularity ranking and a minimum price every product has.
