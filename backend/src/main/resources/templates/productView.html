@@ -1,0 +1,69 @@
+{{>header}}	
+	<div id="product-content-wrapper">
+        <div class="product-column">
+            <img id=product-featured src="../assets/productos/{{product.imgs.0}}">
+
+            <div id="product-slide-wrapper" >
+                <img id="product-slideLeft" class="product-arrow" src="../assets/arrow-left.png">
+                <div id="product-slider">
+                    <img class="product-thumbnail product-active" src="../assets/productos/{{firstImg}}">
+                    {{#nonFirstImgs}}
+                        <img class="product-thumbnail" src="../assets/productos/{{this}}">
+                    {{/nonFirstImgs}}
+                </div>
+                <img id="product-slideRight" class="product-arrow" src="../assets/arrow-right.png">
+            </div>
+        </div>
+
+        <div class="product-column container">
+            <div class="row"><h1 class="softFont product-name">{{product.name}}</h1></div>
+            <hr>
+            <div class="row">
+                <div class="col-3 rounded pt-1 text-center"><h3 class="fs-4 softFont">${{product.price}}</h3></div>
+                {{#inStock}}
+                    {{#lowStock}}
+                        <div class="product-stock col-6 rounded p-1 text-center fs-5 bg-warning softFont">Low Stock: Only {{product.stock}} units available</div>
+                    {{/lowStock}}
+                    {{^lowStock}}
+                        <div class="product-stock col-6 rounded p-1 text-center text-white fs-4 bg-success softFont">In Stock</div>
+                    {{/lowStock}}
+                {{/inStock}}
+                {{^inStock}}
+                    <div class="product-stock col-6 rounded p-1 text-center text-white fs-4 bg-danger softFont">Out of Stock</div>
+                {{/inStock}}
+            </div>
+            <div class="pick-size row">
+                {{#availableSizesStatus}}
+                    {{#this.availableSize}}
+                    <div id="btn-size-{{this.size}}" class="product-size col-1 btn btn-outline-dark m-0" onclick="changeSize('{{this.size}}')">{{this.size}}</div>
+                    {{/this.availableSize}}
+
+                    {{^this.availableSize}}
+                    <div type="button" class="col-1 btn btn-outline-secondary disabled m-0">{{this.size}}</div>
+                    {{/this.availableSize}}
+                {{/availableSizesStatus}}
+            </div>
+            <div class="row"><p class="product-description">{{product.description}}</p></div>
+            {{#logged}}
+            <form id="cart-form" method="post" action="/cart">
+                <div class="row">
+                    <div id="fav-btn" class="col-1 btn btn-outline-dark mx-1 {{#inWishlist}}bg-dark text-white{{/inWishlist}}" onclick="wishlist({{product.id}}, '{{product.name}}')"><i class="fa-solid fa-heart"></i></div>
+                    <button id="cart-btn" class="col-8 btn btn-outline-dark text-uppercase fw-bolder {{^inStock}}disabled{{/inStock}}" type="submit"><i class="bi-cart-fill"> Add to cart</i></button>
+                    <div class="col-2"><input class="rounded w-100 h-100 border-dark text-center softFont fw-bold" name="quantity" type="number" id="quantity" min="1" value="1">
+                        <input type="hidden" name="id" value="{{product.id}}"></div>
+                </div>
+            </form>
+            <div id="msg-label" class="row softFont my-2 p-1">
+                <div id="cart-add-label" class="msg-label col-10 rounded m-0 bg-success fs-4 text-center text-white fw-bold">Added to Cart</div>
+                <div id="wishlist-add-label" class="msg-label col-10 rounded m-0 bg-success fs-4 text-center text-white fw-bold">Added to Wishlist</div>
+                <div id="wishlist-remove-label" class="msg-label col-10 rounded m-0 bg-danger fs-4 text-center text-white fw-bold">Removed from Wishlist</div>
+            </div>
+            {{/logged}}
+            {{^logged}}
+            <div class="row"><a class="col btn btn-outline-dark text-uppercase" href="/login">Sign in</a></div>
+            {{/logged}}
+	    </div>
+
+    </div>
+<script src="../js/productView.js"></script>
+{{>footer}}

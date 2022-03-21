@@ -1,0 +1,47 @@
+{{>header}}
+        <meta id="username" content="{{username}}"/>
+        <div id="header">   
+            <div class="item banner-big-screen"><img src="../assets/banner1.webp"></div>
+            <div class="item banner-small-screen"><img src="../assets/banner1-movil.webp"></div>    
+        </div>
+    
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-center" id="products">
+                    {{#products}}
+                    <div class="col mb-5">
+                        <div id="product-{{id}}" class="card h-100 product">
+                            <meta class="product-id" content="{{id}}"/>
+                            <!-- Fav badge-->
+                            <div id="product-{{id}}-fav-badge" class="badge product-fav-badge bg-dark text-white position-absolute favIcon" onclick="wishlist({{id}}, '{{name}}')"><i class="fa-solid fa-heart"></i></div>
+                            <!-- Product image-->
+                            <a href="/productView/{{id}}"><img class="card-img-top" src="../assets/productos/{{imgs.0}}" alt="Product{{id}}" /></a>
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder product-name">{{name}}</h5>
+                                    <!-- Product price-->
+                                    ${{price}}
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent product-actions">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/productView/{{id}}">View options</a></div>
+                                <!-- if product is in wish list print fav icon -->
+                                <i id="product-{{id}}-fav-icon" class="product-fav-icon fa-solid fa-heart"></i>
+                            </div>
+                        </div>
+                    </div>
+                    {{/products}}            
+                </div>
+                <meta id="max-pages" content="{{maxPages}}"/>
+                {{#hasNext}}
+	            <div class="row p-2"><a id="more-btn" class="btn btn-outline-dark m-auto w-75 text-center fw-bold text-uppercase" onclick="more()">More</a></div>
+	            {{/hasNext}}
+            </div>
+        </section>
+
+<script src="js/index.js"></script>
+{{>footer}}
