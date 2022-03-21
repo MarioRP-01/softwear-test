@@ -175,12 +175,15 @@ Link to our Trello: https://trello.com/b/7PcNfIHM/daw
 
 Installation: 
 	-Install PostgreSQL
-	-Install pgAdmin4 (https://www.pgadmin.org/) and introduce a master password. 
-Versions: 
-	-Java: 17
-	-Maven: 4
+	-Install pgAdmin4 (https://www.pgadmin.org/) and introduce a master password.
+	
+Versions: \
+	-Java: 17 \
+	-Maven: 4 \
 	-SpringBoot: 2.6.3
+	
 Project compilation:
+
 	-In our github, download the project as a zip.
 	-Create a database named softwear.
 	-In the IDE, execute
