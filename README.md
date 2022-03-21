@@ -42,7 +42,7 @@ We provide a catalog that can be filtered through different categories, allowing
 - Product view: where a single product is displayed and specific details are shown. 
 
 \
-![adminHome](readmeAssets/adminHome1.jpg)
+![adminHome](readmeAssets/adminHome.jpg)
 - Admin home: where admins can choose what to do (manage categories, manage users, manage products) and a sales graph is displayed.
 
 \
@@ -51,7 +51,11 @@ We provide a catalog that can be filtered through different categories, allowing
 
 \
 ![manageProducts](readmeAssets/manageProducts.jpg)
-- Manage products: where an admin can create and delete products. 
+- Manage products: where an admin can create, modify and delete products. 
+
+\
+![manageCoupons](readmeAssets/manageCoupons.jpg)
+- Manage coupons: where an admin can create, modify and delete products. 
 
 \
 ![about](readmeAssets/about.jpg)
@@ -72,6 +76,10 @@ We provide a catalog that can be filtered through different categories, allowing
 \
 ![errorPayment](readmeAssets/errorPayment.jpg)
 - Error Payment: shown when there is some error with the product payment.
+
+\
+![errorPass](readmeAssets/errorPayment.jpg)
+- Error Pass: shown when user wants to change the password and the new ones don´t match.
 
 \
 ![outOfStock](readmeAssets/outOfStock.jpg)
