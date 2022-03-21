@@ -170,3 +170,23 @@ We've implemented a mail function that sends the user a mail when they make a pu
 ## Tools
 
 Link to our Trello: https://trello.com/b/7PcNfIHM/daw
+
+## Execution instructions
+
+Installation: 
+	-Install PostgreSQL
+	-Install pgAdmin4 (https://www.pgadmin.org/) and introduce a master password. 
+Versions: 
+	-Java: 17
+	-Maven: 4
+	-SpringBoot: 2.6.3
+Project compilation:
+	-In our github, download the project as a zip.
+	-Create a database named softwear.
+	-In the IDE, execute
+		>cd backend
+		>mvn spring-boot:run
+	then go to the browser and access https://localhost:8443/
+	-To stop the proccess, press Ctr+C, enter and "S".
+	
+	
