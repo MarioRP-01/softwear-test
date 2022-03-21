@@ -119,10 +119,25 @@ function removeFromWishlist(productId, productName) {
 
 }
 
+function hideWishlistIfNReg() {
+    let registered = !($("#username").attr("content") === "");
+    if (!registered) {
+        $(".product-fav-icon").each(function () {
+            $(this).hide();
+        })
+        $(".product-fav-badge").each(function () {
+            $(this).hide();
+        })
+    }
+    return registered;
+}
+
 $(document).ready(function () {
     token = $("#csrf-token").attr("content");
     maxPages = Number($("#max-pages").attr("content"));
-    updateWishlistLabels();
+    if (hideWishlistIfNReg()) {
+        updateWishlistLabels();
+    }
 });
 
 
@@ -143,7 +158,7 @@ function more() {
         				+ "                        <div id=\"product-"+product.id+"\" class=\"card h-100 product\">\r\n"
         				+ "                            <meta class=\"product-id\" content=\""+product.id+"\"/>\r\n"
         				+ "                            <!-- Fav badge-->\r\n"
-        				+ "                            <div id=\"product-"+product.id+"-fav-badge\" class=\"badge bg-dark text-white position-absolute favIcon\" onclick=\"wishlist("+product.id+", '"+product.name+"')\"><i class=\"fa-solid fa-heart\"></i></div>\r\n"
+        				+ "                            <div id=\"product-"+product.id+"-fav-badge\" class=\"badge product-fav-badge bg-dark text-white position-absolute favIcon\" onclick=\"wishlist("+product.id+", '"+product.name+"')\"><i class=\"fa-solid fa-heart\"></i></div>\r\n"
         				+ "                            <!-- Product image-->\r\n"
         				+ "                            <a href=\"/productView/"+product.id+"\"><img class=\"card-img-top\" src=\"../assets/productos/"+img+"\" alt=\"Product"+product.id+"\" /></a>\r\n"
         				+ "                            <!-- Product details-->\r\n"
@@ -159,12 +174,13 @@ function more() {
         				+ "                            <div class=\"card-footer p-4 pt-0 border-top-0 bg-transparent product-actions\">\r\n"
         				+ "                                <div class=\"text-center\"><a class=\"btn btn-outline-dark mt-auto\" href=\"/productView/"+product.id+"\">View options</a></div>\r\n"
         				+ "                                <!-- if product is in wish list print fav icon -->\r\n"
-        				+ "                                <i id=\"product-"+product.id+"-fav-icon\" class=\"fa-solid fa-heart\"></i>\r\n"
+        				+ "                                <i id=\"product-"+product.id+"-fav-icon\" class=\"product-fav-icon fa-solid fa-heart\"></i>\r\n"
         				+ "                            </div>\r\n"
         				+ "                        </div>\r\n"
-        				+ "                    </div>")
-        		updateWishlistLabel(product.id)
-        		
+        				+ "                    </div>");
+        		if(hideWishlistIfNReg()){
+                    updateWishlistLabel(product.id);
+                }
         	}
         	currentPage++;
             if(currentPage >= maxPages - 1) {
@@ -172,4 +188,4 @@ function more() {
             }
         });
     }
-};
+}

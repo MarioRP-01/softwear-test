@@ -67,6 +67,9 @@ public class TransactionController {
     @GetMapping("/cart/pay")
     public String cartPay(Model model) {
         ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
+        if (!userService.checkShippingData(user)) {
+            return "noShippingData";
+        }
         Optional<Transaction> optCart = transactionService.findCart(user);
         if(optCart.isPresent()) {
             Transaction cart = optCart.get();
