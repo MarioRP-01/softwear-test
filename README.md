@@ -224,3 +224,27 @@ Among others, the more outstanding files are:
 * [TransactionRESTController.java (com.softwear.webapp5.controller.TransactionRESTController)](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/controller/TransactionRESTController.java)
 
 Apart from those files, i've been working on a lot of the project files. For further information about them, you should check commits filtering by my user.
+
+### Mario and Ana
+
+Mario and Ana have been working together at the same files. We have created Admin Home graphic with sellings data of database, created access to available sizes of each product, product entity creation and all its main classes to control, creation of example data of data base in databaseinitializer and readme documentation.
+
+#### Important Commits
+
+Among others, the more outstanding commits are:
+* [Moustache and data base examples added](ttps://github.com/CodeURJC-DAW-2021-22/webapp5/tree/0585033f4588811d333048bb0b78fc6fea65040e).
+* [Product controller refactorization and GetMapping addition](https://github.com/CodeURJC-DAW-2021-22/webapp5/tree/2a73df1efe6de911879ca7f8973a983fb0119612).
+* [Product FindBy ](https://github.com/CodeURJC-DAW-2021-22/webapp5/tree/b015f27360e9f27c9c202fa345a8acf2dade9e79).
+* [New transactions on data base and products modification](https://github.com/CodeURJC-DAW-2021-22/webapp5/tree/a3201beb78a9ce4d5700cdd7ee6528afa776d1be).
+* [Readme documentation](https://github.com/CodeURJC-DAW-2021-22/webapp5/tree/9a1a97a8776a511b9e1391e8e6f2c6f2554a0d6a).
+
+
+#### Important Files
+
+Among others, the more outstanding files are:
+* Chart.js
+* TransactionController.java
+* Product.java
+* ProductRepository.java
+* Databaseinitializer.java
+Also other files of the project. For further information about them, you should check commits filtering by our users.
