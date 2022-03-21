@@ -1,26 +1,19 @@
 package com.softwear.webapp5.controller;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.softwear.webapp5.data.CouponView;
-import com.softwear.webapp5.data.ProductView;
 import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.data.ShopUserView;
-import com.softwear.webapp5.data.TransactionView;
 import com.softwear.webapp5.model.ShopUser;
-import com.softwear.webapp5.model.Transaction;
 import com.softwear.webapp5.service.CouponService;
-import com.softwear.webapp5.service.MailService;
 import com.softwear.webapp5.service.ProductService;
 import com.softwear.webapp5.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

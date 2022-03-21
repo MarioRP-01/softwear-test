@@ -1,25 +1,24 @@
 package com.softwear.webapp5.controller;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.transaction.TransactionScoped;
+import javax.servlet.http.HttpServletResponse;
+
+import com.softwear.webapp5.data.ProductSize;
+import com.softwear.webapp5.data.StaticDTO;
 
 import com.softwear.webapp5.data.CouponView;
-import com.softwear.webapp5.data.ProductSize;
 import com.softwear.webapp5.data.ProductView;
 import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.data.ShopUserView;
 import com.softwear.webapp5.model.ShopUser;
-import com.softwear.webapp5.repository.ProductRepository;
 import com.softwear.webapp5.service.CouponService;
-import com.softwear.webapp5.service.MailService;
 import com.softwear.webapp5.service.ProductService;
 import com.softwear.webapp5.service.TransactionService;
 import com.softwear.webapp5.service.UserService;
@@ -29,8 +28,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,8 +51,7 @@ public class RestAdminController {
     TransactionService transactionService;
     @Autowired
     PasswordEncoder passwordEncoder;
-
-
+    
     @PostMapping("/manageUsers")
     public ShopUser users(@RequestParam String mode, @RequestParam(required = false) Long id, @RequestParam(required = false) String username, 
     @RequestParam(required = false) String password, @RequestParam(required = false) String email, 
@@ -112,6 +114,11 @@ public class RestAdminController {
         return null;
     }
 
+    @GetMapping("/statics")
+    public List<StaticDTO> getStatics(HttpServletResponse response) {
+        List<StaticDTO> statics = transactionService.getStatics();
+        return statics;
+    }
     @GetMapping("/manageUsers/{pageNumber}")
     public List<ShopUserView> users(Model model, @PathVariable int pageNumber){
     	ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
@@ -122,7 +129,6 @@ public class RestAdminController {
         }
         return listUser;
     }
-
 
     @PostMapping("/manageCoupons")
     public Coupon coupons(@RequestParam String mode, @RequestParam(required = false) Long id, @RequestParam(required = false) String code,

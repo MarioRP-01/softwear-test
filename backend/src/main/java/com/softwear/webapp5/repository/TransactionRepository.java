@@ -8,11 +8,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
+import com.softwear.webapp5.data.StaticDTO;
 import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Transaction;
 import com.softwear.webapp5.model.ShopUser;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
@@ -54,6 +54,10 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
             "ORDER BY t.id DESC")
     List<Transaction> findPurchaseHistory(ShopUser user);
 
-    
-
+    @Query("SELECT new com.softwear.webapp5.data.StaticDTO(p.name, SUM(p.price), COUNT(p.name)) "
+            + "FROM Transaction t "
+            + "LEFT JOIN t.products p "
+            + "WHERE NOT (t.type = 'CART' OR t.type = 'WISHLIST') "
+            + "GROUP BY p.name")
+    public List<StaticDTO> getStatics();
 }

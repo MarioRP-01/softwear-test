@@ -251,14 +251,14 @@ public class CouponService {
 		return applyCoupon(transactionOptional.get());
 	}
 
-    public void updateInfo(Coupon oldCoupon, Coupon u) {
-		oldCoupon.setCode(u.getCode());
-		oldCoupon.setType(u.getType());
-		oldCoupon.setStartDate(u.getStartDate());
-		oldCoupon.setDateOfExpiry(u.getDateOfExpiry());
-		oldCoupon.setMinimum(u.getMinimum());
-		oldCoupon.setDiscount(u.getDiscount());
-		oldCoupon.setAffectedProducts(u.getAffectedProducts());
+    public void updateInfo(Coupon oldCoupon, Coupon newCoupon) {
+		oldCoupon.setCode(newCoupon.getCode());
+		oldCoupon.setType(newCoupon.getType());
+		oldCoupon.setStartDate(newCoupon.getStartDate());
+		oldCoupon.setDateOfExpiry(newCoupon.getDateOfExpiry());
+		oldCoupon.setMinimum(newCoupon.getMinimum());
+		oldCoupon.setDiscount(newCoupon.getDiscount());
+		oldCoupon.setAffectedProducts(newCoupon.getAffectedProducts());
 
 		couponRepository.save(oldCoupon);
     }

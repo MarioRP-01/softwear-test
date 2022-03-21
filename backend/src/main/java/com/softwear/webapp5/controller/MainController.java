@@ -20,7 +20,7 @@ public class MainController {
 
     @GetMapping("/")
     public String index(Model model, Pageable pageable) {
-    	Page<Product> products = productService.findAll(PageRequest.of(0, 3));
+    	Page<Product> products = productService.findAllNames(PageRequest.of(0, 3));
         model.addAttribute("products", products);
         model.addAttribute("hasNext", products.hasNext());
         model.addAttribute("nextPage", products.getNumber()+1);

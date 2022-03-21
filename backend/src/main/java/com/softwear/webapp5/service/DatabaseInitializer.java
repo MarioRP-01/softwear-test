@@ -47,81 +47,435 @@ public class DatabaseInitializer {
 
 		// Users
 		ShopUser user = new ShopUser("user", "user@user.com", "User", "Softwear", passwordEncoder.encode("pass"), "User Street 1", 654987321, "01/01/2000", "USER");
-		userRepository.save(new ShopUser("admin", "admin@admin.com", "Administrator", "Softwear", passwordEncoder.encode("pass"), "Admin Street 1", 654321987, "01/01/2000", "ADMIN"));
+		ShopUser admin = new ShopUser("admin", "admin@admin.com", "Administrator", "Softwear", passwordEncoder.encode("pass"), "Admin Street 1", 654321987, "01/01/2000", "ADMIN");
+		userRepository.save(admin);
 		userRepository.save(user);
 
-		ArrayList<File> lista1 = new ArrayList<>();
-		ArrayList<File> lista2 = new ArrayList<>();
-		ArrayList<File> lista3 = new ArrayList<>();
+		ArrayList<File> imgsItem1 = new ArrayList<>();
+		ArrayList<File> imgsItem2 = new ArrayList<>();
+		ArrayList<File> imgsItem3 = new ArrayList<>();
+		ArrayList<File> imgsItem4 = new ArrayList<>();
+		ArrayList<File> imgsItem5 = new ArrayList<>();
+//		ArrayList<File> imgsItem6 = new ArrayList<>();
+//		ArrayList<File> imgsItem7 = new ArrayList<>();
+//		ArrayList<File> imgsItem9 = new ArrayList<>();
+//		ArrayList<File> imgsItem10 = new ArrayList<>();
+//		ArrayList<File> imgsItem11 = new ArrayList<>();
+//		ArrayList<File> imgsItem12 = new ArrayList<>();
+//		ArrayList<File> imgsItem13 = new ArrayList<>();
+//		ArrayList<File> imgsItem14 = new ArrayList<>();
 
-		lista1.add(new File("item1.webp"));
-		lista1.add(new File("item2.webp"));
-		lista1.add(new File("item3.webp"));
+		imgsItem1.add(new File("item1.webp"));
+		imgsItem2.add(new File("item2.webp"));
+		imgsItem3.add(new File("item3.webp"));
+		imgsItem4.add(new File("item4.webp"));
+		imgsItem5.add(new File("item5.webp"));
 
-		lista2.add(new File("item4.webp"));
-		lista2.add(new File("item5.webp"));
-		lista2.add(new File("item6.webp"));
+		String description_puffer_jacket = "";
 
-		lista3.add(new File("item7.webp"));
-		lista3.add(new File("item8.webp"));
+		Product puffer_jacket_XS = new Product("Puffer jacket", description_puffer_jacket, 45, (long) 13, ProductSize.XS, imgsItem1);
+		Product puffer_jacket_S = new Product("Puffer jacket", description_puffer_jacket, 45, (long) 99, ProductSize.S, imgsItem1);
+		Product puffer_jacket_M = new Product("Puffer jacket", description_puffer_jacket, 45, (long) 23, ProductSize.M, imgsItem1);
+		Product puffer_jacket_L = new Product("Puffer jacket", description_puffer_jacket, 45, (long) 109, ProductSize.L, imgsItem1);
+		Product puffer_jacket_XL = new Product("Puffer jacket", description_puffer_jacket, 45, (long) 0, ProductSize.XL, imgsItem1);
 
-		Product camisa = new Product("camisa", "es cómoda", 10, (long) 156, ProductSize.XL, lista1);
+		productRepository.save(puffer_jacket_XS);
+		productRepository.save(puffer_jacket_S);
+		productRepository.save(puffer_jacket_M);
+		productRepository.save(puffer_jacket_L);
+		productRepository.save(puffer_jacket_XL);
 
-		productRepository.save(camisa);
-		productRepository.save(new Product("chaqueta", "está cómoda", 20, (long) 156, ProductSize.XS, lista2));
-		productRepository.save(new Product("pantalón", "ufff", 15, (long) 156, ProductSize.S, lista3));
-	
+		String description_cowboy_jacket = "";
+
+		Product cowboy_jacket_XS = new Product("Cowboy jacket", description_cowboy_jacket, 60, (long) 6, ProductSize.XS, imgsItem2);
+		Product cowboy_jacket_S = new Product("Cowboy jacket", description_cowboy_jacket, 60, (long) 8, ProductSize.S, imgsItem2);
+		Product cowboy_jacket_M = new Product("Cowboy jacket", description_cowboy_jacket, 60, (long) 44, ProductSize.M, imgsItem2);
+		Product cowboy_jacket_L = new Product("Cowboy jacket", description_cowboy_jacket, 60, (long) 0, ProductSize.L, imgsItem2);
+		Product cowboy_jacket_XL = new Product("Cowboy jacket", description_cowboy_jacket, 60, (long) 2, ProductSize.XL, imgsItem2);
+
+		productRepository.save(cowboy_jacket_XS);
+		productRepository.save(cowboy_jacket_S);
+		productRepository.save(cowboy_jacket_M);
+		productRepository.save(cowboy_jacket_L);
+		productRepository.save(cowboy_jacket_XL);
+
+		String description_facha_jacket = "";
+
+		Product facha_jacket_XS = new Product("Facha jacket", description_facha_jacket, 40, (long) 10, ProductSize.XS, imgsItem3);
+		Product facha_jacket_S = new Product("Facha jacket", description_facha_jacket, 40, (long) 45, ProductSize.S, imgsItem3);
+		Product facha_jacket_M = new Product("Facha jacket", description_facha_jacket, 40, (long) 0, ProductSize.M, imgsItem3);
+		Product facha_jacket_L = new Product("Facha jacket", description_facha_jacket, 40, (long) 2, ProductSize.L, imgsItem3);
+		Product facha_jacket_XL = new Product("Facha jacket", description_facha_jacket, 40, (long) 7, ProductSize.XL, imgsItem3);
+
+		productRepository.save(facha_jacket_XS);
+		productRepository.save(facha_jacket_S);
+		productRepository.save(facha_jacket_M);
+		productRepository.save(facha_jacket_L);
+		productRepository.save(facha_jacket_XL);
+
+		String description_happy_jacket = "";
+
+		Product happy_jaccket_XS = new Product("Happy jacket", description_happy_jacket, 55, (long) 2, ProductSize.XS, imgsItem4);
+		Product happy_jaccket_S = new Product("Happy jacket", description_happy_jacket, 55, (long) 0, ProductSize.S, imgsItem4);
+		Product happy_jaccket_M = new Product("Happy jacket", description_happy_jacket, 55, (long) 0, ProductSize.M, imgsItem4);
+		Product happy_jaccket_L = new Product("Happy jacket", description_happy_jacket, 55, (long) 1, ProductSize.L, imgsItem4);
+		Product happy_jaccket_XL = new Product("Happy jacket", description_happy_jacket, 55, (long) 4, ProductSize.XL, imgsItem4);
+
+		productRepository.save(happy_jaccket_XS);
+		productRepository.save(happy_jaccket_S);
+		productRepository.save(happy_jaccket_M);
+		productRepository.save(happy_jaccket_L);
+		productRepository.save(happy_jaccket_XL);
+
+		String description_longsleeves_shirt = "Oversize shirt in grey with round neck and long sleeves";
+
+		Product longsleeves_XS = new Product("Long sleeves shirt", description_longsleeves_shirt, 35, (long) 19, ProductSize.XS, null);
+		Product longsleeves_S = new Product("Long sleeves shirt", description_happy_jacket, 35, (long) 32, ProductSize.S, null);
+		Product longsleeves_M = new Product("Long sleeves shirt", description_happy_jacket, 35, (long) 61, ProductSize.M, null);
+		Product longsleeves_L = new Product("Long sleeves shirt", description_happy_jacket, 35, (long) 3, ProductSize.L, null);
+		Product longsleeves_XL = new Product("Long sleeves shirt", description_happy_jacket, 35, (long) 40, ProductSize.XL, null);
+
+		productRepository.save(longsleeves_XS);
+		productRepository.save(longsleeves_S);
+		productRepository.save(longsleeves_M);
+		productRepository.save(longsleeves_L);
+		productRepository.save(longsleeves_XL);
+
+		String description_paris_shirt = "Black shirt with Paris logo and simple style";
+
+		Product paris_shirt_XS = new Product("Paris shirt", description_paris_shirt, 31, (long) 50, ProductSize.XS, null);
+		Product paris_shirt_S = new Product("Paris shirt", description_paris_shirt, 31, (long) 21, ProductSize.S, null);
+		Product paris_shirt_M = new Product("Paris shirt", description_paris_shirt, 31, (long) 29, ProductSize.M, null);
+		Product paris_shirt_L = new Product("Paris shirt", description_paris_shirt, 31, (long) 35, ProductSize.L, null);
+		Product paris_shirt_XL = new Product("Paris shirt", description_paris_shirt, 31, (long) 54, ProductSize.XL, null);
+
+		productRepository.save(paris_shirt_XS);
+		productRepository.save(paris_shirt_S);
+		productRepository.save(paris_shirt_M);
+		productRepository.save(paris_shirt_L);
+		productRepository.save(paris_shirt_XL);
+
+		String description_black_body = "Black and adjusted body with asymetric sleeves";
+
+		Product black_body_XS = new Product("Black body", description_black_body, 40, (long) 70, ProductSize.XS, null);
+		Product black_body_S = new Product("Black body", description_black_body, 40, (long) 31, ProductSize.S, null);
+		Product black_body_M = new Product("Black body", description_black_body, 40, (long) 46, ProductSize.M, null);
+		Product black_body_L = new Product("Black body", description_black_body, 40, (long) 30, ProductSize.L, null);
+		Product black_body_XL = new Product("Black body", description_black_body, 40, (long) 44, ProductSize.XL, null);
+
+		productRepository.save(black_body_XS);
+		productRepository.save(black_body_S);
+		productRepository.save(black_body_M);
+		productRepository.save(black_body_L);
+		productRepository.save(black_body_XL);
+
+		String description_black_shirt = "Black simple cotton made shirt";
+
+		Product black_shirt_XS = new Product("Black shirt", description_black_shirt, 40, (long) 70, ProductSize.XS, null);
+		Product black_shirt_S = new Product("Black shirt", description_black_shirt, 40, (long) 31, ProductSize.S, null);
+		Product black_shirt_M = new Product("Black shirt", description_black_shirt, 40, (long) 46, ProductSize.M, null);
+		Product black_shirt_L = new Product("Black shirt", description_black_shirt, 40, (long) 30, ProductSize.L, null);
+		Product black_shirt_XL = new Product("Black shirt", description_black_shirt, 40, (long) 44, ProductSize.XL, null);
+
+		productRepository.save(black_shirt_XS);
+		productRepository.save(black_shirt_S);
+		productRepository.save(black_shirt_M);
+		productRepository.save(black_shirt_L);
+		productRepository.save(black_shirt_XL);
+		
+		String description_arizona_jeans = "Straight high waisted jeans with zipper and rounded button";
+
+		Product arizona_jeans_XS = new Product("Arizona jeans", description_arizona_jeans, 95, (long) 40, ProductSize.XS, null);
+		Product arizona_jeans_S = new Product("Arizona jeans", description_arizona_jeans, 95, (long) 31, ProductSize.S, null);
+		Product arizona_jeans_M = new Product("Arizona jeans", description_arizona_jeans, 95, (long) 10, ProductSize.M, null);
+		Product arizona_jeans_L = new Product("Arizona jeans", description_arizona_jeans, 95, (long) 35, ProductSize.L, null);
+		Product arizona_jeans_XL = new Product("Arizona jeans", description_arizona_jeans, 95, (long) 48, ProductSize.XL, null);
+
+		productRepository.save(arizona_jeans_XS);
+		productRepository.save(arizona_jeans_S);
+		productRepository.save(arizona_jeans_M);
+		productRepository.save(arizona_jeans_L);
+		productRepository.save(arizona_jeans_XL);
+
+		
+		String description_topos_dress = "Short and ruffled dress in blue with white topos";
+
+		Product topos_dress_XS = new Product("Topos dress", description_topos_dress, 72, (long) 12, ProductSize.XS, null);
+		Product topos_dress_S = new Product("Topos dress", description_topos_dress, 72, (long) 24, ProductSize.S, null);
+		Product topos_dress_M = new Product("Topos dress", description_topos_dress, 72, (long) 31, ProductSize.M, null);
+		Product topos_dress_L = new Product("Topos dress", description_topos_dress, 72, (long) 30, ProductSize.L, null);
+		Product topos_dress_XL = new Product("Topos dress", description_topos_dress, 72, (long) 68, ProductSize.XL, null);
+
+		productRepository.save(topos_dress_XS);
+		productRepository.save(topos_dress_S);
+		productRepository.save(topos_dress_M);
+		productRepository.save(topos_dress_L);
+		productRepository.save(topos_dress_XL);
+
+		String description_winter_jacket = "Black waterproof jacket with zipper. Made with goose feather";
+
+		Product winter_jacket_XS = new Product("Winter jacket", description_winter_jacket, 99, (long) 15, ProductSize.XS, null);
+		Product winter_jacket_S = new Product("Winter jacket", description_winter_jacket, 99, (long) 24, ProductSize.S, null);
+		Product winter_jacket_M = new Product("Winter jacket", description_winter_jacket, 99, (long) 34, ProductSize.M, null);
+		Product winter_jacket_L = new Product("Winter jacket", description_winter_jacket, 99, (long) 3, ProductSize.L, null);
+		Product winter_jacket_XL = new Product("Winter jacket", description_winter_jacket, 99, (long) 25, ProductSize.XL, null);
+
+		productRepository.save(winter_jacket_XS);
+		productRepository.save(winter_jacket_S);
+		productRepository.save(winter_jacket_M);
+		productRepository.save(winter_jacket_L);
+		productRepository.save(winter_jacket_XL);
+
+		String description_creamy_pants = "Creamy loose fit medium waisted pants";
+
+		Product creamy_pants_XS = new Product("Winter jacket", description_creamy_pants, 86, (long) 45, ProductSize.XS, null);
+		Product creamy_pants_S = new Product("Winter jacket", description_creamy_pants, 86, (long) 40, ProductSize.S, null);
+		Product creamy_pants_M = new Product("Winter jacket", description_creamy_pants, 86, (long) 16, ProductSize.M, null);
+		Product creamy_pants_L = new Product("Winter jacket", description_creamy_pants, 86, (long) 11, ProductSize.L, null);
+		Product creamy_pants_XL = new Product("Winter jacket", description_creamy_pants, 86, (long) 5, ProductSize.XL, null);
+
+		productRepository.save(creamy_pants_XS);
+		productRepository.save(creamy_pants_S);
+		productRepository.save(creamy_pants_M);
+		productRepository.save(creamy_pants_L);
+		productRepository.save(creamy_pants_XL);
+
+		String description_oversize_hoodie = "Basic hoodie in grey with hood and long sleeve";
+
+		Product oversize_hoodie_XS = new Product("Oversize hoodie", description_oversize_hoodie, 74, (long) 12, ProductSize.XS, null);
+		Product oversize_hoodie_S = new Product("Oversize hoodie", description_oversize_hoodie, 74, (long) 4, ProductSize.S, null);
+		Product oversize_hoodie_M = new Product("Oversize hoodie", description_oversize_hoodie, 74, (long) 16, ProductSize.M, null);
+		Product oversize_hoodie_L = new Product("Oversize hoodie", description_oversize_hoodie, 74, (long) 0, ProductSize.L, null);
+		Product oversize_hoodie_XL = new Product("Oversize hoodie", description_oversize_hoodie, 74, (long) 9, ProductSize.XL, null);
+
+		productRepository.save(oversize_hoodie_XS);
+		productRepository.save(oversize_hoodie_S);
+		productRepository.save(oversize_hoodie_M);
+		productRepository.save(oversize_hoodie_L);
+		productRepository.save(oversize_hoodie_XL);
+
+		String description_yellow_set = "Yellow set with short sleeves and pocket shirt and short pants";
+
+		Product yellow_set_XS = new Product("Yellow set", description_yellow_set, 110, (long) 23, ProductSize.XS, null);
+		Product yellow_set_S = new Product("Yellow set", description_yellow_set, 110, (long) 0, ProductSize.S, null);
+		Product yellow_set_M = new Product("Yellow set", description_yellow_set, 110, (long) 15, ProductSize.M, null);
+		Product yellow_set_L = new Product("Yellow set", description_yellow_set, 110, (long) 3, ProductSize.L, null);
+		Product yellow_set_XL = new Product("Yellow set", description_yellow_set, 110, (long) 36, ProductSize.XL, null);
+
+		productRepository.save(yellow_set_XS);
+		productRepository.save(yellow_set_S);
+		productRepository.save(yellow_set_M);
+		productRepository.save(yellow_set_L);
+		productRepository.save(yellow_set_XL);
+
+		String description_pocket_pants = "Long short waisted troussers with pockets in pistachio tone";
+
+		Product pocket_pants_XS = new Product("Pocket pistachio pants", description_pocket_pants, 84, (long) 37, ProductSize.XS, null);
+		Product pocket_pants_S = new Product("Pocket pistachio pants", description_pocket_pants, 84, (long) 15, ProductSize.S, null);
+		Product pocket_pants_M = new Product("Pocket pistachio pants", description_pocket_pants, 84, (long) 1, ProductSize.M, null);
+		Product pocket_pants_L = new Product("Pocket pistachio pants", description_pocket_pants, 84, (long) 34, ProductSize.L, null);
+		Product pocket_pants_XL = new Product("Pocket pistachio pants", description_pocket_pants, 84, (long) 6, ProductSize.XL, null);
+
+		productRepository.save(pocket_pants_XS);
+		productRepository.save(pocket_pants_S);
+		productRepository.save(pocket_pants_M);
+		productRepository.save(pocket_pants_L);
+		productRepository.save(pocket_pants_XL);
+
+		String description_goodvibes_set = "White & green shirt and Good vibes logo complementing green sporty shorts";
+
+		Product goodvibes_set_XS = new Product("Good vibes set", description_goodvibes_set, 125, (long) 7, ProductSize.XS, null);
+		Product goodvibes_set_S = new Product("Good vibes set", description_goodvibes_set, 125, (long) 13, ProductSize.S, null);
+		Product goodvibes_set_M = new Product("Good vibes set", description_goodvibes_set, 125, (long) 4, ProductSize.M, null);
+		Product goodvibes_set_L = new Product("Good vibes set", description_goodvibes_set, 125, (long) 25, ProductSize.L, null);
+		Product goodvibes_set_XL = new Product("Good vibes set", description_goodvibes_set, 125, (long) 6, ProductSize.XL, null);
+
+		productRepository.save(goodvibes_set_XS);
+		productRepository.save(goodvibes_set_S);
+		productRepository.save(goodvibes_set_M);
+		productRepository.save(goodvibes_set_L);
+		productRepository.save(goodvibes_set_XL);
+		
+		String description_palmspring_shirt = "Beige tshirt palmspring logo";
+
+		Product palmspring_shirt_XS = new Product("Palmspring set", description_palmspring_shirt, 43, (long) 26, ProductSize.XS, null);
+		Product palmspring_shirt_S = new Product("Palmspring set", description_palmspring_shirt, 43, (long) 3, ProductSize.S, null);
+		Product palmspring_shirt_M = new Product("Palmspring set", description_palmspring_shirt, 43, (long) 24, ProductSize.M, null);
+		Product palmspring_shirt_L = new Product("Palmspring set", description_palmspring_shirt, 43, (long) 5, ProductSize.L, null);
+		Product palmspring_shirt_XL = new Product("Palmspring set", description_palmspring_shirt, 43, (long) 16, ProductSize.XL, null);
+
+		productRepository.save(palmspring_shirt_XS);
+		productRepository.save(palmspring_shirt_S);
+		productRepository.save(palmspring_shirt_M);
+		productRepository.save(palmspring_shirt_L);
+		productRepository.save(palmspring_shirt_XL);
 
 		// Coupons
 
-		Product leather_coat = new Product("Leather Coat (Softwear)", "Test Product", 10.00, 2L, ProductSize.M, lista1);
-		List<Product> affectedProducts = new ArrayList<>();
-		affectedProducts.add(leather_coat);
-		productRepository.save(leather_coat);
-		productRepository.save(new Product("Leather Coat (Softwear)", "Test Product", 10.00, 21L, ProductSize.L, lista1));
+		List<Product> productListA = new ArrayList<>();
 
-		Coupon coupon = new Coupon("ASTONISHOFFER", "total_percentage", "15/02/2022", "26/06/2022", 0f, 0.5f, null);
-		Coupon coupon2x1 = new Coupon("2X1", "2x1", "13/02/2022", "26/06/2022", null, null, affectedProducts);
-		Coupon coupon3x2 = new Coupon("TAKEALOOK3X2", "3x2", "12/02/2022", "22/02/2022", null, null, affectedProducts);
-		Coupon couponLeatherPer = new Coupon("I<3LEATHER", "product_percentage", "15/02/2022", "15/06/2022", null, 0.4f, affectedProducts);
-		Coupon couponLeatherTot = new Coupon("10LEATHER", "product_amount", "15/02/2022", "15/06/2022", null, 4.5f, affectedProducts);
+		productListA.add(puffer_jacket_XS);
+		productListA.add(puffer_jacket_S);
+		productListA.add(puffer_jacket_M);
+		productListA.add(puffer_jacket_L);
+		productListA.add(puffer_jacket_XL);
 
-		couponRepository.save(new Coupon("10PER", "total_percentage", "15/02/2022", "26/06/2022", 10.00f, 0.1f, null));
-		couponRepository.save(new Coupon("GIVEME10", "total_amount", "15/02/2022", "26/02/2022", 10.00f, 2.5f, null));
-		couponRepository.save(coupon2x1);
-		couponRepository.save(coupon3x2);
-		couponRepository.save(couponLeatherPer);
-		couponRepository.save(couponLeatherTot);
-		couponRepository.save(coupon);
+		List<Product> productListB = new ArrayList<>();
+
+		productListB.add(puffer_jacket_XS);
+		productListB.add(puffer_jacket_S);
+		productListB.add(puffer_jacket_M);
+		productListB.add(puffer_jacket_L);
+		productListB.add(puffer_jacket_XL);
+		productListB.add(happy_jaccket_XS);
+		productListB.add(happy_jaccket_S);
+		productListB.add(happy_jaccket_M);
+		productListB.add(happy_jaccket_L);
+		productListB.add(happy_jaccket_XL);
+
+		Coupon globalDiscount50 = new Coupon("ASTONISHOFFER", "total_percentage", "15/02/2022", "26/06/2022", 0f, 0.5f, null);
+		Coupon twoXone = new Coupon("2X1", "2x1", "13/02/2022", "26/06/2022", null, null, productListA);
+		Coupon threeXtwo = new Coupon("TAKEALOOK3X2", "3x2", "12/02/2022", "22/02/2022", null, null, productListA);
+		Coupon productListADiscount = new Coupon("I<3LEATHER", "product_percentage", "15/02/2022", "15/06/2022", null, 0.4f, productListA);
+		Coupon freeSelected = new Coupon("FREESELECTEDA", "product_amount", "15/02/2022", "15/06/2022", null, 4.5f, productListA);
+		Coupon globalDiscount10 = new Coupon("10PER", "total_percentage", "15/02/2022", "26/06/2022", 10.00f, 0.1f, null);
+		Coupon getTen = new Coupon("GIVEME10", "total_amount", "15/02/2022", "26/02/2022", 10.00f, 2.5f, null);
+		
+		couponRepository.save(globalDiscount50);
+		couponRepository.save(twoXone);
+		couponRepository.save(threeXtwo);
+		couponRepository.save(productListADiscount);
+		couponRepository.save(freeSelected);
+		couponRepository.save(globalDiscount10);
+		couponRepository.save(getTen);
+
 
 		// Transactions
 
-		List<Product> productList = new ArrayList<>();
-		for(int i=0; i<3; i++) {
-			productList.add(leather_coat);
+		List<Product> productListTransaction1 = new ArrayList<>();
+		productListTransaction1.add(puffer_jacket_XS);
+		productListTransaction1.add(puffer_jacket_S);
+		productListTransaction1.add(puffer_jacket_L);
+
+
+		List<Product> productListTransaction2 = new ArrayList<>();
+		for (int i=0; i<3; i++){
+			productListTransaction2.add(cowboy_jacket_M);	
 		}
 
-		Transaction transaction = new Transaction("PROCESSED", user, coupon3x2, "17/02/2022", productList);
-		if(!couponService.applyCoupon(transaction)) {
-			transactionRepository.save(transaction);
+
+		List<Product> productListTransaction3 = new ArrayList<>();
+		for (int i=0; i<3; i++){
+			productListTransaction2.add(puffer_jacket_XL);	
 		}
+		productListTransaction3.add(facha_jacket_XL);
+		productListTransaction3.add(arizona_jeans_L);
 
-		transaction = new Transaction("PROCESSED", user, couponLeatherPer, "17/02/2022", productList);
-		if(!couponService.applyCoupon(transaction)) {
-			transactionRepository.save(transaction);
-		}
 
-		transaction = new Transaction("PROCESSED", user, couponLeatherTot, "17/02/2022", productList);
-		if(!couponService.applyCoupon(transaction)) {
-			transactionRepository.save(transaction);
-		}
+		List<Product> productListTransaction4 = new ArrayList<>();
+		productListTransaction4.add(topos_dress_XS);
+		productListTransaction4.add(goodvibes_set_L);
+		productListTransaction4.add(palmspring_shirt_S);
+		productListTransaction4.add(palmspring_shirt_M);
 
-		transaction = new Transaction("WISHLIST", user, null, "24/02/2022", affectedProducts);
-		transactionRepository.save(transaction);
-
-		transaction = new Transaction("CART", user, null, "24/02/2022", productList);
-		transactionRepository.save(transaction);
 		
+		List<Product> productListTransaction5 = new ArrayList<>();
+		productListTransaction5.add(black_body_S);
+		productListTransaction5.add(paris_shirt_S);
+
+
+		List<Product> productListTransaction6 = new ArrayList<>();
+		productListTransaction6.add(pocket_pants_XL);
+		productListTransaction6.add(winter_jacket_L);
+		productListTransaction6.add(yellow_set_L);
+
+
+		List<Product> productListTransaction7 = new ArrayList<>();
+		productListTransaction7.add(winter_jacket_M);
+
+
+		List<Product> productListTransaction8 = new ArrayList<>();
+		productListTransaction8.add(longsleeves_M);
+		productListTransaction8.add(happy_jaccket_M);
+
+
+		List<Product> productListTransaction9 = new ArrayList<>();
+		productListTransaction9.add(oversize_hoodie_L);
+
+
+		List<Product> productListTransaction10 = new ArrayList<>();
+		productListTransaction10.add(oversize_hoodie_M);
+		productListTransaction10.add(oversize_hoodie_S);
+
+
+		List<Product> productListTransaction11 = new ArrayList<>();
+		productListTransaction11.add(pocket_pants_M);
+		productListTransaction11.add(facha_jacket_M);
+
+
+		List<Product> productListTransaction12 = new ArrayList<>();
+		productListTransaction12.add(creamy_pants_L);
+
+
+		List<Product> productListWishList = new ArrayList<>();
+		productListWishList.add(black_body_L);
+
+		List<Product> productListCart = new ArrayList<>();
+		for(int i=0; i<2; i++) {
+			productListCart.add(arizona_jeans_XL);
+		}
+		productListCart.add(cowboy_jacket_XL);
+
+		Transaction transaction1 = new Transaction("PROCESSED", user, freeSelected, "17/02/2022", productListTransaction1);
+        if(!couponService.applyCoupon(transaction1)) {
+            transactionRepository.save(transaction1);
+		}
+
+		Transaction transaction2 = new Transaction("PROCESSED", user, threeXtwo, "17/02/2022", productListTransaction2);
+        if(!couponService.applyCoupon(transaction2)) {
+            transactionRepository.save(transaction2);
+        }
+		
+		Transaction transaction3 = new Transaction("PROCESSED", user, threeXtwo, "17/02/2022", productListTransaction3);
+		if(!couponService.applyCoupon(transaction3)) {
+			transactionRepository.save(transaction3);
+		}
+
+		Transaction transaction4 = new Transaction("PROCESSED", user, globalDiscount10, "17/02/2022", productListTransaction4);
+		if(!couponService.applyCoupon(transaction4)) {
+			transactionRepository.save(transaction4);
+		}
+
+		Transaction transaction5 = new Transaction("PROCESSED", user, getTen, "17/02/2022", productListTransaction5);
+		if(!couponService.applyCoupon(transaction5)) {
+			transactionRepository.save(transaction5);
+		}
+
+		Transaction transaction6 = new Transaction("PROCESSED", user, null, "17/02/2022", productListTransaction6);
+		transactionRepository.save(transaction6);
+		
+		Transaction transaction7 = new Transaction("PROCESSED", user, null, "01/13/2022",productListTransaction7);
+		transactionRepository.save(transaction7);
+
+		Transaction transaction8 = new Transaction("PROCESSED", user, null, "01/13/2022",productListTransaction8);
+		transactionRepository.save(transaction8);
+
+		Transaction transaction9 = new Transaction("PROCESSED", user, null, "01/13/2022",productListTransaction9);
+		transactionRepository.save(transaction9);
+
+		Transaction transaction10 = new Transaction("PROCESSED", user, null, "01/13/2022",productListTransaction10);
+		transactionRepository.save(transaction10);
+
+		Transaction transaction11 = new Transaction("PROCESSED", user, null, "01/13/2022",productListTransaction11);
+		transactionRepository.save(transaction11);
+
+		Transaction transaction12 = new Transaction("PROCESSED", user, null, "01/13/2022",productListTransaction12);
+		transactionRepository.save(transaction12);
+
+		Transaction wishList = new Transaction("WISHLIST", user, null, "24/02/2022", productListWishList);
+		transactionRepository.save(wishList);
+
+		Transaction cart = new Transaction("CART", user, null, "24/02/2022", productListCart);
+		transactionRepository.save(cart);
 	}
-	
 }

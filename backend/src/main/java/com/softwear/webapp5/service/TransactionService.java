@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import com.softwear.webapp5.data.StaticDTO;
 import com.softwear.webapp5.model.*;
 import com.softwear.webapp5.repository.ProductRepository;
 import com.softwear.webapp5.repository.TransactionRepository;
@@ -247,6 +248,8 @@ public class TransactionService {
         }
     }
 
-    
+    public List<StaticDTO> getStatics() {
+        return transactionRepository.getStatics();
+    }
 
 }
