@@ -249,3 +249,52 @@ Among others, the more outstanding files are:
 * Databaseinitializer.java
 
 Also other files of the project. For further information about them, you should check commits filtering by our users.
+
+### Jorge
+
+I developed almost all things relationated with users, also i worked on doing the web pageable and on the 
+security package but I helped on the develop of other classes and functionalities.
+
+### Important Commits
+
+* [User and BBDD](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/d6e2112438bfaafeef317de0f80da209bef0e202)
+* [Logger and Pass encoder](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/1feebc1a7d01ae4f384130e1490a7fcf4298255b)
+* [Index pageable](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/a3d66451529d5a6d7ff2f2b5d78045200ea01d7d)
+* [Added user entity](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/b6a190f6ace0430ee48492adab1cd7a2f0cbbf9d)
+* [Added Sign up](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/a92d4a79f9a1f65f399783ff965692a7fcb1a5b4)
+
+Maybe this commits dont show the final version of the files.
+
+### Important Files
+
+* [ShopUser.java](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/model/ShopUser.java)
+* [UserController.java](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/controller/UserController.java)
+* [UserService.java](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/service/UserService.java)
+* [AdminController.java](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/controller/AdminController.java)
+* [WebSecurityConfig.java](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/security/WebSecurityConfig.java)
+
+I also worked on other files but the most time i spent working are on this files.
+
+### Pablo
+
+I developed the managers for the entities in the admin side: manage users, manage products and manage coupons. They all had an HTML, js and AJAX in the frontside
+and backend related in AdminController and RestAdminController, as well as in the services and repositories they used.
+I also developed the about and error page and divided the HTMLs in header (or adminHeader), body and footer in separate files.
+I helped develop the Coupon entity.
+I coded the general algorithm to suggest coupons that looks at the least frequently bought products and suggest a coupon for them.
+
+### Important Commits
+
+* [frontend manageCoupons done](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/f93bdb08cbaca30ced7c1362210f17ff4674b91d)
+* [restController_done](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/487ff8721a78b0642494e9f976a9b27957a8e800)
+* [manageUsers_final](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/cde08a090d23dcb464b20efc4a08abf16f8fddd2)
+* [adminController](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/e16b76e17cfbb999d527ee325325e7233d252a4a)
+* [divided_views](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/69ff003e314642a2f7b1e1bca003f4317ae31f74)
+
+### Important Files
+
+* [AdminController.java](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/controller/AdminController.java)
+* [RestAdminController.java](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/controller/RestAdminController.java)
+* [manageUsers.js](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/model/ShopUser.java)
+* [manageProducts.js](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/resources/static/js/manageProducts.js)
+* [manageCoupons.js](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/resources/static/js/manageCoupons.js)
