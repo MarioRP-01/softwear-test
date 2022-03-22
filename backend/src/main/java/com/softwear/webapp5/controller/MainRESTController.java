@@ -23,7 +23,7 @@ public class MainRESTController {
 	
 	@GetMapping("/products/{pageNumber}")
     public List<ProductView> users(Model model, @PathVariable int pageNumber){
-        Page<Product> productPage = productService.findAll(PageRequest.of(pageNumber, 3));
+        Page<Product> productPage = productService.findAllNames(PageRequest.of(pageNumber, 10));
         List<ProductView> listProduct= new ArrayList<>();
         for(Product p: productPage) {
         	listProduct.add(new ProductView(p));

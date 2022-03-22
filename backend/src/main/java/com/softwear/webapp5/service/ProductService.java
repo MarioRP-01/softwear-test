@@ -147,4 +147,8 @@ public class ProductService {
 	public Page<Product> findAllNames(Pageable page){
 		return productRepository.findAllNames(page);
 	}
+
+//	public Optional<Product> findOneName(String name){
+//        return productRepository.findOneName(name);
+//    }
 }

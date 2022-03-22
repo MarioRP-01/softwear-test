@@ -1,6 +1,5 @@
 package com.softwear.webapp5.model;
 
-import java.io.File;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
