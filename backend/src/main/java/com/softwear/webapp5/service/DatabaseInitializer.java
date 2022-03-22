@@ -113,21 +113,21 @@ public class DatabaseInitializer {
 		imgsItem16.add("src/main/resources/static/assets/productos/item16.webp");
 
 		blobInitializer(imgsItem1, blobItem1, 1);
-		blobInitializer(imgsItem2, blobItem2, 2);
-		blobInitializer(imgsItem3, blobItem3, 3);
-		blobInitializer(imgsItem4, blobItem4, 4);
-		blobInitializer(imgsItem5, blobItem5, 5);
-		blobInitializer(imgsItem6, blobItem6, 6);
-		blobInitializer(imgsItem7, blobItem7, 7);
-		blobInitializer(imgsItem8, blobItem8, 8);
-		blobInitializer(imgsItem9, blobItem9, 9);
-		blobInitializer(imgsItem10, blobItem10, 10);
-		blobInitializer(imgsItem11, blobItem11, 11);
-		blobInitializer(imgsItem12, blobItem12, 12);
-		blobInitializer(imgsItem13, blobItem13, 13);
-		blobInitializer(imgsItem14, blobItem14, 14);
-		blobInitializer(imgsItem15, blobItem15, 15);
-		blobInitializer(imgsItem16, blobItem16, 16);
+		blobInitializer(imgsItem2, blobItem2, 6);
+		blobInitializer(imgsItem3, blobItem3, 11);
+		blobInitializer(imgsItem4, blobItem4, 16);
+		blobInitializer(imgsItem5, blobItem5, 21);
+		blobInitializer(imgsItem6, blobItem6, 26);
+		blobInitializer(imgsItem7, blobItem7, 31);
+		blobInitializer(imgsItem8, blobItem8, 36);
+		blobInitializer(imgsItem9, blobItem9, 41);
+		blobInitializer(imgsItem10, blobItem10, 46);
+		blobInitializer(imgsItem11, blobItem11, 51);
+		blobInitializer(imgsItem12, blobItem12, 56);
+		blobInitializer(imgsItem13, blobItem13, 61);
+		blobInitializer(imgsItem14, blobItem14, 66);
+		blobInitializer(imgsItem15, blobItem15, 71);
+		blobInitializer(imgsItem16, blobItem16, 76);
 
 		String description_puffer_jacket = "";
 
