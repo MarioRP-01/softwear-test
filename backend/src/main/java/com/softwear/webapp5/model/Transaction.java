@@ -52,7 +52,16 @@ public class Transaction {
 
     public Transaction() {}
 
-	public Long getId() {
+	public Transaction(Transaction tr) {
+		this.type = tr.type;
+        this.user = tr.user;
+        this.usedCoupon = tr.usedCoupon;
+        this.date = tr.date;
+        this.products = tr.products;
+		totalPrice = calculateTotalProductPrice();
+    }
+
+    public Long getId() {
 		return id;
 	}
 
