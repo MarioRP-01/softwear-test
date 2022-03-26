@@ -62,9 +62,55 @@ function edit_user_load(id){
     $("editPassword").attr("required", "false");
 };
 
-function delete_user(id){
-    $("#mode").val("DELETE");
+function updateUser() {
+	
+	var dataObj = {
+			id: $("#editId")[0].defaultValue,
+            username: $("#editUserName")[0].value,
+            password: $("#editPassword")[0].value,
+            email: $("#editEmail")[0].value,
+            name: $("#editName")[0].value,
+            lastName: $("#editLastName")[0].value,
+            address: $("#editAddress")[0].value,
+            mobileNumber: $("#editPhone")[0].value,
+            birthdate: $("#editBirthDate")[0].value,
+            role: $("#editRole")[0].value
+	};
+	console.log(JSON.stringify(dataObj))
+    $.ajax({
+        url: "/api/users/updateInfo",
+        type: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify(dataObj),
+        success: function(result) {
+            alert("success?");
+        }
+    })
+}
 
+
+function delete_user(id){
+	var ajaxUrl = '/apiadmin/manageUsers';
+    var formElements = this.elements;
+    var idAux = formElements[1].value;
+    $.ajax({
+        type: "POST",
+        url: ajaxUrl,
+        data: {
+            mode: formElements[0].value,
+            id: idAux,
+            username: formElements[2].value,
+            password: formElements[3].value,
+            email: formElements[4].value,
+            name: formElements[5].value,
+            lastName: formElements[6].value,
+            address: formElements[7].value,
+            mobileNumber: formElements[8].value,
+            birthdate: formElements[9].value,
+            role: formElements[10].value,
+            _csrf: token
+        }
+    })
     $("#editId").val(id);
     $('#formUsers').submit();
 };
@@ -98,6 +144,8 @@ function error_alert(){
         $('#error-alert').remove();
       }, 3000);
 }
+
+
 
 $('#formUsers').submit(function(e){
     e.preventDefault();

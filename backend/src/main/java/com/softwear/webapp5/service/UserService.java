@@ -70,7 +70,7 @@ public class UserService {
 		
 	}
 
-	public void updateInfo(ShopUser oldShopUser, ShopUser u) {
+	public void updateAdminInfo(ShopUser oldShopUser, ShopUser u) {
 
 		oldShopUser.setUsername(u.getUsername());
 		oldShopUser.setAddress(u.getAddress());
