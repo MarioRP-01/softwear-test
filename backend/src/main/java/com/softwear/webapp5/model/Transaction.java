@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,10 +21,10 @@ public class Transaction {
 	@Column(nullable = false)
     private String type;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, fetch=FetchType.EAGER)
     private ShopUser user;
 
-	@ManyToOne
+	@ManyToOne (fetch=FetchType.EAGER)
     private Coupon usedCoupon;
 
 	@Column(nullable = false)
@@ -32,7 +33,7 @@ public class Transaction {
 	@Column(nullable = false)
 	private Double totalPrice;
 
-	@ManyToMany
+	@ManyToMany (fetch=FetchType.EAGER)
 	@Column(nullable = false)
     private List<Product> products;
 
