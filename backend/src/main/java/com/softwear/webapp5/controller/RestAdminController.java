@@ -78,7 +78,7 @@ public class RestAdminController {
         }else if(mode.equals("ADD")){
             password = passwordEncoder.encode(password);
             ShopUser newUser = new ShopUser(username, email, name, lastName, password, address, mobileNumber, birthdate, role);
-            userService.save(newUser);
+            userService.saveUser(newUser);
             return newUser;
 
         }else if(mode.equals("DELETE")){
