@@ -103,6 +103,13 @@ public class UserController {
 		return "error";
 	}
 	
+	@GetMapping("/logout")
+	public String logoutSuccess(Model model) {
+		return "redirect:/";
+		
+		
+	}
+	
 	@PostMapping("/login/register")
 	public String registerUser(Model model, HttpServletRequest request, ShopUser u, @RequestParam(name="confPassword") String confPass) {
 		
@@ -124,5 +131,8 @@ public class UserController {
 		
 		return "redirect:/userProfile";
 	}
+	
+	
+	
 	
 }

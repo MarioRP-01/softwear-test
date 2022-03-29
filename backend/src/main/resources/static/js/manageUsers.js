@@ -83,7 +83,7 @@ function updateUser() {
         contentType: "application/json",
         data: JSON.stringify(dataObj),
         success: function(result) {
-            alert("success?");
+        	 success_alert();
         }
     })
 }
