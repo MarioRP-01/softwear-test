@@ -25,8 +25,8 @@ function more() {
         				+ "                                data-id=\""+product.id+"\" onclick=\"edit_product_load($(this).data('id'));\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i></button></td>\r\n"
         				+ "                            <td><button data-id=\""+product.id+"\" onclick=\"delete_product($(this).data('id'));\" class=\"btn btn-primary\" type=\"button\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td>\r\n"
         				+ "                          </tr>")
-        		for(let j=0; j<product.imgs.length; j++) {
-        			let img = product.imgs[j]
+        		for(let j=0; j<product.images.length; j++) {
+        			let img = product.images[j]
         			$(" #product-"+$("tbody")[0].childElementCount +" >.product-imgs").append("<img src=\""+img+"\" class=\"d-none\"/>")
         		}
         	}
@@ -142,6 +142,10 @@ $('#formProducts').submit(function(e){
                 for(let imageIndex = 0; imageIndex < formElements; imageIndex++){
                     formData = new FormData($("#imageForm" + (imageIndex + 1))[0])
                     $.ajax({
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        method: 'POST',
                         type: "POST",
                         url: "/apiadmin/manageProducts/" + data.id + "/image/" + imageIndex,
                         enctype: 'multipart/form-data',
