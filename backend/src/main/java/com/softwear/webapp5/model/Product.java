@@ -30,7 +30,7 @@ public class Product{
 	@Column(nullable = false)
 	private ProductSize size;
 
-	@ElementCollection
+	@ElementCollection (fetch = FetchType.EAGER)
 	private List<String> images;
 
 	@ElementCollection
