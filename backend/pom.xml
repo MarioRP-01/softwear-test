@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.softwear</groupId>
 	<artifactId>webapp5</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1-deploy</version>
 	<name>webapp5</name>
 	<description>WebApp 5</description>
 	<properties>
@@ -66,6 +66,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.softwear.webapp5.Webapp5Application</mainClass>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
