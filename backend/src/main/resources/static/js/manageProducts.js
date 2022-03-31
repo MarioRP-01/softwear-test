@@ -145,6 +145,7 @@ $('#formProducts').submit(function(e){
                         cache: false,
                         contentType: false,
                         processData: false,
+                        async: false,
                         method: 'POST',
                         type: "POST",
                         url: "/apiadmin/manageProducts/" + data.id + "/image/" + imageIndex,
@@ -157,6 +158,7 @@ $('#formProducts').submit(function(e){
                         error: function (data) {
                             error_alert();
                         }
+                        
                     });
                 }
 
