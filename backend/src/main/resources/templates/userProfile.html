@@ -23,9 +23,9 @@
 		        </div>
 		        <div class="col-xl-8">
 		            <!-- Account details card-->
-		            <div class="card mb-4">
+		            <div class="card mb-4" >
 		                <div class="card-header">Account Details</div>
-		                <div class="card-body">
+		                <div class="card-body" id="formBox">
 		                    <form action="/userProfile" method="post">
 		                        <input type="hidden" name="_csrf" value="{{token}}">
 		                        {{#fromCart}}<input type="hidden" name="fromCart" value="true">{{/fromCart}}
@@ -65,12 +65,12 @@
 		                            </div>
 		                            <!-- Form Group (birthday)-->
 		                            <div class="col-md-6">
-		                                <label class="small mb-1" for="inputBirthday">Birthday</label>
-		                                <input class="form-control" name="birthdate" type="text" placeholder="Enter your birthday" value="{{birthdate}}" id="inputBirthday">
+		                                <label class="small mb-1" for="inputBirthdate">Birthdate</label>
+		                                <input class="form-control" name="birthdate" type="text" placeholder="Enter your birthdate" value="{{birthdate}}" id="inputBirthdate">
 		                            </div>
 		                        </div>
 		                        <!-- Save changes button-->
-		                        <button class="btn btn-outline-dark" type="submit">Save Changes</button>
+		                        <button class="btn btn-outline-dark" type="button" onclick="updateInfo()">Save Changes</button>
 		                        
 		                        <button class="btn btn-outline-dark" type="button" onclick="openFormChangePassword()">Change Password</button>
 		                        
@@ -100,7 +100,7 @@
                      <label for="floatingPasswordNewRepeat">Repeat New Password</label>
                  </div>
                  <div class="container" id="changePassword-btn-container">
-                         <div class="row"><button type="submit" class="btn btn-outline-dark text-uppercase fw-bold" id="confirm-changePassword" >Change Password</button></div>
+                         <div class="row"><button type="button" class="btn btn-outline-dark text-uppercase fw-bold" id="confirm-changePassword" onclick="updatePass()">Change Password</button></div>
                          <div class="row"><button type="button" class="btn btn-outline-dark text-uppercase fw-bold" id="cancel-changePassword" onclick="closeFormChangePassword()">Cancel</button></div>
                  </div>
              </form>

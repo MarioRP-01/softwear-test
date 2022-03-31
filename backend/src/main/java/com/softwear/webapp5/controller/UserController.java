@@ -50,7 +50,7 @@ public class UserController {
 		return "userProfile";
 	}
 	
-	@PostMapping("/userProfile")
+	/*@PostMapping("/userProfile")
 	public String updateUser(Model model, HttpServletRequest request, ShopUser u, @RequestParam(required = false) Boolean fromCart) throws IOException{
 		
 		Optional<ShopUser> oldUser= users.findById(id);
@@ -62,7 +62,7 @@ public class UserController {
 		}
 
 		return getUser(model, false);
-	}
+	}*/
 	
 	@PostMapping("/userProfile/changePassword")
 	public String updatePass(Model model,  HttpServletRequest request, @RequestParam(name = "oldPass") String oldPass,  @RequestParam(name = "newPass") String newPass,  @RequestParam(name = "newConfPass") String newConfPass) {

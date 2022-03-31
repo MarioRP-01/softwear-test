@@ -34,7 +34,7 @@
                             <td class="user-role">{{role}}</td>
                             <td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAddEditUserData"
                                 data-id="{{id}}" onclick="edit_user_load($(this).data('id'));"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
-                            <td><button data-id="{{id}}" onclick="delete_user($(this).data('id'));" class="btn btn-primary" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                            <td><button data-id="{{id}}" onclick="deleteUser($(this).data('id'));" class="btn btn-primary" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
                           </tr>
                           {{/users}}
                         </tbody>
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" id="dismiss-modal-users" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" onclick="updateUser();">Save</button>
+                                    <button type="button" class="btn btn-primary" id="saveButton" onclick="">Save</button>
                                 </div>    
                             </form>
                         </div>

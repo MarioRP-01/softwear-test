@@ -37,7 +37,7 @@ function more() {
 };
 
 function edit_user_load(id){
-    $("#mode").val("EDIT");
+	$("#saveButton").attr("onclick","updateUser();");
 
     trSelected = "#user-" + id;
     editUsername = trSelected + " .user-username";
@@ -78,45 +78,40 @@ function updateUser() {
 	};
 	console.log(JSON.stringify(dataObj))
     $.ajax({
-        url: "/api/users/updateInfo",
+        url: "/api/users/updateAdminInfo",
         type: "PUT",
         contentType: "application/json",
         data: JSON.stringify(dataObj),
         success: function(result) {
         	 success_alert();
+        	 $('#dismiss-modal-users').click();
+        	 $("#user-"+dataObj.id+" .user-username").html(dataObj.username);
+             $("#user-"+dataObj.id+" .user-email").html(dataObj.email);
+             $("#user-"+dataObj.id+" .user-name").html(dataObj.name);
+             $("#user-"+dataObj.id+" .user-lastName").html(dataObj.lastName);
+             $("#user-"+dataObj.id+" .user-address").html(dataObj.address);
+             $("#user-"+dataObj.id+" .user-phone").html(dataObj.mobileNumber);
+             $("#user-"+dataObj.id+" .user-birthdate").html(dataObj.birthdate);
+             $("#user-"+dataObj.id+" .user-role").html(dataObj.role);
         }
     })
 }
 
 
-function delete_user(id){
-	var ajaxUrl = '/apiadmin/manageUsers';
-    var formElements = this.elements;
-    var idAux = formElements[1].value;
-    $.ajax({
-        type: "POST",
-        url: ajaxUrl,
-        data: {
-            mode: formElements[0].value,
-            id: idAux,
-            username: formElements[2].value,
-            password: formElements[3].value,
-            email: formElements[4].value,
-            name: formElements[5].value,
-            lastName: formElements[6].value,
-            address: formElements[7].value,
-            mobileNumber: formElements[8].value,
-            birthdate: formElements[9].value,
-            role: formElements[10].value,
-            _csrf: token
+function deleteUser(id) {
+	$.ajax({
+        url: "/api/users/deleteUser?id="+id,
+        type: "DELETE",
+        success: function(result) {
+        	 success_alert();
+             $("#user-"+id).remove();
         }
     })
-    $("#editId").val(id);
-    $('#formUsers').submit();
-};
+}
+
 
 $('#button-add-user').click(function(){
-    $("#mode").val("ADD");
+	$("#saveButton").attr("onclick","addUser();");
     $("editPassword").attr("required", "true");
 
     $("#editId").val('');
@@ -130,6 +125,43 @@ $('#button-add-user').click(function(){
     $('#editBirthDate').val('');
     $("#editRole").val('');
 });
+
+function addUser() {
+	var dataObj = {
+			id: $("tbody")[0].childElementCount+1,
+            username: $("#editUserName")[0].value,
+            password: $("#editPassword")[0].value,
+            email: $("#editEmail")[0].value,
+            name: $("#editName")[0].value,
+            lastName: $("#editLastName")[0].value,
+            address: $("#editAddress")[0].value,
+            mobileNumber: $("#editPhone")[0].value,
+            birthdate: $("#editBirthDate")[0].value,
+            role: $("#editRole")[0].value
+	};
+	console.log(JSON.stringify(dataObj))
+    $.ajax({
+        url: "/api/users/createUser",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(dataObj),
+        success: function(result) {
+        	 success_alert();
+        	 $('#dismiss-modal-users').click();
+        	 let addHTML = '<tr id="user-'+dataObj.id+'"> <td scope="row" class="user-id">'+dataObj.id+'</td> <td class="user-username">'+
+		                     dataObj.username+'</td>' + '<td class="user-email">'+dataObj.email+'</td> <td class="user-name">'+dataObj.name+'</td>' +
+		                     '<td class="user-lastName">'+dataObj.lastName+'</td> <td class="user-address">'+dataObj.address+'</td>' +
+		                     '<td class="user-phone">'+dataObj.mobileNumber+'</td> <td class="user-birthdate">'+dataObj.birthdate+'</td>' +
+		                     '<td class="user-role">'+dataObj.role+'</td>'+
+		                     '<td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAddEditUserData" '+
+		                     'data-id="'+dataObj.id+'" onclick="edit_user_load('+dataObj.id+');"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>' +
+		                     '<td><button data-id="'+dataObj.id+'" onclick="deleteUser('+dataObj.id+');" '+
+		                     'class="btn btn-primary" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></td> </tr>';
+             $('tbody').append(addHTML);
+        }
+    })
+}
+
 
 function success_alert(){
     $('#manage-users-container').prepend('<div class="alert alert-success" role="alert" id="success-alert"> Operation succeded! </div>');
