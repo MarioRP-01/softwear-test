@@ -25,7 +25,7 @@ You can choose between two options in order to create the image:
 * Use the Dockerfile
 * Use the create_image.sh script
 
-If you do not want to create the image, you could download it from our dockerhub repository softweardaw/codeurjc-daw-2021-22-webapp5
+If you do not want to create the image, you could download it from our dockerhub repository [softweardaw/codeurjc-daw-2021-22-webapp5](https://hub.docker.com/repository/docker/softweardaw/codeurjc-daw-2021-22-webapp5)
 
 
 #### Dockerfile
