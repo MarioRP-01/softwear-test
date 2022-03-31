@@ -12,14 +12,9 @@ RUN mvn package
 
 FROM eclipse-temurin:17-jre-alpine
 
-ENV PORT 8443
-# ENV SPRING_DATASOURCE_URL jdbc:postgresql://postgres/softwear
-
 WORKDIR /usr/share/app
 
 COPY --from=compiler /usr/share/app/target/webapp5*.jar /usr/share/app/webapp5.jar
-
-EXPOSE 8443
 
 CMD ["java", "-jar", "webapp5.jar"]
 

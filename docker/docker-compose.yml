@@ -3,6 +3,7 @@ services:
     softwear:
         image: softweardaw/codeurjc-daw-2021-22-webapp5
         environment:
+            - PORT=8443
             - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres/softwear
             - MAILER_EMAIL=${MAILER_EMAIL}
             - MAILER_PASS=${MAILER_PASS}

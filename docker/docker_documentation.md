@@ -53,6 +53,7 @@ You can execute the image in a container with the following command:
 ```bash
 docker run [ -d | -it ] --name <container-name> \
 	--network <network-name> \
+	-e PORT=<application-port> \
 	-e SPRING_DATASOURCE_URL=<database-address> \
 	[-e SPRING_DATASOURCE_USERNAME=<database-user>] \
 	[-e SPRING_DATASOURCE_PASSWORD=<database-password>] \
