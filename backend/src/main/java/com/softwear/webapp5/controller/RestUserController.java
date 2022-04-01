@@ -38,19 +38,22 @@ public class RestUserController {
 		return userService.findAll();
 	}
 	
-	@PutMapping("/updateAdminInfo")
-	public void updateAdmin(@RequestBody ShopUser u) {
+	@PutMapping("/updateAdminInfo/{id}")
+	public ResponseEntity updateAdmin(@RequestBody ShopUser u, @PathVariable Long id) {
 		u.setPassword(passwordEncoder.encode(u.getPassword()));
-		Optional<ShopUser> oldUser = userService.findById(u.getId());
+		Optional<ShopUser> oldUser = userService.findById(id);
 	
 		userService.updateAdminInfo(oldUser.get(), u);
+		
+		return ResponseEntity.ok(oldUser);
 	}
 	
 	@PutMapping("/updateUserInfo")
-	public void updateUser(HttpServletRequest request, @RequestBody ShopUser u) {
+	public ResponseEntity updateUser(HttpServletRequest request, @RequestBody ShopUser u) {
 		Optional<ShopUser> oldUser = userService.findByUsername(request.getUserPrincipal().getName());
 	
 		userService.updateInfo(oldUser, u);
+		return ResponseEntity.ok(oldUser);
 	}
 	
 	@PutMapping("/updatePassword")
@@ -67,13 +70,15 @@ public class RestUserController {
 	}
 	
 	@PostMapping("/createUser")
-	public void create(@RequestBody ShopUser u) {
+	public ResponseEntity create(@RequestBody ShopUser u) {
 		u.setPassword(passwordEncoder.encode(u.getPassword()));
 		userService.saveUser(u);
+		return ResponseEntity.ok(u);
 	}
 	
-	@DeleteMapping("/deleteUser")
-	public void delete(@RequestParam Long id) {
+	@DeleteMapping("/deleteUser/{id}")
+	public ResponseEntity delete(@PathVariable Long id) {
 		userService.delete(id);
+		return ResponseEntity.ok().build();
 	}
 }
