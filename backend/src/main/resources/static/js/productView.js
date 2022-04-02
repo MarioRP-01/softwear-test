@@ -26,7 +26,7 @@ function showProduct(product) {
 
 function getProduct(name, size, callback) {
 	$.ajax({
-		url: "/product",
+		url: "/api/product",
 		type: "get",
 		data: {
 			name: $(".product-name").html(),
