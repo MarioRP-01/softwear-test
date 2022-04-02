@@ -27,22 +27,29 @@ public class ProductRESTController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/product")
-    public Product product(@RequestParam(required = false) Long id, @RequestParam(required = false) String name, @RequestParam(required = false) String size) {
-        Optional<Product> product;
-        if(id != null) {
-            product = productService.findById(id);
-            if(product.isPresent()) {
-                return product.get();
-            }
-        } else if(name != null && size != null) {
-            ProductSize pSize = ProductSize.stringToProductSize(size);
-            product = productService.findByNameAndSize(name, pSize);
-            if(product.isPresent()) {
-                return product.get();
-            }
+    @GetMapping(value = "/product", params = "id")
+    public ResponseEntity<Product> getProduct(@RequestParam Long id) {
+
+        Optional<Product> product = productService.findById(id);
+
+        if (product.isPresent()){
+            return ResponseEntity.ok(product.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        } 
+    }
+
+    @GetMapping(value = "/product", params = {"name", "size"})
+    public ResponseEntity<Product> getProduct(@RequestParam String name, @RequestParam String size){
+        
+        ProductSize productSize = ProductSize.stringToProductSize(size);
+        Optional<Product> product = productService.findByNameAndSize(name, productSize);
+
+        if (product.isPresent()){
+            return ResponseEntity.ok(product.get());
+        } else {
+            return ResponseEntity.notFound().build();
         }
-        return null;
     }
 
     @Transactional
