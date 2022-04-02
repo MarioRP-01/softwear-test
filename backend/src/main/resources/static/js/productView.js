@@ -14,16 +14,6 @@ function labelTransition(action) {
 	setTimeout($("#" + action + "-label").fadeOut(2000), 3000);
 }
 
-//Load items from server
-function loadProduct(callback) {
-  $.ajax({
-      url: 'https://localhost:8443/products/'
-  }).done(function (products) {
-      console.log('products loaded: ' + JSON.stringify(products));
-      callback(products);
-  })
-}
-
 function showProduct(product) {
 
 	$("#product-featured")[0].src= product.img_routes[0];
@@ -169,13 +159,6 @@ function changeSize(new_size) {
 $(document).ready(function () {
 
 	token = $("#csrf-token").attr("content");
-
-	loadProduct(function (products) {
-		//When items are loaded from server
-		for (var i = 0; i < products.length; i++) {
-			showProduct(products[i]);
-		}
-	});
 
 	let thumbnails = document.getElementsByClassName('product-thumbnail')
 
