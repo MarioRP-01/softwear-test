@@ -28,11 +28,6 @@ public class MainController {
         model.addAttribute("maxPages", products.getTotalPages());
         return "index";
     }
-
-	@GetMapping("/productView")
-	public String product(Model model) {
-	    return "productView";
-	}
 	
 	@GetMapping("/about")
 	public String about(Model model) {

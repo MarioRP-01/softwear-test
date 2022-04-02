@@ -1,5 +1,6 @@
 package com.softwear.webapp5.controller;
 
+import com.softwear.webapp5.data.ProductNoImagesDTO;
 import com.softwear.webapp5.data.ProductSize;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.service.ProductService;
@@ -21,14 +22,14 @@ import java.util.Optional;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/product")
 public class ProductRESTController {
 
     @Autowired
     private ProductService productService;
 
-    @GetMapping(value = "/product", params = "id")
-    public ResponseEntity<Product> getProduct(@RequestParam Long id) {
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Product> getProduct(@PathVariable Long id) {
 
         Optional<Product> product = productService.findById(id);
 
@@ -39,8 +40,8 @@ public class ProductRESTController {
         } 
     }
 
-    @GetMapping(value = "/product", params = {"name", "size"})
-    public ResponseEntity<Product> getProduct(@RequestParam String name, @RequestParam String size){
+    @GetMapping(value = "/{name}/{size}")
+    public ResponseEntity<Product> getProduct(@PathVariable String name, @PathVariable String size){
         
         ProductSize productSize = ProductSize.stringToProductSize(size);
         Optional<Product> product = productService.findByNameAndSize(name, productSize);
@@ -52,11 +53,55 @@ public class ProductRESTController {
         }
     }
 
+    @PostMapping
+    public ResponseEntity<Product> createProduct(@RequestBody ProductNoImagesDTO productNoImages) {
+
+        Product product = new Product(productNoImages);
+        productService.save(product);
+
+        URI location = fromCurrentRequest().path("/{id}").buildAndExpand(product.getId()).toUri();
+
+        return ResponseEntity.created(location).body(product);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Product> deleteProduct(@PathVariable long id){
+        
+        Optional<Product> product = productService.findById(id);
+
+        if (product.isPresent()) {
+            productService.deleteProduct(id);
+
+            return ResponseEntity.ok(product.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }   
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> replaceProduct(@PathVariable long id,
+            @RequestBody Product newProduct) {
+
+        Optional<Product> product = productService.findById(id);
+
+        if (product.isPresent()) {
+            newProduct.setId(id);
+            productService.save(newProduct);
+
+            return ResponseEntity.ok(newProduct);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @Transactional
-    @GetMapping("/product/{productId}/image/{imageIndex}")
-    public ResponseEntity<Object> getProductImage(@PathVariable Long productId, @PathVariable int imageIndex) throws SQLException {
+    @GetMapping("/{productId}/image/{imageIndex}")
+    public ResponseEntity<Object> getProductImage(@PathVariable Long productId,
+            @PathVariable int imageIndex) throws SQLException {
+
         Product product = productService.findById(productId).orElseThrow();
         List<Blob> images = product.getImageFiles();
+
         if (product.getImageFiles() != null && images.size() > imageIndex) {
             Blob image = product.getImageFile(imageIndex);
             return ResponseEntity.ok()
@@ -68,15 +113,27 @@ public class ProductRESTController {
         }
     }
 
-    @PostMapping("/product/{productId}/image/{imageIndex}")
+    @PostMapping("/{productId}/image/{imageIndex}")
     public ResponseEntity<Object> saveProductImage(@PathVariable Long productId, @PathVariable int imageIndex,
-                                                   @RequestParam MultipartFile imageFile) throws IOException {
-        Product product = productService.findById(productId).orElseThrow();
+                @RequestParam MultipartFile imageFile) throws IOException {
+
+        Optional<Product> productOptional = productService.findById(productId);
         URI location = fromCurrentRequest().build().toUri();
-        product.addImage(location.toString());
-        product.addImageFile(BlobProxy.generateProxy(imageFile.getInputStream(), imageFile.getSize()));
-        productService.save(product);
-        return ResponseEntity.created(location).build();
+
+        if (productOptional.isPresent()){
+            Product product = productOptional.get();
+
+            product.addImage(location.toString());
+            product.addImageFile(BlobProxy.generateProxy(imageFile.getInputStream(), imageFile.getSize()));
+
+            productService.save(product);
+
+            return ResponseEntity.created(location).build();
+
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
+
 
 }

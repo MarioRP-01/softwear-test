@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.softwear.webapp5.data.ProductNoImagesDTO;
 import com.softwear.webapp5.data.ProductSize;
 
 @Entity
@@ -47,6 +48,14 @@ public class Product{
 		this.size = size;
 		this.images = images;
 		this.imageFiles = imageFiles;
+	}
+
+	public Product(ProductNoImagesDTO productNoImages){
+		this.name = productNoImages.getName();
+		this.description = productNoImages.getDescription();
+		this.price = productNoImages.getPrice();
+		this. stock = productNoImages.getStock();
+		this.size = productNoImages.getSize();
 	}
 
 	public Product() {}

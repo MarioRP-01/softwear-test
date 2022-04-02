@@ -25,13 +25,11 @@ function showProduct(product) {
 }
 
 function getProduct(name, size, callback) {
+	console.log("hola")
+	const productUrl = `/api/product/${name}/${size}`
 	$.ajax({
-		url: "/api/product",
+		url: productUrl,
 		type: "get",
-		data: {
-			name: $(".product-name").html(),
-			size: size
-		},
 		dataType: "json"
 	}).done(function (product){
 		callback(product)
