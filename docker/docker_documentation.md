@@ -30,7 +30,7 @@ If you do not want to create the image, you could download it from our dockerhub
 
 #### Dockerfile
 
-In order to compile the image with a dockerfile you could use the webapp5-compile.Dockerfile with the following command from the docker directory.
+In order to compile the image with a dockerfile, you need docker client to be installed in your system. You could use the webapp5-compile.Dockerfile with the following command from the docker directory. 
 ```bash
 docker build -f webapp5-compile.Dockerfile -t <target-image> ..
 ```
@@ -66,6 +66,8 @@ If you not specify a mailer email, it is set to our default email softwearDAW@gm
 
 You could substitute the image name with your compiled image name.
 
+---
+
 **NOTE**: You need a postgres database in the same network in order to execute the container. You could run one with the following command:
 
 ```bash
@@ -83,7 +85,7 @@ If you want to execute both simultaneously, you could check the next section.
 
 ### **Docker Compose - Application Execution**
 
-You can use the docker-compose.yml file in the docker directory in order to run the app with docker compose.
+You need to install the docker client and docker-compose.You would use the docker-compose.yml file in the docker directory.
 
 You need to specify an email for your mail service. If you don't, the application's mail service will not work. You should specify it in a environment variable named MAILER_EMAIL.
 
@@ -97,3 +99,69 @@ You could execute the following command in order to set those variables and run 
 env MAILER_EMAIL=<your-mailer-email> MAILER_PASS=<your-mailer-pass> docker compose up
 ```
 
+### **Heroku Deployment**
+
+In order to deploy the application with heroku, you must create a heroku account and install the heroku client.
+
+First, you need to log in and create a new application with the following commands:
+
+```bash
+heroku login
+heroku create <app-id>
+```
+
+Then, you need to pull our application image from DockerHub for pushing it into the heroku repository:
+
+```bash
+docker image pull softwearDAW/codeurjc-daw-2021-22-webapp5
+```
+
+You need to log in heroku repository and push the downloaded application image into your application repository. You could do it with the following commands:
+
+```bash
+# Log in heroku repository
+heroku container:login
+# Change image name
+docker image tag softwearDAW/codeurjc-daw-2021-22-webapp5:lastest registry.heroku.com/<app-id>/web:lastest
+# Push image
+docker push registry.heroku.com/<app-id>/web
+```
+
+Then you need to configure the database. You can add the database to your heroku app running the following command:
+
+```bash
+heroku addons:create heroku-postgresql --app <app-id>
+```
+
+
+
+You need to set the environment variables running the following command:
+
+```bash
+heroku config:set \
+	SERVER_SSL_ENABLED=false \
+	SPRING_JPA_HIBERNATE_DDL-AUTO=update \
+	MAILER_EMAIL=<mailer-email> \
+	MAILER_PASS=<mailer-pass> \
+	--app <app-id>
+```
+
+In addition, you need to set the database address to the database address provided by the heroku addon. You can do this running the following command:
+
+```bash
+heroku config:set DATABASE_URL=<database-url>
+```
+
+Finally, you could release the application running the following command:
+
+```bash
+heroku container:release --app <app-id>
+```
+
+---
+
+You could destroy the application running the following command:
+
+```bash
+heroku apps:destroy --app <app-id>
+```
