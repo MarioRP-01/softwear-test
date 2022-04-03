@@ -1,13 +1,14 @@
 let token = "";
-let currentPage = 0;
+let currentPage = 1;
 let maxPages = 0;
-
-
+const queryString = window.location.search; 	
+const urlParams = new URLSearchParams(queryString);
+let url = new URL(window.location.href);
 
 function more() {
-    if(currentPage < maxPages - 1) {
+    if(currentPage < maxPages) {
         $.ajax({
-            url: "/apiadmin/manageUsers/" + (currentPage + 1),
+            url: "/apiadmin/manageUsers/" + (currentPage),
             type: "get",
             dataType: "json"
         }).done(function (users) {
@@ -28,12 +29,15 @@ function more() {
         				+ "                            <td><button data-id=\""+user.id+"\" onclick=\"delete_user($(this).data('id'));\" class=\"btn btn-primary\" type=\"button\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td>\r\n"
         				+ "                          </tr>")
         	}
-        	currentPage++;
-            if(currentPage >= maxPages - 1) {
+        	
+            if(currentPage >= maxPages) {
                 $("#more-btn").hide();
             }
         });
+        currentPage++;
+    	window.history.pushState("", "", "?page="+(currentPage));
     }
+    return currentPage;
 };
 
 function edit_user_load(id){
@@ -178,4 +182,11 @@ function error_alert(){
 $(document).ready(function () {
     token = $("#csrf-token").attr("content");
     maxPages = Number($("#max-pages").attr("content"));
+    let page= urlParams.get('page');
+    if(page!=null) {
+    	while((currentPage<page) && (page<=maxPages)) {
+    		currentPage=more();
+    		
+    	}
+    }
 });
