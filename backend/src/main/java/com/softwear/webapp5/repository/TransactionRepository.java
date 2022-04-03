@@ -2,6 +2,7 @@ package com.softwear.webapp5.repository;
 
 import com.softwear.webapp5.model.Product;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -60,4 +61,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
             + "WHERE NOT (t.type = 'CART' OR t.type = 'WISHLIST') "
             + "GROUP BY p.name")
     public List<StaticDTO> getStatics();
+    
+    @Query("SELECT t FROM Transaction t " +
+            "WHERE t.type = :type")
+    Page<Transaction> findByType(String type, Pageable page);
 }

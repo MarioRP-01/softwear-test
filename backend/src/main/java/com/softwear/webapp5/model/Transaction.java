@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 public class Transaction {
 
@@ -25,6 +28,7 @@ public class Transaction {
     private ShopUser user;
 
 	@ManyToOne (fetch=FetchType.EAGER)
+	@OnDelete (action = OnDeleteAction.NO_ACTION)
     private Coupon usedCoupon;
 
 	@Column(nullable = false)
