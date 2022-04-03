@@ -21,6 +21,7 @@ import com.softwear.webapp5.security.jwt.UserLoginService;
 @RequestMapping("/api/auth")
 public class LoginController {
 
+	
 	@Autowired
 	private UserLoginService userService;
 
@@ -40,9 +41,9 @@ public class LoginController {
 		return userService.refresh(refreshToken);
 	}
 
+
 	@PostMapping("/logout")
 	public ResponseEntity<AuthResponse> logOut(HttpServletRequest request, HttpServletResponse response) {
-
 		return ResponseEntity.ok(new AuthResponse(Status.SUCCESS, userService.logout(request, response)));
 	}
 }

@@ -2,6 +2,7 @@ package com.softwear.webapp5.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -24,7 +29,8 @@ public class Transaction {
 	@Column(nullable = false)
     private String type;
 
-	@ManyToOne(optional = false, fetch=FetchType.EAGER)
+	@ManyToOne(optional = false,cascade=CascadeType.REMOVE,  fetch=FetchType.EAGER)
+	@OnDelete(action = OnDeleteAction.CASCADE)
     private ShopUser user;
 
 	@ManyToOne (fetch=FetchType.EAGER)
@@ -37,7 +43,8 @@ public class Transaction {
 	@Column(nullable = false)
 	private Double totalPrice;
 
-	@ManyToMany (fetch=FetchType.EAGER)
+	@ManyToMany(cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@Column(nullable = false)
     private List<Product> products;
 

@@ -79,7 +79,7 @@ public class RestAdminController {
         }else if(mode.equals("ADD")){
             password = passwordEncoder.encode(password);
             ShopUser newUser = new ShopUser(username, email, name, lastName, password, address, mobileNumber, birthdate, role);
-            userService.save(newUser);
+            userService.saveUser(newUser);
             return newUser;
 
         }else if(mode.equals("DELETE")){
@@ -148,16 +148,6 @@ public class RestAdminController {
     public List<StaticDTO> getStatics(HttpServletResponse response) {
         List<StaticDTO> statics = transactionService.getStatics();
         return statics;
-    }
-    @GetMapping("/manageUsers/{pageNumber}")
-    public List<ShopUserView> users(Model model, @PathVariable int pageNumber){
-    	ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
-        Page<ShopUser> usersPage = userService.findAll(PageRequest.of(pageNumber, 10));
-        List<ShopUserView> listUser= new ArrayList<>();
-        for(ShopUser u: usersPage) {
-        	listUser.add(new ShopUserView(u));
-        }
-        return listUser;
     }
 
     @PostMapping("/manageCoupons")

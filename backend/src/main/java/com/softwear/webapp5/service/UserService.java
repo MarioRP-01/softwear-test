@@ -101,10 +101,6 @@ public class UserService {
 		shopUsers.deleteById(id);
 	}
 
-    public void save(ShopUser newUser) {
-		shopUsers.save(newUser);
-    }
-
 	public boolean checkShippingData(ShopUser user) {
 		return !user.getName().equals("") && !user.getLastName().equals("") && !user.getAddress().equals("");
 	}
