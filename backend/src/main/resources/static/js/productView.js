@@ -25,7 +25,6 @@ function showProduct(product) {
 }
 
 function getProduct(name, size, callback) {
-	console.log("hola")
 	const productUrl = `/api/product/${name}/${size}`
 	$.ajax({
 		url: productUrl,

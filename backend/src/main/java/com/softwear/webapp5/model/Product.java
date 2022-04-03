@@ -139,6 +139,10 @@ public class Product{
 		}
 	}
 
+	public void removeAllImages() {
+		this.images.clear();
+	}
+
 	public List<Blob> getImageFiles() {
 		return imageFiles;
 	}
@@ -167,4 +171,7 @@ public class Product{
 		}
 	}
 
+	public void removeAllImagesFiles() {
+		this.imageFiles.clear();
+	}
 }

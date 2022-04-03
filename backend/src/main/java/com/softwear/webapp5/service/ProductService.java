@@ -147,6 +147,37 @@ public class ProductService {
 		return productRepository.findAllNames(page);
 	}
 
+    public List<Product> deleteImage(Product product, int imageIndex) {
+
+		String name = product.getName();
+
+		List<Product> productsWithSameImages = 
+				findByName(name, Pageable.unpaged()).getContent();
+
+		
+		for (Product productEachSize : productsWithSameImages) {
+			productEachSize.removeImage(imageIndex);
+
+			if (!productEachSize.getImageFiles().isEmpty())
+				productEachSize.removeImageFile(imageIndex);
+		}
+		return productsWithSameImages;
+    }
+
+	public List<Product> deleteAllImages(Product product) {
+
+		String name = product.getName();
+
+		List<Product> productsWithSameImages = 
+			findByName(name, Pageable.unpaged()).getContent();
+
+		for (Product productEachSize : productsWithSameImages) {
+			productEachSize.removeAllImages();
+			productEachSize.removeAllImagesFiles();
+		}
+		return productsWithSameImages;
+	}
+
 //	public Optional<Product> findOneName(String name){
 //        return productRepository.findOneName(name);
 //    }
