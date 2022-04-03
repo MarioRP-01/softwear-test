@@ -257,7 +257,7 @@ public class RestTransactionController {
         if(page != null){
             if(page < 1)
                 return null;
-            return transactionService.findByType(type.toUpperCase(), PageRequest.of(page - 1, 1)).toList();
+            return transactionService.findByType(type.toUpperCase(), PageRequest.of(page - 1, 10)).toList();
         }
         return transactionService.findByType(type.toUpperCase());
     }

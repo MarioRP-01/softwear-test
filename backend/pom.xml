@@ -64,6 +64,11 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.7.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.5.12</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -97,9 +102,9 @@
 					</execution>
 				</executions>
 				<configuration>
-					<apiDocsUrl>http://localhost:8443/v3/api-docs.yaml</apiDocsUrl>
+					<apiDocsUrl>http://localhost:8443/v3/api-docs.json</apiDocsUrl>
 					<outputFileName>api-docs.yaml</outputFileName>
-					<outputDir>${project.basedir}/api-docs</outputDir>
+					<outputDir>${project.basedir}/../api-docs</outputDir>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -114,8 +119,8 @@
 						</goals>
 						<configuration>
 							<generatorName>html2</generatorName>
-							<inputSpec>${project.basedir}/api-docs/api-docs.yaml</inputSpec>
-							<output>${project.basedir}/api-docs/</output>
+							<inputSpec>${project.basedir}/../api-docs/api-docs.json</inputSpec>
+							<output>${project.basedir}/../api-docs/</output>
 						</configuration>
 					</execution>
 				</executions>
@@ -132,8 +137,8 @@
 							<goal>rename</goal>
 						</goals>
 						<configuration>
-							<sourceFile>api-docs/index.html</sourceFile>
-							<destinationFile>api-docs/api-docs.html</destinationFile>
+							<sourceFile>../api-docs/index.html</sourceFile>
+							<destinationFile>../api-docs/api-docs.html</destinationFile>
 						</configuration>
 					</execution>
 				</executions>

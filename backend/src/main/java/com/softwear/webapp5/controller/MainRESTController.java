@@ -15,6 +15,9 @@ import com.softwear.webapp5.data.ProductView;
 import com.softwear.webapp5.service.ProductService;
 import com.softwear.webapp5.model.Product;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
+@Hidden
 @RestController
 public class MainRESTController {
 

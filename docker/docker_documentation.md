@@ -123,7 +123,7 @@ You need to log in heroku repository and push the downloaded application image i
 # Log in heroku repository
 heroku container:login
 # Change image name
-docker image tag softwearDAW/codeurjc-daw-2021-22-webapp5:lastest registry.heroku.com/<app-id>/web:lastest
+docker image tag softweardaw/codeurjc-daw-2021-22-webapp5:latest registry.heroku.com/<app-id>/web:latest
 # Push image
 docker push registry.heroku.com/<app-id>/web
 ```
@@ -147,16 +147,10 @@ heroku config:set \
 	--app <app-id>
 ```
 
-In addition, you need to set the database address to the database address provided by the heroku addon. You can do this running the following command:
-
-```bash
-heroku config:set DATABASE_URL=<database-url>
-```
-
 Finally, you could release the application running the following command:
 
 ```bash
-heroku container:release --app <app-id>
+heroku container:release web --app <app-id>
 ```
 
 ---
