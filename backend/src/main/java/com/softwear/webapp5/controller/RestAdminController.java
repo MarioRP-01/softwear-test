@@ -29,7 +29,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -124,7 +123,7 @@ public class RestAdminController {
                     img.getInputStream(), img.getSize()));
         } else {
             imageIndex = product.getImages().size();
-            product.addImage("/product/" + product.getId() + "/image/" + imageIndex);
+            product.addImage("/api/products/" + product.getId() + "/image/" + imageIndex);
             product.addImageFile(BlobProxy.generateProxy(
                     img.getInputStream(), img.getSize()));
         }

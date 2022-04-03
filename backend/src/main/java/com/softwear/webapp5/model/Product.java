@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.softwear.webapp5.data.ProductNoImagesDTO;
 import com.softwear.webapp5.data.ProductSize;
 
 @Entity
@@ -47,6 +48,14 @@ public class Product{
 		this.size = size;
 		this.images = images;
 		this.imageFiles = imageFiles;
+	}
+
+	public Product(ProductNoImagesDTO productNoImages){
+		this.name = productNoImages.getName();
+		this.description = productNoImages.getDescription();
+		this.price = productNoImages.getPrice();
+		this. stock = productNoImages.getStock();
+		this.size = productNoImages.getSize();
 	}
 
 	public Product() {}
@@ -127,7 +136,46 @@ public class Product{
 	public void removeImage(int imageIndex) {
 		if(imageIndex < images.size()) {
 			images.remove(imageIndex);
+			updateImageIndex(imageIndex);
 		}
+	}
+
+	private void updateImageIndex(int deletedImage) {
+
+		if (!this.images.isEmpty()) {
+
+			String route; 
+			String[] splitedRoute;
+			for (int i = deletedImage; i < this.images.size(); i++) {
+				route = images.get(i);
+
+				splitedRoute = route.split("/");
+				splitedRoute[splitedRoute.length - 1] = Integer.toString(i);
+
+				images.set(i, undoSplit(splitedRoute, "/"));
+			}
+		}		
+	}
+
+	private String undoSplit(String[] splitedMessage, String inter) {
+
+		StringBuilder builder = new StringBuilder("");
+
+		int count = 0;
+		int messageSize = splitedMessage.length - 1;
+		for (String i : splitedMessage) {
+			builder.append(i);
+
+			if (count < messageSize) {
+				builder.append(inter);
+			}
+		}
+
+		return builder.toString();
+	}
+
+	public void removeAllImages() {
+		this.images.clear();
 	}
 
 	public List<Blob> getImageFiles() {
@@ -158,4 +206,7 @@ public class Product{
 		}
 	}
 
+	public void removeAllImagesFiles() {
+		this.imageFiles.clear();
+	}
 }
