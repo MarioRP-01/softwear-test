@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -45,6 +47,7 @@ public class Transaction {
 
 	@ManyToMany(cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
 	@OnDelete(action = OnDeleteAction.CASCADE)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@Column(nullable = false)
     private List<Product> products;
 
