@@ -87,22 +87,6 @@ public class AdminController {
         model.addAttribute("maxPages", users.getTotalPages());
         return "manageUsers";
     }
-    
-    @GetMapping("/manageUsers?page={num}")
-    public String usersPag(Model model, @PathVariable int num){
-        Page<ShopUser> users = userService.findAll(PageRequest.of(num, 1));
-        List<ShopUserView> listUsers = new ArrayList<>();
-        for(ShopUser u: users) {
-            listUsers.add(new ShopUserView(u));
-        }
-        model.addAttribute("users", users);
-        model.addAttribute("hasPrev", users.hasPrevious());
-        model.addAttribute("hasNext", users.hasNext());
-        model.addAttribute("nextPage", users.getNumber()+1);
-        model.addAttribute("prevPage", users.getNumber()-1);
-        model.addAttribute("maxPages", users.getTotalPages());
-        return "manageUsers";
-    }
 
     @GetMapping("/home")
     public String adminHome(){

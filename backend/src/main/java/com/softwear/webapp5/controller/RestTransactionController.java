@@ -6,6 +6,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
+import com.softwear.webapp5.data.TransactionView;
 import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.ShopUser;
@@ -258,4 +261,6 @@ public class RestTransactionController {
         }
         return transactionService.findByType(type.toUpperCase());
     }
+    
+    
 }

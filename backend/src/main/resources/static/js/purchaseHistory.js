@@ -4,7 +4,7 @@ let maxPages = 0;
 function more() {
     if(currentPage < maxPages - 1) {
         $.ajax({
-            url: "/purchaseHistory/" + (currentPage + 1),
+            url: "api/userHistory?page=" + (currentPage + 1),
             type: "get",
             dataType: "json"
         }).done(function (purchases) {
