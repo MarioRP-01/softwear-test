@@ -49,20 +49,26 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.antMatcher("/api/**");
 		
 		// URLs that need authentication to access to it
-<<<<<<< HEAD
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/**").hasAnyRole("USER", "ADMIN");
 		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/users/**").hasAnyRole("USER", "ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("ADMIN");		
-=======
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/books/**").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/books/**").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/books/**").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("ADMIN");	
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/userHistory**").hasAnyRole("USER", "ADMIN");
+
+		
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/transactions/**").hasRole("ADMIN");	
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/transactions/**").hasAnyRole("USER", "ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/transactions/**").hasAnyRole("USER", "ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/transactions/**").hasRole("ADMIN");	
+
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/coupons/**").hasRole("ADMIN");	
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/coupons/**").hasAnyRole("USER", "ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/coupons/**").hasAnyRole("USER", "ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/coupons/**").hasRole("ADMIN");
 		
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/product/**").permitAll();
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/product/**").hasRole("ADMIN");
 		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/product/**").hasRole("ADMIN");
 		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/product/**").hasRole("ADMIN");
->>>>>>> origin/restProductController
 		
 		// Other URLs can be accessed without authentication
 		http.authorizeRequests().anyRequest().permitAll();

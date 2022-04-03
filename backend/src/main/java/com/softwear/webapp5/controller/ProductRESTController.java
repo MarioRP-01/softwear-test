@@ -6,6 +6,7 @@ import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.service.ProductService;
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,14 +43,28 @@ public class ProductRESTController {
         } 
     }
 
-    @GetMapping()
-    public ResponseEntity<Product> getProduct(@RequestParam String name, @RequestParam String size){
+    @GetMapping("")
+    public ResponseEntity<List<Product>> getProduct(@RequestParam(required = false) String name, @RequestParam(required = false) String size, 
+    @RequestParam(required = false) Integer page){
         
+        if(name == null || size == null){
+            if(page == null)
+                return ResponseEntity.ok(productService.findAll());
+            else{
+                if(page < 1)
+                    return ResponseEntity.badRequest().build();
+                else
+                    return ResponseEntity.ok(productService.findAll(PageRequest.of(page - 1, 1)).toList());
+            }
+        }
+
         ProductSize productSize = ProductSize.stringToProductSize(size);
         Optional<Product> product = productService.findByNameAndSize(name, productSize);
 
         if (product.isPresent()){
-            return ResponseEntity.ok(product.get());
+            List<Product> lp = new ArrayList<Product>();
+            lp.add(product.get());
+            return ResponseEntity.ok(lp);
         } else {
             return ResponseEntity.notFound().build();
         }

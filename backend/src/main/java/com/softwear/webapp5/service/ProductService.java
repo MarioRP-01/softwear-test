@@ -201,6 +201,10 @@ public class ProductService {
 		return location;
 	}
 
+    public List<Product> findAll() {
+        return productRepository.findAll();
+    }
+
 //	public Optional<Product> findOneName(String name){
 //        return productRepository.findOneName(name);
 //    }
