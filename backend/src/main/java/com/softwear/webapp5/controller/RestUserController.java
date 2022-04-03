@@ -1,5 +1,6 @@
 package com.softwear.webapp5.controller;
 
+import java.net.URI;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.softwear.webapp5.data.PassChange;
 import com.softwear.webapp5.model.ShopUser;
@@ -38,26 +40,28 @@ public class RestUserController {
 		return userService.findAll();
 	}
 	
-	@PutMapping("/updateAdminInfo/{id}")
-	public ResponseEntity updateAdmin(@RequestBody ShopUser u, @PathVariable Long id) {
+	@PutMapping("/{id}")
+	public ResponseEntity<ShopUser> updateAdmin(@RequestBody ShopUser u, @PathVariable Long id) {
 		u.setPassword(passwordEncoder.encode(u.getPassword()));
 		Optional<ShopUser> oldUser = userService.findById(id);
-	
-		userService.updateAdminInfo(oldUser.get(), u);
 		
-		return ResponseEntity.ok(oldUser);
+		if(oldUser.isPresent()) {
+			userService.updateAdminInfo(oldUser.get(), u);
+			return ResponseEntity.ok(oldUser.get());
+		}
+		return ResponseEntity.notFound().build();
 	}
 	
-	@PutMapping("/updateUserInfo")
-	public ResponseEntity updateUser(HttpServletRequest request, @RequestBody ShopUser u) {
+	@PutMapping("/userInfo")
+	public ResponseEntity<ShopUser> updateUser(HttpServletRequest request, @RequestBody ShopUser u) {
 		Optional<ShopUser> oldUser = userService.findByUsername(request.getUserPrincipal().getName());
 	
 		userService.updateInfo(oldUser, u);
-		return ResponseEntity.ok(oldUser);
+		return ResponseEntity.ok(oldUser.get());
 	}
 	
-	@PutMapping("/updatePassword")
-	public ResponseEntity updateUserPass(HttpServletRequest request, @RequestBody PassChange pc) {
+	@PutMapping("/password")
+	public ResponseEntity<ShopUser> updateUserPass(HttpServletRequest request, @RequestBody PassChange pc) {
 		Optional<ShopUser> oldUser= userService.findByUsername(request.getUserPrincipal().getName());
 		
 		if(passwordEncoder.matches(pc.getOldPass(), oldUser.get().getPassword()) && pc.getNewPass().equals(pc.getNewConfPass())) {
@@ -69,16 +73,22 @@ public class RestUserController {
 		
 	}
 	
-	@PostMapping("/createUser")
-	public ResponseEntity create(@RequestBody ShopUser u) {
+	@PostMapping("/")
+	public ResponseEntity<ShopUser> create(@RequestBody ShopUser u) {
 		u.setPassword(passwordEncoder.encode(u.getPassword()));
 		userService.saveUser(u);
-		return ResponseEntity.ok(u);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(u.getId()).toUri();
+		return ResponseEntity.created(location).body(u);
 	}
 	
-	@DeleteMapping("/deleteUser/{id}")
-	public ResponseEntity delete(@PathVariable Long id) {
-		userService.delete(id);
-		return ResponseEntity.ok().build();
+	@DeleteMapping("/{id}")
+	public ResponseEntity<ShopUser> delete(@PathVariable Long id) {
+		Optional<ShopUser> user = userService.findById(id); 
+		if(user.isPresent()) {
+			userService.delete(id);
+			return ResponseEntity.ok(user.get());
+		}
+		
+		return ResponseEntity.notFound().build();
 	}
 }

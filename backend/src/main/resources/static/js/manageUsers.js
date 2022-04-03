@@ -81,7 +81,7 @@ function updateUser() {
             role: $("#editRole")[0].value
 	};
     $.ajax({
-        url: "/api/users/updateAdminInfo/"+dataObj.id,
+        url: "/api/users/"+dataObj.id,
         type: "PUT",
         contentType: "application/json",
         data: JSON.stringify(dataObj),
@@ -131,7 +131,6 @@ $('#button-add-user').click(function(){
 
 function addUser() {
 	var dataObj = {
-			id: $("tbody")[0].childElementCount+1,
             username: $("#editUserName")[0].value,
             password: $("#editPassword")[0].value,
             email: $("#editEmail")[0].value,
@@ -143,21 +142,21 @@ function addUser() {
             role: $("#editRole")[0].value
 	};
     $.ajax({
-        url: "/api/users/createUser",
+        url: "/api/users/",
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify(dataObj),
         success: function(result) {
         	 success_alert();
         	 $('#dismiss-modal-users').click();
-        	 let addHTML = '<tr id="user-'+dataObj.id+'"> <td scope="row" class="user-id">'+dataObj.id+'</td> <td class="user-username">'+
-		                     dataObj.username+'</td>' + '<td class="user-email">'+dataObj.email+'</td> <td class="user-name">'+dataObj.name+'</td>' +
-		                     '<td class="user-lastName">'+dataObj.lastName+'</td> <td class="user-address">'+dataObj.address+'</td>' +
-		                     '<td class="user-phone">'+dataObj.mobileNumber+'</td> <td class="user-birthdate">'+dataObj.birthdate+'</td>' +
-		                     '<td class="user-role">'+dataObj.role+'</td>'+
+        	 let addHTML = '<tr id="user-'+result.id+'"> <td scope="row" class="user-id">'+result.id+'</td> <td class="user-username">'+
+		                     result.username+'</td>' + '<td class="user-email">'+result.email+'</td> <td class="user-name">'+result.name+'</td>' +
+		                     '<td class="user-lastName">'+result.lastName+'</td> <td class="user-address">'+result.address+'</td>' +
+		                     '<td class="user-phone">'+result.mobileNumber+'</td> <td class="user-birthdate">'+result.birthdate+'</td>' +
+		                     '<td class="user-role">'+result.role+'</td>'+
 		                     '<td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAddEditUserData" '+
-		                     'data-id="'+dataObj.id+'" onclick="edit_user_load('+dataObj.id+');"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>' +
-		                     '<td><button data-id="'+dataObj.id+'" onclick="deleteUser('+dataObj.id+');" '+
+		                     'data-id="'+result.id+'" onclick="edit_user_load('+result.id+');"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>' +
+		                     '<td><button data-id="'+result.id+'" onclick="deleteUser('+result.id+');" '+
 		                     'class="btn btn-primary" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></td> </tr>';
              $('tbody').append(addHTML);
         }
