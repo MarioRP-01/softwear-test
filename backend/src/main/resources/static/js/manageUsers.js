@@ -6,14 +6,17 @@ const urlParams = new URLSearchParams(queryString);
 let url = new URL(window.location.href);
 
 function more() {
-    if(currentPage < maxPages) {
+	currentPage++;
+    if(currentPage <= maxPages) {
         $.ajax({
-            url: "/apiadmin/manageUsers/" + (currentPage),
+            url: "/api/users/?page=" + (currentPage),
             type: "get",
             dataType: "json"
         }).done(function (users) {
         	for(let i=0; i<users.length; i++) {
         		let user= users[i];
+        		console.log(user.phoneNumber);
+        		console.log(user.mobileNumber);
         		$("tbody").append("<tr id=\"user-"+user.id+"\">\r\n"
         				+ "                            <td scope=\"row\" class=\"user-id\">"+user.id+"</td>\r\n"
         				+ "                            <td class=\"user-username\">"+user.username+"</td>\r\n"
@@ -21,8 +24,8 @@ function more() {
         				+ "                            <td class=\"user-name\">"+user.name+"</td>\r\n"
         				+ "                            <td class=\"user-lastName\">"+user.lastName+"</td>\r\n"
         				+ "                            <td class=\"user-address\">"+user.address+"</td>\r\n"
-        				+ "                            <td class=\"user-phone\">"+user.phoneNumber+"</td>\r\n"
-        				+ "                            <td class=\"user-birthdate\">"+user.birthDate+"</td>\r\n"
+        				+ "                            <td class=\"user-phone\">"+user.mobileNumber+"</td>\r\n"
+        				+ "                            <td class=\"user-birthdate\">"+user.birthdate+"</td>\r\n"
         				+ "                            <td class=\"user-role\">"+user.role+"</td>\r\n"
         				+ "                            <td><button class=\"btn btn-primary\" type=\"button\" data-bs-toggle=\"modal\" data-bs-target=\"#modalAddEditUserData\"\r\n"
         				+ "                                data-id=\""+user.id+"\" onclick=\"edit_user_load($(this).data('id'));\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i></button></td>\r\n"
@@ -34,7 +37,7 @@ function more() {
                 $("#more-btn").hide();
             }
         });
-        currentPage++;
+        
     	window.history.pushState("", "", "?page="+(currentPage));
     }
     return currentPage;

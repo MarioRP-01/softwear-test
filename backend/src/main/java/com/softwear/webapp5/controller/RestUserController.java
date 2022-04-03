@@ -1,12 +1,16 @@
 package com.softwear.webapp5.controller;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.softwear.webapp5.data.PassChange;
+import com.softwear.webapp5.data.ShopUserView;
 import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.service.UserService;
 
@@ -36,8 +41,17 @@ public class RestUserController {
 	
 	
 	@GetMapping("/")
-	public Collection<ShopUser> get() {
-		return userService.findAll();
+	public ResponseEntity<List<ShopUser>> get(@RequestParam(required=false) Integer page) {
+		if(page!=null) {
+			if(page>0) {
+				List<ShopUser> listUser= new ArrayList<>();
+		        for(ShopUser u: userService.findAll(PageRequest.of(page-1, 1))) {
+		        	listUser.add(u);
+		        }
+		        return ResponseEntity.ok(listUser);
+			}
+		}
+		return ResponseEntity.ok(userService.findAll());
 	}
 	
 	@PutMapping("/{id}")

@@ -148,17 +148,6 @@ public class RestAdminController {
         List<StaticDTO> statics = transactionService.getStatics();
         return statics;
     }
-    
-    @GetMapping("/manageUsers/{pageNumber}")
-    public List<ShopUserView> users(Model model, @PathVariable int pageNumber){
-    	ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
-        Page<ShopUser> usersPage = userService.findAll(PageRequest.of(pageNumber, 1));
-        List<ShopUserView> listUser= new ArrayList<>();
-        for(ShopUser u: usersPage) {
-        	listUser.add(new ShopUserView(u));
-        }
-        return listUser;
-    }
 
     @PostMapping("/manageCoupons")
     public Coupon coupons(@RequestParam String mode, @RequestParam(required = false) Long id, @RequestParam(required = false) String code,
