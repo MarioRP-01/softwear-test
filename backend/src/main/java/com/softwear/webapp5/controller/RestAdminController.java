@@ -123,7 +123,7 @@ public class RestAdminController {
                     img.getInputStream(), img.getSize()));
         } else {
             imageIndex = product.getImages().size();
-            product.addImage("/product/" + product.getId() + "/image/" + imageIndex);
+            product.addImage("/api/product/" + product.getId() + "/image/" + imageIndex);
             product.addImageFile(BlobProxy.generateProxy(
                     img.getInputStream(), img.getSize()));
         }
