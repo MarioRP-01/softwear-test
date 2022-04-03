@@ -1,5 +1,6 @@
 package com.softwear.webapp5.controller;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/api")
@@ -41,12 +43,20 @@ public class CouponRESTController {
     @Autowired
     CouponRepository couponRepository;
 
-    @GetMapping("/coupon") //GET
+    @GetMapping("/coupons/{id}") //GET
+    public ResponseEntity<Coupon> getTransactionById(@PathVariable Long id){
+        Optional<Coupon> oCoupon = couponService.findById(id);
+        if(oCoupon.isPresent())
+            return ResponseEntity.ok(oCoupon.get());
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/coupons") //GET
     public ResponseEntity<List<Coupon>> getCart(){
         return ResponseEntity.ok(couponRepository.findAll());
     }
 
-    @PostMapping("/coupon") //ADD cart, wishlist or processed coupon
+    @PostMapping("/coupons") //ADD cart, wishlist or processed coupon
     public ResponseEntity<Coupon> addCoupon(@RequestBody Coupon coupon){
         Coupon newCoupon;
         List<Product> products = new ArrayList<>();
@@ -72,10 +82,12 @@ public class CouponRESTController {
         }
         else //Cant save null coupons (many fields not nullables)
             return ResponseEntity.badRequest().build();
-        return  ResponseEntity.ok(newCoupon);
+        
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newCoupon.getId()).toUri();
+        return ResponseEntity.created(location).body(newCoupon);
     }
 
-    @PostMapping("/coupon/{couponId}/product/{productId}") //ADD product to coupon
+    @PostMapping("/coupons/{couponId}/products/{productId}") //ADD product to coupon
     public ResponseEntity<Coupon> addProductToCoupon(@PathVariable(value = "couponId") Long couponId, @PathVariable(value = "productId") Long productId){
         Optional<Coupon> oCoupon = couponService.findById(couponId);
         Optional<Product> oProd = productService.findById(productId);
@@ -84,12 +96,30 @@ public class CouponRESTController {
             Product product = oProd.get();
             coupon.getAffectedProducts().add(product);
             couponService.save(coupon);
-            return ResponseEntity.ok(coupon);
+            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(coupon.getId()).toUri();
+            return ResponseEntity.created(location).body(coupon);
         }
         return ResponseEntity.notFound().build();
     }
 
-    @PutMapping("/coupon/{id}") //EDIT (overwrite coupon)
+    @DeleteMapping("/coupons/{couponId}/products/{productId}") //DELETE product from coupon
+    public ResponseEntity<Product> deleteProductFromCoupon(@PathVariable(value = "couponId") Long couponId, @PathVariable(value = "productId") Long productId){
+        Optional<Coupon> oCoupon = couponService.findById(couponId);
+        Optional<Product> oProd = productService.findById(productId);
+        if(oCoupon.isPresent() && oProd.isPresent()){
+            Coupon coupon = oCoupon.get();
+            Product product = oProd.get();
+            if(coupon.getAffectedProducts().contains(product))
+                coupon.getAffectedProducts().remove(product);
+            else
+                return ResponseEntity.notFound().build();
+            couponService.save(coupon);
+            return ResponseEntity.ok(product);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/coupons/{id}") //EDIT (overwrite coupon)
     public ResponseEntity<Coupon> editCoupon(@PathVariable(value = "id") Long id, @RequestBody Coupon coupon){ //"Cannot construct instance of ShopUser" https://localhost:8443/api/coupon/12?type=WISHLIST&user=1&date=10/1/2034&totalPrice=&products=2
         Optional<Coupon> oNewCoupon = couponService.findById(id);
         List<Product> products = new ArrayList<>();
@@ -115,7 +145,7 @@ public class CouponRESTController {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/coupon/{id}") //DELETE
+    @DeleteMapping("/coupons/{id}") //DELETE
     public ResponseEntity<Coupon> removeCoupon(@PathVariable(value = "id") Long id){
         Optional<Coupon> oCoupon = couponService.findById(id);
         if(oCoupon.isPresent()){
