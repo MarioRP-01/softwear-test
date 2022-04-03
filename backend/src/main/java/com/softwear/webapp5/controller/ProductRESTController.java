@@ -28,7 +28,7 @@ public class ProductRESTController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping(value = "/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Product> getProduct(@PathVariable Long id) {
 
         Optional<Product> product = productService.findById(id);
@@ -40,7 +40,7 @@ public class ProductRESTController {
         } 
     }
 
-    @GetMapping(value = "/{name}/{size}")
+    @GetMapping("/{name}/{size}")
     public ResponseEntity<Product> getProduct(@PathVariable String name, @PathVariable String size){
         
         ProductSize productSize = ProductSize.stringToProductSize(size);
@@ -135,5 +135,36 @@ public class ProductRESTController {
         }
     }
 
+    @DeleteMapping("/{productId}/image/{imageIndex}")
+    public ResponseEntity<Object> deleteImage(@PathVariable Long productId,
+            @PathVariable int imageIndex) {
+        
+        Optional<Product> productOptional = productService.findById(productId);
 
+        if (productOptional.isPresent()) {
+
+            List<Product> productsWithSameImages= productService.deleteImage(productOptional.get(), imageIndex);
+            for (Product product : productsWithSameImages)
+                productService.save(product);
+
+            return ResponseEntity.noContent().build();
+        }
+            return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{productId}/image")
+    public ResponseEntity<Object> deleteAllImage(@PathVariable Long productId) {
+        
+        Optional<Product> productOptional = productService.findById(productId);
+
+        if (productOptional.isPresent()) {
+
+            List<Product> productsWithSameImages= productService.deleteAllImages(productOptional.get());
+            for (Product product : productsWithSameImages)
+                productService.save(product);
+
+            return ResponseEntity.noContent().build();
+        }
+            return ResponseEntity.notFound().build();
+    }
 }
