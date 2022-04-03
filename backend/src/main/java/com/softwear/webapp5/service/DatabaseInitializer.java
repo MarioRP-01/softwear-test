@@ -527,7 +527,7 @@ public class DatabaseInitializer {
 			Resource imageResource = new ClassPathResource(image);
 			//FileInputStream imageStream = new FileInputStream(imageFile);
 			blobItem.add(BlobProxy.generateProxy(imageResource.getInputStream(), imageResource.contentLength()));
-			imgsItem.set(i, "/api/product/" + imgNum + "/image/" + i);
+			imgsItem.set(i, "/api/products/" + imgNum + "/image/" + i);
 		}
 	}	
 }

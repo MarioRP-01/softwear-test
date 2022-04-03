@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.Optional;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/products")
 public class ProductRESTController {
 
     @Autowired
@@ -40,8 +41,8 @@ public class ProductRESTController {
         } 
     }
 
-    @GetMapping("/{name}/{size}")
-    public ResponseEntity<Product> getProduct(@PathVariable String name, @PathVariable String size){
+    @GetMapping()
+    public ResponseEntity<Product> getProduct(@RequestParam String name, @RequestParam String size){
         
         ProductSize productSize = ProductSize.stringToProductSize(size);
         Optional<Product> product = productService.findByNameAndSize(name, productSize);
@@ -80,15 +81,15 @@ public class ProductRESTController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Product> replaceProduct(@PathVariable long id,
-            @RequestBody Product newProduct) {
+            @RequestBody ProductNoImagesDTO newProduct) {
 
         Optional<Product> product = productService.findById(id);
 
         if (product.isPresent()) {
-            newProduct.setId(id);
-            productService.save(newProduct);
+            Product updatedProduct = productService.updateProduct(product.get(), newProduct);
+            productService.save(updatedProduct);
 
-            return ResponseEntity.ok(newProduct);
+            return ResponseEntity.ok(updatedProduct);
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -113,15 +114,18 @@ public class ProductRESTController {
         }
     }
 
-    @PostMapping("/{productId}/image/{imageIndex}")
-    public ResponseEntity<Object> saveProductImage(@PathVariable Long productId, @PathVariable int imageIndex,
-                @RequestParam MultipartFile imageFile) throws IOException {
+    @PostMapping("/{productId}/image")
+    public ResponseEntity<Object> saveProductImage(@PathVariable Long productId,
+                @RequestParam MultipartFile imageFile) throws IOException, URISyntaxException {
 
         Optional<Product> productOptional = productService.findById(productId);
-        URI location = fromCurrentRequest().build().toUri();
 
         if (productOptional.isPresent()){
             Product product = productOptional.get();
+
+            URI currentLocation = fromCurrentRequest().build().toUri();
+            String imageIndex = Integer.toString(product.getImages().size());
+            URI location = productService.extendURI(currentLocation, imageIndex);
 
             product.addImage(location.toString());
             product.addImageFile(BlobProxy.generateProxy(imageFile.getInputStream(), imageFile.getSize()));
@@ -143,7 +147,7 @@ public class ProductRESTController {
 
         if (productOptional.isPresent()) {
 
-            List<Product> productsWithSameImages= productService.deleteImage(productOptional.get(), imageIndex);
+            List<Product> productsWithSameImages = productService.deleteImage(productOptional.get(), imageIndex);
             for (Product product : productsWithSameImages)
                 productService.save(product);
 

@@ -1,6 +1,7 @@
 package com.softwear.webapp5.service;
 
 import com.softwear.webapp5.data.ProductAvailabilityBySize;
+import com.softwear.webapp5.data.ProductNoImagesDTO;
 import com.softwear.webapp5.data.ProductSize;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.repository.ProductRepository;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
@@ -160,6 +163,7 @@ public class ProductService {
 
 			if (!productEachSize.getImageFiles().isEmpty())
 				productEachSize.removeImageFile(imageIndex);
+
 		}
 		return productsWithSameImages;
     }
@@ -176,6 +180,25 @@ public class ProductService {
 			productEachSize.removeAllImagesFiles();
 		}
 		return productsWithSameImages;
+	}
+
+    public Product updateProduct(Product product, ProductNoImagesDTO productNoImages) {
+
+		product.setName(productNoImages.getName());
+		product.setDescription(productNoImages.getDescription());
+		product.setPrice(productNoImages.getPrice());
+		product.setStock(productNoImages.getStock());
+		product.setSize(productNoImages.getSize());
+
+        return product;
+    }
+
+	public URI extendURI(URI originalURI, String addition) throws URISyntaxException {
+
+		String locationText = originalURI.toString() + "/" + addition;
+
+		URI location = new URI(locationText);
+		return location;
 	}
 
 //	public Optional<Product> findOneName(String name){
