@@ -197,6 +197,23 @@ Project compilation:
 	then go to the browser and access https://localhost:8443/
 	-To stop the proccess, press Ctr+C, enter and "S".
 	
+## Heroku
+
+Url: 
+
+User credentials: 
+
+Steps to display with Heroku:
+
+## Docker
+
+Execution instructions: 
+
+Documentation to build Docker image:
+
+## Api REST documentation
+
+	
 ## Participation
 
 ### Adrián
