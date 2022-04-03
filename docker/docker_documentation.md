@@ -73,9 +73,10 @@ You could substitute the image name with your compiled image name.
 ```bash
 docker run -d --name <db-container-name> \
 	--network <network-name> \
-	-e POSTGRES_DB=<database-name>
-	-e POSTGRES_PASSWORD=<database-password>
+	-e POSTGRES_DB=<database-name> \
 	[-e POSTGRES_USERNAME=<database-user> \]
+	-e POSTGRES_PASSWORD=<database-password> \
+	postgres:14.2
 
 # Your <database-address> will be jdbc:postgresql://<db-container-name>/<database-name>
 ```
