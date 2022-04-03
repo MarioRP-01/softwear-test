@@ -57,6 +57,17 @@ public class RestTransactionController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/transactions") //GET
+    public ResponseEntity<List<Transaction>> getTransactions(@RequestParam(required = false) Integer page){
+        if(page == null)
+            return ResponseEntity.ok(transactionService.findAll());
+        
+        if(page < 1)
+            return ResponseEntity.badRequest().build();
+        List<Transaction> listTrans = transactionService.findAll(PageRequest.of(page - 1, 3)).toList();
+        return ResponseEntity.ok(listTrans);
+    }
+
     @GetMapping("/transactions/carts") //GET
     public ResponseEntity<List<Transaction>> getCart(@RequestParam(required = false) Integer page){
         List<Transaction> listTrans = getTransaction("CART", page);

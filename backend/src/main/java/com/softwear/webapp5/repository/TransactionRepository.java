@@ -65,4 +65,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     @Query("SELECT t FROM Transaction t " +
             "WHERE t.type = :type")
     Page<Transaction> findByType(String type, Pageable page);
+
+    @Query("SELECT t FROM Transaction t ")
+    Page<Transaction> findAll(Pageable page);
 }

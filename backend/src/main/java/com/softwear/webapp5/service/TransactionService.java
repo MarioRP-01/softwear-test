@@ -256,4 +256,8 @@ public class TransactionService {
         return transactionRepository.getStatics();
     }
 
+    public Page<Transaction> findAll(Pageable page) {
+        return transactionRepository.findAll(page);
+    }
+
 }

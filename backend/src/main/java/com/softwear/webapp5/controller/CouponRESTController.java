@@ -19,6 +19,7 @@ import com.softwear.webapp5.service.CouponService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -52,8 +54,13 @@ public class CouponRESTController {
     }
 
     @GetMapping("/coupons") //GET
-    public ResponseEntity<List<Coupon>> getCart(){
-        return ResponseEntity.ok(couponRepository.findAll());
+    public ResponseEntity<List<Coupon>> getCoupon(@RequestParam(required = false) Integer page){
+        if(page != null){
+            if(page < 1)
+                return ResponseEntity.badRequest().build();
+            return ResponseEntity.ok(couponService.findAll(PageRequest.of(page - 1, 1)).toList());
+        }
+        return ResponseEntity.ok(couponService.findAll());
     }
 
     @PostMapping("/coupons") //ADD cart, wishlist or processed coupon
