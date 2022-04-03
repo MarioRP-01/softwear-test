@@ -50,6 +50,8 @@ public class DatabaseInitializer {
 	@PostConstruct
 	public void init() throws IOException {
 
+		if(userRepository.count() > 0) return;
+
 		// Users
 		ShopUser user = new ShopUser("user", "user@user.com", "User", "Softwear", passwordEncoder.encode("pass"), "User Street 1", 654987321, "01/01/2000", "USER");
 		ShopUser admin = new ShopUser("admin", "admin@admin.com", "Administrator", "Softwear", passwordEncoder.encode("pass"), "Admin Street 1", 654321987, "01/01/2000", "ADMIN");

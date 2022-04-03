@@ -24,3 +24,7 @@ hs_err_pid*
 
 #Target
 */target/**
+
+docker/.ignore/
+
+backend/target/
