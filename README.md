@@ -156,9 +156,12 @@ Property list of each entity:
 	* Owner: registered
 
 ## Diagrams
+*Phase 2
 ![navitagion_diagram.jpeg](readmeAssets/navitagion_diagram.jpeg)
 ![entity_diagram](readmeAssets/entity_diagram.jpeg)
 ![class_diagram](readmeAssets/class_diagram.jpeg)
+*Phase 3
+![class_diagram](readmeAssets/class_diagram_phase3.jpeg)
 
 ## Algorithms
 
@@ -294,24 +297,18 @@ I also worked on other files but the most time i spent working are on this files
 
 ### Pablo
 
-I developed the managers for the entities in the admin side: manage users, manage products and manage coupons. They all had an HTML, js and AJAX in the frontside
-and backend related in AdminController and RestAdminController, as well as in the services and repositories they used.
-I also developed the about and error page and divided the HTMLs in header (or adminHeader), body and footer in separate files.
-I helped develop the Coupon entity.
-I coded the general algorithm to suggest coupons that looks at the least frequently bought products and suggest a coupon for them.
+I developed the coupon and transaction REST controllers, as well as the needed methonds in the controllers and respositories that were missing.
 
 ### Important Commits
 
-* [frontend manageCoupons done](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/f93bdb08cbaca30ced7c1362210f17ff4674b91d)
-* [restController_done](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/487ff8721a78b0642494e9f976a9b27957a8e800)
-* [manageUsers_final](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/cde08a090d23dcb464b20efc4a08abf16f8fddd2)
-* [adminController](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/e16b76e17cfbb999d527ee325325e7233d252a4a)
-* [divided_views](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/69ff003e314642a2f7b1e1bca003f4317ae31f74)
+* [[WORKING] CouponREST (and transactionREST) fixed](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/1483cdc14b6a49bf6b2b45b47454ceceba19b6be)
+* [CouponRESTController [DELETE NOT WORKING due to foreign key violation in transaction]](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/030e14945065bc85f7222eaa17196cd97b807c42)
+* [RestTransactionController finished](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/d5da83886b65203448cd9d316bb40155a350bfe7 )
+* [[NOT WORKING] modified RestTransactionController to map all types of transactions to the same action](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/50cb33b5488f95f848eec87905fa783df30b6eb7)
+* [[NOT FULLY WORKING] RestTransactionController
+](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/2bcd0ca71f8cf3ea20022606d3e0d9bc748192ae)
 
 ### Important Files
 
-* [AdminController.java](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/controller/AdminController.java)
-* [RestAdminController.java](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/controller/RestAdminController.java)
-* [manageUsers.js](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/model/ShopUser.java)
-* [manageProducts.js](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/resources/static/js/manageProducts.js)
-* [manageCoupons.js](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/resources/static/js/manageCoupons.js)
+* [RestTransactionController.java](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/controller/RestTransactionController.java)
+* [CouponRESTController.java](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/controller/CouponRESTController.java)
