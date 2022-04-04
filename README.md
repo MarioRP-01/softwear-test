@@ -464,3 +464,30 @@ I've been working on the docker files and the deploy on heroku. Also, I worked i
 * [docker-compose.yml](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/docker/docker-compose.yml)
 * [pom.xml](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/pom.xml)
 * [application.properties](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/resources/application.properties)
+
+##### Ana
+I have been working in Images uploads, being possible to upload more than a single one, in manageProducts, as well as some changes in productRestController.
+
+##### Important Commits
+
+* [Multiple images upload fixed](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/b080006a3cc033d76822b7b4876470eb3023744b )
+* [API images in RestAdminController fixed](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/34bb9aec780caff2ba5585db8854d8913175176e)
+
+##### Important Files
+
+* [manageProducts.js](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/develop/backend/src/main/resources/static/js/manageProducts.js)
+* [ProductRESTController.java](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/619fbfd71c39d6adb520ca90c37382069ea73e9a/backend/src/main/java/com/softwear/webapp5/controller/ProductRESTController.java)
+
+##### Mario
+I have worked in the images uploads when creating a new product, as well as creating the api REST of product and the product Postman petitions.
+
+##### Important Commits
+
+* [Images Post functionality fixed](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/04b042f96a7ce67e454274ca06cd43b021855542)
+* [Product's basic methods and images get and post mapping created in REST](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/068c0eae4c2b093826ced445361b9892b5d6e38f)
+* [Delete and post images fixed](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/21ec7d94bd7e95c4a875eb4fed9d7695e28176da)
+
+##### Important Files
+
+* [manageProducts.js](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/619fbfd71c39d6adb520ca90c37382069ea73e9a/backend/src/main/resources/static/js/manageProducts.js)
+* [PoductRESTController.java](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/619fbfd71c39d6adb520ca90c37382069ea73e9a/backend/src/main/java/com/softwear/webapp5/controller/ProductRESTController.java)
