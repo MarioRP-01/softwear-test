@@ -15,8 +15,6 @@ function more() {
         }).done(function (users) {
         	for(let i=0; i<users.length; i++) {
         		let user= users[i];
-        		console.log(user.phoneNumber);
-        		console.log(user.mobileNumber);
         		$("tbody").append("<tr id=\"user-"+user.id+"\">\r\n"
         				+ "                            <td scope=\"row\" class=\"user-id\">"+user.id+"</td>\r\n"
         				+ "                            <td class=\"user-username\">"+user.username+"</td>\r\n"
@@ -106,7 +104,7 @@ function updateUser() {
 
 function deleteUser(id) {
 	$.ajax({
-        url: "/api/users/deleteUser/"+id,
+        url: "/api/users/"+id,
         type: "DELETE",
         success: function(result) {
         	 success_alert();
