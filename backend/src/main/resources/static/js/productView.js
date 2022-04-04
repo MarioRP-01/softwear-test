@@ -54,11 +54,12 @@ function updateStock() {
 		let product_stock = $(".product-stock")
 		let row = product_stock.parent()
 		product_stock.remove()
-		if(product.stock > 0) {
-			if(product.stock > 20) {
+		let productObj = product[0]
+		if(productObj.stock > 0) {
+			if(productObj.stock > 20) {
 				row.append("<div class=\"product-stock col-6 rounded p-1 text-center text-white fs-4 bg-success softFont\">In Stock</div>")
 			} else {
-				row.append("<div class=\"product-stock col-6 rounded p-1 text-center fs-5 bg-warning softFont\">Low Stock: Only " + product.stock + " units available</div>")
+				row.append("<div class=\"product-stock col-6 rounded p-1 text-center fs-5 bg-warning softFont\">Low Stock: Only " + productObj.stock + " units available</div>")
 			}
 			if($("#cart-btn").hasClass("disabled")) {
 				$("#cart-btn").removeClass("disabled");
