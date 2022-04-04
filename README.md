@@ -219,6 +219,8 @@ Documentation to build Docker image:
 	
 ## Participation
 
+## Phase 2
+
 ### Adrián
 
 I've been focused on transaction's block and coupon's block but I've been making changes and functions for nearly all classes.
@@ -294,6 +296,32 @@ Maybe this commits dont show the final version of the files.
 * [WebSecurityConfig.java](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/security/WebSecurityConfig.java)
 
 I also worked on other files but the most time i spent working are on this files.
+
+### Pablo
+
+I developed the managers for the entities in the admin side: manage users, manage products and manage coupons. They all had an HTML, js and AJAX in the frontside
+and backend related in AdminController and RestAdminController, as well as in the services and repositories they used.
+I also developed the about and error page and divided the HTMLs in header (or adminHeader), body and footer in separate files.
+I helped develop the Coupon entity.
+I coded the general algorithm to suggest coupons that looks at the least frequently bought products and suggest a coupon for them.
+
+### Important Commits
+
+* [frontend manageCoupons done](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/f93bdb08cbaca30ced7c1362210f17ff4674b91d)
+* [restController_done](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/487ff8721a78b0642494e9f976a9b27957a8e800)
+* [manageUsers_final](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/cde08a090d23dcb464b20efc4a08abf16f8fddd2)
+* [adminController](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/e16b76e17cfbb999d527ee325325e7233d252a4a)
+* [divided_views](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/69ff003e314642a2f7b1e1bca003f4317ae31f74)
+
+### Important Files
+
+* [AdminController.java](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/controller/AdminController.java)
+* [RestAdminController.java](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/controller/RestAdminController.java)
+* [manageUsers.js](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/model/ShopUser.java)
+* [manageProducts.js](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/resources/static/js/manageProducts.js)
+* [manageCoupons.js](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/resources/static/js/manageCoupons.js)
+
+## Phase 3
 
 ### Pablo
 
