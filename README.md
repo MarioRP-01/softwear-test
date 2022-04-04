@@ -216,6 +216,8 @@ Documentation to build Docker image:
 
 ## Api REST documentation
 
+* [OpenApi JSON](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/api-docs/api-docs.json)
+* [OpenApi HTML](https://rawcdn.githack.com/CodeURJC-DAW-2021-22/webapp5/0becb842fc6f969684dcde3be654949e32f543b6/api-docs/api-docs.html)
 	
 ## Participation
 
