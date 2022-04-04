@@ -11768,6 +11768,15 @@ color:#69707a;
   text-align: justify;
 }
 
+.logoutText{
+  text-decoration-line: none; 
+  color: black;
+}
+
+.logoutText:hover {
+  color: hotpink;
+}
+
 .checkout-btn{
   font-size: min(8vw, 10vh);
   border: 3px solid;

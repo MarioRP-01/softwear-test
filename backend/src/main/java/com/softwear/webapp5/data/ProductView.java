@@ -1,7 +1,7 @@
 package com.softwear.webapp5.data;
 
-import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.softwear.webapp5.model.Product;
 
@@ -13,7 +13,7 @@ public class ProductView {
 	private double price;
 	private long stock;
 	private ProductSize size;
-	private ArrayList<File> imgs;
+	private List<String> images;
 	
 	
 	public ProductView(Product p) {
@@ -23,18 +23,18 @@ public class ProductView {
 		this.price = p.getPrice();
 		this.stock = p.getStock();
 		this.size = p.getSize();
-		this.imgs = p.getImgs();
+		this.images = p.getImages();
 	}
 	
 	public ProductView(Long id, String name, String description, double price, long stock, ProductSize size,
-			ArrayList<File> imgs) {
+			ArrayList<String> images) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.stock = stock;
 		this.size = size;
-		this.imgs = imgs;
+		this.images = images;
 	}
 	public Long getId() {
 		return id;
@@ -72,11 +72,11 @@ public class ProductView {
 	public void setSize(ProductSize size) {
 		this.size = size;
 	}
-	public ArrayList<File> getImgs() {
-		return imgs;
+	public List<String> getImages() {
+		return images;
 	}
-	public void setImgs(ArrayList<File> imgs) {
-		this.imgs = imgs;
+	public void setImages(ArrayList<String> images) {
+		this.images = images;
 	}
 	
 	

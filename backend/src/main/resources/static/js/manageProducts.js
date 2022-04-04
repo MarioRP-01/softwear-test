@@ -1,6 +1,6 @@
 let currentPage = 0;
 let maxPages = 0;
-
+let token = "";
 
 
 function more() {
@@ -25,8 +25,8 @@ function more() {
         				+ "                                data-id=\""+product.id+"\" onclick=\"edit_product_load($(this).data('id'));\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i></button></td>\r\n"
         				+ "                            <td><button data-id=\""+product.id+"\" onclick=\"delete_product($(this).data('id'));\" class=\"btn btn-primary\" type=\"button\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td>\r\n"
         				+ "                          </tr>")
-        		for(let j=0; j<product.imgs.length; j++) {
-        			let img = product.imgs[j]
+        		for(let j=0; j<product.images.length; j++) {
+        			let img = product.images[j]
         			$(" #product-"+$("tbody")[0].childElementCount +" >.product-imgs").append("<img src=\""+img+"\" class=\"d-none\"/>")
         		}
         	}
@@ -90,8 +90,8 @@ $('#addImgIcon').click(function(){
     lastImg = $(this).data("lastimg");
     nextImg = lastImg + 1;
     $(this).data("lastimg", nextImg);
-    htmlInput = '<div class="form-group"><label for="editImg'+ nextImg +'">Image #'+ nextImg +
-    '</label> <input type="file" accept="image/*" class="form-control editImg" id="editImg'+ nextImg +'" name="img'+ nextImg +'"></div>';
+    htmlInput = '<form id="imageForm' + nextImg + '" enctype="multipart/form-data"><div class="form-group"><label for="editImg'+ nextImg +'">Image #'+ nextImg +
+    '</label> <input type="file" accept="image/*" class="form-control editImg" id="editImg'+ nextImg +'" name="img"></div></form>';
     $('.img-group').append(htmlInput);
 })
 
@@ -114,14 +114,6 @@ $('#formProducts').submit(function(e){
 
     var ajaxUrl = '/apiadmin/manageProducts';
     var formElements = this.elements;
-    var images = [];
-    var imgNum = 1;
-
-    for(i = 7; i < formElements.length; i++){ // i=7 number of elements before images in form
-        edit = "#editImg" + imgNum;
-        images.push($(edit).val());
-        imgNum++;
-    }
     // console.log(images);
     // alert(images);
     var idAux = formElements[1].value;
@@ -136,13 +128,40 @@ $('#formProducts').submit(function(e){
             price: formElements[4].value,
             stock: formElements[5].value,
             size: formElements[6].value,
-            imgs: images,
+            _csrf: token
         },
         success: function(data)
         {
             success_alert();
-            $('#dismiss-modal-products').click();
+
             if(data !== ""){ //If we added or edited a product
+
+                var images = [];
+                formElements = $(".img-group")[0].children.length
+
+                for(let imageIndex = 0; imageIndex < formElements; imageIndex++){
+                    formData = new FormData($("#imageForm" + (imageIndex + 1))[0])
+                    $.ajax({
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        async: false,
+                        method: 'POST',
+                        type: "POST",
+                        url: "/apiadmin/manageProducts/" + data.id + "/image/" + imageIndex,
+                        enctype: 'multipart/form-data',
+                        data: formData,
+                        headers: {
+                            'X-CSRF-Token': token
+                        },
+                        processData: false,
+                        error: function (data) {
+                            error_alert();
+                        }
+                        
+                    });
+                }
+
                 let arrayIds = [] //Create an array of all ids currently in the page
                 $('.product-id').each(function(){
                     arrayIds.push(Number($(this).html()));
@@ -177,8 +196,16 @@ $('#formProducts').submit(function(e){
                 trSelected = "#product-" + idAux;
                 $(trSelected).remove();
             }
+            $('#dismiss-modal-products').click();
         },
-        error: function (data) {
+        error: function( jqXHR, textStatus, errorThrown ) {
+            console.log("ADD_FAIL")
+            console.log("jqXHR:");
+            console.log(jqXHR);
+            console.log("textStatus:");
+            console.log(textStatus);
+            console.log("errorThrown:");
+            console.log(errorThrown);
             error_alert();
         },
         always: function(){
@@ -189,4 +216,8 @@ $('#formProducts').submit(function(e){
 
 $(document).ready(function () {
     maxPages = Number($("#max-pages").attr("content"));
+    token = $("#csrf-token").attr("content");
+    $("#submit-modal-products").click(function () {
+       $("#formProducts").submit();
+    });
 });

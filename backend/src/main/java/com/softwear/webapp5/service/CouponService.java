@@ -67,11 +67,17 @@ public class CouponService {
 	}
 
 	public boolean addCoupon(Coupon coupon) {
-		
+		if(areDatesInRange(coupon)){
+			couponRepository.save(coupon);
+			return true;
+		}
+		return false;
+	}
+
+	public boolean areDatesInRange(Coupon coupon){
 		int[] stDate = transformStringDateToIntArray(coupon.getStartDate());
 		int[] endDate = transformStringDateToIntArray(coupon.getDateOfExpiry());
 		if(checkDates(stDate, endDate)) {
-			couponRepository.save(coupon);
 			return true;
 		}
 		return false;
@@ -262,5 +268,13 @@ public class CouponService {
 
 		couponRepository.save(oldCoupon);
     }
+
+    public void save(Coupon newCoupon) {
+		couponRepository.save(newCoupon);
+    }
+
+	public void delete(Coupon coupon) {
+		couponRepository.delete(coupon);
+	}
 
 }

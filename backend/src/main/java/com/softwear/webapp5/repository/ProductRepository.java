@@ -38,4 +38,7 @@ public interface ProductRepository extends JpaRepository <Product, Long> {
               + "FROM PRODUCT",
             nativeQuery = true)
     Page<Product> findAllNames(Pageable page);
+
+//    @Query(value = "SELECT * FROM product WHERE name = :name ORDER BY id ASC LIMIT 1", nativeQuery = true)
+//    Optional<Product> findOneName(@Param("name") String name);
 }

@@ -8,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.softwear.webapp5.data.ProductAvailabilityBySize;
@@ -31,8 +29,8 @@ public class ProductController {
     @GetMapping("/productView/{id}")
     public String getProduct(@PathVariable long id, Model model) {
         Product product = productService.findById(id).orElseThrow();
-		File firstImg = productService.getFirstImg(product);
-		ArrayList<File> nonFirstImgs = productService.getNonFirstImgs(product);
+		String firstImg = productService.getFirstImage(product);
+		List<String> nonFirstImgs = productService.getNonFirstImages(product);
 		
 		List<ProductAvailabilityBySize> availableSizesStatus; 
 		availableSizesStatus = productService.getAvailableSizesStatus(product);

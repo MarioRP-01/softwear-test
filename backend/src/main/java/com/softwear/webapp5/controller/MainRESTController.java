@@ -15,6 +15,9 @@ import com.softwear.webapp5.data.ProductView;
 import com.softwear.webapp5.service.ProductService;
 import com.softwear.webapp5.model.Product;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
+@Hidden
 @RestController
 public class MainRESTController {
 
@@ -23,7 +26,7 @@ public class MainRESTController {
 	
 	@GetMapping("/products/{pageNumber}")
     public List<ProductView> users(Model model, @PathVariable int pageNumber){
-        Page<Product> productPage = productService.findAll(PageRequest.of(pageNumber, 3));
+        Page<Product> productPage = productService.findAllNames(PageRequest.of(pageNumber, 10));
         List<ProductView> listProduct= new ArrayList<>();
         for(Product p: productPage) {
         	listProduct.add(new ProductView(p));

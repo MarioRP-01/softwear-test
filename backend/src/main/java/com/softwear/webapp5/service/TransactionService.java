@@ -45,6 +45,10 @@ public class TransactionService {
         return transactionRepository.findByType(type);
     }
 
+    public Page<Transaction> findByType(String type, Pageable page) {
+        return transactionRepository.findByType(type, page);
+    }
+
     public List<Transaction> findByUser(ShopUser user) {
         return transactionRepository.findByUser(user);
     }
@@ -250,6 +254,10 @@ public class TransactionService {
 
     public List<StaticDTO> getStatics() {
         return transactionRepository.getStatics();
+    }
+
+    public Page<Transaction> findAll(Pageable page) {
+        return transactionRepository.findAll(page);
     }
 
 }

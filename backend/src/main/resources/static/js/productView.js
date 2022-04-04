@@ -14,16 +14,6 @@ function labelTransition(action) {
 	setTimeout($("#" + action + "-label").fadeOut(2000), 3000);
 }
 
-//Load items from server
-function loadProduct(callback) {
-  $.ajax({
-      url: 'https://localhost:8443/products/'
-  }).done(function (products) {
-      console.log('products loaded: ' + JSON.stringify(products));
-      callback(products);
-  })
-}
-
 function showProduct(product) {
 
 	$("#product-featured")[0].src= product.img_routes[0];
@@ -35,8 +25,9 @@ function showProduct(product) {
 }
 
 function getProduct(name, size, callback) {
+	const productUrl = `/api/products`
 	$.ajax({
-		url: "/product",
+		url: productUrl,
 		type: "get",
 		data: {
 			name: $(".product-name").html(),
@@ -63,11 +54,12 @@ function updateStock() {
 		let product_stock = $(".product-stock")
 		let row = product_stock.parent()
 		product_stock.remove()
-		if(product.stock > 0) {
-			if(product.stock > 20) {
+		let productObj = product[0]
+		if(productObj.stock > 0) {
+			if(productObj.stock > 20) {
 				row.append("<div class=\"product-stock col-6 rounded p-1 text-center text-white fs-4 bg-success softFont\">In Stock</div>")
 			} else {
-				row.append("<div class=\"product-stock col-6 rounded p-1 text-center fs-5 bg-warning softFont\">Low Stock: Only " + product.stock + " units available</div>")
+				row.append("<div class=\"product-stock col-6 rounded p-1 text-center fs-5 bg-warning softFont\">Low Stock: Only " + productObj.stock + " units available</div>")
 			}
 			if($("#cart-btn").hasClass("disabled")) {
 				$("#cart-btn").removeClass("disabled");
@@ -169,13 +161,6 @@ function changeSize(new_size) {
 $(document).ready(function () {
 
 	token = $("#csrf-token").attr("content");
-
-	loadProduct(function (products) {
-		//When items are loaded from server
-		for (var i = 0; i < products.length; i++) {
-			showProduct(products[i]);
-		}
-	});
 
 	let thumbnails = document.getElementsByClassName('product-thumbnail')
 

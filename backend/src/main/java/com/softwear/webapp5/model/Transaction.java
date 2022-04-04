@@ -2,13 +2,24 @@ package com.softwear.webapp5.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 public class Transaction {
@@ -20,10 +31,12 @@ public class Transaction {
 	@Column(nullable = false)
     private String type;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false,cascade=CascadeType.REMOVE,  fetch=FetchType.EAGER)
+	@OnDelete(action = OnDeleteAction.CASCADE)
     private ShopUser user;
 
-	@ManyToOne
+	@ManyToOne (fetch=FetchType.EAGER)
+	@OnDelete (action = OnDeleteAction.NO_ACTION)
     private Coupon usedCoupon;
 
 	@Column(nullable = false)
@@ -32,7 +45,9 @@ public class Transaction {
 	@Column(nullable = false)
 	private Double totalPrice;
 
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@Column(nullable = false)
     private List<Product> products;
 
@@ -52,7 +67,16 @@ public class Transaction {
 
     public Transaction() {}
 
-	public Long getId() {
+	public Transaction(Transaction tr) {
+		this.type = tr.type;
+        this.user = tr.user;
+        this.usedCoupon = tr.usedCoupon;
+        this.date = tr.date;
+        this.products = tr.products;
+		totalPrice = calculateTotalProductPrice();
+    }
+
+    public Long getId() {
 		return id;
 	}
 

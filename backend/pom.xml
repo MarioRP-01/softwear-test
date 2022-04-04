@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.softwear</groupId>
 	<artifactId>webapp5</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1-deploy</version>
 	<name>webapp5</name>
 	<description>WebApp 5</description>
 	<properties>
@@ -59,6 +59,16 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 			<version>2.5.6</version>
 		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.5.12</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -66,6 +76,72 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<image>
+						<env>
+							<BPE_OVERRIDE_JAVA_TOOL_OPTIONS>
+								-Xss256K
+								-XX:ReservedCodeCacheSize=64M
+								-XX:MaxMetaspaceSize=100000K
+								-Xmx64M
+							</BPE_OVERRIDE_JAVA_TOOL_OPTIONS>
+						</env>
+					</image>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-maven-plugin</artifactId>
+				<version>1.3</version>
+				<executions>
+					<execution>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<apiDocsUrl>http://localhost:8443/v3/api-docs.json</apiDocsUrl>
+					<outputFileName>api-docs.yaml</outputFileName>
+					<outputDir>${project.basedir}/../api-docs</outputDir>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>5.3.0</version>
+				<executions>
+					<execution>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<generatorName>html2</generatorName>
+							<inputSpec>${project.basedir}/../api-docs/api-docs.json</inputSpec>
+							<output>${project.basedir}/../api-docs/</output>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.coderplus.maven.plugins</groupId>
+				<artifactId>copy-rename-maven-plugin</artifactId>
+				<version>1.0</version>
+				<executions>
+					<execution>
+						<id>copy-file</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>rename</goal>
+						</goals>
+						<configuration>
+							<sourceFile>../api-docs/index.html</sourceFile>
+							<destinationFile>../api-docs/api-docs.html</destinationFile>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

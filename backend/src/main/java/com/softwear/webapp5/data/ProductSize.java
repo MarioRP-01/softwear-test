@@ -18,5 +18,4 @@ public enum ProductSize {
             default -> null;
         };
     }
-
 }

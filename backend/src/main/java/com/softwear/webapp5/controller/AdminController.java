@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -73,7 +74,7 @@ public class AdminController {
     
     @GetMapping("/manageUsers")
     public String users(Model model){
-        Page<ShopUser> users = userService.findAll(PageRequest.of(0, 10));
+        Page<ShopUser> users = userService.findAll(PageRequest.of(0, 1));
         List<ShopUserView> listUsers = new ArrayList<>();
         for(ShopUser u: users) {
             listUsers.add(new ShopUserView(u));

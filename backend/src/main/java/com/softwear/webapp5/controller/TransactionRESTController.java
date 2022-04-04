@@ -12,6 +12,7 @@ import com.softwear.webapp5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class TransactionRESTController {
@@ -119,15 +122,21 @@ public class TransactionRESTController {
         return new TransactionView();
     }
     
-    @GetMapping("/purchaseHistory/{pageNumber}")
-    public List<TransactionView> purchaseHistory(Model model, @PathVariable int pageNumber){
-    	ShopUser user = userService.findByUsername((String) model.getAttribute("username")).get();
-        Page<Transaction> transactionsPage = transactionService.findPurchaseHistory(user, PageRequest.of(pageNumber, 10));
-        List<TransactionView> transactions = new ArrayList<>();
-        for(Transaction transaction: transactionsPage) {
-            transactions.add(new TransactionView(transaction));
-        }
-        return transactions;
+    @GetMapping("api/userHistory")
+    public ResponseEntity<List<Transaction>> purchaseHistory(HttpServletRequest request, @RequestParam(required=false) Integer page){
+    	if(page!=null) {
+	    	if(page>0) {
+	    		Optional<ShopUser> oldUser = userService.findByUsername(request.getUserPrincipal().getName());
+	            List<Transaction> transactions = new ArrayList<>();
+	            for(Transaction transaction: transactionService.findPurchaseHistory(oldUser.get(), PageRequest.of(page-1, 10))) {
+	                transactions.add(transaction);
+	            }
+	            return ResponseEntity.ok(transactions);
+	    	}
+    	}
+		return ResponseEntity.ok(transactionService.findAll());
+    	
     }
+   
 
 }

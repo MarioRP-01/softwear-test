@@ -70,7 +70,7 @@ public class UserService {
 		
 	}
 
-	public void updateInfo(ShopUser oldShopUser, ShopUser u) {
+	public void updateAdminInfo(ShopUser oldShopUser, ShopUser u) {
 
 		oldShopUser.setUsername(u.getUsername());
 		oldShopUser.setAddress(u.getAddress());
@@ -100,10 +100,6 @@ public class UserService {
 	public void delete(Long id){
 		shopUsers.deleteById(id);
 	}
-
-    public void save(ShopUser newUser) {
-		shopUsers.save(newUser);
-    }
 
 	public boolean checkShippingData(ShopUser user) {
 		return !user.getName().equals("") && !user.getLastName().equals("") && !user.getAddress().equals("");
