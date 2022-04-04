@@ -297,7 +297,7 @@ I also worked on other files but the most time i spent working are on this files
 
 ### Pablo
 
-I developed the coupon and transaction REST controllers, as well as the needed methonds in the controllers and respositories that were missing.
+I developed the coupon and transaction REST controllers, as well as the needed methods in the controllers and respositories that were missing.
 
 ### Important Commits
 
@@ -312,3 +312,21 @@ I developed the coupon and transaction REST controllers, as well as the needed m
 
 * [RestTransactionController.java](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/controller/RestTransactionController.java)
 * [CouponRESTController.java](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/backend/src/main/java/com/softwear/webapp5/controller/CouponRESTController.java)
+
+### Jorge
+
+I worked on the user REST controller, also deployed the security jwt and Login Controller, but i worked on other controllers and javascripts files to fix some errors.
+
+### Important Commits
+
+* [Added JWT and RestSecurityConfig](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/6815fe7128d05116f993584034f4d4c346549df6)
+* [Api Rest User done](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/e34b8a630f41a2693012ad8a1b3cd5cd84fd4aae)
+* [Login and logout done](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/1a2107ae0db12c7a775f213653a003765c9b9664)
+* [Ajax and api rest added to user info](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/425b6070ce3c9cd266658aac9867ca80d9ce7c46)
+* [Token added and fixes](https://github.com/CodeURJC-DAW-2021-22/webapp5/commit/be7012ec84e957c1dcc20e766d53761db96682c9)
+
+### Important Files
+
+* [RestUserController.java](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/develop/backend/src/main/java/com/softwear/webapp5/controller/RestUserController.java)
+* [PassChange.java](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/develop/backend/src/main/java/com/softwear/webapp5/data/PassChange.java)
+* [ManageUsers.js](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/develop/backend/src/main/resources/static/js/manageUsers.js)
