@@ -161,7 +161,7 @@ Property list of each entity:
 ![entity_diagram](readmeAssets/entity_diagram.jpeg)
 ![class_diagram](readmeAssets/class_diagram.jpeg)
 *Phase 3
-![class_diagram](readmeAssets/class_diagram_phase3.jpeg)
+![class_diagram](readmeAssets/class_diagram_phase3.png)
 
 ## Algorithms
 
