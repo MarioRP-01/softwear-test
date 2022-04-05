@@ -122,7 +122,7 @@ public class ProductRESTController {
         if (product.getImageFiles() != null && images.size() > imageIndex) {
             Blob image = product.getImageFile(imageIndex);
             return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_TYPE, "image/*")
+                    .header(HttpHeaders.CONTENT_TYPE, "image/webp")
                     .contentLength(image.length())
                     .body(image.getBytes(1L, (int) image.length()));
         } else {
