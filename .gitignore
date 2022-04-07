@@ -29,3 +29,4 @@ docker/.ignore/
 
 backend/target/
 
+backend\src\main\resources\public\new
