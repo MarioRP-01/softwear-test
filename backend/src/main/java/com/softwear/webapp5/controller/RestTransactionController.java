@@ -2,13 +2,9 @@ package com.softwear.webapp5.controller;
 
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-
-import com.softwear.webapp5.data.TransactionView;
 import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.ShopUser;
@@ -22,8 +18,6 @@ import com.softwear.webapp5.service.TransactionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

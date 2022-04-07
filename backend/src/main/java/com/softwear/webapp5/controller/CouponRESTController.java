@@ -7,17 +7,11 @@ import java.util.Optional;
 
 import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Product;
-import com.softwear.webapp5.model.ShopUser;
-import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.repository.CouponRepository;
 import com.softwear.webapp5.repository.ProductRepository;
-import com.softwear.webapp5.repository.UserRepository;
 import com.softwear.webapp5.service.CouponService;
 import com.softwear.webapp5.service.ProductService;
-import com.softwear.webapp5.service.CouponService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;

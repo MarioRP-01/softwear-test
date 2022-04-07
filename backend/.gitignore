@@ -33,3 +33,6 @@ build/
 .vscode/
 /bin/
 /target/
+
+### Node build ###
+/src/resources/public/new/

@@ -10,7 +10,6 @@ import org.springframework.core.env.Environment;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
 
 @SpringBootApplication
 public class Webapp5Application {
