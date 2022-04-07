@@ -35,4 +35,4 @@ build/
 /target/
 
 ### Node build ###
-/src/resources/public/new/
+src/main/resources/public/new/

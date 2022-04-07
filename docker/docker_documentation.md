@@ -10,11 +10,11 @@ In order to run the application you need to use environment variables to configu
 
 | **Name**					 | **Application Property**		 | **Default**							 | **Description**									 |
 | -------------------------- | ----------------------------- | ------------------------------------- | ------------------------------------------------- |
-| PORT						 | server.port					 | 8080									 | Server port 										 |
+| PORT						 | server.port					 | 8080								 | Server port 										 |
 | SPRING_DATASOURCE_URL		 | spring.datasource.url		 | jdbc:postgresql://localhost/softwear	 | Database URL										 |
 | SPRING_DATASOURCE_USERNAME | spring.datasource.username	 | postgres								 | Database user									 |
 | SPRING_DATASOURCE_PASSWORD | spring.datasource.password	 | password								 | Database password 								 |
-| MAILER_EMAIL				 | mailer.email					 | softwearDAW@gmail.com				 | Email used in the MailerService (GMail account)	 |
+| MAILER_EMAIL				 | mailer.email					 | softwearDAW@gmail.com				 | Email used in the MailerService (Gmail account)	 |
 | MAILER_PASS				 | mailer.pass					 | 										 | Password for the MAILER_EMAIL					 |
 
 
@@ -25,14 +25,14 @@ You can choose between two options in order to create the image:
 * Use the Dockerfile
 * Use the create_image.sh script
 
-If you do not want to create the image, you could download it from our dockerhub repository [softweardaw/codeurjc-daw-2021-22-webapp5](https://hub.docker.com/repository/docker/softweardaw/codeurjc-daw-2021-22-webapp5)
+If you do not want to create the image, you could download it from our dockerhub repository [mariorp01/codeurjc-daw-2021-22-webapp5b](https://hub.docker.com/repository/docker/mariorp01/codeurjc-daw-2021-22-webapp5b)
 
 
 #### Dockerfile
 
-In order to compile the image with a dockerfile, you need docker client to be installed in your system. You could use the webapp5-compile.Dockerfile with the following command from the docker directory. 
+In order to compile the image with a dockerfile, you need docker client to be installed in your system. You could use the webapp5b-compile.Dockerfile with the following command from the docker directory. 
 ```bash
-docker build -f webapp5-compile.Dockerfile -t <target-image> ..
+docker build -f webapp5b-compile.Dockerfile -t <target-image> ..
 ```
 
 #### Create with create_image.sh
@@ -59,7 +59,7 @@ docker run [ -d | -it ] --name <container-name> \
 	[-e SPRING_DATASOURCE_PASSWORD=<database-password>] \
 	[-e MAILER_EMAIL=<mailer-email>] \
 	[-e MAILER_PASS=<mailer-password>] \
-    softweardaw/codeurjc-daw-2021-22-webapp5
+    mariorp01/codeurjc-daw-2021-22-webapp5b
 ```
 
 If you not specify a mailer email, it is set to our default email softwearDAW@gmail.com. If you not specify the mailer password, you should use -it options in order to introduce it by command line.
@@ -114,7 +114,7 @@ heroku create <app-id>
 Then, you need to pull our application image from DockerHub for pushing it into the heroku repository:
 
 ```bash
-docker image pull softwearDAW/codeurjc-daw-2021-22-webapp5
+docker image pull mariorp01/codeurjc-daw-2021-22-webapp5b
 ```
 
 You need to log in heroku repository and push the downloaded application image into your application repository. You could do it with the following commands:
@@ -123,7 +123,7 @@ You need to log in heroku repository and push the downloaded application image i
 # Log in heroku repository
 heroku container:login
 # Change image name
-docker image tag softweardaw/codeurjc-daw-2021-22-webapp5:latest registry.heroku.com/<app-id>/web:latest
+docker image tag mariorp01/codeurjc-daw-2021-22-webapp5b:latest registry.heroku.com/<app-id>/web:latest
 # Push image
 docker push registry.heroku.com/<app-id>/web
 ```

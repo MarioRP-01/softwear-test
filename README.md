@@ -303,6 +303,22 @@ You need to install docker in your system in order to execute this script. Also,
 * [OpenApi JSON](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/main/api-docs/api-docs.json)
 * [OpenApi HTML](https://rawcdn.githack.com/CodeURJC-DAW-2021-22/webapp5/0becb842fc6f969684dcde3be654949e32f543b6/api-docs/api-docs.html)
 	
+
+## Development environment
+
+When working in the development environment, backend and frontend will be initialised separately and communicate with each other via REST api.
+
+### Launch angular aplication
+
+```bash
+ng serve --proxy-config proxy.conf.json
+```
+### Launch spring-boot aplication
+
+```bash
+mvn spring-boot:run
+```
+
 ## Participation
 
 ### Phase 2
