@@ -2,8 +2,6 @@ package com.softwear.webapp5.model;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name="Users")
 public class ShopUser {
@@ -16,25 +14,27 @@ public class ShopUser {
 	
 	@Column(unique=true, nullable = false)
 	private String email;
-	private String name;
-	private String lastName;
-	@Column(nullable = false)
 
+	private String name;
+
+	private String lastName;
+
+	@Column(nullable = false)
 	private String password;
+
 	private String address;
 	
 	@Column(unique=true)
 	private int mobileNumber;
+
 	private String birthdate;
+
 	@Column(nullable = false)
 	private String role;
 	
 	
-	public ShopUser() {
+	public ShopUser() {}
 	
-	}
-
-		
 
 	public ShopUser(String username, String email, String name, String lastName, String password, String address,
 			int mobileNumber, String birthdate, String role) {
@@ -48,7 +48,6 @@ public class ShopUser {
 		this.birthdate = birthdate;
 		this.setRole(role);
 	}
-
 
 
 	public Long getId() {

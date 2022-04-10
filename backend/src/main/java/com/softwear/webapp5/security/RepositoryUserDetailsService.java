@@ -33,6 +33,5 @@ public class RepositoryUserDetailsService implements UserDetailsService {
 
 		return new org.springframework.security.core.userdetails.User(user.getUsername(),
 				user.getPassword(), roles);
-
 	}
 }

@@ -98,6 +98,7 @@ public class TransactionService {
     }
 
     public void updateAndSave(Transaction transaction) {
+
         transaction.setTotalPrice(transaction.calculateTotalProductPrice());
         if(!couponService.applyCoupon(transaction)) {
             transactionRepository.save(transaction);
@@ -105,9 +106,12 @@ public class TransactionService {
     }
 
     public boolean addToCart(Long productId, ShopUser user, int quantity) {
+
         Optional<Product> optionalProduct = productRepository.findById(productId);
         if (optionalProduct.isPresent()){
+
             Product product = optionalProduct.get();
+
             Optional<Transaction> optionalTransaction = transactionRepository.findCart(user);
             Transaction cart;
             if (optionalTransaction.isPresent()) {
