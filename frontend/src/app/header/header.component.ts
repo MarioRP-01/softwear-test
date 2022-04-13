@@ -9,10 +9,10 @@ export class HeaderComponent implements OnInit {
 
   constructor() { }
 
-  logged: boolean = false;
-  isAdmin: boolean = false;
-  username: string = "";
-  nCartItems: number = 0;
+  logged : boolean = false;
+  isAdmin : boolean = false;
+  username : string = "";
+  nCartItems : number = 0;
   
   ngOnInit(): void {
   }
