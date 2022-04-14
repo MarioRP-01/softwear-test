@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+
 import { Product } from '../model/product';
+import { ProductSize } from '../model/data/product-size';
+import { ProductFilter } from '../model/data/product-filter';
 
 const BASE_URL = '/api/products/'
 
@@ -13,21 +16,27 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
-  /*
-  getProductById(productId: number): Observable<Product> {
 
-    let url = BASE_URL + productId;
+  getProductCards(productId: number): Observable<Product> {
 
-    return this.httpClient.get(url).pipe(
-      map(response => )
-    );
-
+    let url: string = BASE_URL + productId;
+    return this.httpClient.get(url).pipe() as Observable<Product>;
   }
-  */
 
-  // getProductByNameAndSize
+  getProductByNameAndSize(name: string, productSize: ProductSize): Observable<Product> {
 
-  // getAllProductsPaginated
+    let size: string = ProductSize[productSize];
+    let url: string = BASE_URL.slice(0, -1) + `?name=${name}&size=${size}`;
+    return this.httpClient.get(url).pipe() as Observable<Product>;
+  }
+
+  getProductWithFilter(productFilter: ProductFilter, page: number): Observable<Product[]> {
+
+    let filter: string = ProductFilter[productFilter];
+    let url: string = BASE_URL.slice(0, -1) + `?filter=${filter}&page=${page}`;
+
+    return this.httpClient.get(url).pipe() as Observable<Product[]>;
+  }
 
   // getAllProducts
 }

@@ -1,12 +1,15 @@
 package com.softwear.webapp5.controller;
 
+import com.softwear.webapp5.data.ProductFilter;
 import com.softwear.webapp5.data.ProductNoImagesDTO;
 import com.softwear.webapp5.data.ProductSize;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.service.ProductService;
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +21,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,31 +45,50 @@ public class ProductRESTController {
         } 
     }
 
-    @GetMapping("")
-    public ResponseEntity<List<Product>> getProduct(@RequestParam(required = false) String name, @RequestParam(required = false) String size, 
-    @RequestParam(required = false) Integer page){
-        
-        if(name == null || size == null){
-            if(page == null)
-                return ResponseEntity.ok(productService.findAll());
-            else{
-                if(page < 1)
-                    return ResponseEntity.badRequest().build();
-                else
-                    return ResponseEntity.ok(productService.findAll(PageRequest.of(page - 1, 1)).toList());
-            }
-        }
+    @GetMapping(value = "", params = {"name", "size"})
+    public ResponseEntity<Product> getProduct(@RequestParam String name, @RequestParam String size){
 
         ProductSize productSize = ProductSize.stringToProductSize(size);
         Optional<Product> product = productService.findByNameAndSize(name, productSize);
 
         if (product.isPresent()){
-            List<Product> lp = new ArrayList<Product>();
-            lp.add(product.get());
-            return ResponseEntity.ok(lp);
+            return ResponseEntity.ok(product.get());
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping(value="")
+    public ResponseEntity<List<Product>> getProducts(@RequestParam(required = false) String filter, 
+            @RequestParam(required = false) Integer page) {
+
+        Page<Product> products;
+        Pageable pageable;
+
+        if (page == null) {
+            pageable = Pageable.unpaged();
+
+        } else if (page < 1){
+            return ResponseEntity.badRequest().build();
+
+        } else {
+            pageable = PageRequest.of(page - 1, 10);
+
+        }
+
+        if (filter == null) {
+            products = productService.findAll(pageable);
+
+        }  else {
+            ProductFilter productFilter = ProductFilter.stringToProductFilter(filter);
+            if (productFilter == null) {
+                return ResponseEntity.badRequest().build();
+
+            } else {
+                products = productFilter.doOperation(pageable);
+            }
+        }        
+        return ResponseEntity.ok(products.toList());
     }
 
     @PostMapping

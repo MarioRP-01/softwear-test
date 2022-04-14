@@ -5,5 +5,5 @@ export interface ProductNoImages {
     name: string;
     description: string;
     price: string;
-    size: ProductSize;
+    size: string;
 }
