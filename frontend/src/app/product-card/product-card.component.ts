@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { TransactionService } from '../api/transaction.service';
+import { Product } from '../model/product';
 
 @Component({
   selector: 'app-product-card',
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductCardComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  product!: Product;
+
+  constructor(private transactionService: TransactionService) { }
 
   ngOnInit(): void {
   }

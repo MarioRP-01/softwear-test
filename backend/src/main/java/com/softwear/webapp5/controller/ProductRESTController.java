@@ -2,6 +2,7 @@ package com.softwear.webapp5.controller;
 
 import com.softwear.webapp5.data.ProductFilter;
 import com.softwear.webapp5.data.ProductNoImagesDTO;
+import com.softwear.webapp5.data.ProductPageDTO;
 import com.softwear.webapp5.data.ProductSize;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.service.ProductService;
@@ -59,7 +60,7 @@ public class ProductRESTController {
     }
 
     @GetMapping(value="")
-    public ResponseEntity<List<Product>> getProducts(@RequestParam(required = false) String filter, 
+    public ResponseEntity<ProductPageDTO> getProducts(@RequestParam(required = false) String filter, 
             @RequestParam(required = false) Integer page) {
 
         Page<Product> products;
@@ -87,8 +88,13 @@ public class ProductRESTController {
             } else {
                 products = productFilter.doOperation(pageable);
             }
-        }        
-        return ResponseEntity.ok(products.toList());
+        }   
+
+        Integer totalPages = products.getTotalPages();
+
+        ProductPageDTO productPage = new ProductPageDTO(products.toList(), totalPages);
+
+        return ResponseEntity.ok(productPage);
     }
 
     @PostMapping

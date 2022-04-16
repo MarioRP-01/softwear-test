@@ -1,3 +1,21 @@
-
+<div class="col mb-5">
+    <div id="product-{{product.id}}" class="card h-100 product">
+        <!-- Product image-->
+        <a href="/productView/{{product.id}}"><img class="card-img-top" [src]="product.images?.[0]" alt="Product-{{product.id}}" /></a>
+        <!-- Product details-->
+        <div class="card-body p-4">
+            <div class="text-center">
+                <!-- Product name-->
+                <h5 class="fw-bolder product-name">{{product.name}}</h5>
+                <!-- Product price-->
+                ${{product.price}}
+            </div>
+        </div>
+        <!-- Product actions-->
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent product-actions">
+            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/productView/{{product.id}}">View options</a></div>
+        </div>
+    </div>
+</div>
 
 

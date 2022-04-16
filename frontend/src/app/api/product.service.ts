@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Product } from '../model/product';
 import { ProductSize } from '../model/data/product-size';
 import { ProductFilter } from '../model/data/product-filter';
+import { PageableProduct } from '../model/pageable-product';
 
 const BASE_URL = '/api/products/'
 
@@ -30,12 +31,12 @@ export class ProductService {
     return this.httpClient.get(url).pipe() as Observable<Product>;
   }
 
-  getProductWithFilter(productFilter: ProductFilter, page: number): Observable<Product[]> {
+  getProductWithFilter(productFilter: ProductFilter, page: number): Observable<PageableProduct> {
 
     let filter: string = ProductFilter[productFilter];
     let url: string = BASE_URL.slice(0, -1) + `?filter=${filter}&page=${page}`;
 
-    return this.httpClient.get(url).pipe() as Observable<Product[]>;
+    return this.httpClient.get(url).pipe() as Observable<PageableProduct>;
   }
 
   // getAllProducts
