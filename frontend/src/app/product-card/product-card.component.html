@@ -1,7 +1,16 @@
 <div class="col mb-5">
-    <div id="product-{{product.id}}" class="card h-100 product">
+    <div class="card h-100 product">
+
+        <!-- add to wishlist-->
+        <div class="badge product-fav-badge bg-dark text-white position-absolute favIcon" (click)="turnWishlist()">
+            <i class="bi bi-heart"></i>
+        </div>
+
         <!-- Product image-->
-        <a href="/productView/{{product.id}}"><img class="card-img-top" [src]="product.images?.[0]" alt="Product-{{product.id}}" /></a>
+        <a href="/productView/{{product.id}}">
+            <img class="card-img-top" [src]="product.images?.[0]" alt="Product-{{product.id}}" />
+        </a>
+        
         <!-- Product details-->
         <div class="card-body p-4">
             <div class="text-center">
@@ -11,9 +20,15 @@
                 ${{product.price}}
             </div>
         </div>
+
         <!-- Product actions-->
         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent product-actions">
-            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/productView/{{product.id}}">View options</a></div>
+            <div class="text-center">
+                <a class="btn btn-outline-dark mt-auto" href="/productView/{{product.id}}">View options</a>
+            </div>
+
+            <!-- favicon wishlist -->
+            <i class="bi bi-heart-fill"></i>
         </div>
     </div>
 </div>

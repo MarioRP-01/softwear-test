@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductService } from '../api/product.service';
+import { TransactionService } from '../api/transaction.service';
 import { ProductFilter } from '../model/data/product-filter';
+import { TransactionType } from '../model/data/transaction-type';
 import { PageableProduct } from '../model/pageable-product';
 import { Product } from '../model/product';
 
@@ -13,10 +15,12 @@ import { Product } from '../model/product';
 export class HomeComponent implements OnInit {
 
   public products: Product[] = [];
-  private totalPages: number = 0;
-  private nextPage: number = 1
+  public wishlistId: number = -1;
 
-  constructor(private productService: ProductService) { }
+  public totalPages: number = 0;
+  public nextPage: number = 1
+
+  constructor(private productService: ProductService, private transactionService: TransactionService) { }
 
   ngOnInit(): void {
     this.refresh();
@@ -26,23 +30,39 @@ export class HomeComponent implements OnInit {
    * Call API REST to refresh website content.
    */
   refresh(): void {
-    let filter = ProductFilter.OneByName;
-    this.productService.getProductWithFilter(filter, this.nextPage).subscribe(
-      page => this.updateContent(page)
-    )
+
+    this.setProducts()
+    this.setWishlist()
   }
 
   updateContent(page: PageableProduct): void {
+
     let length = this.products.length;
 
     this.products.splice(length, 0, ...page.products);
     this.totalPages = page.totalPages;
   }
 
-  setNextPage(): void {
+  setProducts(): void {
+    let filter = ProductFilter.OneByName;
+    this.productService.getProductWithFilter(filter, this.nextPage).subscribe(
+      page => this.updateContent(page)
+    )
+  }
+
+  setWishlist(): void {
+
+    this.transactionService.getSpecialTransactionId(TransactionType.WISHLIST).subscribe(
+      wishlistId => this.wishlistId = wishlistId[0]
+    );
+  }
+
+  loadNextPage(): void {
+    
     if (this.totalPages > this.nextPage) {
-      this.nextPage++;
-    }   
+      this.nextPage++;   
+      this.refresh();
+    }
   }
 
 }
