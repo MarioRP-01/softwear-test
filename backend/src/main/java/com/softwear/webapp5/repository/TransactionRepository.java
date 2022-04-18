@@ -18,6 +18,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
     List<Transaction> findByType(String type);
     List<Transaction> findByUser(ShopUser user);
+
+    Page<Transaction> findByUser(ShopUser user, Pageable page);
+
     List<Transaction> findByUsedCoupon(Coupon coupon);
     List<Transaction> findByDate(String date);
     List<Transaction> findByTotalPrice(Double totalPrice);
@@ -64,6 +67,11 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     @Query("SELECT t FROM Transaction t " +
             "WHERE t.type = :type")
     Page<Transaction> findByType(String type, Pageable page);
+
+    @Query("SELECT t FROM Transaction t " +
+            "WHERE t.user = :user and t.type = :type " +
+            "ORDER BY t.id DESC")
+    Page<Transaction> findByTypeAndUser(ShopUser user, String type, Pageable page);    
 
     @Query("SELECT t FROM Transaction t ")
     Page<Transaction> findAll(Pageable page);

@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
+import com.softwear.webapp5.data.IdDTO;
+import com.softwear.webapp5.data.TransactionPageDTO;
+import com.softwear.webapp5.data.TransactionType;
 import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.ShopUser;
@@ -14,11 +19,15 @@ import com.softwear.webapp5.repository.ProductRepository;
 import com.softwear.webapp5.repository.UserRepository;
 import com.softwear.webapp5.service.ProductService;
 import com.softwear.webapp5.service.TransactionService;
+import com.softwear.webapp5.service.UserService;
 
+import org.apache.commons.lang3.EnumUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,12 +46,19 @@ public class RestTransactionController {
 
     @Autowired
     TransactionService transactionService;
+
     @Autowired
     ProductService productService;
+
+    @Autowired
+    UserService userService;
+
     @Autowired
     UserRepository userRepository;
+
     @Autowired
     ProductRepository productRepository;
+
     @Autowired
     CouponRepository couponRepository;
 
@@ -54,6 +70,7 @@ public class RestTransactionController {
         return ResponseEntity.notFound().build();
     }
 
+    /*
     @GetMapping("/transactions") //GET
     public ResponseEntity<List<Transaction>> getTransactions(@RequestParam(required = false) Integer page){
         if(page == null)
@@ -64,7 +81,44 @@ public class RestTransactionController {
         List<Transaction> listTrans = transactionService.findAll(PageRequest.of(page - 1, 3)).toList();
         return ResponseEntity.ok(listTrans);
     }
+    */
 
+    @GetMapping(value = "/transactions")
+    public ResponseEntity<TransactionPageDTO> getSpecialTransaction(@RequestParam(required = false) String type,
+            @RequestParam(required = false) Integer page) {
+
+        Pageable pageable;
+
+        if (page == null) {
+            pageable = Pageable.unpaged();
+
+        } else {
+            pageable = PageRequest.of(page - 1, 10);
+
+        }
+        
+        Page<Transaction> transactions;
+
+        if (type == null) {
+            transactions = transactionService.findAll(pageable);           
+
+        } else {
+            boolean isValidType = EnumUtils.isValidEnum(TransactionType.class, type.toUpperCase());
+
+            if (!isValidType) {
+                return ResponseEntity.badRequest().build();
+            }
+
+            transactions = transactionService.findByType(type.toUpperCase(),pageable);
+        }
+
+        int totalPages = transactions.getTotalPages();
+
+        TransactionPageDTO transactionPageDTO = new TransactionPageDTO(transactions.toList(), totalPages);  
+        return ResponseEntity.ok(transactionPageDTO);
+    }
+
+    /*
     @GetMapping("/transactions/carts") //GET
     public ResponseEntity<List<Transaction>> getCart(@RequestParam(required = false) Integer page){
         List<Transaction> listTrans = getTransaction("CART", page);
@@ -88,9 +142,45 @@ public class RestTransactionController {
             return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(listTrans);
     }
+    */
+
+    @GetMapping(value = "/transactions", params = {"user"})
+    public ResponseEntity<TransactionPageDTO> getUserTransaction(@RequestParam Long userId, 
+            @RequestParam(required = false) String type, @RequestParam(required = false) Integer page) {
+
+        if (type != null) {
+            boolean isValidType = EnumUtils.isValidEnum(TransactionType.class, type.toUpperCase());
+
+            if (!isValidType) {
+                return ResponseEntity.badRequest().build();
+            }
+        }         
+                
+        TransactionPageDTO transactionPageDTO = transactionService.getUserTransaction(userId, type, page);
+        return ResponseEntity.ok(transactionPageDTO);
+    }
+
+    @GetMapping(value = "/transactions/my")
+    public ResponseEntity<TransactionPageDTO> getMyTransactions(HttpServletRequest request, @RequestParam (required = false) String type,
+    @RequestParam (required = false) Integer page) {
+
+        if (type != null) {
+            boolean isValidType = EnumUtils.isValidEnum(TransactionType.class, type.toUpperCase());
+
+            if (!isValidType) {
+                return ResponseEntity.badRequest().build();
+            }
+        }
+
+        String username = request.getUserPrincipal().getName();
+        ShopUser user = userService.findByUsername(username).get();
+
+        TransactionPageDTO transactionPageDTO = transactionService.getUserTransaction(user.getId(), type, page);
+        return ResponseEntity.ok(transactionPageDTO);
+    }
 
     @PostMapping("/transactions") //ADD cart, wishlist or processed transaction
-    public ResponseEntity<Transaction> addTransaction(@RequestBody Transaction transaction){
+    public ResponseEntity<Transaction> addTransaction(@RequestBody Transaction transaction) {
         Transaction newTransaction;
         ShopUser user;
         List<Product> products = new ArrayList<>();
@@ -126,20 +216,55 @@ public class RestTransactionController {
         return ResponseEntity.created(location).body(newTransaction);
     }
 
-    @PostMapping("/transactions/{transactionId}/products/{productId}") //ADD product to transaction
-    public ResponseEntity<Transaction> addProductToTransaction(@PathVariable(value = "transactionId") Long transactionId, @PathVariable(value = "productId") Long productId){
-        Optional<Transaction> oTransaction = transactionService.findById(transactionId);
-        Optional<Product> oProd = productService.findById(productId);
-        if(oTransaction.isPresent() && oProd.isPresent()){
-            Transaction transaction = oTransaction.get();
-            Product product = oProd.get();
+    @PostMapping("/transactions/{transactionId}/products")
+    public ResponseEntity<Transaction> addProduct(@PathVariable Long transactionId, @RequestBody IdDTO productId) {
+
+        Optional<Transaction> transactionOptional = transactionService.findById(transactionId);
+        Optional<Product> productOptional = productService.findById(productId.getId());
+
+        if(transactionOptional.isPresent() && productOptional.isPresent()){
+
+            Transaction transaction = transactionOptional.get();
+            Product product = productOptional.get();
+
             transaction.getProducts().add(product);
             transactionService.save(transaction);
-            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(transaction.getId()).toUri();
+
+            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                    .buildAndExpand(transaction.getId()).toUri();
+
             return ResponseEntity.created(location).body(transaction);
         }
+
         return ResponseEntity.notFound().build();
     }
+
+
+
+    /*
+    @PostMapping("/transactions/{transactionId}/products/{productId}") //ADD product to transaction
+    public ResponseEntity<Transaction> addProductToTransaction(@PathVariable(value = "transactionId") Long transactionId, @PathVariable(value = "productId") Long productId){
+
+        Optional<Transaction> oTransaction = transactionService.findById(transactionId);
+        Optional<Product> oProd = productService.findById(productId);
+
+        if(oTransaction.isPresent() && oProd.isPresent()){
+
+            Transaction transaction = oTransaction.get();
+            Product product = oProd.get();
+
+            transaction.getProducts().add(product);
+            transactionService.save(transaction);
+
+            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                    .buildAndExpand(transaction.getId()).toUri();
+
+            return ResponseEntity.created(location).body(transaction);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+    */
 
     @DeleteMapping("/transactions/{transactionId}/products/{productId}") //DELETE product from transaction
     public ResponseEntity<Product> deleteProductFromTransaction(@PathVariable(value = "transactionId") Long transactionId, @PathVariable(value = "productId") Long productId){
@@ -247,6 +372,7 @@ public class RestTransactionController {
         return null;
     }
 
+/*
     private List<Transaction> getTransaction(String type, Integer page) {
         if(page != null){
             if(page < 1)
@@ -255,6 +381,6 @@ public class RestTransactionController {
         }
         return transactionService.findByType(type.toUpperCase());
     }
-    
+*/    
     
 }

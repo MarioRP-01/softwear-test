@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.softwear.webapp5.data.StaticDTO;
+import com.softwear.webapp5.data.TransactionPageDTO;
 import com.softwear.webapp5.model.*;
 import com.softwear.webapp5.repository.ProductRepository;
 import com.softwear.webapp5.repository.TransactionRepository;
@@ -18,6 +19,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TransactionService {
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private CouponService couponService;
@@ -53,6 +57,14 @@ public class TransactionService {
         return transactionRepository.findByUser(user);
     }
 
+    public Page<Transaction> findByUser(Long userId, Pageable page) {
+
+        ShopUser user = userService.findById(userId).get();
+
+        return transactionRepository.findByUser(user, page);
+    }
+
+
     public List<Transaction> findByUsedCoupon(Coupon coupon) {
         return transactionRepository.findByUsedCoupon(coupon);
     }
@@ -87,6 +99,13 @@ public class TransactionService {
     
     public List<Transaction> findPurchaseHistory(ShopUser user) {
         return transactionRepository.findPurchaseHistory(user);
+    }
+
+    public Page<Transaction> findByTypeAndUser(Long userId, String type, Pageable page) {
+
+        ShopUser user = userService.findById(userId).get();
+
+        return transactionRepository.findByTypeAndUser(user, type, page);
     }
 
     public void save(Transaction transaction) {
@@ -262,6 +281,35 @@ public class TransactionService {
 
     public Page<Transaction> findAll(Pageable page) {
         return transactionRepository.findAll(page);
+    }
+
+    public TransactionPageDTO getUserTransaction(long userId, String type, Integer page) {
+        Pageable pageable;
+
+        if (page == null) {
+            pageable = Pageable.unpaged();
+
+        } else {
+            pageable = PageRequest.of(page - 1, 10);
+
+        }
+
+        Page<Transaction> transactions;
+
+        if (type == null) {
+            transactions = findByUser(userId, pageable);
+
+        } else {
+
+            transactions = findByTypeAndUser(userId, type.toUpperCase(), pageable);
+
+        }
+
+        int totalPages = transactions.getTotalPages();
+
+        TransactionPageDTO transactionPageDTO = new TransactionPageDTO(transactions.toList(), totalPages);
+
+        return transactionPageDTO;
     }
 
 }
