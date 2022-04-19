@@ -27,8 +27,8 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public ResponseEntity<AuthResponse> login(
-			@CookieValue(name = "accessToken", required = false) String accessToken,
-			@CookieValue(name = "refreshToken", required = false) String refreshToken,
+			@CookieValue(name = "AccessToken", required = false) String accessToken,
+			@CookieValue(name = "RefreshToken", required = false) String refreshToken,
 			@RequestBody LoginRequest loginRequest) {
 		
 		return userService.login(loginRequest, accessToken, refreshToken);
@@ -36,14 +36,14 @@ public class LoginController {
 
 	@PostMapping("/refresh")
 	public ResponseEntity<AuthResponse> refreshToken(
-			@CookieValue(name = "refreshToken", required = false) String refreshToken) {
+			@CookieValue(name = "RefreshToken", required = false) String refreshToken) {
 
 		return userService.refresh(refreshToken);
 	}
-
 
 	@PostMapping("/logout")
 	public ResponseEntity<AuthResponse> logOut(HttpServletRequest request, HttpServletResponse response) {
 		return ResponseEntity.ok(new AuthResponse(Status.SUCCESS, userService.logout(request, response)));
 	}
+
 }

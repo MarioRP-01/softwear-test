@@ -2,6 +2,10 @@ package com.softwear.webapp5.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+
+
 @Entity
 @Table(name="Users")
 public class ShopUser {
@@ -19,6 +23,7 @@ public class ShopUser {
 
 	private String lastName;
 
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@Column(nullable = false)
 	private String password;
 
