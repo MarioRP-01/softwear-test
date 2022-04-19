@@ -86,7 +86,7 @@ public class ProductRESTController {
                 return ResponseEntity.badRequest().build();
 
             } else {
-                products = productFilter.doOperation(pageable);
+                products = productService.applyProductFilter(productFilter, pageable);
             }
         }   
 

@@ -8,6 +8,10 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { LoginComponent } from './login/login.component';
+import { ErrorNotFoundComponent } from './error-not-found/error-not-found.component';
+import { SignInComponent } from './loginElement/sign-in/sign-in.component';
+import { SignUpComponent } from './loginElement/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +19,11 @@ import { ProductCardComponent } from './product-card/product-card.component';
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    LoginComponent,
+    ErrorNotFoundComponent,
+    SignInComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,

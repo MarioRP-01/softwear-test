@@ -1,6 +1,7 @@
 package com.softwear.webapp5.service;
 
 import com.softwear.webapp5.data.ProductAvailabilityBySize;
+import com.softwear.webapp5.data.ProductFilter;
 import com.softwear.webapp5.data.ProductNoImagesDTO;
 import com.softwear.webapp5.data.ProductSize;
 import com.softwear.webapp5.model.Product;
@@ -204,6 +205,19 @@ public class ProductService {
     public List<Product> findAll() {
         return productRepository.findAll();
     }
+
+	public Page<Product> applyProductFilter(ProductFilter filter, Pageable page) {
+
+		Page<Product> products = null;
+
+		switch(filter) {
+			case OneByName:
+				products =  findAllNames(page);
+			break;
+		}
+
+		return products;
+	}
 
 //	public Optional<Product> findOneName(String name){
 //        return productRepository.findOneName(name);
