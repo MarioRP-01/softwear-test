@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Transaction } from '../model/transaction';
-import { TransactionType } from '../model/data/transaction-type';
+import { Transaction } from '@app/shared/model/transaction';
+import { TransactionType } from '@app/shared/model/data/transaction-type';
 
 const BASE_URL = '/api/transactions'
 

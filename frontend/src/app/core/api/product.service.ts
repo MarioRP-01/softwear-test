@@ -3,10 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { Product } from '../model/product';
-import { ProductSize } from '../model/data/product-size';
-import { ProductFilter } from '../model/data/product-filter';
-import { PageableProduct } from '../model/pageable-product';
+import { Product } from '@app/shared/model/product';
+import { ProductSize } from '@app/shared/model/data/product-size';
+import { ProductFilter } from '@app/shared/model/data/product-filter';
+import { PageableProduct } from '@app/shared/model/pageable-product';
 
 const BASE_URL = '/api/products'
 

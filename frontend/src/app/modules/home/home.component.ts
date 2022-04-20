@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductService } from '../api/product.service';
-import { TransactionService } from '../api/transaction.service';
-import { ProductFilter } from '../model/data/product-filter';
-import { TransactionType } from '../model/data/transaction-type';
-import { PageableProduct } from '../model/pageable-product';
-import { Product } from '../model/product';
+import { ProductService } from '@app/core/api/product.service';
+import { TransactionService } from '@app/core/api/transaction.service';
+import { ProductFilter } from '@app/shared/model/data/product-filter';
+import { TransactionType } from '@app/shared/model/data/transaction-type';
+import { PageableProduct } from '@app/shared/model/pageable-product';
+import { Product } from '@app/shared/model/product';
 
 @Component({
   selector: 'app-home',
