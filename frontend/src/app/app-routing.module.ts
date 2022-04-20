@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { ErrorNotFoundComponent } from './error-not-found/error-not-found.component';
-import { SharedModule } from './shared/shared.module';
+import { NotFoundComponent } from '@app/shared/layout-error/not-found/not-found.component';
 
 const routes: Routes = [
-  { path: 'error', component: ErrorNotFoundComponent},
+  { path: 'not-found', component: NotFoundComponent},
   { path: '', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule) },
-  { path: '**', redirectTo: "error"}
+  { path: '**', redirectTo: "not-found"}
 ];
 
 @NgModule({
