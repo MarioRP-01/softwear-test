@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductService } from '@app/core/api/product.service';
 import { TransactionService } from '@app/core/api/transaction.service';
@@ -19,6 +19,14 @@ export class HomeUsComponent implements OnInit {
 
   public totalPages: number = 0;
   public nextPage: number = 1
+
+  success = "warning"
+
+  @Input()
+  type:string = '';
+
+
+  
 
   constructor(private productService: ProductService, private transactionService: TransactionService) { }
 

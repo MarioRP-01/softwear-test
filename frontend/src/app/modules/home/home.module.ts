@@ -6,6 +6,8 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { HomeUsComponent } from './pages/home-us/home-us.component';
 import { HomeComponent } from './home.component';
 import { AboutComponent } from './pages/about/about.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import { AboutComponent } from './pages/about/about.component';
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    NgbModule
   ]
 })
 export class HomeModule { }
