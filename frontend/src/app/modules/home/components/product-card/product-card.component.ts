@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TransactionService } from '../api/transaction.service';
-import { TransactionType } from '../model/data/transaction-type';
-import { Product } from '../model/product';
-import { Transaction } from '../model/transaction';
+import { TransactionService } from '@app/core/api/transaction.service';
+import { Product } from '@app/shared/model/product';
 
 @Component({
   selector: 'app-product-card',
