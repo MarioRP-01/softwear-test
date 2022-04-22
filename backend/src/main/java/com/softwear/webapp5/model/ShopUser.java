@@ -39,7 +39,6 @@ public class ShopUser {
 	
 	
 	public ShopUser() {}
-	
 
 	public ShopUser(String username, String email, String name, String lastName, String password, String address,
 			int mobileNumber, String birthdate, String role) {

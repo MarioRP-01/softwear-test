@@ -1,4 +1,4 @@
-import { ProductSize } from "./data/product-size";
+import { ProductSize } from "../data-type/product-size";
 
 export interface Product {
     id: number;

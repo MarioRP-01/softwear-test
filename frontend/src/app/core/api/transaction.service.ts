@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Transaction } from '@app/shared/model/transaction';
-import { TransactionType } from '@app/shared/model/data/transaction-type';
+import { TransactionType } from '@app/shared/data-type/transaction-type';
 
 const BASE_URL = '/api/transactions'
 
