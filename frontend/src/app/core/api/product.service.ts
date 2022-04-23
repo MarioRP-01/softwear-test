@@ -21,6 +21,7 @@ export class ProductService {
 
     let size: string = ProductSize[productSize];
     let url: string = BASE_URL + `?name=${name}&size=${size}`;
+    
     return this.httpClient.get(url).pipe() as Observable<Product>;
   }
 

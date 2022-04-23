@@ -2,28 +2,41 @@
     <div class="card-login border-0 shadow rounded-3 my-5">
         <div class="card-body p-4 p-sm-5">
             <div class="container">
+
+                <!--  Title -->
                 <div class="row">
                     <h5 class="card-title text-center mb-5 fw-light fs-5">Sign In</h5>
                 </div>
+
                 <div class="row">
-                    <form id="form-login" action="/login" method="post">
+                    <form>
+
+                        <!-- Username -->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingUsername"
-                                   placeholder="Username" name="usernameLogin" required>
-                            <label for="floatingUsername">Username</label>
+                            <input type="text" class="form-control" placeholder="Username" name="username" 
+                                    id="signInUsername" [(ngModel)]="username" required>
+
+                            <label for="signInUsername">Username</label>
                         </div>
+
+                        <!-- Password -->
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPassword"
-                                   placeholder="Password" name="passwordLogin" required>
-                            <label for="floatingPassword">Password</label>
+                            <input type="password" class="form-control" placeholder="Password" name="password"
+                                    id="signInPassword" name="signInPassword" [(ngModel)]="password" required>
+
+                            <label for="signInPassword">Password</label>
                         </div>
+
+                        <!-- Send Form -->
                         <div class="d-grid">
                             <button class="btn btn-outline-dark btn-login text-uppercase fw-bold"
-                                    type="submit" onclick="signIn()">Sign in
+                                    type="submit" (click)="signIn()">Sign in
                             </button>
                         </div>
+
                         <input type="hidden" name="_csrf" value="token"/>
                     </form>
+
                 </div>
             </div>
         </div>

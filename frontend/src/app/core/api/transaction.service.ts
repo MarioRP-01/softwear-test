@@ -20,7 +20,7 @@ export class TransactionService {
     let url: string = BASE_URL + `/my?type=${type}`;
 
     return this.httpClient.get(url).pipe(
-      map((transactions) => this.getIdsFromTransactions(transactions as Transaction[]))
+      map(transactions => this.getIdsFromTransactions(transactions as Transaction[]))
     ) as Observable<number[]>;
   }
 

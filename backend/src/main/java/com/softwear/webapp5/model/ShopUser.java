@@ -30,7 +30,6 @@ public class ShopUser {
 
 	private String address;
 	
-	@Column(unique=true)
 	private int mobileNumber;
 
 	private String birthdate;

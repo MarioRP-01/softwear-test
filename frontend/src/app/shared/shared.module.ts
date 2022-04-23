@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NotFoundComponent } from './layout-error/not-found/not-found.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
-
 
 @NgModule({
   declarations: [
@@ -17,8 +18,13 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     NgbModule
   ],
   exports: [
+    CommonModule,
+    FormsModule,
+
+    NgbModule,
+
     HeaderComponent,
-    FooterComponent,
+    FooterComponent
   ]
 })
 /*No services */

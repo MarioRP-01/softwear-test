@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ShopUser } from '@app/shared/model';
-import { LoginRequest } from '@app/shared/model/login-request';
+import { AuthResponse, LoginRequest } from '@app/shared/model';
 import { Observable } from 'rxjs';
 
 const BASE_URL = '/api/auth'
@@ -13,16 +12,11 @@ export class AuthService {
 
   constructor(private HttpClient: HttpClient) { }
 
-  login(loginRequest: LoginRequest): Observable<boolean> {
+  login(loginRequest: LoginRequest): Observable<AuthResponse> {
 
     let url: string = BASE_URL + '/login'
-    return this.HttpClient.post(url, loginRequest).pipe() as Observable<boolean>;
+    return this.HttpClient.post(url, loginRequest).pipe() as Observable<AuthResponse>;
   }
 
-  /*
-  register(): Observable<ShopUser> {
 
-    let url: string = BASE_URL + '/register'
-  }
-  */
 }

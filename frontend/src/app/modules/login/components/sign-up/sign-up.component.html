@@ -2,39 +2,53 @@
     <div class="card-register border-0 shadow rounded-3 my-5">
         <div class="card-body p-4 p-sm-5">
             <div class="container">
+
+                <!-- Title -->
                 <div class="row">
                     <h5 class="card-title text-center mb-5 fw-light fs-5">Sign Up</h5>
                 </div>
-                <div class="row">
-                    <form id="form-register" action="/login/register" method="post">
 
-                        <input type="hidden" name="_csrf" value="token">
+                <div class="row">
+                    <form>
+
+                        <!-- Username -->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingUsernameReg"
-                                   placeholder="Username" name="Username" required>
-                            <label for="floatingUsernameReg">Username</label>
+                            <input type="text" class="form-control" id="signUpUsername" name="username"
+                                   placeholder="Username" [(ngModel)]="username" required>
+
+                            <label for="signUpUsername">Username</label>
                         </div>
+
+                        <!-- Email -->
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingEmailReg"
-                                   placeholder="name@example.com" name="email" required>
-                            <label for="floatingEmailReg">Email address</label>
+                            <input type="email" class="form-control" id="floatingEmailReg" name="email"
+                                   placeholder="name@example.com" [(ngModel)]="email" required>
+                            <label for="signUpEmail">Email address</label>
                         </div>
+
+                        <!-- Password -->
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPasswordReg"
-                                   placeholder="Password" name="password" required>
-                            <label for="floatingPasswordReg">Password</label>
+                            <input type="password" class="form-control" id="signUpPassword" name="password"
+                                   placeholder="Password" [(ngModel)]="password" required>
+                            <label for="signUpPassword">Password</label>
                         </div>
+
+                        <!-- Repeat Password -->
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPasswordRepeatReg"
-                                   placeholder="Confirmation Password" name="confPassword" required>
-                            <label for="floatingPasswordRepeatReg">Repeat Password</label>
+                            <input type="password" class="form-control" id="signUpPasswordRepeat" name="repeatedPassword"
+                                   placeholder="Confirmation Password" [(ngModel)]="repeatedPassword" required>
+                            <label for="signUpPasswordRepeat">Repeat Password</label>
                         </div>
+
+                        <!-- Send Form -->
                         <input type="hidden" name="_csrf" value="token">
                         <div class="d-grid">
                             <button class="btn btn-outline-dark btn-login text-uppercase fw-bold"
-                                    type="submit" onclick="register()">Sign up
+                                    type="submit" (click)="signUp()">Sign up
                             </button>
                         </div>
+
+                        <input type="hidden" name="_csrf" value="token">
                     </form>
                 </div>
             </div>
