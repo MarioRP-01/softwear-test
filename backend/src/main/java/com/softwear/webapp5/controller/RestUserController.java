@@ -27,7 +27,7 @@ import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.service.UserService;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class RestUserController {
 
 	@Autowired
@@ -35,8 +35,7 @@ public class RestUserController {
 	
 	@Autowired
 	private UserService userService;
-	
-	
+		
 	@GetMapping("/")
 	public ResponseEntity<List<ShopUser>> get(@RequestParam(required=false) Integer page) {
 		if(page!=null) {

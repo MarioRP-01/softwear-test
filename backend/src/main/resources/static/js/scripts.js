@@ -51,7 +51,7 @@ function register() {
 		};
 		console.log(JSON.stringify(dataObj))
 	    $.ajax({
-	        url: "/api/users/createUser",
+	        url: "/users/createUser",
 	        type: "POST",
 	        contentType: "application/json",
 	        data: JSON.stringify(dataObj),

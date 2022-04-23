@@ -13,7 +13,7 @@ function updateInfo() {
 	};
 	console.log(JSON.stringify(dataObj));
     $.ajax({
-        url: "/api/users/updateUserInfo",
+        url: "/users/updateUserInfo",
         type: "PUT",
         contentType: "application/json",
         data: JSON.stringify(dataObj),
@@ -37,7 +37,7 @@ function updatePass() {
 	};
 	console.log(JSON.stringify(dataObj))
     $.ajax({
-        url: "/api/users/updatePassword",
+        url: "/users/updatePassword",
         type: "PUT",
         contentType: "application/json",
         data: JSON.stringify(dataObj),

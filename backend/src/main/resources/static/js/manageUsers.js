@@ -9,7 +9,7 @@ function more() {
 	currentPage++;
     if(currentPage <= maxPages) {
         $.ajax({
-            url: "/api/users/?page=" + (currentPage),
+            url: "/users/?page=" + (currentPage),
             type: "get",
             dataType: "json"
         }).done(function (users) {
@@ -82,7 +82,7 @@ function updateUser() {
             role: $("#editRole")[0].value
 	};
     $.ajax({
-        url: "/api/users/"+dataObj.id,
+        url: "/users/"+dataObj.id,
         type: "PUT",
         contentType: "application/json",
         data: JSON.stringify(dataObj),
@@ -104,7 +104,7 @@ function updateUser() {
 
 function deleteUser(id) {
 	$.ajax({
-        url: "/api/users/"+id,
+        url: "/users/"+id,
         type: "DELETE",
         success: function(result) {
         	 success_alert();
@@ -143,7 +143,7 @@ function addUser() {
             role: $("#editRole")[0].value
 	};
     $.ajax({
-        url: "/api/users/",
+        url: "/users/",
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify(dataObj),

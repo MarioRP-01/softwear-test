@@ -60,7 +60,7 @@ public class RestAdminController {
     public ShopUser users(@RequestParam String mode, @RequestParam(required = false) Long id, @RequestParam(required = false) String username, 
     @RequestParam(required = false) String password, @RequestParam(required = false) String email, 
     @RequestParam(required = false) String name, @RequestParam(required = false) String lastName, 
-    @RequestParam(required = false) String address, @RequestParam(required = false) Integer mobileNumber,
+    @RequestParam(required = false) String address, @RequestParam(required = false) int mobileNumber,
     @RequestParam(required = false) String birthdate, 
     @RequestParam(required = false) String role){
 

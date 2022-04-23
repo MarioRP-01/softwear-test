@@ -8,13 +8,18 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.softwear.webapp5.data.UserEditProfileDTO;
 import com.softwear.webapp5.model.ShopUser;
 
 @Service
 public class UserService {
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	@Autowired
 	private UserRepository shopUsers;
 	
@@ -70,6 +75,31 @@ public class UserService {
 		
 	}
 
+	public void updateProfile(ShopUser user, UserEditProfileDTO editData) {
+		
+		user.setEmail(editData.getEmail());
+		user.setName(editData.getName());
+		user.setLastName(editData.getLastName());
+		user.setAddress(editData.getAddress());
+		user.setMobileNumber(editData.getMobileNumber());
+		user.setBirthdate(editData.getBirthDate());
+	}
+
+	public void updateUser(ShopUser oldUser, ShopUser newUser) {
+
+		oldUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+
+		oldUser.setUsername(newUser.getUsername());
+		oldUser.setAddress(newUser.getAddress());
+		oldUser.setPassword(newUser.getPassword());
+		oldUser.setBirthdate(newUser.getBirthdate());
+		oldUser.setEmail(newUser.getEmail());
+		oldUser.setLastName(newUser.getLastName());
+		oldUser.setMobileNumber(newUser.getMobileNumber());
+		oldUser.setName(newUser.getName());
+		oldUser.setRole(newUser.getRole());
+	}
+
 	public void updateAdminInfo(ShopUser oldShopUser, ShopUser u) {
 
 		oldShopUser.setUsername(u.getUsername());
@@ -91,6 +121,12 @@ public class UserService {
 		oldShopUser.get().setPassword(newPass);
 		shopUsers.save(oldShopUser.get());
 		
+	}
+
+	public void updatePass(ShopUser user, String newPass) {
+
+		user.setPassword(newPass);
+		shopUsers.save(user);
 	}
 	
 	public void saveUser(ShopUser u) {

@@ -3,6 +3,7 @@ package com.softwear.webapp5.model;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.softwear.webapp5.data.UserRegisterDTO;
 
 
 
@@ -53,11 +54,16 @@ public class ShopUser {
 		this.setRole(role);
 	}
 
+	public ShopUser(UserRegisterDTO userRegister) {
+
+		this.username = userRegister.getUsername();
+		this.email = userRegister.getEmail();
+		this.role = "USER";
+	}
 
 	public Long getId() {
 		return id;
 	}
-
 
 	public void setId(Long id) {
 		this.id = id;

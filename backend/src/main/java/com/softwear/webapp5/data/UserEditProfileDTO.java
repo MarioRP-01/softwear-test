@@ -6,17 +6,17 @@ public class UserEditProfileDTO {
     private String lastName;
     private String address;
     private String email;
-    private String mobileNumber;
-    private String birthDate;
+    private int mobileNumber;
+    private String birthdate;
 
-    public UserEditProfileDTO(String name, String lastName, String address, String email, String mobileNumber,
-            String birthDate) {
+    public UserEditProfileDTO(String name, String lastName, String address, String email, int mobileNumber,
+            String birthdate) {
         this.name = name;
         this.lastName = lastName;
         this.address = address;
         this.email = email;
         this.mobileNumber = mobileNumber;
-        this.birthDate = birthDate;
+        this.birthdate = birthdate;
     }
 
     public String getName() {
@@ -51,20 +51,20 @@ public class UserEditProfileDTO {
         this.email = email;
     }
 
-    public String getMobileNumber() {
+    public int getMobileNumber() {
         return mobileNumber;
     }
 
-    public void setMobileNumber(String mobileNumber) {
+    public void setMobileNumber(int mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
 
     public String getBirthDate() {
-        return birthDate;
+        return birthdate;
     }
 
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthDate(String birthdate) {
+        this.birthdate = birthdate;
     }
 
     
