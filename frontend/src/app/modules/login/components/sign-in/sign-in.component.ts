@@ -23,7 +23,7 @@ export class SignInComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  fieldsEmpty(): boolean {
+  areFieldsEmpty(): boolean {
 
     let isEmpty: boolean = (!this.username || !this.password);
     if (isEmpty) {
@@ -54,6 +54,8 @@ export class SignInComponent implements OnInit {
 
     console.log(Status.SUCCESS.toString())
     if (authResponse.status === Status[Status.SUCCESS]) {
+      this.authService.checkLogin(authResponse);
+
       this.navigationService.back();
 
     } else {
@@ -64,12 +66,13 @@ export class SignInComponent implements OnInit {
 
   errorResponse(): void {
     this.emptyPasswordField();
+    // Add warning about wrong credentials
 
   }
 
   signIn(): void {
     
-    if (!this.fieldsEmpty()) {
+    if (!this.areFieldsEmpty()) {
       let loginRequest: LoginRequest = this.createLoginRequest();
 
       this.authService.login(loginRequest).subscribe(

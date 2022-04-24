@@ -10,6 +10,7 @@ import com.softwear.webapp5.data.UserEditProfileDTO;
 import com.softwear.webapp5.data.UserPageDTO;
 import com.softwear.webapp5.data.UserRegisterDTO;
 import com.softwear.webapp5.model.ShopUser;
+import com.softwear.webapp5.service.TransactionService;
 import com.softwear.webapp5.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,9 @@ public class UserRestController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TransactionService transactionService;
 
     @GetMapping("/{id}")
     public ResponseEntity<ShopUser> getUser(@PathVariable Long id) {
@@ -98,7 +102,11 @@ public class UserRestController {
 
         ShopUser user = new ShopUser(registerData);
 		user.setPassword(passwordEncoder.encode(registerData.getPassword()));
+        
         userService.saveUser(user);
+
+        transactionService.saveEmptyCart(user);
+        transactionService.saveEmptyWishlist(user);
 
         URI location = fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
 

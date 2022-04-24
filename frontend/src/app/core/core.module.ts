@@ -1,4 +1,6 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+
 
 import { ProductService, ShopUserService, TransactionService } from './api';
 import { AuthGuard, AuthService } from './authentication'
@@ -9,7 +11,8 @@ import { AuthGuard, AuthService } from './authentication'
     ShopUserService,
     TransactionService,
     AuthGuard,
-    AuthService
+    AuthService,
+    CookieService
   ],
 })
 export class CoreModule { 

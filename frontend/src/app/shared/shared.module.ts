@@ -15,7 +15,8 @@ import { NotFoundComponent } from './layout-error/not-found/not-found.component'
     NotFoundComponent
   ],
   imports:[
-    NgbModule
+    NgbModule,
+    CommonModule
   ],
   exports: [
     CommonModule,

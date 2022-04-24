@@ -160,7 +160,7 @@ public class RestTransactionController {
         return ResponseEntity.ok(transactionPageDTO);
     }
 
-    @GetMapping(value = "/transactions/my")
+    @GetMapping("/transactions/my")
     public ResponseEntity<TransactionPageDTO> getMyTransactions(HttpServletRequest request, @RequestParam (required = false) String type,
     @RequestParam (required = false) Integer page) {
 

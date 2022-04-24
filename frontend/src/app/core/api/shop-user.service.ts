@@ -12,6 +12,12 @@ export class ShopUserService {
 
   constructor(private httpClient: HttpClient) { }
 
+  getOwnUser(): Observable<ShopUser> {
+
+    let url: string = BASE_URL + `/my`;
+    return this.httpClient.get(url).pipe() as Observable<ShopUser>;
+  }
+
   createUser(userRegister: UserRegister): Observable<ShopUser> {
 
     let url: string = BASE_URL;

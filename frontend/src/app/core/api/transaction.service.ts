@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Transaction } from '@app/shared/model/transaction';
+import { Transaction } from '@app/shared/model';
 import { TransactionType } from '@app/shared/data-type/transaction-type';
+import { PageableTransaction } from '@app/shared/model';
 
 const BASE_URL = '/api/transactions'
 
@@ -14,19 +15,20 @@ export class TransactionService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getSpecialTransactionId(transactionType: TransactionType): Observable<number[]> {
+  getSpecialTransactionId(transactionType: TransactionType): Observable<Transaction> {
 
     let type: string = TransactionType[transactionType].toLowerCase();
     let url: string = BASE_URL + `/my?type=${type}`;
 
     return this.httpClient.get(url).pipe(
-      map(transactions => this.getIdsFromTransactions(transactions as Transaction[]))
-    ) as Observable<number[]>;
+      map(transactions => this.getFirstTransaction(transactions as PageableTransaction))
+    ) as Observable<Transaction>;
   }
 
-  getIdsFromTransactions(transactions: Transaction[]): number[] {
+  getFirstTransaction(pageableTransaction: PageableTransaction): Transaction {
 
-    return transactions.map(transaction => transaction.id);
+    let transaction: Transaction = pageableTransaction.transactions?.[0];
+    return transaction
   }
 
   addProductToTransaction(transactionId: number, productId:number): Observable<Transaction> {

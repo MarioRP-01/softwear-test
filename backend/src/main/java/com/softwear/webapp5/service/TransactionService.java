@@ -206,6 +206,28 @@ public class TransactionService {
         }
     }
 
+    public void saveEmptyCart(ShopUser user) {
+
+        Transaction cart = createEmptyCart(user);
+        save(cart);
+    }
+
+    public Transaction createEmptyCart(ShopUser user) {
+
+        return new Transaction("CART", user, null, getCurrentDate(), new ArrayList<>());
+    }
+
+    public void saveEmptyWishlist(ShopUser user) {
+
+        Transaction wishlist = createEmptyWishlist(user);
+        save(wishlist);
+    } 
+
+    public Transaction createEmptyWishlist(ShopUser user) {
+
+        return new Transaction("WISHLIST", user, null, getCurrentDate(), new ArrayList<>());
+    }
+
     public boolean addToWishlist(Long productId, ShopUser user) {
         Optional<Product> optionalProduct = productRepository.findById(productId);
         if (optionalProduct.isPresent()){

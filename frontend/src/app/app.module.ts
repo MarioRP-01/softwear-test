@@ -20,7 +20,7 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     CoreModule,
     SharedModule.forRoot(),
-    NgbModule    
+    NgbModule,  
   ],
   providers: [],
   bootstrap: [AppComponent]

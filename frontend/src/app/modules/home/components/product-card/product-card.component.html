@@ -2,8 +2,16 @@
     <div class="card h-100 product">
 
         <!-- add to wishlist-->
-        <div class="badge product-fav-badge bg-dark text-white position-absolute favIcon" (click)="turnWishlist()">
-            <i class="bi bi-heart"></i>
+        <div class="badge product-fav-badge bg-dark text-white position-absolute favIcon"
+            (click)="turnWishlist()"
+            *ngIf="activeSesion">
+
+            <i class="bi bi-heart" *ngIf="isPresent; else notPresent"></i>
+
+            <ng-template #notPresent>
+                <i class="bi bi-heart-fill"></i>
+            </ng-template>
+            
         </div>
 
         <!-- Product image-->

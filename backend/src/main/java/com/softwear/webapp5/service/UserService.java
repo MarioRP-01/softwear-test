@@ -22,7 +22,7 @@ public class UserService {
 
 	@Autowired
 	private UserRepository shopUsers;
-	
+
 	public Page<ShopUser> findAll(Pageable page){
 		return shopUsers.findAll(page);
 	}
@@ -130,6 +130,7 @@ public class UserService {
 	}
 	
 	public void saveUser(ShopUser u) {
+
 		shopUsers.save(u);
 	}
 

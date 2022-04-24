@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductService } from '@app/core/api/product.service';
-import { TransactionService } from '@app/core/api/transaction.service';
-import { ProductFilter } from '@app/shared/data-type/product-filter';
-import { TransactionType } from '@app/shared/data-type/transaction-type';
-import { PageableProduct } from '@app/shared/model/pageable-product';
-import { Product } from '@app/shared/model/product';
+
+import { ProductService, TransactionService } from '@app/core/api'
+
+import { Transaction, PageableProduct, Product } from '@app/shared/model';
+import { ProductFilter, TransactionType } from '@app/shared/data-type';
+import { AuthService } from '@app/core/authentication';
 
 @Component({
   selector: 'app-home-us',
@@ -15,12 +15,12 @@ import { Product } from '@app/shared/model/product';
 export class HomeUsComponent implements OnInit {
 
   public products: Product[] = [];
-  public wishlistId: number = -1;
-
+  
   public totalPages: number = 0;
-  public nextPage: number = 1
+  public nextPage: number = 1;
+  public $wishlist!: Observable<Transaction>
 
-  success = "warning"
+  public activeSesion!: boolean;
 
   @Input()
   type:string = '';
@@ -28,7 +28,12 @@ export class HomeUsComponent implements OnInit {
 
   
 
-  constructor(private productService: ProductService, private transactionService: TransactionService) { }
+  constructor(
+    private productService: ProductService,
+    private transactionService: TransactionService,
+    private authService: AuthService
+
+    ) { }
 
   ngOnInit(): void {
     this.refresh();
@@ -39,8 +44,10 @@ export class HomeUsComponent implements OnInit {
    */
   refresh(): void {
 
-    this.setProducts()
-    this.setWishlist()
+    this.refreshProducts();
+    this.refreshWishlist();
+
+    this.activeSesion = this.authService.isUserLoggedIn();
   }
 
   updateContent(page: PageableProduct): void {
@@ -51,18 +58,16 @@ export class HomeUsComponent implements OnInit {
     this.totalPages = page.totalPages;
   }
 
-  setProducts(): void {
+  refreshProducts(): void {
     let filter = ProductFilter.OneByName;
     this.productService.getProductWithFilter(filter, this.nextPage).subscribe(
       page => this.updateContent(page)
     )
   }
 
-  setWishlist(): void {
+  refreshWishlist(): void {
 
-    this.transactionService.getSpecialTransactionId(TransactionType.WISHLIST).subscribe(
-      wishlistId => this.wishlistId = wishlistId[0]
-    );
+    this.$wishlist = this.transactionService.getSpecialTransactionId(TransactionType.WISHLIST);
   }
 
   loadNextPage(): void {
