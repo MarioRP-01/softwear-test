@@ -3,7 +3,9 @@ import { Observable, map } from 'rxjs';
 
 import { TransactionService } from '@app/core/api';
 
-import { Transaction, Product } from '@app/shared/model';
+import { Transaction, Product as ProductInterface} from '@app/shared/model';
+import { TransactionSpecialType } from '@app/shared/data-type';
+import { Product } from '@app/shared/classes'
 
 
 @Component({
@@ -14,7 +16,7 @@ import { Transaction, Product } from '@app/shared/model';
 export class ProductCardComponent implements OnInit {
 
   @Input()
-  product!: Product;
+  product!: ProductInterface;
 
   @Input()
   $wishlist!: Observable<Transaction>;
@@ -23,7 +25,7 @@ export class ProductCardComponent implements OnInit {
   activeSesion!: boolean;
 
   @Output()
-  refresh = new EventEmitter<void>();
+  refreshWishlist = new EventEmitter<void>();
 
   public isPresent!: boolean;
 
@@ -34,37 +36,67 @@ export class ProductCardComponent implements OnInit {
     this.refreshIsPresent();
   }
 
+  createObjectProduct(productInterface: ProductInterface): Product {
+
+    let product: Product = new Product(
+      productInterface.id,
+      productInterface.name,
+      productInterface.description,
+      productInterface.price,
+      productInterface.size,
+      productInterface.images
+    );
+
+    return product;
+  }
+
   refreshIsPresent(): void {
     this.$wishlist.subscribe(
-      transaction => this.isPresent = transaction.products.includes(this.product),
+      transaction => {
+
+        let product: Product = this.createObjectProduct(this.product);
+
+        this.isPresent = product.containsProduct(transaction.products);
+        console.log(this.isPresent)
+      },
       error => {
         this.isPresent = false;
-        console.log(error)
-      }  
+        console.log(error);
+      }
     )
   }
 
   addToWishlist() {
-    this.isPresent = true;
 
+    this.isPresent = true;
+    this.transactionService.addProductToMyTransaction(this.product.id, TransactionSpecialType.WISHLIST).subscribe(
+      error => {
+        console.log(error);
+      }
+    )
   }
 
   removeFromWishlist() {
+
     this.isPresent = false;
 
+    this.transactionService.deleteProductFromMyTransaction(this.product.id, TransactionSpecialType.WISHLIST).subscribe(
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   turnWishlist(): void {
 
     if (this.isPresent) {
-      this.removeFromWishlist()
+      this.removeFromWishlist();
 
     } else {
-      this.addToWishlist()
+      this.addToWishlist();
 
     }
-    this.refresh.emit()
+    this.refreshWishlist.emit();
   }
-  
 
 }

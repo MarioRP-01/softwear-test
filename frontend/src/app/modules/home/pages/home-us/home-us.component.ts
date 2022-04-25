@@ -40,9 +40,9 @@ export class HomeUsComponent implements OnInit {
     this.refreshProducts()
     this.refreshWishlist();
 
-    this.authService.loadUser().subscribe(
+    this.authService.loadUser().pipe(shareReplay()).subscribe(
       response => {
-        this.activeSesion = this.authService.isUserLoggedIn();        
+        this.activeSesion = this.authService.isUserLoggedIn();
 
       },
       error => console.log(error)
@@ -59,16 +59,14 @@ export class HomeUsComponent implements OnInit {
 
   refreshProducts(): void {
 
-    let filter = ProductFilter.OneByName;
-    
-    this.productService.getProductWithFilter(filter, this.nextPage).subscribe(
+    this.productService.getProductWithFilter(ProductFilter.OneByName, this.nextPage).subscribe(
       page => this.loadPage(page)
     )
   }
 
   refreshWishlist(): void {
 
-    this.$wishlist = this.transactionService.getSpecialTransactionId(TransactionType.WISHLIST).pipe(shareReplay());
+    this.$wishlist = this.transactionService.getMyTransactionByType(TransactionType.WISHLIST).pipe(shareReplay());
   }
 
   loadNextPage(): void {

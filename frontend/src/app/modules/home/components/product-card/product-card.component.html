@@ -6,10 +6,10 @@
             (click)="turnWishlist()"
             *ngIf="activeSesion">
 
-            <i class="bi bi-heart" *ngIf="isPresent; else notPresent"></i>
+            <i class="bi bi-heart-fill" *ngIf="isPresent; else notPresent"></i>
 
             <ng-template #notPresent>
-                <i class="bi bi-heart-fill"></i>
+                <i class="bi bi-heart"></i>
             </ng-template>
             
         </div>
@@ -36,7 +36,7 @@
             </div>
 
             <!-- favicon wishlist -->
-            <i class="bi bi-heart-fill"></i>
+            <i *ngIf="isPresent" class="bi bi-heart-fill"></i>
         </div>
     </div>
 </div>
