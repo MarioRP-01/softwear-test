@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.softwear.webapp5.data.IdDTO;
 import com.softwear.webapp5.data.TransactionPageDTO;
+import com.softwear.webapp5.data.TransactionSpecialType;
 import com.softwear.webapp5.data.TransactionType;
 import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Product;
@@ -41,7 +42,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/transactions")
 public class RestTransactionController {
 
     @Autowired
@@ -62,7 +63,7 @@ public class RestTransactionController {
     @Autowired
     CouponRepository couponRepository;
 
-    @GetMapping("/transactions/{id}") //GET
+    @GetMapping("/{id}") //GET
     public ResponseEntity<Transaction> getTransactionById(@PathVariable Long id){
         Optional<Transaction> oTrans = transactionService.findById(id);
         if(oTrans.isPresent())
@@ -83,7 +84,7 @@ public class RestTransactionController {
     }
     */
 
-    @GetMapping(value = "/transactions")
+    @GetMapping(value = "")
     public ResponseEntity<TransactionPageDTO> getSpecialTransaction(@RequestParam(required = false) String type,
             @RequestParam(required = false) Integer page) {
 
@@ -144,8 +145,8 @@ public class RestTransactionController {
     }
     */
 
-    @GetMapping(value = "/transactions", params = {"user"})
-    public ResponseEntity<TransactionPageDTO> getUserTransaction(@RequestParam Long userId, 
+    @GetMapping(value = "", params = {"user"})
+    public ResponseEntity<TransactionPageDTO> getTransactionByUser(@RequestParam Long userId, 
             @RequestParam(required = false) String type, @RequestParam(required = false) Integer page) {
 
         if (type != null) {
@@ -160,7 +161,7 @@ public class RestTransactionController {
         return ResponseEntity.ok(transactionPageDTO);
     }
 
-    @GetMapping("/transactions/my")
+    @GetMapping("/my")
     public ResponseEntity<TransactionPageDTO> getMyTransactions(HttpServletRequest request, @RequestParam (required = false) String type,
     @RequestParam (required = false) Integer page) {
 
@@ -179,7 +180,7 @@ public class RestTransactionController {
         return ResponseEntity.ok(transactionPageDTO);
     }
 
-    @PostMapping("/transactions") //ADD cart, wishlist or processed transaction
+    @PostMapping("") //ADD cart, wishlist or processed transaction
     public ResponseEntity<Transaction> addTransaction(@RequestBody Transaction transaction) {
         Transaction newTransaction;
         ShopUser user;
@@ -216,8 +217,45 @@ public class RestTransactionController {
         return ResponseEntity.created(location).body(newTransaction);
     }
 
-    @PostMapping("/transactions/{transactionId}/products")
-    public ResponseEntity<Transaction> addProduct(@PathVariable Long transactionId, @RequestBody IdDTO productId) {
+
+    @PostMapping(value = "/my", params = {"type"})
+    public ResponseEntity<Product> addProductToOwnTransaction(
+        @RequestParam String type,
+        @RequestBody IdDTO productId,
+        HttpServletRequest request) {
+            
+        String username = request.getUserPrincipal().getName();
+        ShopUser user = userService.findByUsername(username).get();
+
+        Optional<Product> productOptional = productService.findById(productId.getId());
+
+        if (productOptional.isPresent()) {
+
+            Transaction transaction;
+
+            if (type.equals("wishlist")) {
+                transaction = transactionService.findWishlist(user).get();
+    
+            } else if (type.equals("cart")) {
+                transaction = transactionService.findCart(user).get();
+    
+            } else {
+                return ResponseEntity.badRequest().build();
+
+            }
+            transaction.getProducts().add(productOptional.get());
+            transactionService.save(transaction);
+
+            URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
+
+            return ResponseEntity.created(location).body(productOptional.get());
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/{transactionId}/products")
+    public ResponseEntity<Transaction> addProductToTransaction(@PathVariable Long transactionId, @RequestBody IdDTO productId) {
 
         Optional<Transaction> transactionOptional = transactionService.findById(transactionId);
         Optional<Product> productOptional = productService.findById(productId.getId());
@@ -266,25 +304,14 @@ public class RestTransactionController {
     }
     */
 
-    @DeleteMapping("/transactions/{transactionId}/products/{productId}") //DELETE product from transaction
-    public ResponseEntity<Product> deleteProductFromTransaction(@PathVariable(value = "transactionId") Long transactionId, @PathVariable(value = "productId") Long productId){
-        Optional<Transaction> oTransaction = transactionService.findById(transactionId);
-        Optional<Product> oProd = productService.findById(productId);
-        if(oTransaction.isPresent() && oProd.isPresent()){
-            Transaction transaction = oTransaction.get();
-            Product product = oProd.get();
-            if(transaction.getProducts().contains(product))
-                transaction.getProducts().remove(product);
-            else
-                ResponseEntity.notFound().build();
-            transactionService.save(transaction);
-            return ResponseEntity.ok(product);
-        }
-        return ResponseEntity.notFound().build();
-    }
+ 
 
-    @PutMapping("/transactions/{id}") //EDIT (overwrite transaction)
-    public ResponseEntity<Transaction> editTransaction(@PathVariable(value = "id") Long id, @RequestBody Transaction transaction){ //"Cannot construct instance of ShopUser" https://localhost:8443/api/transaction/12?type=WISHLIST&user=1&date=10/1/2034&totalPrice=&products=2
+    @PutMapping("/{id}") //EDIT (overwrite transaction)
+    public ResponseEntity<Transaction> editTransaction(
+        @PathVariable(value = "id") Long id, 
+        @RequestBody Transaction transaction){ 
+        //"Cannot construct instance of ShopUser" https://localhost:8443/api/transaction/12?type=WISHLIST&user=1&date=10/1/2034&totalPrice=&products=2
+
         Optional<Transaction> oNewTransaction = transactionService.findById(id);
         ShopUser user;
         List<Product> products = new ArrayList<>();
@@ -318,7 +345,7 @@ public class RestTransactionController {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/transactions/{id}") //DELETE
+    @DeleteMapping("/{id}") //DELETE
     public ResponseEntity<Transaction> removeTransaction(@PathVariable(value = "id") Long id){
         Optional<Transaction> oTransaction = transactionService.findById(id);
         if(oTransaction.isPresent()){
@@ -329,6 +356,68 @@ public class RestTransactionController {
             transactionService.delete(transaction);
             //Fails when trying to return transaction
             return response;
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/my/products/{productId}")
+    public ResponseEntity<Product> deleteProductFromOwnTransaction(
+        @PathVariable Long productId,
+        @RequestParam String type,
+        HttpServletRequest request) {
+        
+        String username = request.getUserPrincipal().getName();
+        ShopUser user = userService.findByUsername(username).get();
+
+        Optional<Product> productOptional = productService.findById(productId);
+
+        if (productOptional.isPresent()) {
+
+            Transaction transaction;
+
+            if (type.equals("wishlist")) {
+                transaction = transactionService.findWishlist(user).get();
+    
+            } else if (type.equals("cart")) {
+                transaction = transactionService.findCart(user).get();
+    
+            } else {
+                return ResponseEntity.badRequest().build();
+
+            }
+            if(transaction.getProducts().contains(productOptional.get()))
+                transaction.getProducts().remove(productOptional.get());
+            transactionService.save(transaction);
+
+            URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
+
+            return ResponseEntity.created(location).body(productOptional.get());
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{transactionId}/products/{productId}") //DELETE product from transaction
+    public ResponseEntity<Product> deleteProductFromTransaction(
+        @PathVariable Long transactionId,
+        @PathVariable Long productId){
+
+        Optional<Transaction> oTransaction = transactionService.findById(transactionId);
+        Optional<Product> oProd = productService.findById(productId);
+
+        if(oTransaction.isPresent() && oProd.isPresent()){
+            Transaction transaction = oTransaction.get();
+            Product product = oProd.get();
+
+            if(transaction.getProducts().contains(product))
+                transaction.getProducts().remove(product);
+
+            else
+                ResponseEntity.notFound().build();
+
+            transactionService.save(transaction);
+            return ResponseEntity.ok(product);
+
         }
         return ResponseEntity.notFound().build();
     }

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable, shareReplay } from 'rxjs';
 
 import { ProductService, TransactionService } from '@app/core/api'
 
@@ -18,7 +18,7 @@ export class HomeUsComponent implements OnInit {
   
   public totalPages: number = 0;
   public nextPage: number = 1;
-  public $wishlist!: Observable<Transaction>
+  public $wishlist!: Observable<Transaction>;
 
   public activeSesion!: boolean;
 
@@ -36,21 +36,20 @@ export class HomeUsComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.refresh();
-  }
-
-  /**
-   * Call API REST to refresh website content.
-   */
-  refresh(): void {
-
-    this.refreshProducts();
+    
+    this.refreshProducts()
     this.refreshWishlist();
 
-    this.activeSesion = this.authService.isUserLoggedIn();
+    this.authService.loadUser().subscribe(
+      response => {
+        this.activeSesion = this.authService.isUserLoggedIn();        
+
+      },
+      error => console.log(error)
+    );
   }
 
-  updateContent(page: PageableProduct): void {
+  loadPage(page: PageableProduct) {
 
     let length = this.products.length;
 
@@ -59,22 +58,24 @@ export class HomeUsComponent implements OnInit {
   }
 
   refreshProducts(): void {
+
     let filter = ProductFilter.OneByName;
+    
     this.productService.getProductWithFilter(filter, this.nextPage).subscribe(
-      page => this.updateContent(page)
+      page => this.loadPage(page)
     )
   }
 
   refreshWishlist(): void {
 
-    this.$wishlist = this.transactionService.getSpecialTransactionId(TransactionType.WISHLIST);
+    this.$wishlist = this.transactionService.getSpecialTransactionId(TransactionType.WISHLIST).pipe(shareReplay());
   }
 
   loadNextPage(): void {
     
     if (this.totalPages > this.nextPage) {
       this.nextPage++;   
-      this.refresh();
+      this.refreshProducts();
     }
   }
 

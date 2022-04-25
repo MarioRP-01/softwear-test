@@ -66,10 +66,14 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN");	
 
 
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/transactions/my/**").hasAnyRole("USER", "ADMIN");	
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/transactions/my/**").hasAnyRole("USER", "ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/transactions/my/**").hasAnyRole("USER", "ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/transactions/my/**").hasAnyRole("USER", "ADMIN");
+		
+		
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/transactions/**").hasRole("ADMIN");	
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/transactions/**").hasAnyRole("USER", "ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/transactions/**").hasAnyRole("USER", "ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/transactions/**").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/transactions/**").hasRole("ADMIN");
 		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/transactions/**").hasRole("ADMIN");	
 
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/coupons/**").hasRole("ADMIN");	

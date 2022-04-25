@@ -35,10 +35,13 @@ export class ProductCardComponent implements OnInit {
   }
 
   refreshIsPresent(): void {
-    this.$wishlist.pipe(map(
+    this.$wishlist.subscribe(
       transaction => this.isPresent = transaction.products.includes(this.product),
-      (error: any) => this.isPresent = false
-    ));
+      error => {
+        this.isPresent = false;
+        console.log(error)
+      }  
+    )
   }
 
   addToWishlist() {
@@ -54,10 +57,10 @@ export class ProductCardComponent implements OnInit {
   turnWishlist(): void {
 
     if (this.isPresent) {
-      this.addToWishlist()
+      this.removeFromWishlist()
 
     } else {
-      this.removeFromWishlist()
+      this.addToWishlist()
 
     }
     this.refresh.emit()
