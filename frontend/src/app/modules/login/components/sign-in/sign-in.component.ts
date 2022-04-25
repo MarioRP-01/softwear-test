@@ -54,9 +54,9 @@ export class SignInComponent implements OnInit {
 
     console.log(Status.SUCCESS.toString())
     if (authResponse.status === Status[Status.SUCCESS]) {
-      this.authService.checkLogin(authResponse);
-
-      this.navigationService.back();
+      this.authService.loadUser().subscribe(
+        response => this.navigationService.back()
+      );
 
     } else {
       this.emptyPasswordField();

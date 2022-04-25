@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { map, Observable } from 'rxjs';
 
 import { Status } from '@app/shared/data-type';
@@ -14,49 +13,52 @@ const BASE_URL = '/api/auth'
 })
 export class AuthService {
 
+  userData: ShopUser | undefined;
+
   constructor(
     private httpClient: HttpClient,
-    private cookieService: CookieService,
     private shopUserService: ShopUserService
     ) { }
 
   login(loginRequest: LoginRequest): Observable<AuthResponse> {
 
-    let url: string = BASE_URL + '/login'
+    let url: string = BASE_URL + `/login`
 
     return this.httpClient.post(url, loginRequest).pipe() as Observable<AuthResponse>;
   }
 
-  checkLogin(authResponse: AuthResponse) {
+  logout(): Observable<AuthResponse> {
+    
+    let url: string = BASE_URL + `logout`;
 
-    if (authResponse.status === Status[Status.SUCCESS]) {
-
-      console.log("hola")
-
-      this.shopUserService.getOwnUser().pipe(map(
-        response => this.createIDToken(response as ShopUser)
-      ))
-    }
-
-    console.log("adios")
-    return authResponse;
+    return this.httpClient.post(url, null).pipe() as Observable<AuthResponse>
   }
 
-  createIDToken(user: ShopUser): void {
-    
-    console.log("funciona")
-    this.cookieService.set(
-      "IDToken",
-      JSON.stringify(user)
-    )
+  loadUser(): Observable<ShopUser> {
+
+    return this.shopUserService.getOwnUser().pipe(map(
+      response => this.userData = response,
+      (error: String) => {
+        this.userData = undefined;
+        console.log(error);
+      }
+    ))
   }
 
   isUserLoggedIn(): boolean {
 
-    let exist = false;
+    return this.userData !== undefined;
+  }
 
+  getUserData(): ShopUser | null {
 
-    return exist;
+    if (this.isUserLoggedIn()) {
+      return this.userData as ShopUser;
+
+    } else {
+      return null;
+
+    }
   }
 
 }
