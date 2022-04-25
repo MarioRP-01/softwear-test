@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
+//import { CookieService } from 'ngx-cookie-service';
 import { map, Observable } from 'rxjs';
 
 import { Status } from '@app/shared/data-type';
@@ -16,7 +16,7 @@ export class AuthService {
 
   constructor(
     private httpClient: HttpClient,
-    private cookieService: CookieService,
+    //private cookieService: CookieService,
     private shopUserService: ShopUserService
     ) { }
 
@@ -45,10 +45,10 @@ export class AuthService {
   createIDToken(user: ShopUser): void {
     
     console.log("funciona")
-    this.cookieService.set(
-      "IDToken",
-      JSON.stringify(user)
-    )
+    //this.cookieService.set(
+    //  "IDToken",
+    // JSON.stringify(user)
+    //)
   }
 
   isUserLoggedIn(): boolean {
