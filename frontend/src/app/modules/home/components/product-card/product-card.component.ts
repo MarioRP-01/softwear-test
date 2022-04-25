@@ -57,7 +57,6 @@ export class ProductCardComponent implements OnInit {
         let product: Product = this.createObjectProduct(this.product);
 
         this.isPresent = product.containsProduct(transaction.products);
-        console.log(this.isPresent)
       },
       error => {
         this.isPresent = false;

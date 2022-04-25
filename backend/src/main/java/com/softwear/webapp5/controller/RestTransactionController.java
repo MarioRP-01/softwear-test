@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.softwear.webapp5.data.IdDTO;
 import com.softwear.webapp5.data.TransactionPageDTO;
-import com.softwear.webapp5.data.TransactionSpecialType;
 import com.softwear.webapp5.data.TransactionType;
 import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Product;
@@ -162,8 +161,10 @@ public class RestTransactionController {
     }
 
     @GetMapping("/my")
-    public ResponseEntity<TransactionPageDTO> getMyTransactions(HttpServletRequest request, @RequestParam (required = false) String type,
-    @RequestParam (required = false) Integer page) {
+    public ResponseEntity<TransactionPageDTO> getMyTransactions(
+        HttpServletRequest request,
+        @RequestParam (required = false) String type,
+        @RequestParam (required = false) Integer page) {
 
         if (type != null) {
             boolean isValidType = EnumUtils.isValidEnum(TransactionType.class, type.toUpperCase());
@@ -218,7 +219,7 @@ public class RestTransactionController {
     }
 
 
-    @PostMapping(value = "/my", params = {"type"})
+    @PostMapping(value = "/my/products", params = {"type"})
     public ResponseEntity<Product> addProductToOwnTransaction(
         @RequestParam String type,
         @RequestBody IdDTO productId,

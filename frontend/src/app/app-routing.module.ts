@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: 'not-found', component: NotFoundComponent},
   { path: '', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule) },
   { path: 'login', loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule) },
+  { path: 'profile', loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule) },
   { path: 'product-view', loadChildren: () => import('./modules/product/product.module').then(m => m.ProductModule) },
   { path: '**', redirectTo: "not-found"}
 ];

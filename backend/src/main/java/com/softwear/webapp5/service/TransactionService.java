@@ -322,7 +322,6 @@ public class TransactionService {
             transactions = findByUser(userId, pageable);
 
         } else {
-
             transactions = findByTypeAndUser(userId, type.toUpperCase(), pageable);
 
         }
