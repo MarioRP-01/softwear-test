@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ShopUserService } from '@app/core/api';
 import { AuthService } from '@app/core/authentication';
 import { ValidateDataService } from '@app/core/service';
-import { ShopUser, UserEditProfile as UserEditProgileInterface } from '@app/shared/model';
+import { UserChangePassword, UserEditProfile as UserEditProgileInterface } from '@app/shared/model';
 import { UserEditProfile } from '@app/shared/classes';
-import { Observable } from 'rxjs';
-import { UserChangePassword } from '@app/shared/model/user-change-password';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
 
 @Component({
   selector: 'app-account-details',
@@ -15,13 +15,12 @@ import { UserChangePassword } from '@app/shared/model/user-change-password';
 export class AccountDetailsComponent implements OnInit {
 
   public user: UserEditProgileInterface = new UserEditProfile();
-  public changePassword!: UserChangePassword;
-  public repeatedPassword! : string;
 
   constructor(
     private userService: ShopUserService,
     private authService: AuthService,
-    private validateDataService: ValidateDataService
+    private validateDataService: ValidateDataService,
+    private modalService: NgbModal
     ) { }
 
   ngOnInit(): void {
@@ -43,22 +42,16 @@ export class AccountDetailsComponent implements OnInit {
     );
   }
 
-
-
   isValidEditData(): boolean {
 
     let isValid = this.validateDataService.isValidEmail(this.user.email);
     
     if (!isValid) {
       // set error message for wrong email.
-
     }
-
     if (isValid = this.validateDataService.isValidDate(this.user.birthdate)) {
       // set error message for wrong date.
-
     }  
-
     return isValid;
   }
 
@@ -80,25 +73,32 @@ export class AccountDetailsComponent implements OnInit {
     }
     console.log("Data is invalid")
     // Create alert error
-  }
-
-  checkChangePassword(): boolean {
-    let isValidated: boolean = this.validateDataService.matchingPasswords
-      (this.changePassword.oldPassword, this.repeatedPassword)
-
-    if (!isValidated) {
-      // Create alert passwords doesn't match
-
-    }
-
-    return isValidated
-
-  }
-
-  
+  }  
 
   openFormChangePassword() {
 
-  }
+    const modalRef = this.modalService.open(ChangePasswordComponent)
+    modalRef.componentInstance.id = this.authService.getUserId;
 
+    modalRef.result.then(
+      (result) => {
+        let userChangePassword: UserChangePassword = {
+          oldPassword: result.oldPassword,
+          newPassword: result.password1
+        }
+        this.userService.changePassword(userChangePassword).subscribe(
+          response => {
+            console.log(response)
+            // success alert
+          },
+          error => {
+            console.log(error)
+            // error alert
+          })
+      }).catch(
+        (error) => {
+          console.log(error)
+        
+      })
+  }
 }

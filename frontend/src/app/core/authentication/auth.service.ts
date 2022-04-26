@@ -61,4 +61,13 @@ export class AuthService {
     }
   }
 
+  getUserId(): number {
+    if (this.isUserLoggedIn()) {
+
+      let user = this.userData as ShopUser
+      return user.id;
+    }
+  
+    return 0
+  }
 }
