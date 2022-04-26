@@ -197,7 +197,7 @@ Project compilation:
 	-In the IDE, execute
 		>cd backend
 		>mvn spring-boot:run
-	then go to the browser and access https://localhost:8443/
+	then go to the browser and access https://localhost:8080/
 	-To stop the proccess, press Ctr+C, enter and "S".
 	
 ## Heroku

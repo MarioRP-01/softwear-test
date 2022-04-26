@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
@@ -8,6 +7,7 @@ import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-hist
 import { ProfilePictureComponent } from './components/profile-picture/profile-picture.component';
 import { AccountDetailsComponent } from './components/account-details/account-details.component';
 import { TransactionCardComponent } from './components/transaction-card/transaction-card.component';
+import { SharedModule } from '@app/shared/shared.module';
 
 
 @NgModule({
@@ -20,8 +20,8 @@ import { TransactionCardComponent } from './components/transaction-card/transact
     TransactionCardComponent
   ],
   imports: [
-    CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    SharedModule
   ]
 })
 export class UserModule { }

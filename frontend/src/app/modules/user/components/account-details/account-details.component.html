@@ -1,1 +1,67 @@
-<p>account-details works!</p>
+<div class="card mb-4" >
+
+    <div class="card-header">Account Details</div>
+
+    <div class="card-body" id="formBox">
+
+        <form action="/userProfile" method="post">
+            
+            <!-- <input type="hidden" name="_csrf" value="{{token}}"> -->
+
+            <!-- Form Row-->
+            <div class="row gx-3 mb-3">
+
+                <!-- Form Group (first name)-->
+                <div class="col-md-6">
+                    <label class="small mb-1" for="inputFirstName">First name</label>
+                    <input class="form-control" name="name" type="text" placeholder="Enter your first name" [(ngModel)]="user.name" id="inputFirstName">
+                </div>
+
+                <!-- Form Group (last name)-->
+                <div class="col-md-6">
+                    <label class="small mb-1" for="inputLastName">Last name</label>
+                    <input class="form-control" name="lastName" type="text" placeholder="Enter your last name" [(ngModel)]="user.lastName" id="inputLastName">
+                </div>
+            </div>
+
+            <!-- Form Row -->
+            <div class="row gx-3 mb-3">
+                
+                <!-- Form Group (Address)-->
+                <div class="col-md-6">
+                    <label class="small mb-1" for="inputAddress">Address</label>
+                    <input class="form-control" name="address" type="text" placeholder="Enter your address" [(ngModel)]="user.address" id="inputAddress">
+                </div>
+
+            </div>
+
+            <!-- Form Group (email address)-->
+            <div class="mb-3">
+                <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                <input class="form-control" name="email" type="email" placeholder="Enter your email address" [(ngModel)]="user.email"  id="inputEmailAddress">
+            </div>
+
+            <!-- Form Row-->
+            <div class="row gx-3 mb-3">
+
+                <!-- Form Group (phone number)-->
+                <div class="col-md-6">
+                    <label class="small mb-1" for="inputPhone">Phone number</label>
+                    <input class="form-control" name="mobileNumber" type="text" placeholder="Enter your phone number" [(ngModel)]="user.mobileNumber" id="inputPhone">
+                </div>
+
+                <!-- Form Group (birthday)-->
+                <div class="col-md-6">
+                    <label class="small mb-1" for="inputBirthdate">Birthdate</label>
+                    <input class="form-control" name="birthdate" type="text" placeholder="Enter your birthdate" [(ngModel)]="user.birthdate" id="inputBirthdate">
+                </div>
+
+            </div>
+
+            <!-- Save changes button-->
+            <button class="btn btn-outline-dark" type="button" (click)="editProfile()">Save Changes</button>            
+            <button class="btn btn-outline-dark" type="button" (click)="openFormChangePassword()">Change Password</button>
+            
+        </form>
+    </div>
+</div>
