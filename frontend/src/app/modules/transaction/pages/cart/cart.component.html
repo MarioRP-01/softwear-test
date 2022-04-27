@@ -1,1 +1,29 @@
-<p>cart works!</p>
+<div class="card mb-4 shadow-sm" style="border: 1px solid rgba(114, 114, 114, 0.26); margin: 30px; border-radius: 5px;">
+
+    <div class="card-header">
+        <div class="row">
+            <div class="col-11"><h2 class="softFont">Cart</h2></div>
+            <div class="col-1">
+                <button class="btn btn-outline-dark bi bi-trash" (click)="emptyCart()" type="button"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <table class="table">
+
+            <app-product-row
+                *ngFor="let product of products"
+                    [product]="product">
+            </app-product-row>
+
+        </table>
+
+        <div style="display: flex; justify-content: center; align-items: center; gap: 2rem;">
+            <a class="btn btn-outline-dark checkout-btn fa-brands fa-paypal" href="/cart/pay"></a>
+            <a class="btn btn-outline-dark checkout-btn fa-brands fa-cc-amazon-pay" href="/cart/pay"></a>
+            <a class="btn btn-outline-dark checkout-btn fa-solid fa-credit-card" href="/cart/pay"></a>
+        </div>
+    </div>
+</div>
+

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ProductInTransaction } from '@app/shared/model/product-in-transaction';
 
 @Component({
   selector: 'app-product-row',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-row.component.css']
 })
 export class ProductRowComponent implements OnInit {
+
+  @Input()
+  product!: ProductInTransaction;
 
   constructor() { }
 

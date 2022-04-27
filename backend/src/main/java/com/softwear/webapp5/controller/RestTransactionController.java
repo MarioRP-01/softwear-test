@@ -361,7 +361,39 @@ public class RestTransactionController {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/my/products/{productId}")
+    @DeleteMapping(value="/my/products", params={"type"})
+    public ResponseEntity<Transaction> deleteAllProductsFromOwnTransaction(
+        @RequestParam String type,
+        HttpServletRequest request) {
+
+        String username = request.getUserPrincipal().getName();
+        ShopUser user = userService.findByUsername(username).get();
+
+        Transaction transaction;
+
+        if (type.equals("wishlist")) {
+            transaction = transactionService.findWishlist(user).get();
+            
+
+        } else if (type.equals("cart")) {
+            transaction = transactionService.findCart(user).get();
+
+        } else {
+
+            return ResponseEntity.badRequest().build();
+        }
+        
+        transaction.getProducts().clear();
+        transactionService.save(transaction);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
+
+        return ResponseEntity.created(location).body(transaction);
+    }
+
+        
+
+    @DeleteMapping(value="/my/products/{productId}", params={"type"})
     public ResponseEntity<Product> deleteProductFromOwnTransaction(
         @PathVariable Long productId,
         @RequestParam String type,
