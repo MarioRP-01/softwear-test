@@ -4,7 +4,7 @@ import { map, Observable, shareReplay } from 'rxjs';
 import { ProductService, TransactionService } from '@app/core/api'
 
 import { Transaction, PageableProduct, Product } from '@app/shared/model';
-import { ProductFilter, TransactionType } from '@app/shared/data-type';
+import { ProductFilter, TransactionSpecialType, TransactionType } from '@app/shared/data-type';
 import { AuthService } from '@app/core/authentication';
 
 @Component({
@@ -66,7 +66,7 @@ export class HomeUsComponent implements OnInit {
 
   refreshWishlist(): void {
 
-    this.$wishlist = this.transactionService.getMyTransactionByType(TransactionType.WISHLIST).pipe(shareReplay());
+    this.$wishlist = this.transactionService.getMySpecialTransactionByType(TransactionSpecialType.WISHLIST).pipe(shareReplay());
   }
 
   loadNextPage(): void {

@@ -4,6 +4,7 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { ProductService, ShopUserService, TransactionService } from './api';
 import { AuthGuard, AuthService } from './authentication';
 import { NavigationService, ValidateDataService } from './service'
+import { PasswordValidator } from './validator';
 
 @NgModule({
   providers: [
@@ -13,7 +14,8 @@ import { NavigationService, ValidateDataService } from './service'
     AuthGuard,
     AuthService,
     NavigationService,
-    ValidateDataService
+    ValidateDataService,
+    PasswordValidator
   ],
 })
 export class CoreModule { 

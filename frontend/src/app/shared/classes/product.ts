@@ -6,7 +6,7 @@ export class Product implements ProductInterface{
         public id: number,
         public name: string,
         public description: string,
-        public price: string,
+        public price: number,
         public size: string,
         public images: string[]
 

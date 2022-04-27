@@ -16,9 +16,17 @@ export class TransactionService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getMyTransactionByType(transactionType: TransactionType): Observable<Transaction> {
+  getMyTransactionsByType(transactionType: TransactionType, page: number): Observable<PageableTransaction> {
 
     let type: string = TransactionType[transactionType].toLowerCase();
+    let url: string = BASE_URL + `/my?type=${type}&page=${page}`;
+
+    return this.httpClient.get(url).pipe() as Observable<PageableTransaction>;
+  }
+
+  getMySpecialTransactionByType(transactionType: TransactionSpecialType): Observable<Transaction> {
+
+    let type: string = TransactionSpecialType[transactionType].toLowerCase();
     let url: string = BASE_URL + `/my?type=${type}`;
 
     return this.httpClient.get(url).pipe(
@@ -47,6 +55,15 @@ export class TransactionService {
     let url: string = BASE_URL + `/my/products/${productId}?type=${transactionType}`;
     return this.httpClient.delete(url).pipe() as Observable<Product>;
   }
+
+  deleteAllProductsFromMyTransaction(type: TransactionSpecialType): Observable<Transaction> {
+
+    let transactionType: string = TransactionSpecialType[type].toLowerCase();
+
+    let url: string = BASE_URL + `/my/products?type=${transactionType}`
+    return this.httpClient.delete(url).pipe() as Observable<Transaction>
+  }
+
 }
 
 

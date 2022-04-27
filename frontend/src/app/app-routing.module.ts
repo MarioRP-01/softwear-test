@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'profile', loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule) },
   { path: 'product-view', loadChildren: () => import('./modules/product/product.module').then(m => m.ProductModule) },
   { path: 'admin', loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule) },
+  { path: 'transaction', loadChildren: () => import('./modules/transaction/transaction.module').then(m => m.TransactionModule) },
   { path: '**', redirectTo: "not-found"}
 ];
 

@@ -8,6 +8,7 @@ import { ProfilePictureComponent } from './components/profile-picture/profile-pi
 import { AccountDetailsComponent } from './components/account-details/account-details.component';
 import { TransactionCardComponent } from './components/transaction-card/transaction-card.component';
 import { SharedModule } from '@app/shared/shared.module';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { SharedModule } from '@app/shared/shared.module';
     PurchaseHistoryComponent,
     ProfilePictureComponent,
     AccountDetailsComponent,
-    TransactionCardComponent
+    TransactionCardComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     UserRoutingModule,

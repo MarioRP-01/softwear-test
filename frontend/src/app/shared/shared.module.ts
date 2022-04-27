@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -21,6 +22,8 @@ import { NotFoundComponent } from './layout-error/not-found/not-found.component'
   exports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
+    FontAwesomeModule,
 
     NgbModule,
 
