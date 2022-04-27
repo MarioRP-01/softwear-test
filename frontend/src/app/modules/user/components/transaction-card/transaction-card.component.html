@@ -12,14 +12,14 @@
         <table class="table">
             <tbody class="cart">          
 
-            <tr *ngFor="let product of transaction.products; let i = index">
+            <tr *ngFor="let product of products; let i = index">
                 <td>{{i}}</td>
                 <td style="padding: 0;">
                     <!--  -->
                     <a class="btn border-0" href="/productView/{{product.id}}">{{product.name}} ({{product.size}})</a>
                 </td>
-                <td>{{quantity}} x ${{product.price}}</td>
-                <td class="text-right">${{totalPrice}}</td>
+                <td>{{product.quantity}} x ${{product.price}}</td>
+                <td class="text-right">${{product.price*product.quantity}}</td>
             </tr>
 
             </tbody>
