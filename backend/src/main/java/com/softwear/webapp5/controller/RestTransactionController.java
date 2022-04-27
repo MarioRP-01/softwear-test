@@ -2,6 +2,7 @@ package com.softwear.webapp5.controller;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -219,9 +220,10 @@ public class RestTransactionController {
     }
 
 
-    @PostMapping(value = "/my/products", params = {"type"})
+    @PostMapping(value = "/my/products", params = {"type", "amount"})
     public ResponseEntity<Product> addProductToOwnTransaction(
         @RequestParam String type,
+        @RequestParam Integer amount,
         @RequestBody IdDTO productId,
         HttpServletRequest request) {
             
@@ -244,7 +246,16 @@ public class RestTransactionController {
                 return ResponseEntity.badRequest().build();
 
             }
-            transaction.getProducts().add(productOptional.get());
+
+            if (0 < amount && amount < productOptional.get().getStock()) {
+
+                for (int i = 0; i < amount; i++) {
+
+                    transaction.getProducts().add(productOptional.get());
+                }
+
+            } else return ResponseEntity.badRequest().build();
+
             transactionService.save(transaction);
 
             URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
@@ -256,7 +267,9 @@ public class RestTransactionController {
     }
 
     @PostMapping("/{transactionId}/products")
-    public ResponseEntity<Transaction> addProductToTransaction(@PathVariable Long transactionId, @RequestBody IdDTO productId) {
+    public ResponseEntity<Transaction> addProductToTransaction(
+        @PathVariable Long transactionId,
+        @RequestBody IdDTO productId) {
 
         Optional<Transaction> transactionOptional = transactionService.findById(transactionId);
         Optional<Product> productOptional = productService.findById(productId.getId());
@@ -397,6 +410,7 @@ public class RestTransactionController {
     public ResponseEntity<Product> deleteProductFromOwnTransaction(
         @PathVariable Long productId,
         @RequestParam String type,
+        @RequestParam(required = false) Integer amount,
         HttpServletRequest request) {
         
         String username = request.getUserPrincipal().getName();
@@ -418,15 +432,35 @@ public class RestTransactionController {
                 return ResponseEntity.badRequest().build();
 
             }
-            if(transaction.getProducts().contains(productOptional.get()))
-                transaction.getProducts().remove(productOptional.get());
+
+            if (transaction.getProducts().contains(productOptional.get())) {
+
+                if (amount == null) {
+                    transaction.getProducts().removeAll(Collections.singletonList(productOptional.get()));
+
+                } else if (amount > 0){
+
+                    int count = 0;
+                    do {
+                        transaction.getProducts().remove(productOptional.get());                        
+                        count++;
+
+                    } while (transaction.getProducts().contains(productOptional.get()) && count < amount);
+
+                } else {
+                    return ResponseEntity.badRequest().build();
+                    
+                }
+
+            } else ResponseEntity.notFound().build();
+
             transactionService.save(transaction);
 
             URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
 
             return ResponseEntity.created(location).body(productOptional.get());
-        }
 
+        }
         return ResponseEntity.notFound().build();
     }
 

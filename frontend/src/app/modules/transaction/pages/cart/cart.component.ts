@@ -3,6 +3,8 @@ import { TransactionService } from '@app/core/api';
 import { TransactionSpecialType } from '@app/shared/data-type';
 import { Transaction } from '@app/shared/model';
 import { ProductInTransaction } from '@app/shared/model/product-in-transaction';
+import { faCcAmazonPay, faPaypal } from '@fortawesome/free-brands-svg-icons'; 
+import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-cart',
@@ -19,6 +21,10 @@ export class CartComponent implements OnInit {
   public totalPrice: number = 0;
   public totalAmount: number = 0;
 
+  faCcAmazonPay = faCcAmazonPay;
+  faPaypal = faPaypal;
+  faCreditCard = faCreditCard
+
   constructor(
     private transactionService: TransactionService
   ) { }
@@ -26,7 +32,7 @@ export class CartComponent implements OnInit {
   
 
   ngOnInit(): void {
-
+    this.refreshTransactions();
     
   }
 
@@ -105,9 +111,8 @@ export class CartComponent implements OnInit {
   emptyCart(): void {
 
     this.transactionService.deleteAllProductsFromMyTransaction(this.cartType).subscribe(
-      response => console.log("works!")
+      response => this.products = []
     );
   }
-
 }
 
