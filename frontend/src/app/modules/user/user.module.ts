@@ -19,7 +19,7 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
     ProfilePictureComponent,
     AccountDetailsComponent,
     TransactionCardComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
   ],
   imports: [
     UserRoutingModule,
