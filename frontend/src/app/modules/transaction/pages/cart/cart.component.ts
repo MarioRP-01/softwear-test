@@ -114,5 +114,35 @@ export class CartComponent implements OnInit {
       response => this.products = []
     );
   }
+
+  addProduct(index: number) {
+    this.products[index].quantity++
+    this.transactionService.addProductByAmountToMyTransaction(this.products[index].id, this.cartType, 1).subscribe(
+      error => {
+        console.log(error);
+      }
+    )
+  }
+  
+  deleteProduct(index: number) {
+  
+    this.products[index].quantity--
+    this.transactionService.deleteProductByAmountFromMyTransaction(this.products[index].id, this.cartType, 1).subscribe(
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  
+  deleteAllOfProduct(index: number) {
+  
+    this.products[index].quantity = 0;
+    this.transactionService.deleteProductFromMyTransaction(this.products[index].id, this.cartType).subscribe(
+      error => {
+        console.log(error);
+      }
+    )
+  }
 }
+
 

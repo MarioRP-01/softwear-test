@@ -12,13 +12,37 @@
     <div class="card-body">
         <table class="table">
             <tbody class="cart">
-                    
-                <app-product-row  
-                    *ngFor="let product of products; let i = index"                 
-                        [product]="product"
-                        [index]="i">   
-                </app-product-row>
-            
+                
+                <ng-template ngFor let-i="index" let-product [ngForOf]="products">
+                    <tr *ngIf="product.quantity > 0" id="product_{{product.id}}" class="product-row">
+                        <td class="cart-text product-index">{{i + 1}}</td>
+
+                        <td><a href="/productView/{{product.id}}" class="btn border-0">{{product.name}} ({{product.size}})</a></td>
+
+                        <td class="cart-text product-unit-price">${{product.price}}</td>
+
+
+                        <td class="text-center" style="width: 60px;">
+                            <button class="btn btn-block btn-sm btn-outline-dark fw-bold" (click)="addProduct(i)" type="button">+</button>
+                        </td>
+
+                        <td class="cart-text text-center product-quantity">{{product.quantity}}</td>
+
+                        <td class="text-center" style="width: 60px;">
+                            <button class="btn btn-block btn-sm btn-outline-dark fw-bold" (click)="deleteProduct(i)" type="button">-</button>
+                        </td>
+
+                        <td class="cart-text text-right product-total-price">${{product.quantity*product.price}}</td>
+
+                        <td class="text-right">
+                            <button class="btn btn-outline-dark fw-bold" (click)="deleteAllOfProduct(i)" type="button">Delete</button>
+                        </td>
+
+                        <td></td>
+                        <td></td>
+                        
+                    </tr>
+                </ng-template>
             </tbody>
             
             <tfoot>
