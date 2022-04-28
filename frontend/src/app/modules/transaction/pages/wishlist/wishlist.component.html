@@ -1,1 +1,32 @@
-<p>wishlist works!</p>
+<div class="card mb-4 shadow-sm" style="border: 1px solid rgba(114, 114, 114, 0.26); margin: 30px; border-radius: 5px;">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-11"><h2 class="softFont">Wish List</h2></div>
+            <div class="col-1 mr-2">
+                <button class="btn btn-outline-dark bi bi-trash" (click)="emptyWishlist()" type="button"></button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <tbody class="cart">
+            
+                <ng-template ngFor let-i="index" let-product [ngForOf]="products">
+
+                
+                    <tr *ngIf="product.quantity > 0" id="product_{{product.id}}" class="product-row">
+                        <td class="cart-text product-index">#{{i + 1}}</td>
+                        
+                        <td>
+                            <a class="btn border-0" href="/productView/{{product.id}}">{{product.name}}</a>
+                        </td>
+                        <td class="cart-text text-right product-price">${{product.price}}</td>
+                        <td><button class="btn btn-outline-dark text-uppercase fw-bold" (click)="addToCart(i)" type="button">addToCart</button></td>
+                        <td><button class="btn btn-outline-dark text-uppercase fw-bold" (click)="deleteFromWishlist(i)" type="button">Remove</button></td>
+                        
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
+</div>

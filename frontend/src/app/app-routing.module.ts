@@ -1,20 +1,25 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { NotFoundComponent } from '@app/shared/layout-error/not-found/not-found.component';
 
 const routes: Routes = [
   { path: 'not-found', component: NotFoundComponent},
-  { path: '', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule) },
+  { path: 'home', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule) },
   { path: 'login', loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule) },
   { path: 'profile', loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule) },
   { path: 'product-view', loadChildren: () => import('./modules/product/product.module').then(m => m.ProductModule) },
   { path: 'transaction', loadChildren: () => import('./modules/transaction/transaction.module').then(m => m.TransactionModule) },
   { path: 'admin', loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule) },
+  { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: '**', redirectTo: "not-found"}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(
+    routes,
+    {
+      preloadingStrategy: PreloadAllModules
+    })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

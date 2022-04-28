@@ -1,7 +1,7 @@
 <div class="card mb-4 shadow-sm" style="border: 1px solid rgba(114, 114, 114, 0.26); margin: 30px; border-radius: 5px;">
 
     <div class="card-header">
-        <div class="row">
+        <div class="row pt-2">
             <div class="col-11"><h2 class="softFont">Cart</h2></div>
             <div class="col-1">
                 <button class="btn btn-outline-dark bi bi-trash" (click)="emptyCart()" type="button"></button>
@@ -11,18 +11,83 @@
 
     <div class="card-body">
         <table class="table">
+            <tbody class="cart">
+                
+                <ng-template ngFor let-i="index" let-product [ngForOf]="products">
+                    <tr *ngIf="product.quantity > 0" id="product_{{product.id}}" class="product-row">
+                        <td class="cart-text product-index">{{i + 1}}</td>
 
-            <app-product-row
-                *ngFor="let product of products"
-                    [product]="product">
-            </app-product-row>
+                        <td><a href="/productView/{{product.id}}" class="btn border-0">{{product.name}} ({{product.size}})</a></td>
 
+                        <td class="cart-text product-unit-price">${{product.price}}</td>
+
+
+                        <td class="text-center" style="width: 60px;">
+                            <button class="btn btn-block btn-sm btn-outline-dark fw-bold" (click)="addProduct(i)" type="button">+</button>
+                        </td>
+
+                        <td class="cart-text text-center product-quantity">{{product.quantity}}</td>
+
+                        <td class="text-center" style="width: 60px;">
+                            <button class="btn btn-block btn-sm btn-outline-dark fw-bold" (click)="deleteProduct(i)" type="button">-</button>
+                        </td>
+
+                        <td class="cart-text text-right product-total-price">${{product.quantity*product.price}}</td>
+
+                        <td class="text-right">
+                            <button class="btn btn-outline-dark fw-bold" (click)="deleteAllOfProduct(i)" type="button">Delete</button>
+                        </td>
+
+                        <td></td>
+                        <td></td>
+                        
+                    </tr>
+                </ng-template>
+            </tbody>
+            
+            <tfoot>
+                <tr id="apply-coupon">
+                    <td></td>
+                    <td class="cart-text">Total</td>
+                    <td></td>
+                    <td></td>
+                    <td class="cart-text text-center cart-items-number">{{totalAmount}}</td>
+                    <td></td>
+                    <td class="cart-text text-right"><strong class="total cart-total-price">${{totalPrice}}</strong></td>
+                    <td class="cart-text text-center">Discount code:</td>
+                    <td id="coupon-code"><input type="text" class="form-control form-control-sm" placeholder="Enter your discount code..." name="code"/></td>
+                    <td><button type="button" class="btn btn-outline-dark" onclick="applyCoupon()">Apply</button></td>
+                </tr>
+
+                <tr id="valid-coupon">
+                    <td></td>
+                    <td class="cart-text">Total</td>
+                    <td></td>
+                    <td></td>
+                    <td class="cart-text text-center cart-items-number">{{totalAmount}}</td>
+                    <td></td>
+                    <td class="text-right"><strong class="total cart-total-price">${{totalPrice}}</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+            
         </table>
 
         <div style="display: flex; justify-content: center; align-items: center; gap: 2rem;">
-            <a class="btn btn-outline-dark checkout-btn fa-brands fa-paypal" href="/cart/pay"></a>
-            <a class="btn btn-outline-dark checkout-btn fa-brands fa-cc-amazon-pay" href="/cart/pay"></a>
-            <a class="btn btn-outline-dark checkout-btn fa-solid fa-credit-card" href="/cart/pay"></a>
+            
+            <a class="btn btn-outline-dark checkout-btn" (click)="processCart()">
+                <fa-icon [icon]="faPaypal" class="fa-2x"></fa-icon>
+            </a>
+            
+            <a class="btn btn-outline-dark checkout-btn" (click)="processCart()">
+                <fa-icon [icon]="faCcAmazonPay" class="fa-2x"></fa-icon>
+            </a>
+            
+            <a class="btn btn-outline-dark checkout-btn" (click)="processCart()">
+                <fa-icon [icon]="faCreditCard" class="fa-2x"></fa-icon>
+            </a>
         </div>
     </div>
 </div>

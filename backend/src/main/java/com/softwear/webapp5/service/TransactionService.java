@@ -228,6 +228,23 @@ public class TransactionService {
         return new Transaction("WISHLIST", user, null, getCurrentDate(), new ArrayList<>());
     }
 
+    public Transaction processTransaction(Transaction transaction, ShopUser user) {       
+
+        if (!transaction.getProducts().isEmpty()) {
+
+            ArrayList<Product> products =  new ArrayList<>();
+
+            products.addAll(transaction.getProducts());
+            Transaction processedTransaction = new Transaction("PROCESSED", user, null, getCurrentDate(), products);
+
+            transaction.getProducts().clear();
+
+            return processedTransaction;
+        }
+        
+        return null;
+    }
+
     public boolean addToWishlist(Long productId, ShopUser user) {
         Optional<Product> optionalProduct = productRepository.findById(productId);
         if (optionalProduct.isPresent()){

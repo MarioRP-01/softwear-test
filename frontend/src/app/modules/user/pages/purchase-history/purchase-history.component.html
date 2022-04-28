@@ -1,27 +1,17 @@
-<div id="purchases-container" class="container">
+<hr class="mt-0 mb-4">
 
-    <!-- Account page navigation-->
-    <nav class="nav nav-borders">
-        <a class="nav-link ms-0" [routerLinkActive]="['/profile']">Profile</a>
-        <a class="nav-link active ms-0" [routerLinkActive]="['/purchase-history']">Orders</a>
-    </nav>
+<app-transaction-card
+    *ngFor="let transaction of transactions"
+        [transaction]="transaction">
+</app-transaction-card>
 
-    <hr class="mt-0 mb-4">
-
-    <app-transaction-card
-        *ngFor="let transaction of transactions"
-            [transaction]="transaction">
-    </app-transaction-card>
-
-    <div *ngIf="totalPages > nextPage" class="row p-2">
-        <a id="more-btn" 
-            class="btn btn-outline-dark m-auto w-75 text-center fw-bold text-uppercase" 
-            (click)="loadNextPage()">
-            
-            More
-        </a>
-    </div>
-    
+<div *ngIf="totalPages > nextPage" class="row p-2">
+    <a id="more-btn" 
+        class="btn btn-outline-dark m-auto w-75 text-center fw-bold text-uppercase" 
+        (click)="loadNextPage()">
+        
+        More
+    </a>
 </div>
 
 

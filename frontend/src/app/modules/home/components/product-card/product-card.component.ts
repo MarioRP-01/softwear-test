@@ -68,7 +68,7 @@ export class ProductCardComponent implements OnInit {
   addToWishlist() {
 
     this.isPresent = true;
-    this.transactionService.addProductToMyTransaction(this.product.id, TransactionSpecialType.WISHLIST).subscribe(
+    this.transactionService.addProductByAmountToMyTransaction(this.product.id, TransactionSpecialType.WISHLIST, 1).subscribe(
       error => {
         console.log(error);
       }
@@ -79,7 +79,7 @@ export class ProductCardComponent implements OnInit {
 
     this.isPresent = false;
 
-    this.transactionService.deleteProductFromMyTransaction(this.product.id, TransactionSpecialType.WISHLIST).subscribe(
+    this.transactionService.deleteProductByAmountFromMyTransaction(this.product.id, TransactionSpecialType.WISHLIST, 1).subscribe(
       error => {
         console.log(error);
       }
