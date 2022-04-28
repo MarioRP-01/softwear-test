@@ -16,6 +16,7 @@ export class SignInComponent implements OnInit {
   username!: string;
   password!: string;
   error: number = 0;
+  isEmpty : boolean = false;
 
   constructor(private authService: AuthService, private navigationService: NavigationService,
       private router: Router) { }
@@ -27,8 +28,13 @@ export class SignInComponent implements OnInit {
 
     let isEmpty: boolean = (!this.username || !this.password);
     if (isEmpty) {
-      
+      this.isEmpty = true;
+      //window.alert("Hay uno o más campos vacíos. Rellénelos antes de continuar");
       // add warning about empty
+      
+    }
+    else{
+      this.isEmpty = false;
     }
   
     return isEmpty;
@@ -82,5 +88,11 @@ export class SignInComponent implements OnInit {
 
     }
   }
+
+}
+
+
+
+export class NgbdAlertBasic {
 }
 
