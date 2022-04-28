@@ -15,7 +15,7 @@
         </div>
 
         <!-- Product image-->
-        <a href="/productView/{{product.id}}">
+        <a [routerLink]="['/product', product.id]">
             <img class="card-img-top" [src]="product.images?.[0]" alt="Product-{{product.id}}" />
         </a>
         

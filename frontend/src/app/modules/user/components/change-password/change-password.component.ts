@@ -22,11 +22,11 @@ export class ChangePasswordComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder
     ) { 
-      this.createForm();
+      
     }
 
   ngOnInit(): void {
-
+    this.createForm();
   }
 
   createForm() {

@@ -17,6 +17,13 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
+  getProductById(id: number) {
+
+    let url: string =  BASE_URL + `/${id}`;
+    
+    return this.httpClient.get(url).pipe() as Observable<Product>
+  }
+
   getProductByNameAndSize(name: string, productSize: ProductSize): Observable<Product> {
 
     let size: string = ProductSize[productSize];
@@ -32,6 +39,8 @@ export class ProductService {
 
     return this.httpClient.get(url).pipe() as Observable<PageableProduct>;
   }
+
+  //getProductSizeAvailability
 
   // getAllProducts
 }

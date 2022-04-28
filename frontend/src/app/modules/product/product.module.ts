@@ -1,20 +1,22 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { ProductRoutingModule } from './product-routing.module';
 import { ProductComponent } from './product.component';
-import { ProductSizeComponent } from './components/product-size/product-size/product-size.component';
-import { ProductCarouselComponent } from './components/product-carousel/product-carousel/product-carousel.component';
+import { ProductSizeComponent } from './components/product-size/product-size.component';
+import { ProductCarouselComponent } from './components/product-carousel/product-carousel.component';
+import { SharedModule } from '@app/shared/shared.module';
+import { ProductViewComponent } from './pages/product-view/product-view.component';
 
 
 @NgModule({
   declarations: [
     ProductComponent,
+    ProductViewComponent,
     ProductCarouselComponent,
     ProductSizeComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     ProductRoutingModule
   ]
 })

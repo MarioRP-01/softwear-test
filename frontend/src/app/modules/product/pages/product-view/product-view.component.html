@@ -1,1 +1,11 @@
-<p>product-view works!</p>
+<div id="product-content-wrapper">
+    <app-product-carousel
+        [product]="product"
+    ></app-product-carousel>
+
+    <app-product-size
+        [product]="product"
+        [user]="user"
+        [wishlist]="wishlist"
+    ></app-product-size>
+</div>
