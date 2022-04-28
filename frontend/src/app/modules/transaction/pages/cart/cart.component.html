@@ -77,15 +77,15 @@
 
         <div style="display: flex; justify-content: center; align-items: center; gap: 2rem;">
             
-            <a class="btn btn-outline-dark checkout-btn" href="/cart/pay">
+            <a class="btn btn-outline-dark checkout-btn" (click)="processCart()">
                 <fa-icon [icon]="faPaypal" class="fa-2x"></fa-icon>
             </a>
             
-            <a class="btn btn-outline-dark checkout-btn" href="/cart/pay">
+            <a class="btn btn-outline-dark checkout-btn" (click)="processCart()">
                 <fa-icon [icon]="faCcAmazonPay" class="fa-2x"></fa-icon>
             </a>
             
-            <a class="btn btn-outline-dark checkout-btn" href="/cart/pay">
+            <a class="btn btn-outline-dark checkout-btn" (click)="processCart()">
                 <fa-icon [icon]="faCreditCard" class="fa-2x"></fa-icon>
             </a>
         </div>

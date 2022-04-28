@@ -48,6 +48,12 @@ export class TransactionService {
     return this.httpClient.post(url, productId).pipe() as Observable<Product>;
   }
 
+  processCart() {
+
+    let url: string = BASE_URL + `/my`;
+    return this.httpClient.post(url, null).pipe() as Observable<Transaction>;
+  }
+
   deleteProductByAmountFromMyTransaction(productId: number, type: TransactionSpecialType, amount: number): Observable<Product> {
 
     let transactionType: string = TransactionSpecialType[type].toLowerCase();
@@ -68,10 +74,9 @@ export class TransactionService {
 
     let transactionType: string = TransactionSpecialType[type].toLowerCase();
 
-    let url: string = BASE_URL + `/my/products?type=${transactionType}`
-    return this.httpClient.delete(url).pipe() as Observable<Transaction>
+    let url: string = BASE_URL + `/my/products?type=${transactionType}`;
+    return this.httpClient.delete(url).pipe() as Observable<Transaction>;
   }
-
 }
 
 

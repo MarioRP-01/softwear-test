@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TransactionService } from '@app/core/api';
 import { TransactionSpecialType } from '@app/shared/data-type';
 import { Transaction } from '@app/shared/model';
@@ -26,7 +27,8 @@ export class CartComponent implements OnInit {
   faCreditCard = faCreditCard
 
   constructor(
-    private transactionService: TransactionService
+    private transactionService: TransactionService,
+    private router: Router
   ) { }
 
   
@@ -141,6 +143,18 @@ export class CartComponent implements OnInit {
       error => {
         console.log(error);
       }
+    )
+  }
+
+  processCart() {
+
+
+    this.transactionService.processCart().subscribe(
+      response => {
+        console.log("works!")
+        this.router.navigate(['']);
+      },
+      error => console.log(error)
     )
   }
 }

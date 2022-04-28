@@ -219,6 +219,26 @@ public class RestTransactionController {
         return ResponseEntity.created(location).body(newTransaction);
     }
 
+    @PostMapping("/my")
+    public ResponseEntity<Transaction> purchaseTransaction(HttpServletRequest request) {
+
+        String username = request.getUserPrincipal().getName();
+        ShopUser user = userService.findByUsername(username).get();
+
+        Transaction cart = transactionService.findCart(user).get();
+
+        Transaction processedTransaction = transactionService.processTransaction(cart, user);
+
+        if (processedTransaction == null) {
+            ResponseEntity.notFound().build();
+        }
+
+        transactionService.save(cart);
+        transactionService.save(processedTransaction);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(processedTransaction.getId()).toUri();
+        return ResponseEntity.created(location).body(processedTransaction);
+    }
 
     @PostMapping(value = "/my/products", params = {"type", "amount"})
     public ResponseEntity<Product> addProductToOwnTransaction(
