@@ -24,7 +24,7 @@
                             <input type="password" class="form-control" placeholder="Password" name="password"
                                     id="signInPassword" name="signInPassword" [(ngModel)]="password" required>
 
-                            <label for="signInPassword">Password</label>
+                            <label for="signInPassword">Password</label>  
                         </div>
 
                         <!-- Send Form -->
@@ -32,6 +32,11 @@
                             <button class="btn btn-outline-dark btn-login text-uppercase fw-bold"
                                     type="submit" (click)="signIn()">Sign in
                             </button>
+                            <p *ngIf="isEmpty == true">
+                                <ngb-alert [dismissible]="false">
+                                  <strong>¡Campos vacíos!</strong> Rellénelos antes de continuar.
+                                </ngb-alert>
+                              </p>
                         </div>
 
                         <input type="hidden" name="_csrf" value="token"/>

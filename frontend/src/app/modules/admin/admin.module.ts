@@ -6,7 +6,7 @@ import { AdminComponent } from './admin.component';
 import { AdminHomeComponent } from './pages/admin-home/admin-home/admin-home.component';
 import { ManageProductsComponent } from './pages/manage-products/manage-products/manage-products.component';
 import { ManageUsersComponent } from './pages/manage-users/manage-users/manage-users.component';
-import { ModalComponent } from './components/modal/modal/modal.component';
+import { FillingTableComponent } from './components/filling-table/filling-table.component';
 
 
 @NgModule({
@@ -15,7 +15,7 @@ import { ModalComponent } from './components/modal/modal/modal.component';
     AdminHomeComponent,
     ManageProductsComponent,
     ManageUsersComponent,
-    ModalComponent
+    FillingTableComponent
   ],
   imports: [
     CommonModule,

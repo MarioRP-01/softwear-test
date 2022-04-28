@@ -32,6 +32,7 @@
                     <div class="product-stock col-6 rounded p-1 text-center text-white fs-4 bg-danger softFont">Out of Stock</div>
                 {{/inStock}}
             </div>
+
             <div class="pick-size row">
                 {{#availableSizesStatus}}
                     {{#this.availableSize}}
@@ -43,7 +44,9 @@
                     {{/this.availableSize}}
                 {{/availableSizesStatus}}
             </div>
+
             <div class="row"><p class="product-description">{{product.description}}</p></div>
+            
             {{#logged}}
             <form id="cart-form" method="post" action="/cart">
                 <div class="row">
