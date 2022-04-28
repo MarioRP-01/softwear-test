@@ -151,7 +151,6 @@ export class CartComponent implements OnInit {
 
     this.transactionService.processCart().subscribe(
       response => {
-        console.log("works!")
         this.router.navigate(['']);
       },
       error => console.log(error)
