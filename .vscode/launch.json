@@ -1,5 +1,6 @@
 {
     "configurations": [
+
         {
             "type": "java",
             "name": "Spring Boot-Webapp5Application<webapp5>",
@@ -10,6 +11,14 @@
             "projectName": "webapp5",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
-        }
+        },
+        {
+            "name": "ng serve",
+            "type": "pwa-chrome",
+            "cwd": "${workspaceFolder}/frontend",
+            "request": "launch",
+            "preLaunchTask": "npm: start",
+            "url": "http://localhost:4200/",
+        },
     ]
 }
