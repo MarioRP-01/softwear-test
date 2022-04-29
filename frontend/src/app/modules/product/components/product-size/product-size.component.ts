@@ -29,10 +29,9 @@ export class ProductSizeComponent implements OnInit {
   productInTransaction!: ProductInTransaction;
   isInWishlist: any;
 
-  amount: FormControl =  new FormControl(1, [
-    Validators.required,
-    Validators.min(1)
-  ])
+  amount: number = 1;
+
+  stock: number = 10;
 
   wishlistButton: any;
 
@@ -50,7 +49,6 @@ export class ProductSizeComponent implements OnInit {
 
     this.productInTransaction = this.initProductInTransaction();
     this.checkIfPresentInWishlist();
-    this.initWishlistButton();
   }
 
   initProductInTransaction(): ProductInTransaction {
@@ -65,19 +63,6 @@ export class ProductSizeComponent implements OnInit {
     }
   }
 
-  initWishlistButton(): any {
-
-    return {
-      'col-1': true,
-      'btn': true,
-      'btn-outline-dark': true,
-      'p-1': true, 
-      'mx-1': true,
-      'bg-dark': this.isPresent,
-      'text-white': this.isPresent
-    }
-  }
-
   checkIfPresentInWishlist() {
 
     this.isPresent = this.wishlist?.productIsPresent(this.productInTransaction) != -1
@@ -86,7 +71,7 @@ export class ProductSizeComponent implements OnInit {
   addToCart() {
 
     this.transactionService.addProductByAmountToMyTransaction
-      (this.product.id, this.cartType, this.amount.value).subscribe(
+      (this.product.id, this.cartType, this.amount).subscribe(
         response => console.log("works!"),
         error => console.log(error)
       );
@@ -103,7 +88,6 @@ export class ProductSizeComponent implements OnInit {
         this.removeFromWishlist();
 
       }
-
     }
   }
 

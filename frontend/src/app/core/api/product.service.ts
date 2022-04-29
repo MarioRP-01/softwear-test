@@ -34,8 +34,7 @@ export class ProductService {
 
   getProductWithFilter(productFilter: ProductFilter, page: number): Observable<PageableProduct> {
 
-    let filter: string = ProductFilter[productFilter];
-    let url: string = BASE_URL + `?filter=${filter}&page=${page}`;
+    let url: string = BASE_URL + `?filter=${productFilter}&page=${page}`;
 
     return this.httpClient.get(url).pipe() as Observable<PageableProduct>;
   }

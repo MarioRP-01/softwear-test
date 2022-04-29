@@ -6,6 +6,7 @@ import { ProductSizeComponent } from './components/product-size/product-size.com
 import { ProductCarouselComponent } from './components/product-carousel/product-carousel.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { ProductViewComponent } from './pages/product-view/product-view.component';
+import { TransactionsInteractionComponent } from './components/transactions-interaction/transactions-interaction.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { ProductViewComponent } from './pages/product-view/product-view.componen
     ProductComponent,
     ProductViewComponent,
     ProductCarouselComponent,
-    ProductSizeComponent
+    ProductSizeComponent,
+    TransactionsInteractionComponent
   ],
   imports: [
     SharedModule,

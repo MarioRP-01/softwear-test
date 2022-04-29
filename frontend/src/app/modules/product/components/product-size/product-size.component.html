@@ -23,41 +23,43 @@
         </div>
 
         <!-- interact with transaction -->
+        <div class="form-group" *ngIf="isLogged(); else login">
 
-        <span *ngIf="isLogged(); else login">
-
-                <div class="row">
-                    <!-- Button to add in cart -->
-                    <div id="fav-btn" class="col-1 btn btn-outline-dark p-1 mx-1"
-                    [class.bg-dark]="isPresent"
-                    [class.text-white]="isPresent"
-                    (click)="toogleWishlist()">
-                        <fa-icon [icon]="faHeart" class="fa-2x"></fa-icon>
-                    </div>
-
-                    <!-- Button to add in cart -->
-                    <button id="cart-btn" class="col-8 btn btn-outline-dark text-uppercase fw-bolder" 
-                        [disabled]="!amount.valid" 
-                        (click)="addToCart()">
-
-                        <i class="bi-cart-fill"> Add to cart</i>
-                    </button>
-
-                    <!-- input to set the amount -->
-                    <div class="col-2">
-                        <input class="rounded w-100 h-100 border-dark text-center softFont fw-bold form-control"
-                        formControlName="amount" 
-                        type="number"
-                        id="quantity"
-                        min="1"
-                        value="1">
-                    </div>
+            <div class="row">
+                <!-- Button to add in cart -->
+                <div id="fav-btn" class="col-1 btn btn-outline-dark p-1 mx-1"
+                [class.bg-dark]="isPresent"
+                [class.text-white]="isPresent"
+                (click)="toogleWishlist()">
+                    <fa-icon [icon]="faHeart" class="fa-2x"></fa-icon>
                 </div>
-                
-            <div id="msg-label" class="row softFont my-2 p-1">
 
+                <!-- Button to add in cart -->
+                <button id="cart-btn" class="col-8 btn btn-outline-dark text-uppercase fw-bolder" 
+                    [disabled]="(quantity.invalid)" 
+                    (click)="addToCart()">
+
+                    <i class="bi-cart-fill"> Add to cart</i>
+                </button>
+
+                <!-- input to set the amount -->
+                <div class="col-2">
+                    <input class="rounded w-100 h-100 border-dark text-center softFont fw-bold form-control"
+                    #quantity="ngModel"
+                    name="quantity"                       
+                    type="number"
+                    id="amount"
+                    min="1"
+                    [max]="stock"
+                    [(ngModel)]="amount" 
+                    required>
+                </div>
             </div>
-        </span>
+            
+            <!-- Alertas -->
+            <div></div>
+            
+        </div>
 
         <ng-template #login>
             <div class="row">

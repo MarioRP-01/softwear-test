@@ -1,3 +1,3 @@
 export enum ProductFilter {
-    OneByName
+    OneByName="one-by-name"
 }
