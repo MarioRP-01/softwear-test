@@ -24,12 +24,14 @@
 
         <!-- interact with transaction -->
 
-        <span *ngIf="isLogged()">
+        <span *ngIf="isLogged(); else login">
 
                 <div class="row">
                     <!-- Button to add in cart -->
-                    <div id="fav-btn" class="col-1 btn btn-outline-dark p-1 mx-1" 
-                    (click)="addToWishlist()">
+                    <div id="fav-btn" class="col-1 btn btn-outline-dark p-1 mx-1"
+                    [class.bg-dark]="isPresent"
+                    [class.text-white]="isPresent"
+                    (click)="toogleWishlist()">
                         <fa-icon [icon]="faHeart" class="fa-2x"></fa-icon>
                     </div>
 
@@ -56,5 +58,11 @@
 
             </div>
         </span>
+
+        <ng-template #login>
+            <div class="row">
+                <a class="col btn btn-outline-dark text-uppercase" [routerLink]="['/login']">Sign in</a>
+            </div>
+        </ng-template>
     </div>
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ShopUser, Transaction } from '@app/shared/classes';
+import { ShopUser, Wishlist } from '@app/shared/classes';
 import { Product } from '@app/shared/model';
 import { ProductAvailabilityBySize } from '@app/shared/model/product-availability-by-size';
 import { Observable } from 'rxjs';
@@ -15,7 +15,7 @@ export class ProductViewComponent implements OnInit {
   product!: Product;
   availablesSizes!: ProductAvailabilityBySize[];
   user!: ShopUser | null;
-  wishlist!: Transaction | null;
+  wishlist!: Wishlist | null;
 
   constructor(
     private route: ActivatedRoute

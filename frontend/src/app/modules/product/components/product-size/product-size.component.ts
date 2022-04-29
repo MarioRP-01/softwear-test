@@ -2,8 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { TransactionService } from '@app/core/api';
 import { ShopUser, Transaction } from '@app/shared/classes';
+import { Wishlist } from '@app/shared/classes/wishlist';
 import { TransactionSpecialType } from '@app/shared/data-type';
-import { Product } from '@app/shared/model';
+import { Product, ProductInTransaction } from '@app/shared/model';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -20,12 +21,12 @@ export class ProductSizeComponent implements OnInit {
   user!: ShopUser | null;
 
   @Input()
-  wishlist!: Transaction | null;
+  wishlist!: Wishlist | null;
 
-  isPresent!: boolean;
+  isPresent?: boolean;
 
   faHeart = faHeart; 
-
+  productInTransaction!: ProductInTransaction;
   isInWishlist: any;
 
   amount: FormControl =  new FormControl(1, [
@@ -33,33 +34,95 @@ export class ProductSizeComponent implements OnInit {
     Validators.min(1)
   ])
 
+  wishlistButton: any;
+
   cartType: TransactionSpecialType = TransactionSpecialType.CART;
   wishlistType: TransactionSpecialType = TransactionSpecialType.WISHLIST;
 
   constructor(
-    private transactionService: TransactionService,
-    private formBuilder: FormBuilder
-  ) { }
+    private transactionService: TransactionService
+  ) { 
+
+    
+  }
 
   ngOnInit(): void {
 
-    this.checkIfPresent()
+    this.productInTransaction = this.initProductInTransaction();
+    this.checkIfPresentInWishlist();
+    this.initWishlistButton();
   }
 
-  checkIfPresent() {
+  initProductInTransaction(): ProductInTransaction {
 
+    return {
+      id: this.product.id,
+      name: this.product.name,
+      size: this.product.size,
+      price: this.product.price,
+      quantity: 1
+
+    }
+  }
+
+  initWishlistButton(): any {
+
+    return {
+      'col-1': true,
+      'btn': true,
+      'btn-outline-dark': true,
+      'p-1': true, 
+      'mx-1': true,
+      'bg-dark': this.isPresent,
+      'text-white': this.isPresent
+    }
+  }
+
+  checkIfPresentInWishlist() {
+
+    this.isPresent = this.wishlist?.productIsPresent(this.productInTransaction) != -1
   }
 
   addToCart() {
 
     this.transactionService.addProductByAmountToMyTransaction
-      (this.product.id, this.cartType, this.amount.value);
+      (this.product.id, this.cartType, this.amount.value).subscribe(
+        response => console.log("works!"),
+        error => console.log(error)
+      );
   }
 
-  addToWishlist() {
+  toogleWishlist() {
 
+    if (this.wishlist !== null) {
+
+      if (!this.isPresent) {
+        this.addToWishlist();
+
+      } else {
+        this.removeFromWishlist();
+
+      }
+
+    }
+  }
+
+  private addToWishlist() {
+
+    this.isPresent = true;
     this.transactionService.addProductByAmountToMyTransaction
-      (this.product.id, this.wishlistType, 1)
+      (this.product.id, this.wishlistType, 1).subscribe(
+        response => console.log("works!")
+      )
+  }
+
+  private removeFromWishlist() {
+
+    this.isPresent = false;
+    this.transactionService.deleteProductFromMyTransaction
+      (this.product.id, this.wishlistType).subscribe(
+        response => console.log("works!")
+      )
   }
 
   isLogged() {
