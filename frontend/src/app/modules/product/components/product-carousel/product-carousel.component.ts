@@ -10,14 +10,14 @@ import { Observable } from 'rxjs';
 export class ProductCarouselComponent implements OnInit {
 
   @Input()
-  product!: Product;
+  productSizes!: Product[];
 
   mainImage?: string;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.mainImage = this.product.images?.[0]
+    this.mainImage = this.productSizes[0].images?.[0]
   }
 
   setMainImage(image: string) {

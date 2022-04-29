@@ -1,11 +1,14 @@
 package com.softwear.webapp5.controller;
 
 import com.softwear.webapp5.data.ProductFilter;
+import com.softwear.webapp5.data.ProductFilterToId;
 import com.softwear.webapp5.data.ProductNoImagesDTO;
 import com.softwear.webapp5.data.ProductPageDTO;
 import com.softwear.webapp5.data.ProductSize;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.service.ProductService;
+
+import org.apache.commons.lang3.EnumUtils;
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -59,6 +62,30 @@ public class ProductRESTController {
         }
     }
 
+    @GetMapping(value="/{id}", params={"filter"})
+    public ResponseEntity<List<Product>> getProductByIdWithFilter(
+        @PathVariable Long id,
+        @RequestParam String filter
+    ) {
+
+        if (!EnumUtils.isValidEnum(ProductFilterToId.class, filter.toUpperCase())) {
+            return ResponseEntity.badRequest().build();
+
+        }
+
+        Optional<Product> productOptional = productService.findById(id);
+
+        if (productOptional.isPresent()) {
+            ProductFilterToId filterType = ProductFilterToId.stringToProductFilter(filter);
+
+            List <Product> productsSizes = productService.applyProductFilterToId(productOptional.get().getName(), filterType);
+
+            return ResponseEntity.ok(productsSizes);
+
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @GetMapping(value="")
     public ResponseEntity<ProductPageDTO> getProducts(@RequestParam(required = false) String filter, 
             @RequestParam(required = false) Integer page) {
@@ -95,6 +122,18 @@ public class ProductRESTController {
         ProductPageDTO productPage = new ProductPageDTO(products.toList(), totalPages);
 
         return ResponseEntity.ok(productPage);
+    }
+
+    @GetMapping(params={"name"})
+    public ResponseEntity<List<Product>> getProductByName(@RequestParam String name) {
+
+        Page<Product> product = productService.findByName(name, Pageable.unpaged());
+
+        if (product.isEmpty()) {
+            return ResponseEntity.notFound().build();
+
+        }
+        return ResponseEntity.ok(product.toList());
     }
 
     @PostMapping

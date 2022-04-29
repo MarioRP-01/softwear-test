@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class ProductViewComponent implements OnInit {
 
-  product!: Product;
+  productSizes!: Product[];
   availablesSizes!: ProductAvailabilityBySize[];
   user!: ShopUser | null;
   wishlist!: Wishlist | null;
@@ -23,7 +23,7 @@ export class ProductViewComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.product = this.route.snapshot.data['product'];
+    this.productSizes = this.route.snapshot.data['productSizes'];
     this.availablesSizes = this.route.snapshot.data['availablesSizes'];
     this.user = this.route.snapshot.data['user'];
     this.wishlist = this.route.snapshot.data['wishlist']

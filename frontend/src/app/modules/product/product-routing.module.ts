@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductViewComponent } from './pages/product-view/product-view.component';
-import { ProductResolver, UserLoggedResolver, WishlistResolver } from '@app/core/resolver';
+import { ProductResolver, ProductSizesResolver, UserLoggedResolver, WishlistResolver } from '@app/core/resolver';
 import { AvailableSizesResolver } from './resolver';
 
 const routes: Routes = [{
     path: '',
     component: ProductViewComponent,
     resolve: {
-      product: ProductResolver,
+      productSizes: ProductSizesResolver,
       user: UserLoggedResolver,
       availablesSizes: AvailableSizesResolver,
       wishlist: WishlistResolver

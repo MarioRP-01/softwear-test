@@ -2,6 +2,7 @@ package com.softwear.webapp5.service;
 
 import com.softwear.webapp5.data.ProductAvailabilityBySize;
 import com.softwear.webapp5.data.ProductFilter;
+import com.softwear.webapp5.data.ProductFilterToId;
 import com.softwear.webapp5.data.ProductNoImagesDTO;
 import com.softwear.webapp5.data.ProductSize;
 import com.softwear.webapp5.model.Product;
@@ -218,6 +219,18 @@ public class ProductService {
 
 		return products;
 	}
+
+    public List<Product> applyProductFilterToId(String name, ProductFilterToId filter) {
+
+		List<Product> products = null;
+
+		switch(filter) {
+			case SIZE:
+				products = findByName(name, Pageable.unpaged()).toList();
+		}
+		
+        return products;
+    }
 
 //	public Optional<Product> findOneName(String name){
 //        return productRepository.findOneName(name);

@@ -18,12 +18,12 @@ public enum ProductFilter {
 
             return this.getProductService().findAllNames(page);
         }
-    } ;
+    };
 
     public static ProductFilter stringToProductFilter(String filter) {
 
         return switch (filter) {
-            case "OneByName" -> OneByName;
+            case "one-by-name" -> OneByName;
             default -> null;
         };
     }

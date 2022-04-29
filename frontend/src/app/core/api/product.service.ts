@@ -7,6 +7,7 @@ import { Product } from '@app/shared/model/product';
 import { ProductSize } from '@app/shared/data-type/product-size';
 import { ProductFilter } from '@app/shared/data-type/product-filter';
 import { PageableProduct } from '@app/shared/model/pageable-product';
+import { ProductFilterToId } from '@app/shared/data-type';
 
 const BASE_URL = '/api/products'
 
@@ -39,6 +40,12 @@ export class ProductService {
     return this.httpClient.get(url).pipe() as Observable<PageableProduct>;
   }
 
+  getProductByIdWithFilter(id: number, filter: ProductFilterToId): Observable<Product[]> {
+
+    let url: string = BASE_URL + `/${id}/?filter=${filter}`
+
+    return this.httpClient.get(url).pipe() as Observable<Product[]>
+  }
   //getProductSizeAvailability
 
   // getAllProducts

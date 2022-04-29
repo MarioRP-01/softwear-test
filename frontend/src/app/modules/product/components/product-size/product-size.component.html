@@ -3,7 +3,7 @@
     <div class="row">
 
         <!-- title -->
-        <h1 class="softFont product-name">{{product.name}}</h1>
+        <h1 class="softFont product-name">{{productSizes[0].name}}</h1>
     
         <hr>
 
@@ -12,14 +12,30 @@
 
         </div>
 
-        <!-- pick-size -->
+        <!-- pick-size -->       
         <div class="pick-size row">
-
+            <ng-template ngFor let-i="index" let-product [ngForOf]="productSizes">
+                <div *ngIf="product.stock > 0; else exist" 
+                    id="btn-size-{{product.size}}" 
+                    class="product-size col-1 btn btn-outline-dark m-0"
+                    [class.bg-dark]="i == selectedProduct"
+                    [class.text-white]="i == selectedProduct"
+                    (click)="selectSize(i)">
+                    
+                    {{product.size}}
+                </div>
+                
+                <ng-template #exist>
+                    <div type="button" class="col-1 btn btn-outline-secondary disabled m-0">
+                        {{product.size}}
+                    </div>
+                </ng-template> 
+            </ng-template>                                                 
         </div>
 
         <!-- product description -->
         <div class="row">
-            <p class="product-description">{{product.description}}</p>
+            <p class="product-description">{{productSizes[0].description}}</p>
         </div>
 
         <!-- interact with transaction -->
@@ -50,8 +66,7 @@
                     type="number"
                     id="amount"
                     min="1"
-                    [max]="stock"
-                    [(ngModel)]="amount" 
+                    [(ngModel)]="amount"
                     required>
                 </div>
             </div>

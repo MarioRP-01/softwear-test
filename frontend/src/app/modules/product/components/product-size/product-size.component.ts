@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { TransactionService } from '@app/core/api';
 import { ShopUser, Transaction } from '@app/shared/classes';
 import { Wishlist } from '@app/shared/classes/wishlist';
@@ -15,7 +14,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 export class ProductSizeComponent implements OnInit {
 
   @Input()
-  product!: Product;
+  productSizes!: Product[];
 
   @Input()
   user!: ShopUser | null;
@@ -24,14 +23,13 @@ export class ProductSizeComponent implements OnInit {
   wishlist!: Wishlist | null;
 
   isPresent?: boolean;
+  selectedProduct?: number; 
 
   faHeart = faHeart; 
   productInTransaction!: ProductInTransaction;
   isInWishlist: any;
 
   amount: number = 1;
-
-  stock: number = 10;
 
   wishlistButton: any;
 
@@ -54,13 +52,24 @@ export class ProductSizeComponent implements OnInit {
   initProductInTransaction(): ProductInTransaction {
 
     return {
-      id: this.product.id,
-      name: this.product.name,
-      size: this.product.size,
-      price: this.product.price,
+      id: this.productSizes?.[0].id,
+      name: this.productSizes?.[0].name,
+      size: this.productSizes?.[0].size,
+      price: this.productSizes?.[0].price,
       quantity: 1
 
     }
+  }
+
+  selectSize(index: number) {
+
+    if (this.selectedProduct === undefined || this.selectedProduct != index) {
+      this.selectedProduct = index;
+
+    } else {
+      this.selectedProduct = undefined;
+    }
+      
   }
 
   checkIfPresentInWishlist() {
@@ -70,11 +79,28 @@ export class ProductSizeComponent implements OnInit {
 
   addToCart() {
 
-    this.transactionService.addProductByAmountToMyTransaction
-      (this.product.id, this.cartType, this.amount).subscribe(
-        response => console.log("works!"),
-        error => console.log(error)
-      );
+    if (this.selectedProduct !== undefined) {
+
+      if (this.amount > this.productSizes[this.selectedProduct]?.stock) { 
+        // send alert
+        console.log("Not enough products in stock")
+
+      } else {
+        let index: number = this.selectedProduct;
+
+        this.transactionService.addProductByAmountToMyTransaction
+        (this.productSizes[this.selectedProduct].id, this.cartType, this.amount).subscribe(
+          response => {
+            console.log("works!");
+            this.productSizes[index].stock -= this.amount;
+          },
+          error => console.log(error)
+        );
+
+      }
+    } 
+    // send alert
+    console.log("Select a product")
   }
 
   toogleWishlist() {
@@ -95,7 +121,7 @@ export class ProductSizeComponent implements OnInit {
 
     this.isPresent = true;
     this.transactionService.addProductByAmountToMyTransaction
-      (this.product.id, this.wishlistType, 1).subscribe(
+      (this.productSizes?.[0].id, this.wishlistType, 1).subscribe(
         response => console.log("works!")
       )
   }
@@ -104,12 +130,12 @@ export class ProductSizeComponent implements OnInit {
 
     this.isPresent = false;
     this.transactionService.deleteProductFromMyTransaction
-      (this.product.id, this.wishlistType).subscribe(
+      (this.productSizes?.[0].id, this.wishlistType).subscribe(
         response => console.log("works!")
       )
   }
 
-  isLogged() {
+  isLogged(): boolean {
     return this.user != null;
   }
 

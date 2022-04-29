@@ -6,7 +6,7 @@
         <i class="bi bi-arrow-left-circle fa-2x product-arrow" (click)="slideLeft()"></i>
         
         <div id="product-slide">
-            <img *ngFor="let image of product?.images" class="product-thumbnail" [src]="image" (mouseover)="setMainImage(image)">
+            <img *ngFor="let image of productSizes[0]?.images" class="product-thumbnail" [src]="image" (mouseover)="setMainImage(image)">
         </div>
 
         <i class="bi bi-arrow-right-circle fa-2x product-arrow" (click)="slideRight()"></i>

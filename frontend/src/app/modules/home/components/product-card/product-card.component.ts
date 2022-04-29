@@ -38,14 +38,7 @@ export class ProductCardComponent implements OnInit {
 
   createObjectProduct(productInterface: ProductInterface): Product {
 
-    let product: Product = new Product(
-      productInterface.id,
-      productInterface.name,
-      productInterface.description,
-      productInterface.price,
-      productInterface.size,
-      productInterface.images
-    );
+    let product: Product = new Product(productInterface);
 
     return product;
   }
