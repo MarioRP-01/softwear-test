@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.softwear.webapp5.data.StaticDTO;
+import com.softwear.webapp5.data.TransactionFilter;
 import com.softwear.webapp5.data.TransactionPageDTO;
 import com.softwear.webapp5.model.*;
 import com.softwear.webapp5.repository.ProductRepository;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -348,6 +350,19 @@ public class TransactionService {
         TransactionPageDTO transactionPageDTO = new TransactionPageDTO(transactions.toList(), totalPages);
 
         return transactionPageDTO;
+    }
+
+    public Page<StaticDTO> applyTransactionFilter(TransactionFilter filter, Pageable pageable) {
+
+		Page<StaticDTO> products = null;
+
+		switch(filter) {
+			case STATICS:
+				products = transactionRepository.getStatics(pageable);
+                break;
+		}
+		
+        return products;
     }
 
 }

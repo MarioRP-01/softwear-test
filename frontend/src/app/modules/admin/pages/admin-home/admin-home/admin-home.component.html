@@ -1,1 +1,23 @@
-<p>admin-home works!</p>
+<section class="py-5">
+    <div class="container">
+        <div class="row gx-4 row-cols-1 row-cols-xl-2">
+
+            <!-- Incomes chart -->
+            <div class="col">
+                <h2>Incomes</h2>
+                <app-income-chart
+                [barChartData]="incomes"
+                ></app-income-chart>
+            </div>
+
+            <!-- Sales chart -->
+            <div class="col">    
+                <h2>Sales</h2>
+                <app-sale-chart
+                    [barChartData]="sales"
+                ></app-sale-chart>
+            </div>
+
+        </div>
+    </div>
+</section>

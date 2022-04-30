@@ -12,7 +12,6 @@
             <tbody class="cart">
             
                 <ng-template ngFor let-i="index" let-product [ngForOf]="products">
-
                 
                     <tr *ngIf="product.quantity > 0" id="product_{{product.id}}" class="product-row">
                         <td class="cart-text product-index">#{{i + 1}}</td>
@@ -25,7 +24,9 @@
                         <td><button class="btn btn-outline-dark text-uppercase fw-bold" (click)="deleteFromWishlist(i)" type="button">Remove</button></td>
                         
                     </tr>
+
                 </ng-template>
+                
             </tbody>
         </table>
     </div>

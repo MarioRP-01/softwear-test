@@ -7,6 +7,8 @@ import { ManageProductsComponent } from './pages/manage-products/manage-products
 import { ManageUsersComponent } from './pages/manage-users/manage-users/manage-users.component';
 import { FillingTableComponent } from './components/filling-table/filling-table.component';
 import { SharedModule } from '@app/shared/shared.module';
+import { IncomeChartComponent } from './components/income-chart/income-chart.component';
+import { SaleChartComponent } from './components/sale-chart/sale-chart.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { SharedModule } from '@app/shared/shared.module';
     AdminHomeComponent,
     ManageProductsComponent,
     ManageUsersComponent,
-    FillingTableComponent
+    FillingTableComponent,
+    IncomeChartComponent,
+    SaleChartComponent
   ],
   imports: [
     SharedModule,

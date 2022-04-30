@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ChartData } from 'chart.js';
 
 @Component({
   selector: 'app-admin-home',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminHomeComponent implements OnInit {
 
-  constructor() { }
+  incomes!: ChartData<'bar'>;
+  sales!: ChartData<'bar'>;
+
+  constructor(
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    this.incomes = this.route.snapshot.data['incomes']
+    this.sales = this.route.snapshot.data['sales']
   }
 
 }

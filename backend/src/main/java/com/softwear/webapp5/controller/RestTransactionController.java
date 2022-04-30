@@ -9,6 +9,8 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 
 import com.softwear.webapp5.data.IdDTO;
+import com.softwear.webapp5.data.StaticDTO;
+import com.softwear.webapp5.data.TransactionFilter;
 import com.softwear.webapp5.data.TransactionPageDTO;
 import com.softwear.webapp5.data.TransactionType;
 import com.softwear.webapp5.model.Coupon;
@@ -117,6 +119,38 @@ public class RestTransactionController {
 
         TransactionPageDTO transactionPageDTO = new TransactionPageDTO(transactions.toList(), totalPages);  
         return ResponseEntity.ok(transactionPageDTO);
+    }
+
+    @GetMapping(params={"filter"})
+    public ResponseEntity<List<StaticDTO>> getStatics(
+        @RequestParam String filter, 
+        @RequestParam(required = false) Integer page) {
+
+        boolean isValidType = EnumUtils.isValidEnum(TransactionFilter.class, filter.toUpperCase());
+
+        if (!isValidType) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        TransactionFilter filterType = TransactionFilter.stringToProductFilter(filter);
+
+        Pageable pageable;
+
+        if (page == null) {
+            pageable = Pageable.unpaged();
+
+        } else {
+            pageable = PageRequest.of(page - 1, 10);
+
+        }
+
+        Page<StaticDTO> statics = transactionService.applyTransactionFilter(filterType, pageable);
+
+        if (statics.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(statics.toList());
     }
 
     /*

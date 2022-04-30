@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { IncomesResolver, SalesResolver } from '@app/core/resolver';
 import { AdminComponent } from './admin.component';
 import { FillingTableComponent } from './components/filling-table/filling-table.component';
 import { AdminHomeComponent } from './pages/admin-home/admin-home/admin-home.component';
@@ -11,7 +12,8 @@ const routes: Routes = [
     path: 'home',
     component: AdminHomeComponent,
     resolve: {
-      
+      incomes: IncomesResolver,
+      sales: SalesResolver
     }
   },
 

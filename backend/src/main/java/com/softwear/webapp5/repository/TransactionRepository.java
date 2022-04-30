@@ -63,6 +63,13 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
             + "WHERE NOT (t.type = 'CART' OR t.type = 'WISHLIST') "
             + "GROUP BY p.name")
     public List<StaticDTO> getStatics();
+
+    @Query("SELECT new com.softwear.webapp5.data.StaticDTO(p.name, SUM(p.price), COUNT(p.name)) "
+            + "FROM Transaction t "
+            + "LEFT JOIN t.products p "
+            + "WHERE NOT (t.type = 'CART' OR t.type = 'WISHLIST') "
+            + "GROUP BY p.name")
+    public Page<StaticDTO> getStatics(Pageable page);
     
     @Query("SELECT t FROM Transaction t " +
             "WHERE t.type = :type")

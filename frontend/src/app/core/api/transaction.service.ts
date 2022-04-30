@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Product, Transaction } from '@app/shared/model';
-import { TransactionType } from '@app/shared/data-type/transaction-type';
-import { PageableTransaction } from '@app/shared/model';
-import { TransactionSpecialType } from '@app/shared/data-type';
+import { Product, Transaction, PageableTransaction, Static } from '@app/shared/model';
+import { TransactionType, TransactionSpecialType } from '@app/shared/data-type';
 
 const BASE_URL = '/api/transactions'
 
@@ -77,6 +75,15 @@ export class TransactionService {
     let url: string = BASE_URL + `/my/products?type=${transactionType}`;
     return this.httpClient.delete(url).pipe() as Observable<Transaction>;
   }
+
+  getStatics(): Observable<Static[]> {
+
+    let filter = "statics";
+    
+    let url: string = BASE_URL + `?filter=${filter}`
+    return this.httpClient.get(url).pipe() as Observable<Static[]>
+  }
+
 }
 
 

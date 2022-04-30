@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NotFoundComponent } from './layout-error/not-found/not-found.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -17,13 +18,14 @@ import { NotFoundComponent } from './layout-error/not-found/not-found.component'
   ],
   imports:[
     NgbModule,
-    CommonModule
+    CommonModule,
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    NgChartsModule,
 
     NgbModule,
 
