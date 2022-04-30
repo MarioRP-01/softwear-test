@@ -17,6 +17,7 @@ export class SignInComponent implements OnInit {
   password!: string;
   error: number = 0;
   isEmpty : boolean = false;
+  isWrong : boolean = false;
 
   constructor(private authService: AuthService, private navigationService: NavigationService,
       private router: Router) { }
@@ -26,11 +27,10 @@ export class SignInComponent implements OnInit {
 
   areFieldsEmpty(): boolean {
 
+    // empty warning
     let isEmpty: boolean = (!this.username || !this.password);
     if (isEmpty) {
       this.isEmpty = true;
-      //window.alert("Hay uno o más campos vacíos. Rellénelos antes de continuar");
-      // add warning about empty
       
     }
     else{
@@ -71,10 +71,40 @@ export class SignInComponent implements OnInit {
   }
 
   errorResponse(): void {
+
+
     this.emptyPasswordField();
     // Add warning about wrong credentials
 
   }
+
+  errorRespons(): boolean {
+
+    let regex = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
+    let isWrong = this.username.match(regex) != null;
+
+    if (!isWrong) {
+      this.isWrong = false;
+    }
+      else{
+        this.isWrong = true;
+    }
+    return isWrong;
+  }
+
+/*
+  let isMatch: boolean =  this.password == this.repeatedPassword;
+    if (!isMatch) {
+      this.isMatch = true;
+
+    }
+    else{
+      this.isMatch = false;
+    }
+
+    return isMatch
+  }*/
+
 
   signIn(): void {
     

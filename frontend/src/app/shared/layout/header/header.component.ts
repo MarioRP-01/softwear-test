@@ -10,7 +10,7 @@ export class HeaderComponent implements OnInit {
 
   constructor() { }
   
-  isCollapsed: boolean = false;
+  isCollapsed: boolean = true;
 
   logged : boolean = false;
   isAdmin : boolean = false;

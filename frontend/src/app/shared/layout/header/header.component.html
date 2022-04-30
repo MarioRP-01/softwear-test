@@ -2,101 +2,55 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">  <!-- bg-light -->
     <div class="container px-4 px-lg-5">
 
-        <a class="navbar-brand" href="/"><img src="../assets/full-logo-new.svg" style = "width: 5vw"></a>
+        <a class="navbar-brand" [routerLink]="['/']"><img src="../assets/full-logo-new.svg" style = "width: 5vw"></a>
 
         <div *ngIf="logged" class="nav-item user-icon-small-screen dropdown">
-            <a class="nav-link dropdown-toggle" id="session-small-Dropdown" href="#" role="button" data-bs-toggle="dropdown"
+            <a class="nav-link dropdown-toggle" id="session-small-Dropdown" role="button" data-bs-toggle="dropdown"
                aria-expanded="false"><img src="../assets/user-icon.png" class="user-icon" style = "width: 3vw"></a>
 
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
                 <li>
-                    <a class="dropdown-item" href="/userProfile">Profile</a>
+                    <a class="dropdown-item" [routerLink]="['/user/user-info']">Profile</a>
                 </li>
 
-                <li *ngIf="isAdmin"><a class="dropdown-item" href="/admin/home">Admin Panel</a></li>
+                <li *ngIf="isAdmin"><a class="dropdown-item" [routerLink]="['/admin/admin-home']">Admin Panel</a></li>
 
                 <li>
-                    <a class="dropdown-item" href="/wishlist">Wishlist</a>
+                    <a class="dropdown-item" [routerLink]="['/user/user-wishlist']">Wishlist</a>
                 </li>
 
                 <li><hr class="dropdown-divider" /></li>
 
                 <li>
-                    <a class="dropdown-item" href="/logout" onclick="logOut()">Log Out</a>
+                    <a class="dropdown-item" [routerLink]="['/logout']" onclick="logOut()">Log Out</a>
                 </li>
             </ul>
         </div>
         
 
-        <a *ngIf="!logged" class="navbar-brand-2 user-icon-small-screen" href="./login"><img src="../assets/user-icon.png" class="user-icon" style = "width: 3vw"></a>
+        <a *ngIf="!logged" class="navbar-brand-2 user-icon-small-screen" [routerLink]="['/login']"><img src="../assets/user-icon.png" class="user-icon" style = "width: 3vw"></a>
 
         <button class="navbar-toggler" type="button" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"
-        aria-controls="navbarSupportedContent" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        aria-controls="navbarSupportedContent" aria-label="Toggle navigation" aria-expanded="false"><span class="navbar-toggler-icon"></span></button>
         
         <div #collapse="ngbCollapse" class="collapse navbar-collapse" [(ngbCollapse)]="isCollapsed">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item"><a class="nav-link" aria-current="page" href="/">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                <li class="nav-item"><a class="nav-link" aria-current="page" [routerLink]="['/']">Home</a></li>
+                <li class="nav-item"><a class="nav-link" [routerLink]="['/home/about']">About</a></li>
                 <li ngbDropdown>
-                    <a class="nav-link dropdown-toggle" ngbDropdownToggle id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                    <a class="nav-link dropdown-toggle" ngbDropdownToggle id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                     <ul  ngbDropdownMenu aria-labelledby="navbarDropdown">
-                        <li><a ngbDropdownItem href="#!">All Products</a></li>
+                        <li><a ngbDropdownItem [routerLink]="['/home']">All Products</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a ngbDropdownItem href="#!">Popular Items</a></li>
-                        <li><a ngbDropdownItem href="#!">New Arrivals</a></li>
+                        <li><a ngbDropdownItem [routerLink]="['/home']">Popular Items</a></li>
+                        <li><a ngbDropdownItem [routerLink]="['/home']">New Arrivals</a></li>
                     </ul>
                 </li>
             </ul>
-
-
-            <!--<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">All Products</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    
-                
-                -->
-
-            <!---
-            <p>
-                <button type="button" class="btn btn-outline-primary" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"
-                  aria-controls="collapseExample">
-                  Toggle
-                </button>
-              </p>
-              <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-                <div class="card">
-                  <div class="card-body">
-                    <li class="nav-item"><a class="nav-link" aria-current="page" href="/">Home</a></li>
-                  </div>
-                  <div class="card-body">
-                    <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
-                  </div>
-                  <div class="card-body">
-                    You can collapse this card by clicking Toggle
-                  </div>
-                </div>
-              </div>
-              
-            -->
-
-            
         
             <form class="d-flex cart-icon">
-                <a class="btn btn-outline-dark" href="/cart">
+                <a class="btn btn-outline-dark" [routerLink]="['/transaction/cart']">
                     <i class="bi-cart-fill me-1"></i>
                     Cart
                     <span class="badge bg-dark text-white ms-1 rounded-pill cart-items-number">{{nCartItems}}</span>
@@ -107,17 +61,17 @@
         
         <div *ngIf="logged">
             <div class="nav-item user-icon-big-screen dropdown">
-                <a class="nav-link dropdown-toggle" id="sessionDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" id="sessionDropdown" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false"><img src="../assets/user-icon.png" class="user-icon" style = "width: 3vw"></a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="/userProfile">Profile</a></li>
+                    <li><a class="dropdown-item" [routerLink]="['/profile/user-info']">Profile</a></li>
                     
-                    <li *ngIs="isAdmin"><a class="dropdown-item" href="/admin/home">Admin Panel</a></li>
+                    <li *ngIs="isAdmin"><a class="dropdown-item" [routerLink]="['/admin-home']">Admin Panel</a></li>
 
-                    <li><a class="dropdown-item" href="/wishlist">Wishlist</a></li>
+                    <li><a class="dropdown-item" [routerLink]="['/transaction/wishlist']">Wishlist</a></li>
                     <li><hr class="dropdown-divider" /></li>
                     <li>
-                        <a class="dropdown-item" href="/logout" onclick="logOut()">Log Out</a>
+                        <a class="dropdown-item" onclick="logOut()">Log Out</a>
                     </li>
                 </ul>
                 
@@ -127,7 +81,7 @@
             </ul>
         </div>
 
-        <a *ngIf="!logged" class="navbar-brand-2 user-icon-big-screen" href="/login"><img src="../assets/user-icon.png" class="user-icon" style = "width: 3vw"></a>
+        <a *ngIf="!logged" class="navbar-brand-2 user-icon-big-screen" [routerLink]="['/login']"><img src="../assets/user-icon.png" class="user-icon" style = "width: 3vw"></a>
 
     </div>
 </nav>

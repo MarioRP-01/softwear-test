@@ -1,13 +1,23 @@
 <table class="table">
     <thead>
-        <th>Nombre</th>
-        <th></th>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Price</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Size</th>
+        <th scope="col" class="d-none">Imgs</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
     </thead>
     <tbody>
         <tr>
+         <!--<ng-template *ngFor = "let product of products">-->
             <td>Ana</td>
-            <td><button class="btn btn-lg btn-outline-primary" (click)="open(content)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-            </td>
+            <td><button class="btn btn-primary" type="button"
+                (click)="open(content)"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+            <td><button (click)="delete(content)" class="btn btn-primary" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+         <!--</ng-template>-->
         </tr>
     </tbody>
 </table>

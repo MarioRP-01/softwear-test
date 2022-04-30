@@ -15,6 +15,10 @@ export class SignUpComponent implements OnInit {
   email!: string;
   password!: string;
   repeatedPassword!: string;
+  isEmpty : boolean = false;
+  isMatch : boolean = false;
+  isValid : boolean = false;
+
 
   constructor(private userService: ShopUserService, private authService: AuthService,
       private navigationService: NavigationService) { }
@@ -27,12 +31,17 @@ export class SignUpComponent implements OnInit {
     let isEmpty: boolean = (!this.username || !this.password ||
         !this.email || !this.repeatedPassword);
     if (isEmpty) {
-      // add warning about empty
+      this.isEmpty = true;
 
+    }
+    else{
+      this.isEmpty = false;
     }
   
     return isEmpty;
   }
+
+
 
   emptyPasswords(): void {
     
@@ -42,12 +51,16 @@ export class SignUpComponent implements OnInit {
 
   matchingPasswords(): boolean {
 
+    // match warning
     let isMatch: boolean =  this.password == this.repeatedPassword;
     if (!isMatch) {
-      // add warning about passwords not matching
-      this.emptyPasswords;
+      this.isMatch = true;
 
     }
+    else{
+      this.isMatch = false;
+    }
+
     return isMatch
   }
 
@@ -57,8 +70,10 @@ export class SignUpComponent implements OnInit {
     let isValid = this.email.match(regex) != null;
 
     if (!isValid) {
-      // add warning about not valid email
-
+      this.isValid = true;
+    }
+      else{
+        this.isValid = false;
     }
     return isValid;
   }
@@ -105,6 +120,8 @@ export class SignUpComponent implements OnInit {
     //add warning about error with server / existing username
     this.emptyFields();
   }
+
+
 
   isValidRegistration(): boolean {
 

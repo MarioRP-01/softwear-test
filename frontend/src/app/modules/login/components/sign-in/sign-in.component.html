@@ -17,6 +17,11 @@
                                     id="signInUsername" [(ngModel)]="username" required>
 
                             <label for="signInUsername">Username</label>
+                            <p *ngIf="isWrong == true">
+                                <ngb-alert [dismissible]="false">
+                                  <strong>nooo</strong> Rellénelos antes de continuar.
+                                </ngb-alert>
+                            </p>
                         </div>
 
                         <!-- Password -->
@@ -36,7 +41,7 @@
                                 <ngb-alert [dismissible]="false">
                                   <strong>¡Campos vacíos!</strong> Rellénelos antes de continuar.
                                 </ngb-alert>
-                              </p>
+                            </p>
                         </div>
 
                         <input type="hidden" name="_csrf" value="token"/>

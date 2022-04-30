@@ -8,6 +8,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NotFoundComponent } from './layout-error/not-found/not-found.component';
+import { RouterModule } from '@angular/router';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { NotFoundComponent } from './layout-error/not-found/not-found.component'
   ],
   imports:[
     NgbModule,
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     CommonModule,
@@ -28,7 +31,8 @@ import { NotFoundComponent } from './layout-error/not-found/not-found.component'
     NgbModule,
 
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    RouterModule
   ]
 })
 /*No services */
