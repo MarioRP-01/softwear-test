@@ -42,10 +42,13 @@ export class HomeUsComponent implements OnInit {
 
     this.authService.loadUser().pipe(shareReplay()).subscribe(
       response => {
-        this.activeSesion = this.authService.isUserLoggedIn();
+        this.activeSesion = true
 
       },
-      error => console.log(error)
+      error => {
+        console.log(error)
+        this.activeSesion = false
+      }
     );
   }
 

@@ -46,6 +46,7 @@ export class ProductService {
 
     return this.httpClient.get(url).pipe() as Observable<Product[]>
   }
+  
   //getProductSizeAvailability
 
   // getAllProducts

@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 
-import { Status } from '@app/shared/data-type';
+import { Status, UserRole } from '@app/shared/data-type';
 import { AuthResponse, LoginRequest, ShopUser } from '@app/shared/model';
 import { ShopUserService } from '../api';
 
@@ -45,9 +45,30 @@ export class AuthService {
     ))
   }
 
-  isUserLoggedIn(): boolean {
+  isUserLoggedIn(): Observable<boolean> {
 
-    return this.userData !== undefined;
+    return this.shopUserService.getOwnUser().pipe(map(
+        response => true
+      ),
+      catchError(
+        err => {
+          console.log(err);
+          return of(false);
+        }
+      )) as Observable<boolean>
+  }
+
+  isAdminLoggedIn(): Observable<boolean> {
+
+    return this.shopUserService.getOwnUser().pipe(map(
+      response => response.role == UserRole.ADMIN.toUpperCase()
+    ),
+    catchError(
+      err => {
+        console.log(err);
+        return of(false);
+      }
+    ))
   }
 
   getUserData(): ShopUser | null {
