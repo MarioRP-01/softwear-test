@@ -22,6 +22,10 @@ export class FillingTableComponent implements OnInit {
     });
   }
 
+  delete(content : any) {
+    
+  }
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';

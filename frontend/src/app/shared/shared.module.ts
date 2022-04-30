@@ -9,6 +9,8 @@ import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NotFoundComponent } from './layout-error/not-found/not-found.component';
 import { NgChartsModule } from 'ng2-charts';
+import { RouterModule } from '@angular/router';
+
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { NgChartsModule } from 'ng2-charts';
   imports:[
     NgbModule,
     CommonModule,
+    RouterModule
   ],
   exports: [
     CommonModule,
@@ -30,7 +33,8 @@ import { NgChartsModule } from 'ng2-charts';
     NgbModule,
 
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    RouterModule
   ]
 })
 /*No services */

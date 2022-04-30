@@ -7,7 +7,6 @@ import { AdminAuthGuard } from './core/authentication/admin-auth.guard';
 const routes: Routes = [
   { path: 'not-found', component: NotFoundComponent},
   { path: 'home', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule) },
-
   { path: 'login', loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule) },
 
   { 

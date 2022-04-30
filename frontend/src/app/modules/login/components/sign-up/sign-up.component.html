@@ -24,6 +24,11 @@
                             <input type="email" class="form-control" id="floatingEmailReg" name="email"
                                    placeholder="name@example.com" [(ngModel)]="email" required>
                             <label for="signUpEmail">Email address</label>
+                            <p *ngIf="isValid == true">
+                                <ngb-alert [dismissible]="false">
+                                  <strong>El formato de email no es correcto.</strong> Inténtelo de nuevo.
+                                </ngb-alert>
+                            </p>
                         </div>
 
                         <!-- Password -->
@@ -38,6 +43,11 @@
                             <input type="password" class="form-control" id="signUpPasswordRepeat" name="repeatedPassword"
                                    placeholder="Confirmation Password" [(ngModel)]="repeatedPassword" required>
                             <label for="signUpPasswordRepeat">Repeat Password</label>
+                            <p *ngIf="isMatch == true">
+                                <ngb-alert [dismissible]="false">
+                                  <strong>Las constraseñas no coinciden.</strong> Inténtelo de nuevo.
+                                </ngb-alert>
+                            </p>
                         </div>
 
                         <!-- Send Form -->
@@ -46,6 +56,11 @@
                             <button class="btn btn-outline-dark btn-login text-uppercase fw-bold"
                                     type="submit" (click)="signUp()">Sign up
                             </button>
+                            <p *ngIf="isEmpty == true">
+                                <ngb-alert [dismissible]="false">
+                                  <strong>¡Campos vacíos!</strong> Rellénelos antes de continuar.
+                                </ngb-alert>
+                            </p>
                         </div>
 
                         <input type="hidden" name="_csrf" value="token">
