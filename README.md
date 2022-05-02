@@ -517,3 +517,58 @@ I have worked in the images uploads when creating a new product, as well as crea
 
 * [manageProducts.js](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/619fbfd71c39d6adb520ca90c37382069ea73e9a/backend/src/main/resources/static/js/manageProducts.js)
 * [PoductRESTController.java](https://github.com/CodeURJC-DAW-2021-22/webapp5/blob/619fbfd71c39d6adb520ca90c37382069ea73e9a/backend/src/main/java/com/softwear/webapp5/controller/ProductRESTController.java)
+
+
+##### PHASE 4
+
+
+##### SPA Instructions
+
+Blablabla
+
+##### Classes diagram
+![image](https://user-images.githubusercontent.com/55719681/166327154-059d1b65-ad14-4a10-a906-43041d192ac2.png)
+![image](https://user-images.githubusercontent.com/55719681/166327218-e7ddcb2a-8193-40bb-ba67-741c37f04824.png)
+
+
+##### Participation
+
+##### Ana
+
+##### Important Commits
+* [Dropdown home-us](https://github.com/CodeURJC-DAW-2021-22/webapp5b/commit/3a991ffaf067e72c7b6531588da7cb6b8922f1b0)
+* [Product module, component and carousel created](https://github.com/CodeURJC-DAW-2021-22/webapp5b/commit/53cc9e3a3a1a81941dc638bcc3f31ea497fddbfe)
+* [Admin module and routing created](https://github.com/CodeURJC-DAW-2021-22/webapp5b/commit/3e92dd8b5c00cb48e3f714b15c11660f366623f2)
+* [Product modal and form created](https://github.com/CodeURJC-DAW-2021-22/webapp5b/commit/d0b5170ba2aaf57c5390db84e521fb300a976c05)
+* [Login alerts and product finished](https://github.com/CodeURJC-DAW-2021-22/webapp5b/commit/032358a53c4e6e9d189dc022305355661a90d7af)
+
+##### Important Files
+-Login module 
+
+-Sign in component 
+
+-Sign up component 
+
+-Product module 
+
+-Product-size component
+
+##### Mario
+
+##### Important Commits
+* [Added amount to add and delete products](https://github.com/CodeURJC-DAW-2021-22/webapp5b/commit/ed479f4ed10b560c146c73e89dbc4947ef2a63c8)
+* [Functions on wishlist view](https://github.com/CodeURJC-DAW-2021-22/webapp5b/commit/35f82366a50ee163a0bde0f4bfc9fc3c41677da6)
+* [Product carousel and some resolvers](https://github.com/CodeURJC-DAW-2021-22/webapp5b/commit/b47bcbd27c5595138c27d6366ab65a27810f9547)
+* [Fixed bug in entering product without being logged](https://github.com/CodeURJC-DAW-2021-22/webapp5b/commit/4680eb2e1f8cd8412827f7c4b3beb3658416dff0)
+* [Select size in product view](https://github.com/CodeURJC-DAW-2021-22/webapp5b/commit/809f6e42fc50e1abeff7e7bc1a3aa81e0070830b)
+
+##### Important Files
+-Home module
+
+-Admin module 
+
+-Transaction module 
+
+-Account details component 
+
+-Product size component
