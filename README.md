@@ -306,13 +306,19 @@ You need to install docker in your system in order to execute this script. Also,
 
 ## Development environment
 
-When working in the development environment, backend and frontend will be initialised separately and communicate with each other via REST api.
+When working in the development environment, backend and frontend will be initialised separately and will communicate with each other via REST api. In order to do it, we set a proxy which let frontend to get all needed information from backend. It's configuration is in proxy.conf.json.
 
 ### Launch angular aplication
 
 ```bash
 ng serve --proxy-config proxy.conf.json
 ```
+or 
+```bash
+npm start 
+```
+We can use this comand because it was configure as a script in package.json.
+
 ### Launch spring-boot aplication
 
 ```bash
