@@ -528,7 +528,7 @@ I have worked in the images uploads when creating a new product, as well as crea
 
 ##### Youtube video
 
-![Link to video](https://www.youtube.com/watch?v=xC5o0zyJtjQ&ab_channel=AnaCristinaAcostaHern%C3%A1ndez)
+[Link to video](https://www.youtube.com/watch?v=xC5o0zyJtjQ&ab_channel=AnaCristinaAcostaHern%C3%A1ndez)
 
 ##### Participation
 
