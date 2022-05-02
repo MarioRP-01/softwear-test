@@ -325,6 +325,10 @@ We can use this comand because it was configure as a script in package.json.
 mvn spring-boot:run
 ```
 
+### Changes in docker image construction
+
+Added in dockerfile code needed to build angular before maven to move it later.
+
 ## Participation
 
 ### Phase 2
