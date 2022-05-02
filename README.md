@@ -522,10 +522,6 @@ I have worked in the images uploads when creating a new product, as well as crea
 ##### PHASE 4
 
 
-##### SPA Instructions
-
-Blablabla
-
 ##### Classes diagram
 ![image](https://user-images.githubusercontent.com/55719681/166327154-059d1b65-ad14-4a10-a906-43041d192ac2.png)
 ![image](https://user-images.githubusercontent.com/55719681/166327218-e7ddcb2a-8193-40bb-ba67-741c37f04824.png)
@@ -535,6 +531,7 @@ Blablabla
 
 ##### Ana
 
+I have been mostly working in graphic libraries ng-bootstrap.
 ##### Important Commits
 * [Dropdown home-us](https://github.com/CodeURJC-DAW-2021-22/webapp5b/commit/3a991ffaf067e72c7b6531588da7cb6b8922f1b0)
 * [Product module, component and carousel created](https://github.com/CodeURJC-DAW-2021-22/webapp5b/commit/53cc9e3a3a1a81941dc638bcc3f31ea497fddbfe)
@@ -555,6 +552,7 @@ Blablabla
 
 ##### Mario
 
+I have been working in all the areas fo the project.
 ##### Important Commits
 * [Added amount to add and delete products](https://github.com/CodeURJC-DAW-2021-22/webapp5b/commit/ed479f4ed10b560c146c73e89dbc4947ef2a63c8)
 * [Functions on wishlist view](https://github.com/CodeURJC-DAW-2021-22/webapp5b/commit/35f82366a50ee163a0bde0f4bfc9fc3c41677da6)
