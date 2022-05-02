@@ -526,6 +526,9 @@ I have worked in the images uploads when creating a new product, as well as crea
 ![image](https://user-images.githubusercontent.com/55719681/166327154-059d1b65-ad14-4a10-a906-43041d192ac2.png)
 ![image](https://user-images.githubusercontent.com/55719681/166327218-e7ddcb2a-8193-40bb-ba67-741c37f04824.png)
 
+##### Youtube video
+
+![Link to video](https://www.youtube.com/watch?v=xC5o0zyJtjQ&ab_channel=AnaCristinaAcostaHern%C3%A1ndez)
 
 ##### Participation
 
