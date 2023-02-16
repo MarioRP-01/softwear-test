@@ -18,8 +18,9 @@ import javax.mail.internet.MimeMultipart;
 
 public class MailService {
 
-    Properties prop;
-    Session session;
+    final Properties prop;
+    final Session session;
+    private final String mailUsername;
 
     public MailService(String mailUsername, String mailPassword){
 
@@ -37,12 +38,14 @@ public class MailService {
                 return new PasswordAuthentication(mailUsername, mailPassword);
             }
         });
+
+        this.mailUsername = mailUsername;
     }
 
     public void send(String receiverMail, String subject, String msg) throws Exception{
    
         Message message = new MimeMessage(this.session);
-        message.setFrom(new InternetAddress("softwearDAW@gmail.com"));
+        message.setFrom(new InternetAddress(this.mailUsername));
         message.setRecipients(
         Message.RecipientType.TO, InternetAddress.parse(receiverMail));
         message.setSubject(subject);
