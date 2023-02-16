@@ -10,7 +10,7 @@ In order to run the application you need to use environment variables to configu
 
 | **Name**					 | **Application Property**		 | **Default**							 | **Description**									 |
 | -------------------------- | ----------------------------- | ------------------------------------- | ------------------------------------------------- |
-| PORT						 | server.port					 | 8080								 | Server port 										 |
+| PORT						 | server.port					 | 8080								 	 | Server port 										 |
 | SPRING_DATASOURCE_URL		 | spring.datasource.url		 | jdbc:postgresql://localhost/softwear	 | Database URL										 |
 | SPRING_DATASOURCE_USERNAME | spring.datasource.username	 | postgres								 | Database user									 |
 | SPRING_DATASOURCE_PASSWORD | spring.datasource.password	 | password								 | Database password 								 |

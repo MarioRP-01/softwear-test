@@ -1,9 +1,9 @@
-FROM node:alpine as frontend
+FROM node:16-alpine as frontend
 WORKDIR /app/frontend
 COPY /frontend /app/frontend
 RUN rm -rf /app/frontend/node_modules
 RUN npm i
-RUN npm i -g @angular/cli
+RUN npm i -g @angular/cli@13.3.1
 RUN ng build --base-href="/new/" --named-chunks
 
 FROM maven:3.8.4-openjdk-17 as compiler
