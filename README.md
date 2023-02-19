@@ -8,15 +8,31 @@ This is the [original repository](https://github.com/CodeURJC-DAW-2021-22/webapp
 
 ## Development environment
 
-When working in the development environment, backend and frontend will be initialised separately and will communicate with each other via REST api. In order to do it, we set a proxy which let frontend to get all needed information from backend. It's configuration is in proxy.conf.json.
+Backend and frontend will be initialised separately and will communicate with each other via REST api. In order to do it, we set a proxy which let frontend to get all needed information from backend. It's configuration is in proxy.conf.json.
 
 ### Configure Postgres db
-version: 
+
+version: 15 >= 
+
 - **db name**: softwear
 - **username**: postgres
 - **password**: password
 
+#### Launch Postgres in docker container
+
+```bash
+docker run --name sw-pg -d \
+    -e POSTGRES_DB=softwear \
+    -e POSTGRES_PASSWORD=password \
+    -p 5432:5432 \
+    postgres:15
+```
+
 ### Launch Spring Boot
+
+```bash
+mvn spring-boot:run
+```
 
 ### Launch Angular aplication
 
@@ -30,10 +46,6 @@ npm start
 We can use this command instead because it was configure as a script in package.json.
 
 ### Launch spring-boot aplication
-
-```bash
-mvn spring-boot:run
-```
 
 ## Docker
 
