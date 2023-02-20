@@ -30,11 +30,15 @@ docker run --name sw-pg -d \
 
 ### Launch Spring Boot
 
+version: 2.6.4
+
 ```bash
 mvn spring-boot:run
 ```
 
 ### Launch Angular aplication
+
+version: 13 >=
 
 ```bash
 ng serve --proxy-config proxy.conf.json
