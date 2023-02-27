@@ -45,7 +45,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/api/transactions")
-public class RestTransactionController {
+public class TransactionRestController {
 
     @Autowired
     TransactionService transactionService;
