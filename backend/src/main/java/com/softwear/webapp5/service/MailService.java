@@ -1,6 +1,5 @@
 package com.softwear.webapp5.service;
 
-import com.softwear.webapp5.data.CouponView;
 import com.softwear.webapp5.data.TransactionView;
 import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.model.Transaction;
@@ -69,10 +68,6 @@ public class MailService {
             TransactionView.TransactionViewEntry entry = cartView.getTransactionEntries().get(i);
             products.append(String.format("\t#%d\t%s - %s\t$%01.02f x %d\t->\t$%01.02f\n",
                     i + 1, entry.getProduct().getName(), entry.getProduct().getSize(), entry.getProduct().getPrice(), entry.getQuantity(), entry.getTotalPrice()));
-        }
-        if(cartView.getCoupon() != null) {
-            CouponView coupon = cartView.getCoupon();
-            products.append(String.format("\tCoupon: %s\t\t\t- $%01.02f\n", coupon.getCode(), coupon.getDiscount()));
         }
         products.append(String.format("Total: $%01.02f\n", cartView.getTotalPrice()));
         return String.format("Transaction ID: %d\nDate: %s\nStatus: %s\nShipping Address: %s\nSummary:\n%s", cart.getId(), cart.getDate(), cart.getType(), cart.getUser().getAddress(), products.toString());

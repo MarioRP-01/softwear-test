@@ -25,9 +25,6 @@ public class TransactionService {
     private UserService userService;
 
     @Autowired
-    private CouponService couponService;
-
-    @Autowired
     private TransactionRepository transactionRepository;
 
     @Autowired
@@ -63,11 +60,6 @@ public class TransactionService {
         ShopUser user = userService.findById(userId).get();
 
         return transactionRepository.findByUser(user, page);
-    }
-
-
-    public List<Transaction> findByUsedCoupon(Coupon coupon) {
-        return transactionRepository.findByUsedCoupon(coupon);
     }
 
     public List<Transaction> findByDate(String date) {
@@ -120,9 +112,7 @@ public class TransactionService {
     public void updateAndSave(Transaction transaction) {
 
         transaction.setTotalPrice(transaction.calculateTotalProductPrice());
-        if(!couponService.applyCoupon(transaction)) {
-            transactionRepository.save(transaction);
-        }
+        transactionRepository.save(transaction);
     }
 
     public boolean addToCart(Long productId, ShopUser user, int quantity) {
@@ -137,7 +127,7 @@ public class TransactionService {
             if (optionalTransaction.isPresent()) {
                 cart = optionalTransaction.get();
             } else {
-                cart = new Transaction("CART", user, null, getCurrentDate(), new ArrayList<>());
+                cart = new Transaction("CART", user, getCurrentDate(), new ArrayList<>());
             }
             for(int i=0; i<quantity; i++) {
                 cart.getProducts().add(product);
@@ -187,19 +177,6 @@ public class TransactionService {
         return false;
     }
 
-    public boolean removeCouponFromCart(ShopUser user) {
-        Optional<Transaction> optionalCart = transactionRepository.findCart(user);
-        if(optionalCart.isPresent()) {
-            Transaction cart = optionalCart.get();
-            if(cart.getUsedCoupon() != null){
-                cart.setUsedCoupon(null);
-                updateAndSave(cart);
-                return true;
-            }
-        }
-        return false;
-    }
-
     public void emptyCart(ShopUser user) {
         Optional<Transaction> optCart = transactionRepository.findCart(user);
         if (optCart.isPresent()) {
@@ -215,7 +192,7 @@ public class TransactionService {
 
     public Transaction createEmptyCart(ShopUser user) {
 
-        return new Transaction("CART", user, null, getCurrentDate(), new ArrayList<>());
+        return new Transaction("CART", user, getCurrentDate(), new ArrayList<>());
     }
 
     public void saveEmptyWishlist(ShopUser user) {
@@ -226,7 +203,7 @@ public class TransactionService {
 
     public Transaction createEmptyWishlist(ShopUser user) {
 
-        return new Transaction("WISHLIST", user, null, getCurrentDate(), new ArrayList<>());
+        return new Transaction("WISHLIST", user, getCurrentDate(), new ArrayList<>());
     }
 
     public Transaction processTransaction(Transaction transaction, ShopUser user) {       
@@ -236,7 +213,7 @@ public class TransactionService {
             ArrayList<Product> products =  new ArrayList<>();
 
             products.addAll(transaction.getProducts());
-            Transaction processedTransaction = new Transaction("PROCESSED", user, null, getCurrentDate(), products);
+            Transaction processedTransaction = new Transaction("PROCESSED", user, getCurrentDate(), products);
 
             transaction.getProducts().clear();
 
@@ -255,7 +232,7 @@ public class TransactionService {
             if (optionalTransaction.isPresent()) {
                 wishlist = optionalTransaction.get();
             } else {
-                wishlist = new Transaction("WISHLIST", user, null, getCurrentDate(), new ArrayList<>());
+                wishlist = new Transaction("WISHLIST", user, getCurrentDate(), new ArrayList<>());
             }
             if (!wishlist.getProducts().contains(product)) {
                 wishlist.getProducts().add(product);

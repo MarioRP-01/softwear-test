@@ -31,10 +31,6 @@ public class Transaction {
 	@OnDelete(action = OnDeleteAction.CASCADE)
     private ShopUser user;
 
-	@ManyToOne (fetch=FetchType.EAGER)
-	@OnDelete (action = OnDeleteAction.NO_ACTION)
-    private Coupon usedCoupon;
-
 	@Column(nullable = false)
     private String date;
 
@@ -52,10 +48,9 @@ public class Transaction {
 		this.date = date;
 	}
 
-    public Transaction(String type, ShopUser user, Coupon usedCoupon, String date, List<Product> products) {
+    public Transaction(String type, ShopUser user, String date, List<Product> products) {
         this.type = type;
         this.user = user;
-        this.usedCoupon = usedCoupon;
         this.date = date;
         this.products = products;
 		totalPrice = calculateTotalProductPrice();
@@ -66,7 +61,6 @@ public class Transaction {
 	public Transaction(Transaction tr) {
 		this.type = tr.type;
         this.user = tr.user;
-        this.usedCoupon = tr.usedCoupon;
         this.date = tr.date;
         this.products = tr.products;
 		totalPrice = calculateTotalProductPrice();
@@ -94,14 +88,6 @@ public class Transaction {
 
 	public void setUser(ShopUser user) {
 		this.user = user;
-	}
-
-	public Coupon getUsedCoupon() {
-		return usedCoupon;
-	}
-
-	public void setUsedCoupon(Coupon usedCoupon) {
-		this.usedCoupon = usedCoupon;
 	}
 
 	public String getDate() {

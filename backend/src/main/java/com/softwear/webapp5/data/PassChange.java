@@ -1,6 +1,6 @@
 package com.softwear.webapp5.data;
 
-public class PassChange {
+private class PassChange {
 
 	private String oldPass;
 	private String newPass;

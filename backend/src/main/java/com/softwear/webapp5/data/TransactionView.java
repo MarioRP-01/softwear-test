@@ -1,6 +1,5 @@
 package com.softwear.webapp5.data;
 
-import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.Transaction;
 
@@ -15,7 +14,6 @@ public class TransactionView {
     private List<TransactionViewEntry> transactionEntries= new ArrayList<>();
     private String date;
     private String type;
-    private CouponView coupon;
     private double totalPrice;
     private double discount;
 
@@ -85,12 +83,6 @@ public class TransactionView {
         type = transaction.getType();
         totalPrice = transaction.getTotalPrice();
         discount = calculateDiscount();
-        Coupon usedCoupon = transaction.getUsedCoupon();
-        if(usedCoupon == null) {
-            coupon = null;
-        } else {
-            coupon = new CouponView(usedCoupon, discount);
-        }
     }
 
     public long getId() {
@@ -123,14 +115,6 @@ public class TransactionView {
 
     public void setTransactionEntries(List<TransactionViewEntry> transactionEntries) {
         this.transactionEntries = transactionEntries;
-    }
-
-    public CouponView getCoupon() {
-        return coupon;
-    }
-
-    public void setCoupon(CouponView coupon) {
-        this.coupon = coupon;
     }
 
     public double getTotalPrice() {

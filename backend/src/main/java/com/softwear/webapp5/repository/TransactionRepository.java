@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.softwear.webapp5.data.StaticDTO;
-import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Transaction;
 import com.softwear.webapp5.model.ShopUser;
 import org.springframework.data.jpa.repository.Query;
@@ -21,7 +20,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
     Page<Transaction> findByUser(ShopUser user, Pageable page);
 
-    List<Transaction> findByUsedCoupon(Coupon coupon);
     List<Transaction> findByDate(String date);
     List<Transaction> findByTotalPrice(Double totalPrice);
 

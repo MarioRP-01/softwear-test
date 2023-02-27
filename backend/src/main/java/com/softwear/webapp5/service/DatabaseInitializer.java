@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 
 import com.softwear.webapp5.model.Product;
-import com.softwear.webapp5.repository.CouponRepository;
 import com.softwear.webapp5.repository.ProductRepository;
 import com.softwear.webapp5.repository.TransactionRepository;
 import com.softwear.webapp5.repository.UserRepository;
@@ -20,7 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.softwear.webapp5.data.ProductSize;
-import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Transaction;
 import com.softwear.webapp5.model.ShopUser;
 
@@ -33,16 +31,10 @@ public class DatabaseInitializer {
 	private ProductRepository productRepository;
 
 	@Autowired
-	private CouponRepository couponRepository;
-
-	@Autowired
 	private TransactionRepository transactionRepository;
 
 	@Autowired
 	private UserRepository userRepository;
-
-	@Autowired
-	private CouponService couponService;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -379,23 +371,6 @@ public class DatabaseInitializer {
 		productListB.add(happy_jaccket_L);
 		productListB.add(happy_jaccket_XL);
 
-		Coupon globalDiscount50 = new Coupon("ASTONISHOFFER", "total_percentage", "15/02/2022", "26/06/2022", 0f, 0.5f, null);
-		Coupon twoXone = new Coupon("2X1", "2x1", "13/02/2022", "26/06/2022", null, null, productListA);
-		Coupon threeXtwo = new Coupon("TAKEALOOK3X2", "3x2", "12/02/2022", "22/02/2022", null, null, productListA);
-		Coupon productListADiscount = new Coupon("I<3LEATHER", "product_percentage", "15/02/2022", "15/06/2022", null, 0.4f, productListA);
-		Coupon freeSelected = new Coupon("FREESELECTEDA", "product_amount", "15/02/2022", "15/06/2022", null, 4.5f, productListA);
-		Coupon globalDiscount10 = new Coupon("10PER", "total_percentage", "15/02/2022", "26/06/2022", 10.00f, 0.1f, null);
-		Coupon getTen = new Coupon("GIVEME10", "total_amount", "15/02/2022", "26/02/2022", 10.00f, 2.5f, null);
-		
-		couponRepository.save(globalDiscount50);
-		couponRepository.save(twoXone);
-		couponRepository.save(threeXtwo);
-		couponRepository.save(productListADiscount);
-		couponRepository.save(freeSelected);
-		couponRepository.save(globalDiscount10);
-		couponRepository.save(getTen);
-
-
 		// Transactions
 
 		List<Product> productListTransaction1 = new ArrayList<>();
@@ -470,56 +445,31 @@ public class DatabaseInitializer {
 		}
 		productListCart.add(cowboy_jacket_XL);
 
-		Transaction transaction1 = new Transaction("PROCESSED", user, freeSelected, "17/02/2022", productListTransaction1);
-        if(!couponService.applyCoupon(transaction1)) {
-            transactionRepository.save(transaction1);
-		}
-
-		Transaction transaction2 = new Transaction("PROCESSED", user, threeXtwo, "17/02/2022", productListTransaction2);
-        if(!couponService.applyCoupon(transaction2)) {
-            transactionRepository.save(transaction2);
-        }
-		
-		Transaction transaction3 = new Transaction("PROCESSED", user, threeXtwo, "17/02/2022", productListTransaction3);
-		if(!couponService.applyCoupon(transaction3)) {
-			transactionRepository.save(transaction3);
-		}
-
-		Transaction transaction4 = new Transaction("PROCESSED", user, globalDiscount10, "17/02/2022", productListTransaction4);
-		if(!couponService.applyCoupon(transaction4)) {
-			transactionRepository.save(transaction4);
-		}
-
-		Transaction transaction5 = new Transaction("PROCESSED", user, getTen, "17/02/2022", productListTransaction5);
-		if(!couponService.applyCoupon(transaction5)) {
-			transactionRepository.save(transaction5);
-		}
-
-		Transaction transaction6 = new Transaction("PROCESSED", user, null, "17/02/2022", productListTransaction6);
+		Transaction transaction6 = new Transaction("PROCESSED", user, "17/02/2022", productListTransaction6);
 		transactionRepository.save(transaction6);
 		
-		Transaction transaction7 = new Transaction("PROCESSED", user, null, "01/13/2022",productListTransaction7);
+		Transaction transaction7 = new Transaction("PROCESSED", user, "01/13/2022",productListTransaction7);
 		transactionRepository.save(transaction7);
 
-		Transaction transaction8 = new Transaction("PROCESSED", user, null, "01/13/2022",productListTransaction8);
+		Transaction transaction8 = new Transaction("PROCESSED", user, "01/13/2022",productListTransaction8);
 		transactionRepository.save(transaction8);
 
-		Transaction transaction9 = new Transaction("PROCESSED", user, null, "01/13/2022",productListTransaction9);
+		Transaction transaction9 = new Transaction("PROCESSED", user, "01/13/2022",productListTransaction9);
 		transactionRepository.save(transaction9);
 
-		Transaction transaction10 = new Transaction("PROCESSED", user, null, "01/13/2022",productListTransaction10);
+		Transaction transaction10 = new Transaction("PROCESSED", user, "01/13/2022",productListTransaction10);
 		transactionRepository.save(transaction10);
 
-		Transaction transaction11 = new Transaction("PROCESSED", user, null, "01/13/2022",productListTransaction11);
+		Transaction transaction11 = new Transaction("PROCESSED", user, "01/13/2022",productListTransaction11);
 		transactionRepository.save(transaction11);
 
-		Transaction transaction12 = new Transaction("PROCESSED", user, null, "01/13/2022",productListTransaction12);
+		Transaction transaction12 = new Transaction("PROCESSED", user, "01/13/2022",productListTransaction12);
 		transactionRepository.save(transaction12);
 
-		Transaction wishList = new Transaction("WISHLIST", user, null, "24/02/2022", productListWishList);
+		Transaction wishList = new Transaction("WISHLIST", user, "24/02/2022", productListWishList);
 		transactionRepository.save(wishList);
 
-		Transaction cart = new Transaction("CART", user, null, "24/02/2022", productListCart);
+		Transaction cart = new Transaction("CART", user, "24/02/2022", productListCart);
 		transactionRepository.save(cart);
 	}
 

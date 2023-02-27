@@ -13,11 +13,9 @@ import com.softwear.webapp5.data.StaticDTO;
 import com.softwear.webapp5.data.TransactionFilter;
 import com.softwear.webapp5.data.TransactionPageDTO;
 import com.softwear.webapp5.data.TransactionType;
-import com.softwear.webapp5.model.Coupon;
 import com.softwear.webapp5.model.Product;
 import com.softwear.webapp5.model.ShopUser;
 import com.softwear.webapp5.model.Transaction;
-import com.softwear.webapp5.repository.CouponRepository;
 import com.softwear.webapp5.repository.ProductRepository;
 import com.softwear.webapp5.repository.UserRepository;
 import com.softwear.webapp5.service.ProductService;
@@ -61,9 +59,6 @@ public class TransactionRestController {
 
     @Autowired
     ProductRepository productRepository;
-
-    @Autowired
-    CouponRepository couponRepository;
 
     @GetMapping("/{id}") //GET
     public ResponseEntity<Transaction> getTransactionById(@PathVariable Long id){
@@ -237,9 +232,6 @@ public class TransactionRestController {
             else
                 newTransaction.setProducts(products);
 
-            //We get the coupon by id
-            newTransaction.setUsedCoupon(getDbCouponFromIdCouponInTransaction(transaction));
-
             newTransaction.setType(transaction.getType());
             newTransaction.setDate(transaction.getDate());
         
@@ -400,9 +392,6 @@ public class TransactionRestController {
                 return ResponseEntity.notFound().build();
             else
                 newTransaction.setProducts(products);
-
-            //We get the coupon by id
-            newTransaction.setUsedCoupon(getDbCouponFromIdCouponInTransaction(transaction));
 
             newTransaction.setType(transaction.getType());
             newTransaction.setDate(transaction.getDate());
@@ -567,19 +556,6 @@ public class TransactionRestController {
             }
         }
         return products;
-    }
-
-    private Coupon getDbCouponFromIdCouponInTransaction(Transaction transaction) {
-        Coupon coupon;
-        try{ //If its null it throws an exception, if it's not and it exists we return it
-                Optional<Coupon> oCoupon = couponRepository.findById(transaction.getUsedCoupon().getId());
-                if(oCoupon.isPresent()){
-                    coupon = oCoupon.get();
-                    return coupon;
-                }
-            }catch(Exception e){
-            }
-        return null;
     }
 
 /*
