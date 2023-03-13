@@ -1,0 +1,539 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "api",
+    "dateExported": "2023-03-11T17:38:04.078Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "a3a98d3e-d4fa-4a25-a7be-e21feae5891d",
+            "name": "authentication",
+            "containerId": "",
+            "created": "2023-03-11T14:27:08.514Z",
+            "sortNum": 5000
+        },
+        {
+            "_id": "90dbffd4-9e68-42c9-a998-bd9a10fb02a5",
+            "name": "shop_users",
+            "containerId": "",
+            "created": "2023-03-11T11:55:23.881Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "c3b06c2e-02a4-45a3-80f3-8638e4bfe4e2",
+            "name": "transactions",
+            "containerId": "",
+            "created": "2023-03-11T11:55:23.882Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "142b2e0c-92be-41d6-a3d7-59c67b35f1c4",
+            "name": "products",
+            "containerId": "",
+            "created": "2023-03-11T11:55:23.884Z",
+            "sortNum": 40000
+        },
+        {
+            "_id": "8d90bcfc-aa1a-461f-b401-d1ae01d653a7",
+            "name": "ProductImages",
+            "containerId": "",
+            "created": "2023-03-11T11:55:23.885Z",
+            "sortNum": 50000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "b30d5a47-f8ad-4092-80d9-4c67d1682df8",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "a3a98d3e-d4fa-4a25-a7be-e21feae5891d",
+            "name": "sign_in_user",
+            "url": "https://localhost:8443/api/auth/login",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-03-11T11:55:23.883Z",
+            "modified": "2023-03-11T14:27:18.820Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{ \"username\": \"user\", \"password\":\"pass\"}"
+            },
+            "auth": {
+                "type": "none"
+            }
+        },
+        {
+            "_id": "988d8f84-379a-4b1e-9809-c4a4db18abdb",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "a3a98d3e-d4fa-4a25-a7be-e21feae5891d",
+            "name": "sign_in_admin",
+            "url": "https://localhost:8443/api/auth/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-03-11T11:55:23.882Z",
+            "modified": "2023-03-11T14:27:24.748Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "username",
+                    "value": "user",
+                    "isDisabled": true
+                },
+                {
+                    "name": "password",
+                    "value": "pass",
+                    "isDisabled": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{ \"username\" : \"admin\", \"password\" :\"pass\" }"
+            }
+        },
+        {
+            "_id": "784c2337-a4cc-483f-ab28-3238be0e6869",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "a3a98d3e-d4fa-4a25-a7be-e21feae5891d",
+            "name": "logout",
+            "url": "https://localhost:8443/api/auth/logout",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-03-11T11:55:23.884Z",
+            "modified": "2023-03-11T14:27:27.687Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": ""
+            },
+            "auth": {
+                "type": "none"
+            }
+        },
+        {
+            "_id": "5eee5f69-8204-471a-afd1-8b69dd8d475e",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "90dbffd4-9e68-42c9-a998-bd9a10fb02a5",
+            "name": "create_user",
+            "url": "https://localhost:8443/api/users/",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-03-11T11:55:23.885Z",
+            "modified": "2023-03-11T11:55:23.885Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\"username\":\"Jorge\",\"password\":\"pass\",\"email\":\"Jorge@user.com\",\"name\":\"User\",\"lastName\":\"Softwear\",\"address\":\"User Street 1\",\"mobileNumber\":333323232,\"birthdate\":\"01/01/2000\",\"role\":\"USER\"}"
+            }
+        },
+        {
+            "_id": "020d99ab-df03-4cce-8469-05ce4fd2a1a0",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "90dbffd4-9e68-42c9-a998-bd9a10fb02a5",
+            "name": "get_user",
+            "url": "https://localhost:8443/api/users/",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2023-03-11T11:55:23.886Z",
+            "modified": "2023-03-11T11:55:23.886Z",
+            "headers": [],
+            "auth": {
+                "type": "none"
+            }
+        },
+        {
+            "_id": "172b8150-f54f-4de7-b937-0475ded7348f",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "90dbffd4-9e68-42c9-a998-bd9a10fb02a5",
+            "name": "get_user_history",
+            "url": "https://localhost:8443/api/userHistory?page=1",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-03-11T11:55:23.887Z",
+            "modified": "2023-03-11T11:55:23.887Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "1"
+                }
+            ],
+            "auth": {
+                "type": "none"
+            }
+        },
+        {
+            "_id": "c581b514-e95b-449f-a2fc-c55f66dffb96",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "90dbffd4-9e68-42c9-a998-bd9a10fb02a5",
+            "name": "update_info_by_user",
+            "url": "https://localhost:8443/api/users/userInfo",
+            "method": "PUT",
+            "sortNum": 70000,
+            "created": "2023-03-11T11:55:23.888Z",
+            "modified": "2023-03-11T11:55:23.888Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\"id\":\"\",\"username\":\"\",\"password\":\"\",\"email\":\"user@user.com\",\"name\":\"Manolo\",\"lastName\":\"Softwear\",\"address\":\"User Street 1\",\"mobileNumber\":\"654987321\",\"birthdate\":\"01/01/2000\",\"role\":\"\"}"
+            }
+        },
+        {
+            "_id": "cd260084-acaa-4234-9fff-a44db2deafe1",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "90dbffd4-9e68-42c9-a998-bd9a10fb02a5",
+            "name": "update_user_info",
+            "url": "https://localhost:8443/api/users/2",
+            "method": "PUT",
+            "sortNum": 80000,
+            "created": "2023-03-11T11:55:23.889Z",
+            "modified": "2023-03-11T11:55:23.889Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\"id\":2,\"username\":\"Manolo\",\"password\":\"pass\",\"email\":\"user@user.com\",\"name\":\"User\",\"lastName\":\"Softwear\",\"address\":\"User Street 1\",\"mobileNumber\":654987321,\"birthdate\":\"01/01/2000\",\"role\":\"USER\"}"
+            }
+        },
+        {
+            "_id": "d78343c4-68e5-4cfe-8b6d-ebc16844cbcf",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "90dbffd4-9e68-42c9-a998-bd9a10fb02a5",
+            "name": "update_password",
+            "url": "https://localhost:8443/api/users/password",
+            "method": "PUT",
+            "sortNum": 90000,
+            "created": "2023-03-11T11:55:23.890Z",
+            "modified": "2023-03-11T11:55:23.890Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\"oldPass\":\"pass\",\"newPass\":\"1234\",\"newConfPass\":\"1234\"}"
+            }
+        },
+        {
+            "_id": "690e5fad-0366-4736-919a-df79d08dcab4",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "90dbffd4-9e68-42c9-a998-bd9a10fb02a5",
+            "name": "delete_user",
+            "url": "https://localhost:8443/api/users/3",
+            "method": "DELETE",
+            "sortNum": 100000,
+            "created": "2023-03-11T11:55:23.891Z",
+            "modified": "2023-03-11T11:55:23.891Z",
+            "headers": [
+                {
+                    "name": "id",
+                    "value": "2",
+                    "isDisabled": true
+                }
+            ]
+        },
+        {
+            "_id": "65ebfe6b-36ba-4f77-bb6b-746f82be785e",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "c3b06c2e-02a4-45a3-80f3-8638e4bfe4e2",
+            "name": "get_all_transactions",
+            "url": "https://localhost:8443/api/transactions?page=2",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2023-03-11T11:55:23.892Z",
+            "modified": "2023-03-11T11:55:23.892Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "2"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{ \"type\":\"WISHLIST\", \"user\": { \"id\" : 1}, \"date\": \"10/1/2034\", \"products\": [{\"id\" : 2}, {\"id\": 3}], \"usedCoupon\":{\"id\":3} }"
+            }
+        },
+        {
+            "_id": "fb064e5a-b195-4a1b-982f-ad2ea448583a",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "c3b06c2e-02a4-45a3-80f3-8638e4bfe4e2",
+            "name": "get_processed_transactions",
+            "url": "https://localhost:8443/api/transactions/processed?page=2",
+            "method": "GET",
+            "sortNum": 120000,
+            "created": "2023-03-11T11:55:23.893Z",
+            "modified": "2023-03-11T11:55:23.893Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "2"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{ \"type\":\"WISHLIST\", \"user\": { \"id\" : 1}, \"date\": \"10/1/2034\", \"products\": [{\"id\" : 2}, {\"id\": 3}], \"usedCoupon\":{\"id\":3} }"
+            }
+        },
+        {
+            "_id": "2a1af36f-ad89-435b-9413-b34cd3d4d28c",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "c3b06c2e-02a4-45a3-80f3-8638e4bfe4e2",
+            "name": "get_cart_transactions",
+            "url": "https://localhost:8443/api/transactions/carts",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2023-03-11T11:55:23.894Z",
+            "modified": "2023-03-11T11:55:23.894Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{ \"type\":\"WISHLIST\", \"user\": { \"id\" : 1}, \"date\": \"10/1/2034\", \"products\": [{\"id\" : 2}, {\"id\": 3}], \"usedCoupon\":{\"id\":3} }"
+            }
+        },
+        {
+            "_id": "924c2c7a-5136-43f9-ad97-2c5cbf350ee9",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "c3b06c2e-02a4-45a3-80f3-8638e4bfe4e2",
+            "name": "get_wishlist_transactions",
+            "url": "https://localhost:8443/api/transactions/wishlists",
+            "method": "GET",
+            "sortNum": 140000,
+            "created": "2023-03-11T11:55:23.895Z",
+            "modified": "2023-03-11T11:55:23.895Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{ \"type\":\"WISHLIST\", \"user\": { \"id\" : 1}, \"date\": \"10/1/2034\", \"products\": [{\"id\" : 2}, {\"id\": 3}], \"usedCoupon\":{\"id\":3} }"
+            }
+        },
+        {
+            "_id": "3c515044-a858-4ac0-98c7-cb6e26305c70",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "c3b06c2e-02a4-45a3-80f3-8638e4bfe4e2",
+            "name": "update_transaction",
+            "url": "https://localhost:8443/api/transactions/12",
+            "method": "PUT",
+            "sortNum": 150000,
+            "created": "2023-03-11T11:55:23.896Z",
+            "modified": "2023-03-11T11:55:23.896Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{ \"type\":\"WISHLIST\", \"user\": { \"id\" : 1}, \"date\": \"10/1/2034\", \"products\": [{\"id\" : 2}, {\"id\": 3}], \"usedCoupon\":{\"id\":1} }"
+            }
+        },
+        {
+            "_id": "275ba090-f059-44d1-be7f-0de32ce74b41",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "c3b06c2e-02a4-45a3-80f3-8638e4bfe4e2",
+            "name": "create_transaction",
+            "url": "https://localhost:8443/api/transactions",
+            "method": "POST",
+            "sortNum": 160000,
+            "created": "2023-03-11T11:55:23.897Z",
+            "modified": "2023-03-11T11:55:23.897Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{ \"type\":\"WISHLIST\", \"user\": { \"id\" : 1}, \"date\": \"10/1/2034\", \"products\": [{\"id\" : 2}, {\"id\": 3}], \"usedCoupon\":{\"id\":3} }"
+            }
+        },
+        {
+            "_id": "29058327-bf46-449b-9399-66dba8f74eb4",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "c3b06c2e-02a4-45a3-80f3-8638e4bfe4e2",
+            "name": "add_product_to_transaction",
+            "url": "https://localhost:8443/api/transactions/13/products/1",
+            "method": "POST",
+            "sortNum": 170000,
+            "created": "2023-03-11T11:55:23.899Z",
+            "modified": "2023-03-11T11:55:23.899Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{ \"type\":\"WISHLIST\", \"user\": { \"id\" : 1}, \"date\": \"10/1/2034\", \"products\": [{\"id\" : 2}, {\"id\": 3}], \"usedCoupon\":{\"id\":3} }"
+            }
+        },
+        {
+            "_id": "dea59f7d-8dd8-4884-afdc-948c21c5b358",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "c3b06c2e-02a4-45a3-80f3-8638e4bfe4e2",
+            "name": "remove_product_from_transaction",
+            "url": "https://localhost:8443/api/transactions/13/products/1",
+            "method": "DELETE",
+            "sortNum": 180000,
+            "created": "2023-03-11T11:55:23.900Z",
+            "modified": "2023-03-11T11:55:23.900Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{ \"type\":\"WISHLIST\", \"user\": { \"id\" : 1}, \"date\": \"10/1/2034\", \"products\": [{\"id\" : 2}, {\"id\": 3}], \"usedCoupon\":{\"id\":3} }"
+            }
+        },
+        {
+            "_id": "02869bf8-981c-42eb-a248-1bcf5b1359cd",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "c3b06c2e-02a4-45a3-80f3-8638e4bfe4e2",
+            "name": "delete_transaction",
+            "url": "https://localhost:8443/api/transactions/12",
+            "method": "DELETE",
+            "sortNum": 190000,
+            "created": "2023-03-11T11:55:23.901Z",
+            "modified": "2023-03-11T11:55:23.901Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{ \"type\":\"WISHLIST\", \"user\": { \"id\" : 1}, \"date\": \"10/1/2034\", \"products\": [{\"id\" : 2}, {\"id\": 3}], \"usedCoupon\":{\"id\":3} }"
+            }
+        },
+        {
+            "_id": "7ac652bd-8e3e-4a6e-9e98-dc748014ef46",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "142b2e0c-92be-41d6-a3d7-59c67b35f1c4",
+            "name": "get_product_by_id",
+            "url": "https://localhost:8443/api/products/1",
+            "method": "GET",
+            "sortNum": 260000,
+            "created": "2023-03-11T11:55:23.908Z",
+            "modified": "2023-03-11T11:55:23.908Z",
+            "headers": []
+        },
+        {
+            "_id": "833e7ea6-6c6b-4b03-9ff8-0630f8d0901a",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "142b2e0c-92be-41d6-a3d7-59c67b35f1c4",
+            "name": "get_product_by_name_and_size",
+            "url": "https://localhost:8443/api/products?name=Arizona%20jeans&size=XS",
+            "method": "GET",
+            "sortNum": 265000,
+            "created": "2023-03-11T11:55:23.910Z",
+            "modified": "2023-03-11T17:28:27.100Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "name",
+                    "value": "Arizona%20jeans"
+                },
+                {
+                    "name": "size",
+                    "value": "XS"
+                }
+            ]
+        },
+        {
+            "_id": "7d974b9a-2d51-4aae-acee-fd24458f37a5",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "142b2e0c-92be-41d6-a3d7-59c67b35f1c4",
+            "name": "get_all_products",
+            "url": "https://localhost:8443/api/products?page=3",
+            "method": "GET",
+            "sortNum": 270000,
+            "created": "2023-03-11T11:55:23.909Z",
+            "modified": "2023-03-11T11:55:23.909Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "3"
+                }
+            ]
+        },
+        {
+            "_id": "0c2814ef-ffd6-4109-910f-eab2965b25a3",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "142b2e0c-92be-41d6-a3d7-59c67b35f1c4",
+            "name": "create_product",
+            "url": "https://localhost:8443/api/products",
+            "method": "POST",
+            "sortNum": 290000,
+            "created": "2023-03-11T11:55:23.911Z",
+            "modified": "2023-03-11T11:55:23.911Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n    \"name\": \"Cheese Jeans\",\r\n    \"description\": \"These are the best jeans manufactured in Valencia\",\r\n    \"price\": \"220.0\",\r\n    \"stock\": \"54\",\r\n    \"size\": \"M\"\r\n}"
+            }
+        },
+        {
+            "_id": "1c6c8091-4b7f-410f-9e7d-1be186fa93a7",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "142b2e0c-92be-41d6-a3d7-59c67b35f1c4",
+            "name": "delete_product",
+            "url": "https://localhost:8443/api/products/81",
+            "method": "DELETE",
+            "sortNum": 300000,
+            "created": "2023-03-11T11:55:23.912Z",
+            "modified": "2023-03-11T11:55:23.912Z",
+            "headers": []
+        },
+        {
+            "_id": "15f81c3f-a556-4b7f-b8f0-b8f1b708e4e9",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "142b2e0c-92be-41d6-a3d7-59c67b35f1c4",
+            "name": "update_product",
+            "url": "https://localhost:8443/api/products/1",
+            "method": "PUT",
+            "sortNum": 310000,
+            "created": "2023-03-11T11:55:23.913Z",
+            "modified": "2023-03-11T11:55:23.913Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n    \"id\": 41,\r\n    \"name\": \"Spring Dress\",\r\n    \"description\": \"Straight high waisted jeans with zipper and rounded button\",\r\n    \"price\": 95.0,\r\n    \"stock\": 40,\r\n    \"size\": \"XS\"\r\n}"
+            }
+        },
+        {
+            "_id": "d07309cd-2585-41c1-aa5d-af2195fa0ef0",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "8d90bcfc-aa1a-461f-b401-d1ae01d653a7",
+            "name": "get_image",
+            "url": "https://localhost:8443/api/products/41/image/0",
+            "method": "GET",
+            "sortNum": 320000,
+            "created": "2023-03-11T11:55:23.914Z",
+            "modified": "2023-03-11T11:55:23.914Z",
+            "headers": []
+        },
+        {
+            "_id": "4b9f329f-5734-44ef-a5fc-2708ab0489c6",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "8d90bcfc-aa1a-461f-b401-d1ae01d653a7",
+            "name": "add_image_to_product",
+            "url": "https://localhost:8443/api/products/41/image",
+            "method": "POST",
+            "sortNum": 330000,
+            "created": "2023-03-11T11:55:23.915Z",
+            "modified": "2023-03-11T11:55:23.915Z",
+            "headers": [],
+            "body": {
+                "form": [],
+                "files": [
+                    {
+                        "name": "imageFile",
+                        "value": "/C:/Users/eltio/Downloads/stock1.jpg"
+                    }
+                ],
+                "type": "formdata"
+            }
+        },
+        {
+            "_id": "bf243036-93ab-48af-b388-170a5552e6ba",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "8d90bcfc-aa1a-461f-b401-d1ae01d653a7",
+            "name": "delete_image",
+            "url": "https://localhost:8443/api/products/41/image/0",
+            "method": "DELETE",
+            "sortNum": 340000,
+            "created": "2023-03-11T11:55:23.916Z",
+            "modified": "2023-03-11T11:55:23.916Z",
+            "headers": []
+        },
+        {
+            "_id": "9b19efac-781e-4929-90ee-80eb5b60a6a0",
+            "colId": "30945279-1626-423a-9605-e4d71aa3c83c",
+            "containerId": "8d90bcfc-aa1a-461f-b401-d1ae01d653a7",
+            "name": "delete_all_images_from_product",
+            "url": "https://localhost:8443/api/products/41/image",
+            "method": "DELETE",
+            "sortNum": 350000,
+            "created": "2023-03-11T11:55:23.917Z",
+            "modified": "2023-03-11T11:55:23.917Z",
+            "headers": []
+        }
+    ]
+}

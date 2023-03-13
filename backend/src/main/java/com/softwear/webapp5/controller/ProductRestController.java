@@ -37,6 +37,12 @@ public class ProductRestController {
     @Autowired
     private ProductService productService;
 
+    /**
+     * Get set of products with the same ID
+     * 
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProduct(@PathVariable Long id) {
 
@@ -49,6 +55,13 @@ public class ProductRestController {
         } 
     }
 
+    /**
+     * Search an specific product by it's name and size.
+     * 
+     * @param name
+     * @param size
+     * @return
+     */
     @GetMapping(value = "", params = {"name", "size"})
     public ResponseEntity<Product> getProduct(@RequestParam String name, @RequestParam String size){
 
@@ -62,6 +75,13 @@ public class ProductRestController {
         }
     }
 
+    /**
+     * Get specific product based on id and size
+     * 
+     * @param id
+     * @param filter
+     * @return
+     */
     @GetMapping(value="/{id}", params={"filter"})
     public ResponseEntity<List<Product>> getProductByIdWithFilter(
         @PathVariable Long id,

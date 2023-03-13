@@ -68,19 +68,6 @@ public class TransactionRestController {
         return ResponseEntity.notFound().build();
     }
 
-    /*
-    @GetMapping("/transactions") //GET
-    public ResponseEntity<List<Transaction>> getTransactions(@RequestParam(required = false) Integer page){
-        if(page == null)
-            return ResponseEntity.ok(transactionService.findAll());
-        
-        if(page < 1)
-            return ResponseEntity.badRequest().build();
-        List<Transaction> listTrans = transactionService.findAll(PageRequest.of(page - 1, 3)).toList();
-        return ResponseEntity.ok(listTrans);
-    }
-    */
-
     @GetMapping(value = "")
     public ResponseEntity<TransactionPageDTO> getSpecialTransaction(@RequestParam(required = false) String type,
             @RequestParam(required = false) Integer page) {
@@ -147,32 +134,6 @@ public class TransactionRestController {
 
         return ResponseEntity.ok(statics.toList());
     }
-
-    /*
-    @GetMapping("/transactions/carts") //GET
-    public ResponseEntity<List<Transaction>> getCart(@RequestParam(required = false) Integer page){
-        List<Transaction> listTrans = getTransaction("CART", page);
-        if(listTrans == null)
-            return ResponseEntity.badRequest().build();
-        return ResponseEntity.ok(listTrans);
-    }
-
-    @GetMapping("/transactions/wishlists") //GET
-    public ResponseEntity<List<Transaction>> getWishlist(@RequestParam(required = false) Integer page){
-        List<Transaction> listTrans = getTransaction("WISHLIST", page);
-        if(listTrans == null)
-            return ResponseEntity.badRequest().build();
-        return ResponseEntity.ok(listTrans);
-    }
-
-    @GetMapping("/transactions/processed") //GET
-    public ResponseEntity<List<Transaction>> getProcessed(@RequestParam(required = false) Integer page){
-        List<Transaction> listTrans = getTransaction("PROCESSED", page);
-        if(listTrans == null)
-            return ResponseEntity.badRequest().build();
-        return ResponseEntity.ok(listTrans);
-    }
-    */
 
     @GetMapping(value = "", params = {"user"})
     public ResponseEntity<TransactionPageDTO> getTransactionByUser(@RequestParam Long userId, 
@@ -336,35 +297,6 @@ public class TransactionRestController {
 
         return ResponseEntity.notFound().build();
     }
-
-
-
-    /*
-    @PostMapping("/transactions/{transactionId}/products/{productId}") //ADD product to transaction
-    public ResponseEntity<Transaction> addProductToTransaction(@PathVariable(value = "transactionId") Long transactionId, @PathVariable(value = "productId") Long productId){
-
-        Optional<Transaction> oTransaction = transactionService.findById(transactionId);
-        Optional<Product> oProd = productService.findById(productId);
-
-        if(oTransaction.isPresent() && oProd.isPresent()){
-
-            Transaction transaction = oTransaction.get();
-            Product product = oProd.get();
-
-            transaction.getProducts().add(product);
-            transactionService.save(transaction);
-
-            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                    .buildAndExpand(transaction.getId()).toUri();
-
-            return ResponseEntity.created(location).body(transaction);
-        }
-
-        return ResponseEntity.notFound().build();
-    }
-    */
-
- 
 
     @PutMapping("/{id}") //EDIT (overwrite transaction)
     public ResponseEntity<Transaction> editTransaction(
@@ -557,16 +489,4 @@ public class TransactionRestController {
         }
         return products;
     }
-
-/*
-    private List<Transaction> getTransaction(String type, Integer page) {
-        if(page != null){
-            if(page < 1)
-                return null;
-            return transactionService.findByType(type.toUpperCase(), PageRequest.of(page - 1, 10)).toList();
-        }
-        return transactionService.findByType(type.toUpperCase());
-    }
-*/    
-    
 }
